@@ -1,0 +1,36 @@
+#Dependencies 
+node_modules/
+venv/
+.venv/
+.vscode/
+build/
+install/
+log/
+*.db
+__pycache__/
+#Build outputs
+dist/
+build/
+
+# OS files
+.DS_Store
+
+
+# Hugging Face local cache and downloads
+.cache/
+huggingface/
+.huggingface/
+
+# Large model weights and binaries (if stored locally)
+*.safetensors
+*.bin
+*.pt
+*.h5
+*.ckpt
+*.onnx
+
+# Dataset caches / Arrow files
+*.arrow
+*.parquet
+
+
