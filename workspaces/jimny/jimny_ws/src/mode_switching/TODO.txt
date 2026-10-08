@@ -1,0 +1,7 @@
+- New error check:
+If no Ackermann message is sent in a given time (from RC or MPC), declare invalid input
+As of now this may not be detected and may cause errors, this should however already work on the arduino side
+
+
+- MPC disarmed to armed check again in case changed
+- Change the error topic to a real error message with description for debugging

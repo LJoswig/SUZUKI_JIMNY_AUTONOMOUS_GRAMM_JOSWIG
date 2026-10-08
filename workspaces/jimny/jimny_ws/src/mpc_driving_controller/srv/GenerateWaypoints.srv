@@ -1,0 +1,18 @@
+# Request
+float64 x0              # Initial pose x coordinate
+float64 y0              # Initial pose y coordinate
+float64 psi0            # Initial heading angle
+
+---
+
+# Response
+float64 s0              # Initial cumulative distance along the path (meters)
+float64 e_y0            # Cross-track error (meters)
+float64 e_psi0          # Heading error (radians)
+float64[] x_ref         # Reference X positions (meters)
+float64[] y_ref         # Reference Y positions (meters)
+float64[] psi_ref       # Reference yaw angles (radians)
+float64[] cdist_ref     # Cumulative distance references (meters)
+float64[] curv_ref      # Reference curvatures (1/meters)
+float64[] v_ref         # Reference velocities (meters/second)
+bool stop               # Indicates if the trajectory has ended

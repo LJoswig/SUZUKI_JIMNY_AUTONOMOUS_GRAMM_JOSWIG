@@ -1,0 +1,13 @@
+To-do:
+- Start at different than 0, 0
+- allow changing target curve
+- optimize code
+
+Optional:
+- Adapt to smaller datasets l.38 ref_gps_traj.py (need around 35 points for now)
+- Make into a docker container
+- Add steering angle trackign
+- Add namespaces
+- Set to 0 if at end cartesian_mpc l.253
+
+Bugs:

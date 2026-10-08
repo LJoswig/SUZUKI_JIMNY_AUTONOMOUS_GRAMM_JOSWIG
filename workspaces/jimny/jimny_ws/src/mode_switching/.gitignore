@@ -1,0 +1,46 @@
+# Ignore build directories
+build/
+install/
+log/
+
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore CMake files
+CMakeFiles/
+CMakeCache.txt
+Makefile
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore other IDE/project files
+.idea/
+*.swp
+*.swo
+*.bak
+*.orig
+
+# Ignore ROS-specific files
+*.o
+*.so
+*.a
+*.d
+*.dpkg*
+
+# Ignore environment files
+*.env
+*.venv
+
+# Ignore coverage reports
+.coverage
+*.cover
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore temporary files
+*~ 
+*.tmp
+*.temp

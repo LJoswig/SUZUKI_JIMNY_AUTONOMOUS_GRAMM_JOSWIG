@@ -1,0 +1,7 @@
+Recorded data should be in CSV files with the following header:
+
+Mandatory:
+ROS Timestamp,Latitude,Longitude,PSIS (Yaw Angle)
+
+Optional:
+ROS Timestamp,Latitude,Longitude,PSIS (Yaw Angle), Velocity

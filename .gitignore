@@ -34,3 +34,11 @@ huggingface/
 *.parquet
 
 
+
+# Editor temporary files and backups
+*.swp
+*.swo
+*.bak
+
+# Jimny debug logs
+sterf_debug_*.csv

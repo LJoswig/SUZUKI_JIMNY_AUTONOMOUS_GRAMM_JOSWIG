@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>to_vehicle</name>
+  <version>0.0.0</version>
+  <description>Node to send vehicle commands and receive data from vehicle back</description>
+  <maintainer email="jimnyspots@gmail.com">liljim</maintainer>
+  <license>TODO: License declaration</license>
+
+  <!-- Build dependencies -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <!-- Runtime dependencies -->
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>ackermann_msgs</exec_depend>
+  <exec_depend>python3-serial</exec_depend>
+  <exec_depend>gps_msgs</exec_depend>
+  <exec_depend>python3-can</exec_depend>
+  <exec_depend>cuberos</exec_depend>
+  <exec_depend>mode_switching</exec_depend>
+  <exec_depend>mpc_driving_controller</exec_depend>
+  <exec_depend>launch</exec_depend>
+
+  <!-- Testing dependencies -->
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

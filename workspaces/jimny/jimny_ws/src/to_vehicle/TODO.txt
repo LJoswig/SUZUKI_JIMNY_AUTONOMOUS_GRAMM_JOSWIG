@@ -1,0 +1,1 @@
+- add environment variable in the launch, which chooses jimny/rover, everything else should be environment variables
