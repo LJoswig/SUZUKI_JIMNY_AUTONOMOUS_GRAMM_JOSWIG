@@ -1,0 +1,74 @@
+[0.042s] Invoking command in '/home/user/vision_ws/build/zed_topic_benchmark': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:/home/user/vision_ws/install/zed_ros2:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble LD_LIBRARY_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component/lib:/home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tools/zed_benchmark -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_topic_benchmark
+[0.192s] -- The C compiler identification is GNU 11.4.0
+[0.311s] -- The CXX compiler identification is GNU 11.4.0
+[0.328s] -- Detecting C compiler ABI info
+[0.495s] -- Detecting C compiler ABI info - done
+[0.504s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.506s] -- Detecting C compile features
+[0.507s] -- Detecting C compile features - done
+[0.515s] -- Detecting CXX compiler ABI info
+[0.699s] -- Detecting CXX compiler ABI info - done
+[0.711s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.713s] -- Detecting CXX compile features
+[0.714s] -- Detecting CXX compile features - done
+[0.722s] -- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[1.142s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.327s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.704s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.721s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.744s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.781s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.831s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.957s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.966s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[2.193s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[2.261s] -- Found FastRTPS: /opt/ros/humble/include  
+[2.357s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.386s] -- Looking for pthread.h
+[2.567s] -- Looking for pthread.h - found
+[2.567s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[2.751s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[2.751s] -- Found Threads: TRUE  
+[3.022s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[3.128s] -- Added test 'copyright' to check source files copyright and LICENSE
+[3.132s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[3.133s] -- Configured cppcheck include dirs: 
+[3.133s] -- Configured cppcheck exclude dirs and/or files: 
+[3.136s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[3.137s] -- Configured cpplint exclude dirs and/or files: 
+[3.139s] -- Added test 'flake8' to check Python code syntax and style conventions
+[3.142s] -- Added test 'lint_cmake' to check CMake code style
+[3.144s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[3.147s] -- Added test 'uncrustify' to check C / C++ code style
+[3.147s] -- Configured uncrustify additional arguments: 
+[3.150s] -- Added test 'xmllint' to check XML markup files
+[3.155s] -- Configuring done
+[3.212s] -- Generating done
+[3.224s] -- Build files have been written to: /home/user/vision_ws/build/zed_topic_benchmark
+[3.260s] Invoked command in '/home/user/vision_ws/build/zed_topic_benchmark' returned '0': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:/home/user/vision_ws/install/zed_ros2:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble LD_LIBRARY_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component/lib:/home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tools/zed_benchmark -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_topic_benchmark
+[3.261s] Invoking command in '/home/user/vision_ws/build/zed_topic_benchmark': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:/home/user/vision_ws/install/zed_ros2:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble LD_LIBRARY_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component/lib:/home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/user/vision_ws/build/zed_topic_benchmark -- -j4 -l4
+[3.389s] [ 50%] [32mBuilding CXX object CMakeFiles/zed_topic_benchmark.dir/src/topic_benchmark_container.cpp.o[0m
+[11.598s] [100%] [32m[1mLinking CXX executable zed_topic_benchmark[0m
+[11.926s] [100%] Built target zed_topic_benchmark
+[11.974s] Invoked command in '/home/user/vision_ws/build/zed_topic_benchmark' returned '0': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:/home/user/vision_ws/install/zed_ros2:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble LD_LIBRARY_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component/lib:/home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/user/vision_ws/build/zed_topic_benchmark -- -j4 -l4
+[11.975s] Invoking command in '/home/user/vision_ws/build/zed_topic_benchmark': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:/home/user/vision_ws/install/zed_ros2:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble LD_LIBRARY_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component/lib:/home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/user/vision_ws/build/zed_topic_benchmark
+[11.995s] -- Install configuration: "Release"
+[11.995s] -- Execute custom install script
+[11.996s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/lib/zed_topic_benchmark/zed_topic_benchmark
+[12.019s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/launch/zed_test_ipc.launch.py
+[12.042s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/ament_index/resource_index/package_run_dependencies/zed_topic_benchmark
+[12.063s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/ament_index/resource_index/parent_prefix_path/zed_topic_benchmark
+[12.084s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/environment/ament_prefix_path.sh
+[12.106s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/environment/ament_prefix_path.dsv
+[12.128s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/environment/path.sh
+[12.150s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/environment/path.dsv
+[12.171s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/local_setup.bash
+[12.192s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/local_setup.sh
+[12.214s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/local_setup.zsh
+[12.234s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/local_setup.dsv
+[12.257s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/package.dsv
+[12.277s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/ament_index/resource_index/packages/zed_topic_benchmark
+[12.299s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/cmake/zed_topic_benchmarkConfig.cmake
+[12.320s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/cmake/zed_topic_benchmarkConfig-version.cmake
+[12.342s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark/share/zed_topic_benchmark/package.xml
+[12.371s] Invoked command in '/home/user/vision_ws/build/zed_topic_benchmark' returned '0': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component:/home/user/vision_ws/install/zed_topic_benchmark_interfaces:/home/user/vision_ws/install/zed_ros2:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble LD_LIBRARY_PATH=/home/user/vision_ws/install/zed_topic_benchmark_component/lib:/home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/user/vision_ws/build/zed_topic_benchmark

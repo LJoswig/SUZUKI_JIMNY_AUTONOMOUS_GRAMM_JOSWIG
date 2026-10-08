@@ -1,0 +1,84 @@
+[0.035s] Invoking command in '/home/user/vision_ws/build/zed_ipc': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_ipc -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_ipc
+[0.190s] -- The C compiler identification is GNU 11.4.0
+[0.305s] -- The CXX compiler identification is GNU 11.4.0
+[0.320s] -- Detecting C compiler ABI info
+[0.468s] -- Detecting C compiler ABI info - done
+[0.483s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.483s] -- Detecting C compile features
+[0.483s] -- Detecting C compile features - done
+[0.489s] -- Detecting CXX compiler ABI info
+[0.679s] -- Detecting CXX compiler ABI info - done
+[0.693s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.695s] -- Detecting CXX compile features
+[0.696s] -- Detecting CXX compile features - done
+[0.704s] -- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[1.165s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.367s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.809s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.824s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.847s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.879s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.933s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.063s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.071s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[2.307s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[2.386s] -- Found FastRTPS: /opt/ros/humble/include  
+[2.506s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.531s] -- Looking for pthread.h
+[2.719s] -- Looking for pthread.h - found
+[2.719s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[2.902s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[2.906s] -- Found Threads: TRUE  
+[3.228s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[3.337s] -- Added test 'copyright' to check source files copyright and LICENSE
+[3.341s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[3.341s] -- Configured cppcheck include dirs: /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_ipc/src/include;/home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_ipc/src/component/include;/home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_ipc/src/components/include
+[3.342s] -- Configured cppcheck exclude dirs and/or files: 
+[3.344s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[3.345s] -- Configured cpplint exclude dirs and/or files: 
+[3.346s] -- Added test 'flake8' to check Python code syntax and style conventions
+[3.348s] -- Added test 'lint_cmake' to check CMake code style
+[3.349s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[3.352s] -- Added test 'uncrustify' to check C / C++ code style
+[3.352s] -- Configured uncrustify additional arguments: 
+[3.353s] -- Added test 'xmllint' to check XML markup files
+[3.362s] -- Configuring done
+[3.392s] -- Generating done
+[3.447s] -- Build files have been written to: /home/user/vision_ws/build/zed_ipc
+[3.486s] Invoked command in '/home/user/vision_ws/build/zed_ipc' returned '0': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_ipc -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_ipc
+[3.487s] Invoking command in '/home/user/vision_ws/build/zed_ipc': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_ipc -- -j4 -l4
+[3.605s] [ 33%] [32mBuilding CXX object CMakeFiles/pointcloud_component.dir/src/components/src/pointcloud_component.cpp.o[0m
+[31.973s] [ 66%] [32mBuilding CXX object CMakeFiles/pointcloud_component.dir/src/components/src/winavg.cpp.o[0m
+[32.986s] [100%] [32m[1mLinking CXX shared library libpointcloud_component.so[0m
+[33.307s] [100%] Built target pointcloud_component
+[33.352s] Invoked command in '/home/user/vision_ws/build/zed_ipc' returned '0': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_ipc -- -j4 -l4
+[33.356s] Invoking command in '/home/user/vision_ws/build/zed_ipc': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_ipc
+[33.372s] -- Install configuration: "Release"
+[33.373s] -- Execute custom install script
+[33.374s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/lib/libpointcloud_component.so
+[33.391s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/include/zed_ipc//ipc_visibility_control.hpp
+[33.409s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/include/zed_ipc//pointcloud_component.hpp
+[33.426s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/include/zed_ipc//winavg.hpp
+[33.445s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/launch/zed_ipc.launch.py
+[33.464s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/environment/library_path.sh
+[33.481s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/environment/library_path.dsv
+[33.500s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/ament_index/resource_index/package_run_dependencies/zed_ipc
+[33.518s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/ament_index/resource_index/parent_prefix_path/zed_ipc
+[33.537s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/environment/ament_prefix_path.sh
+[33.554s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/environment/ament_prefix_path.dsv
+[33.573s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/environment/path.sh
+[33.592s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/environment/path.dsv
+[33.610s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/local_setup.bash
+[33.627s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/local_setup.sh
+[33.646s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/local_setup.zsh
+[33.664s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/local_setup.dsv
+[33.682s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/package.dsv
+[33.701s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/ament_index/resource_index/packages/zed_ipc
+[33.719s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/ament_index/resource_index/rclcpp_components/zed_ipc
+[33.742s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/cmake/ament_cmake_export_include_directories-extras.cmake
+[33.760s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/cmake/ament_cmake_export_libraries-extras.cmake
+[33.777s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/cmake/ament_cmake_export_dependencies-extras.cmake
+[33.796s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/cmake/zed_ipcConfig.cmake
+[33.814s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/cmake/zed_ipcConfig-version.cmake
+[33.834s] -- Symlinking: /home/user/vision_ws/install/zed_ipc/share/zed_ipc/package.xml
+[33.858s] Invoked command in '/home/user/vision_ws/build/zed_ipc' returned '0': AMENT_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_multi_camera:/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_ipc

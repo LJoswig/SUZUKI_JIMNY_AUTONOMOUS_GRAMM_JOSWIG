@@ -1,0 +1,50 @@
+[0.057s] Invoking command in '/home/user/vision_ws/build/zed_tutorial_pos_tracking': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_pose_tutorial -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_tutorial_pos_tracking
+[0.081s] -- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[0.393s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.632s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.637s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.648s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.668s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.694s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.756s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.761s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.973s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.284s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.330s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.331s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.332s] -- Configured cppcheck include dirs: 
+[1.332s] -- Configured cppcheck exclude dirs and/or files: 
+[1.333s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.333s] -- Configured cpplint exclude dirs and/or files: 
+[1.334s] -- Added test 'lint_cmake' to check CMake code style
+[1.336s] -- Added test 'uncrustify' to check C / C++ code style
+[1.336s] -- Configured uncrustify additional arguments: 
+[1.336s] -- Added test 'xmllint' to check XML markup files
+[1.338s] -- Configuring done
+[1.368s] -- Generating done
+[1.377s] -- Build files have been written to: /home/user/vision_ws/build/zed_tutorial_pos_tracking
+[1.402s] Invoked command in '/home/user/vision_ws/build/zed_tutorial_pos_tracking' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_pose_tutorial -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_tutorial_pos_tracking
+[1.405s] Invoking command in '/home/user/vision_ws/build/zed_tutorial_pos_tracking': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_tutorial_pos_tracking -- -j8 -l8
+[1.494s] [35m[1mConsolidate compiler generated dependencies of target zed_tutorial_pos_tracking[0m
+[1.532s] [100%] Built target zed_tutorial_pos_tracking
+[1.557s] Invoked command in '/home/user/vision_ws/build/zed_tutorial_pos_tracking' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_tutorial_pos_tracking -- -j8 -l8
+[1.560s] Invoking command in '/home/user/vision_ws/build/zed_tutorial_pos_tracking': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_tutorial_pos_tracking
+[1.577s] -- Install configuration: "Release"
+[1.577s] -- Execute custom install script
+[1.578s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/lib/zed_tutorial_pos_tracking/zed_tutorial_pos_tracking
+[1.578s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/ament_index/resource_index/package_run_dependencies/zed_tutorial_pos_tracking
+[1.578s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/ament_index/resource_index/parent_prefix_path/zed_tutorial_pos_tracking
+[1.579s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/environment/ament_prefix_path.sh
+[1.579s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/environment/ament_prefix_path.dsv
+[1.579s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/environment/path.sh
+[1.580s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/environment/path.dsv
+[1.580s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/local_setup.bash
+[1.580s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/local_setup.sh
+[1.580s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/local_setup.zsh
+[1.581s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/local_setup.dsv
+[1.581s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/package.dsv
+[1.601s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/ament_index/resource_index/packages/zed_tutorial_pos_tracking
+[1.601s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/cmake/zed_tutorial_pos_trackingConfig.cmake
+[1.601s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/cmake/zed_tutorial_pos_trackingConfig-version.cmake
+[1.601s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_pos_tracking/share/zed_tutorial_pos_tracking/package.xml
+[1.607s] Invoked command in '/home/user/vision_ws/build/zed_tutorial_pos_tracking' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_tutorial_pos_tracking

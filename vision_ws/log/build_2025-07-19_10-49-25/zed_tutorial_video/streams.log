@@ -1,0 +1,23 @@
+[0.067s] Invoking command in '/home/user/vision_ws/build/zed_tutorial_video': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_tutorial_video -- -j8 -l8
+[0.204s] [100%] Built target zed_tutorial_video
+[0.230s] Invoked command in '/home/user/vision_ws/build/zed_tutorial_video' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_tutorial_video -- -j8 -l8
+[0.260s] Invoking command in '/home/user/vision_ws/build/zed_tutorial_video': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_tutorial_video
+[0.279s] -- Install configuration: "Release"
+[0.280s] -- Execute custom install script
+[0.282s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/lib/zed_tutorial_video/zed_tutorial_video
+[0.282s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/ament_index/resource_index/package_run_dependencies/zed_tutorial_video
+[0.286s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/ament_index/resource_index/parent_prefix_path/zed_tutorial_video
+[0.286s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/environment/ament_prefix_path.sh
+[0.286s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/environment/ament_prefix_path.dsv
+[0.287s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/environment/path.sh
+[0.287s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/environment/path.dsv
+[0.287s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/local_setup.bash
+[0.287s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/local_setup.sh
+[0.287s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/local_setup.zsh
+[0.288s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/local_setup.dsv
+[0.288s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/package.dsv
+[0.307s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/ament_index/resource_index/packages/zed_tutorial_video
+[0.307s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/cmake/zed_tutorial_videoConfig.cmake
+[0.308s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/cmake/zed_tutorial_videoConfig-version.cmake
+[0.308s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/package.xml
+[0.313s] Invoked command in '/home/user/vision_ws/build/zed_tutorial_video' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_tutorial_video

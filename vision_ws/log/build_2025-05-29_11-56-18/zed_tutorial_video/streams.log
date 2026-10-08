@@ -1,0 +1,61 @@
+[0.027s] Invoking command in '/home/user/vision_ws/build/zed_tutorial_video': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_video_tutorial -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_tutorial_video
+[0.154s] -- The C compiler identification is GNU 11.4.0
+[0.361s] -- The CXX compiler identification is GNU 11.4.0
+[0.386s] -- Detecting C compiler ABI info
+[0.895s] -- Detecting C compiler ABI info - done
+[0.903s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.916s] -- Detecting C compile features
+[0.916s] -- Detecting C compile features - done
+[0.923s] -- Detecting CXX compiler ABI info
+[1.375s] -- Detecting CXX compiler ABI info - done
+[1.381s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.382s] -- Detecting CXX compile features
+[1.384s] -- Detecting CXX compile features - done
+[1.391s] -- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[1.974s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[2.170s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[2.713s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[2.726s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[2.748s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.778s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.820s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.963s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.964s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[3.154s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[3.215s] -- Found FastRTPS: /opt/ros/humble/include  
+[3.311s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.336s] -- Looking for pthread.h
+[3.793s] -- Looking for pthread.h - found
+[3.793s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[4.284s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[4.284s] -- Found Threads: TRUE  
+[4.670s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[4.694s] -- Configuring done
+[4.757s] -- Generating done
+[4.766s] -- Build files have been written to: /home/user/vision_ws/build/zed_tutorial_video
+[4.860s] Invoked command in '/home/user/vision_ws/build/zed_tutorial_video' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_video_tutorial -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_tutorial_video
+[4.861s] Invoking command in '/home/user/vision_ws/build/zed_tutorial_video': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_tutorial_video -- -j4 -l4
+[5.014s] [ 50%] [32mBuilding CXX object CMakeFiles/zed_tutorial_video.dir/src/zed_video_sub_tutorial.cpp.o[0m
+[35.036s] [100%] [32m[1mLinking CXX executable zed_tutorial_video[0m
+[35.404s] [100%] Built target zed_tutorial_video
+[35.435s] Invoked command in '/home/user/vision_ws/build/zed_tutorial_video' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_tutorial_video -- -j4 -l4
+[35.436s] Invoking command in '/home/user/vision_ws/build/zed_tutorial_video': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_tutorial_video
+[35.451s] -- Install configuration: "Release"
+[35.452s] -- Execute custom install script
+[35.453s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/lib/zed_tutorial_video/zed_tutorial_video
+[35.476s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/ament_index/resource_index/package_run_dependencies/zed_tutorial_video
+[35.500s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/ament_index/resource_index/parent_prefix_path/zed_tutorial_video
+[35.534s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/environment/ament_prefix_path.sh
+[35.561s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/environment/ament_prefix_path.dsv
+[35.587s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/environment/path.sh
+[35.610s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/environment/path.dsv
+[35.637s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/local_setup.bash
+[35.662s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/local_setup.sh
+[35.684s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/local_setup.zsh
+[35.705s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/local_setup.dsv
+[35.730s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/package.dsv
+[35.753s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/ament_index/resource_index/packages/zed_tutorial_video
+[35.775s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/cmake/zed_tutorial_videoConfig.cmake
+[35.796s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/cmake/zed_tutorial_videoConfig-version.cmake
+[35.816s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_video/share/zed_tutorial_video/package.xml
+[35.839s] Invoked command in '/home/user/vision_ws/build/zed_tutorial_video' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_tutorial_video

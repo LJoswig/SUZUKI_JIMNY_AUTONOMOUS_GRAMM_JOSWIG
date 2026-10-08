@@ -1,0 +1,2337 @@
+[0.000000] (-) TimerEvent: {}
+[0.000597] (zed_components) JobQueued: {'identifier': 'zed_components', 'dependencies': OrderedDict()}
+[0.001131] (zed_wrapper) JobQueued: {'identifier': 'zed_wrapper', 'dependencies': OrderedDict([('zed_components', '/home/user/vision_ws/install/zed_components')])}
+[0.001402] (zed_ros2) JobQueued: {'identifier': 'zed_ros2', 'dependencies': OrderedDict([('zed_components', '/home/user/vision_ws/install/zed_components'), ('zed_wrapper', '/home/user/vision_ws/install/zed_wrapper')])}
+[0.001703] (zed_components) JobStarted: {'identifier': 'zed_components'}
+[0.018019] (zed_components) JobProgress: {'identifier': 'zed_components', 'progress': 'cmake'}
+[0.019054] (zed_components) Command: {'cmd': ['/usr/bin/cmake', '/home/user/vision_ws/src/zed-ros2-wrapper/zed_components', '-DCMAKE_BUILD_TYPE=Release', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_components'], 'cwd': '/home/user/vision_ws/build/zed_components', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_ZA:en'), ('USER', 'user'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/autorover_ws/install/zed_components/lib:/home/user/autorover_ws/install/mavros_extras/lib:/home/user/autorover_ws/install/mavros/lib:/home/user/autorover_ws/install/mavros_msgs/lib:/home/user/autorover_ws/install/libmavconn/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/vision_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1496'), ('SYSTEMD_EXEC_PID', '2171'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3250'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/user/autorover_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'user'), ('JOURNAL_STREAM', '8:45951'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'user'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/rovertut-desktop:@/tmp/.ICE-unix/2143,unix/rovertut-desktop:/tmp/.ICE-unix/2143'), ('INVOCATION_ID', '2d9cf8d595a1462d86831f651acd0db1'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_ZA.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:24ee3358-e131-4420-9dd7-5b18d714a25d'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/user/vision_ws/build/zed_components'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/user/autorover_ws/build/autorover_bringup:/home/user/autorover_ws/install/mavros/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/mavros_msgs/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/autorover_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble')]), 'shell': False}
+[0.099481] (-) TimerEvent: {}
+[0.126681] (zed_components) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.199666] (-) TimerEvent: {}
+[0.237952] (zed_components) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.256932] (zed_components) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.300029] (-) TimerEvent: {}
+[0.395820] (zed_components) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.400110] (-) TimerEvent: {}
+[0.420400] (zed_components) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.421318] (zed_components) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.422654] (zed_components) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.433491] (zed_components) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.500327] (-) TimerEvent: {}
+[0.594774] (zed_components) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.600472] (-) TimerEvent: {}
+[0.620097] (zed_components) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.621078] (zed_components) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.622743] (zed_components) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.638175] (zed_components) StdoutLine: {'line': b'-- Looking for sgemm_\n'}
+[0.700751] (-) TimerEvent: {}
+[0.777452] (zed_components) StdoutLine: {'line': b'-- Looking for sgemm_ - not found\n'}
+[0.779728] (zed_components) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[0.800928] (-) TimerEvent: {}
+[0.901606] (-) TimerEvent: {}
+[0.915950] (zed_components) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[0.916675] (zed_components) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[1.001796] (-) TimerEvent: {}
+[1.063248] (zed_components) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[1.065991] (zed_components) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[1.101898] (-) TimerEvent: {}
+[1.144728] (zed_components) StdoutLine: {'line': b'-- Looking for sgemm_\n'}
+[1.202103] (-) TimerEvent: {}
+[1.302771] (-) TimerEvent: {}
+[1.329597] (zed_components) StdoutLine: {'line': b'-- Looking for sgemm_ - found\n'}
+[1.331264] (zed_components) StdoutLine: {'line': b'-- Found BLAS: /usr/lib/aarch64-linux-gnu/libopenblas.so  \n'}
+[1.401986] (zed_components) StdoutLine: {'line': b'-- Found CUDA: /usr/local/cuda (found suitable version "12.2", minimum required is "12.2") \n'}
+[1.402880] (-) TimerEvent: {}
+[1.451686] (zed_components) StdoutLine: {'line': b'-- Found CUDA: /usr/local/cuda (found version "12.2") \n'}
+[1.458376] (zed_components) StdoutLine: {'line': b'-- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)\n'}
+[1.503041] (-) TimerEvent: {}
+[1.603619] (-) TimerEvent: {}
+[1.704238] (-) TimerEvent: {}
+[1.804848] (-) TimerEvent: {}
+[1.810407] (zed_components) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.905002] (-) TimerEvent: {}
+[1.964074] (zed_components) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[2.005213] (-) TimerEvent: {}
+[2.105857] (-) TimerEvent: {}
+[2.206500] (-) TimerEvent: {}
+[2.272599] (zed_components) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[2.284634] (zed_components) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[2.303018] (zed_components) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[2.306544] (-) TimerEvent: {}
+[2.328937] (zed_components) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.365106] (zed_components) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.406737] (-) TimerEvent: {}
+[2.507364] (-) TimerEvent: {}
+[2.595190] (zed_components) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[2.601452] (zed_components) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[2.607508] (-) TimerEvent: {}
+[2.708336] (-) TimerEvent: {}
+[2.769757] (zed_components) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[2.808522] (-) TimerEvent: {}
+[2.823432] (zed_components) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[2.908701] (-) TimerEvent: {}
+[2.913920] (zed_components) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[3.008853] (-) TimerEvent: {}
+[3.109531] (-) TimerEvent: {}
+[3.210290] (-) TimerEvent: {}
+[3.310972] (-) TimerEvent: {}
+[3.411631] (-) TimerEvent: {}
+[3.442301] (zed_components) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)\n'}
+[3.445078] (zed_components) StdoutLine: {'line': b'-- Found Eigen3: TRUE (found version "3.4.0") \n'}
+[3.445531] (zed_components) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[3.511790] (-) TimerEvent: {}
+[3.612434] (-) TimerEvent: {}
+[3.682212] (zed_components) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[3.712527] (-) TimerEvent: {}
+[3.768450] (zed_components) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[3.772230] (zed_components) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[3.773431] (zed_components) StdoutLine: {'line': b'-- Configured cppcheck include dirs: /home/user/vision_ws/src/zed-ros2-wrapper/zed_components/src/include;/home/user/vision_ws/src/zed-ros2-wrapper/zed_components/src/zed_camera/include;/home/user/vision_ws/src/zed-ros2-wrapper/zed_components/src/tools/include\n'}
+[3.773662] (zed_components) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[3.775094] (zed_components) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[3.778757] (zed_components) StdoutLine: {'line': b"-- Added test 'uncrustify' to check C / C++ code style\n"}
+[3.778953] (zed_components) StdoutLine: {'line': b'-- Configured uncrustify additional arguments: \n'}
+[3.780044] (zed_components) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[3.787626] (zed_components) StdoutLine: {'line': b'-- Configuring done\n'}
+[3.812696] (-) TimerEvent: {}
+[3.855806] (zed_components) StdoutLine: {'line': b'-- Generating done\n'}
+[3.877176] (zed_components) StdoutLine: {'line': b'-- Build files have been written to: /home/user/vision_ws/build/zed_components\n'}
+[3.912898] (-) TimerEvent: {}
+[3.915332] (zed_components) CommandEnded: {'returncode': 0}
+[3.920444] (zed_components) JobProgress: {'identifier': 'zed_components', 'progress': 'build'}
+[3.922221] (zed_components) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/user/vision_ws/build/zed_components', '--', '-j4', '-l4'], 'cwd': '/home/user/vision_ws/build/zed_components', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_ZA:en'), ('USER', 'user'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/autorover_ws/install/zed_components/lib:/home/user/autorover_ws/install/mavros_extras/lib:/home/user/autorover_ws/install/mavros/lib:/home/user/autorover_ws/install/mavros_msgs/lib:/home/user/autorover_ws/install/libmavconn/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/vision_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1496'), ('SYSTEMD_EXEC_PID', '2171'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3250'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/user/autorover_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'user'), ('JOURNAL_STREAM', '8:45951'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'user'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/rovertut-desktop:@/tmp/.ICE-unix/2143,unix/rovertut-desktop:/tmp/.ICE-unix/2143'), ('INVOCATION_ID', '2d9cf8d595a1462d86831f651acd0db1'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_ZA.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:24ee3358-e131-4420-9dd7-5b18d714a25d'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/user/vision_ws/build/zed_components'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/user/autorover_ws/build/autorover_bringup:/home/user/autorover_ws/install/mavros/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/mavros_msgs/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/autorover_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble')]), 'shell': False}
+[4.013182] (-) TimerEvent: {}
+[4.036648] (zed_components) StdoutLine: {'line': b'[ 14%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/tools/src/sl_win_avg.cpp.o\x1b[0m\n'}
+[4.037584] (zed_components) StdoutLine: {'line': b'[ 14%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_one_component.dir/src/tools/src/sl_win_avg.cpp.o\x1b[0m\n'}
+[4.044144] (zed_components) StdoutLine: {'line': b'[ 21%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_one_component.dir/src/tools/src/sl_tools.cpp.o\x1b[0m\n'}
+[4.048357] (zed_components) StdoutLine: {'line': b'[ 28%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/tools/src/sl_tools.cpp.o\x1b[0m\n'}
+[4.113233] (-) TimerEvent: {}
+[4.213938] (-) TimerEvent: {}
+[4.314644] (-) TimerEvent: {}
+[4.415375] (-) TimerEvent: {}
+[4.516090] (-) TimerEvent: {}
+[4.616857] (-) TimerEvent: {}
+[4.717598] (-) TimerEvent: {}
+[4.818319] (-) TimerEvent: {}
+[4.925241] (-) TimerEvent: {}
+[5.025938] (-) TimerEvent: {}
+[5.127366] (-) TimerEvent: {}
+[5.228093] (-) TimerEvent: {}
+[5.328806] (-) TimerEvent: {}
+[5.393743] (zed_components) StdoutLine: {'line': b'[ 35%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_one_component.dir/src/tools/src/gnss_replay.cpp.o\x1b[0m\n'}
+[5.396496] (zed_components) StdoutLine: {'line': b'[ 42%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/tools/src/gnss_replay.cpp.o\x1b[0m\n'}
+[5.429009] (-) TimerEvent: {}
+[5.529865] (-) TimerEvent: {}
+[5.630570] (-) TimerEvent: {}
+[5.731312] (-) TimerEvent: {}
+[5.832036] (-) TimerEvent: {}
+[5.932769] (-) TimerEvent: {}
+[6.033553] (-) TimerEvent: {}
+[6.134340] (-) TimerEvent: {}
+[6.235126] (-) TimerEvent: {}
+[6.335832] (-) TimerEvent: {}
+[6.436578] (-) TimerEvent: {}
+[6.537385] (-) TimerEvent: {}
+[6.638133] (-) TimerEvent: {}
+[6.738908] (-) TimerEvent: {}
+[6.839668] (-) TimerEvent: {}
+[6.940458] (-) TimerEvent: {}
+[7.041254] (-) TimerEvent: {}
+[7.142036] (-) TimerEvent: {}
+[7.242808] (-) TimerEvent: {}
+[7.343602] (-) TimerEvent: {}
+[7.444347] (-) TimerEvent: {}
+[7.545098] (-) TimerEvent: {}
+[7.645861] (-) TimerEvent: {}
+[7.746621] (-) TimerEvent: {}
+[7.847385] (-) TimerEvent: {}
+[7.948147] (-) TimerEvent: {}
+[8.048906] (-) TimerEvent: {}
+[8.149822] (-) TimerEvent: {}
+[8.250567] (-) TimerEvent: {}
+[8.351345] (-) TimerEvent: {}
+[8.452126] (-) TimerEvent: {}
+[8.552881] (-) TimerEvent: {}
+[8.653639] (-) TimerEvent: {}
+[8.754361] (-) TimerEvent: {}
+[8.855136] (-) TimerEvent: {}
+[8.955885] (-) TimerEvent: {}
+[9.056640] (-) TimerEvent: {}
+[9.157403] (-) TimerEvent: {}
+[9.258147] (-) TimerEvent: {}
+[9.358919] (-) TimerEvent: {}
+[9.459668] (-) TimerEvent: {}
+[9.560411] (-) TimerEvent: {}
+[9.661163] (-) TimerEvent: {}
+[9.761847] (-) TimerEvent: {}
+[9.862609] (-) TimerEvent: {}
+[9.963338] (-) TimerEvent: {}
+[10.064080] (-) TimerEvent: {}
+[10.164799] (-) TimerEvent: {}
+[10.265514] (-) TimerEvent: {}
+[10.366242] (-) TimerEvent: {}
+[10.466975] (-) TimerEvent: {}
+[10.567699] (-) TimerEvent: {}
+[10.668447] (-) TimerEvent: {}
+[10.769207] (-) TimerEvent: {}
+[10.869922] (-) TimerEvent: {}
+[10.970618] (-) TimerEvent: {}
+[11.071303] (-) TimerEvent: {}
+[11.172063] (-) TimerEvent: {}
+[11.272811] (-) TimerEvent: {}
+[11.373587] (-) TimerEvent: {}
+[11.474320] (-) TimerEvent: {}
+[11.575060] (-) TimerEvent: {}
+[11.675837] (-) TimerEvent: {}
+[11.776608] (-) TimerEvent: {}
+[11.877431] (-) TimerEvent: {}
+[11.978154] (-) TimerEvent: {}
+[12.078910] (-) TimerEvent: {}
+[12.179711] (-) TimerEvent: {}
+[12.280547] (-) TimerEvent: {}
+[12.381280] (-) TimerEvent: {}
+[12.482009] (-) TimerEvent: {}
+[12.582734] (-) TimerEvent: {}
+[12.683467] (-) TimerEvent: {}
+[12.784238] (-) TimerEvent: {}
+[12.884993] (-) TimerEvent: {}
+[12.985742] (-) TimerEvent: {}
+[13.086467] (-) TimerEvent: {}
+[13.187175] (-) TimerEvent: {}
+[13.287909] (-) TimerEvent: {}
+[13.388639] (-) TimerEvent: {}
+[13.489389] (-) TimerEvent: {}
+[13.590084] (-) TimerEvent: {}
+[13.690803] (-) TimerEvent: {}
+[13.791520] (-) TimerEvent: {}
+[13.892211] (-) TimerEvent: {}
+[13.992975] (-) TimerEvent: {}
+[14.093736] (-) TimerEvent: {}
+[14.194500] (-) TimerEvent: {}
+[14.295269] (-) TimerEvent: {}
+[14.396005] (-) TimerEvent: {}
+[14.496713] (-) TimerEvent: {}
+[14.597470] (-) TimerEvent: {}
+[14.698209] (-) TimerEvent: {}
+[14.798930] (-) TimerEvent: {}
+[14.899620] (-) TimerEvent: {}
+[15.000336] (-) TimerEvent: {}
+[15.101149] (-) TimerEvent: {}
+[15.201858] (-) TimerEvent: {}
+[15.302601] (-) TimerEvent: {}
+[15.403340] (-) TimerEvent: {}
+[15.504038] (-) TimerEvent: {}
+[15.604745] (-) TimerEvent: {}
+[15.705464] (-) TimerEvent: {}
+[15.806210] (-) TimerEvent: {}
+[15.906939] (-) TimerEvent: {}
+[16.007645] (-) TimerEvent: {}
+[16.108349] (-) TimerEvent: {}
+[16.209066] (-) TimerEvent: {}
+[16.309745] (-) TimerEvent: {}
+[16.410475] (-) TimerEvent: {}
+[16.511205] (-) TimerEvent: {}
+[16.611979] (-) TimerEvent: {}
+[16.712761] (-) TimerEvent: {}
+[16.813575] (-) TimerEvent: {}
+[16.914307] (-) TimerEvent: {}
+[17.015079] (-) TimerEvent: {}
+[17.115860] (-) TimerEvent: {}
+[17.216634] (-) TimerEvent: {}
+[17.317392] (-) TimerEvent: {}
+[17.418145] (-) TimerEvent: {}
+[17.518926] (-) TimerEvent: {}
+[17.619678] (-) TimerEvent: {}
+[17.720421] (-) TimerEvent: {}
+[17.821178] (-) TimerEvent: {}
+[17.921941] (-) TimerEvent: {}
+[18.022646] (-) TimerEvent: {}
+[18.123405] (-) TimerEvent: {}
+[18.224196] (-) TimerEvent: {}
+[18.325106] (-) TimerEvent: {}
+[18.426134] (-) TimerEvent: {}
+[18.526841] (-) TimerEvent: {}
+[18.627572] (-) TimerEvent: {}
+[18.728366] (-) TimerEvent: {}
+[18.829145] (-) TimerEvent: {}
+[18.929849] (-) TimerEvent: {}
+[19.030584] (-) TimerEvent: {}
+[19.131333] (-) TimerEvent: {}
+[19.232036] (-) TimerEvent: {}
+[19.332727] (-) TimerEvent: {}
+[19.427348] (zed_components) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/tools/src/sl_types.cpp.o\x1b[0m\n'}
+[19.432989] (-) TimerEvent: {}
+[19.498216] (zed_components) StdoutLine: {'line': b'[ 57%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/zed_camera/src/zed_camera_component_main.cpp.o\x1b[0m\n'}
+[19.533202] (-) TimerEvent: {}
+[19.633884] (-) TimerEvent: {}
+[19.734588] (-) TimerEvent: {}
+[19.835287] (-) TimerEvent: {}
+[19.936009] (-) TimerEvent: {}
+[20.036740] (-) TimerEvent: {}
+[20.111636] (zed_components) StdoutLine: {'line': b'[ 64%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_one_component.dir/src/tools/src/sl_types.cpp.o\x1b[0m\n'}
+[20.136976] (-) TimerEvent: {}
+[20.180590] (zed_components) StdoutLine: {'line': b'[ 71%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_one_component.dir/src/zed_camera/src/zed_camera_one_component.cpp.o\x1b[0m\n'}
+[20.237259] (-) TimerEvent: {}
+[20.337945] (-) TimerEvent: {}
+[20.438616] (-) TimerEvent: {}
+[20.539316] (-) TimerEvent: {}
+[20.640022] (-) TimerEvent: {}
+[20.740763] (-) TimerEvent: {}
+[20.841498] (-) TimerEvent: {}
+[20.942228] (-) TimerEvent: {}
+[21.042947] (-) TimerEvent: {}
+[21.143699] (-) TimerEvent: {}
+[21.244417] (-) TimerEvent: {}
+[21.345198] (-) TimerEvent: {}
+[21.445966] (-) TimerEvent: {}
+[21.546758] (-) TimerEvent: {}
+[21.647494] (-) TimerEvent: {}
+[21.748232] (-) TimerEvent: {}
+[21.848998] (-) TimerEvent: {}
+[21.949775] (-) TimerEvent: {}
+[22.050496] (-) TimerEvent: {}
+[22.151240] (-) TimerEvent: {}
+[22.251993] (-) TimerEvent: {}
+[22.352796] (-) TimerEvent: {}
+[22.453563] (-) TimerEvent: {}
+[22.554304] (-) TimerEvent: {}
+[22.655037] (-) TimerEvent: {}
+[22.755794] (-) TimerEvent: {}
+[22.856531] (-) TimerEvent: {}
+[22.957254] (-) TimerEvent: {}
+[23.057970] (-) TimerEvent: {}
+[23.158722] (-) TimerEvent: {}
+[23.259478] (-) TimerEvent: {}
+[23.360277] (-) TimerEvent: {}
+[23.461041] (-) TimerEvent: {}
+[23.561785] (-) TimerEvent: {}
+[23.662520] (-) TimerEvent: {}
+[23.763272] (-) TimerEvent: {}
+[23.864024] (-) TimerEvent: {}
+[23.964772] (-) TimerEvent: {}
+[24.065471] (-) TimerEvent: {}
+[24.166181] (-) TimerEvent: {}
+[24.266925] (-) TimerEvent: {}
+[24.367666] (-) TimerEvent: {}
+[24.468430] (-) TimerEvent: {}
+[24.569211] (-) TimerEvent: {}
+[24.669949] (-) TimerEvent: {}
+[24.770695] (-) TimerEvent: {}
+[24.871434] (-) TimerEvent: {}
+[24.972176] (-) TimerEvent: {}
+[25.072944] (-) TimerEvent: {}
+[25.173711] (-) TimerEvent: {}
+[25.274468] (-) TimerEvent: {}
+[25.376335] (-) TimerEvent: {}
+[25.477036] (-) TimerEvent: {}
+[25.577736] (-) TimerEvent: {}
+[25.678451] (-) TimerEvent: {}
+[25.779140] (-) TimerEvent: {}
+[25.879859] (-) TimerEvent: {}
+[25.980838] (-) TimerEvent: {}
+[26.081583] (-) TimerEvent: {}
+[26.182299] (-) TimerEvent: {}
+[26.283051] (-) TimerEvent: {}
+[26.383807] (-) TimerEvent: {}
+[26.484541] (-) TimerEvent: {}
+[26.585228] (-) TimerEvent: {}
+[26.685945] (-) TimerEvent: {}
+[26.786664] (-) TimerEvent: {}
+[26.887412] (-) TimerEvent: {}
+[26.988156] (-) TimerEvent: {}
+[27.088878] (-) TimerEvent: {}
+[27.189611] (-) TimerEvent: {}
+[27.290330] (-) TimerEvent: {}
+[27.391055] (-) TimerEvent: {}
+[27.491784] (-) TimerEvent: {}
+[27.592505] (-) TimerEvent: {}
+[27.693237] (-) TimerEvent: {}
+[27.793947] (-) TimerEvent: {}
+[27.894694] (-) TimerEvent: {}
+[27.995419] (-) TimerEvent: {}
+[28.096158] (-) TimerEvent: {}
+[28.196936] (-) TimerEvent: {}
+[28.297669] (-) TimerEvent: {}
+[28.398369] (-) TimerEvent: {}
+[28.499098] (-) TimerEvent: {}
+[28.599824] (-) TimerEvent: {}
+[28.700564] (-) TimerEvent: {}
+[28.801343] (-) TimerEvent: {}
+[28.902163] (-) TimerEvent: {}
+[29.002914] (-) TimerEvent: {}
+[29.103642] (-) TimerEvent: {}
+[29.204338] (-) TimerEvent: {}
+[29.305117] (-) TimerEvent: {}
+[29.405835] (-) TimerEvent: {}
+[29.506551] (-) TimerEvent: {}
+[29.607233] (-) TimerEvent: {}
+[29.707913] (-) TimerEvent: {}
+[29.808604] (-) TimerEvent: {}
+[29.909336] (-) TimerEvent: {}
+[30.010062] (-) TimerEvent: {}
+[30.110766] (-) TimerEvent: {}
+[30.211536] (-) TimerEvent: {}
+[30.312319] (-) TimerEvent: {}
+[30.413096] (-) TimerEvent: {}
+[30.513782] (-) TimerEvent: {}
+[30.614506] (-) TimerEvent: {}
+[30.715200] (-) TimerEvent: {}
+[30.823484] (-) TimerEvent: {}
+[30.924205] (-) TimerEvent: {}
+[31.024921] (-) TimerEvent: {}
+[31.125694] (-) TimerEvent: {}
+[31.226393] (-) TimerEvent: {}
+[31.327111] (-) TimerEvent: {}
+[31.427874] (-) TimerEvent: {}
+[31.528648] (-) TimerEvent: {}
+[31.629424] (-) TimerEvent: {}
+[31.730146] (-) TimerEvent: {}
+[31.831452] (-) TimerEvent: {}
+[31.932168] (-) TimerEvent: {}
+[32.032874] (-) TimerEvent: {}
+[32.133579] (-) TimerEvent: {}
+[32.234315] (-) TimerEvent: {}
+[32.335046] (-) TimerEvent: {}
+[32.435801] (-) TimerEvent: {}
+[32.536535] (-) TimerEvent: {}
+[32.637254] (-) TimerEvent: {}
+[32.737968] (-) TimerEvent: {}
+[32.838700] (-) TimerEvent: {}
+[32.939418] (-) TimerEvent: {}
+[33.040150] (-) TimerEvent: {}
+[33.140902] (-) TimerEvent: {}
+[33.241607] (-) TimerEvent: {}
+[33.342357] (-) TimerEvent: {}
+[33.443141] (-) TimerEvent: {}
+[33.543927] (-) TimerEvent: {}
+[33.644684] (-) TimerEvent: {}
+[33.745462] (-) TimerEvent: {}
+[33.846200] (-) TimerEvent: {}
+[33.946963] (-) TimerEvent: {}
+[34.047696] (-) TimerEvent: {}
+[34.148452] (-) TimerEvent: {}
+[34.249951] (-) TimerEvent: {}
+[34.354224] (-) TimerEvent: {}
+[34.454930] (-) TimerEvent: {}
+[34.555687] (-) TimerEvent: {}
+[34.656480] (-) TimerEvent: {}
+[34.730757] (zed_components) StdoutLine: {'line': b'[ 78%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/zed_camera/src/zed_camera_component_objdet.cpp.o\x1b[0m\n'}
+[34.756701] (-) TimerEvent: {}
+[34.857470] (-) TimerEvent: {}
+[34.958202] (-) TimerEvent: {}
+[35.058937] (-) TimerEvent: {}
+[35.159660] (-) TimerEvent: {}
+[35.260392] (-) TimerEvent: {}
+[35.361131] (-) TimerEvent: {}
+[35.461833] (-) TimerEvent: {}
+[35.562557] (-) TimerEvent: {}
+[35.582970] (zed_components) StdoutLine: {'line': b'[ 85%] \x1b[32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/zed_camera/src/zed_camera_component_bodytrk.cpp.o\x1b[0m\n'}
+[35.662772] (-) TimerEvent: {}
+[35.763502] (-) TimerEvent: {}
+[35.864229] (-) TimerEvent: {}
+[35.964968] (-) TimerEvent: {}
+[36.065755] (-) TimerEvent: {}
+[36.166495] (-) TimerEvent: {}
+[36.267251] (-) TimerEvent: {}
+[36.368020] (-) TimerEvent: {}
+[36.468787] (-) TimerEvent: {}
+[36.569536] (-) TimerEvent: {}
+[36.670255] (-) TimerEvent: {}
+[36.771002] (-) TimerEvent: {}
+[36.871757] (-) TimerEvent: {}
+[36.972517] (-) TimerEvent: {}
+[37.073267] (-) TimerEvent: {}
+[37.174032] (-) TimerEvent: {}
+[37.274771] (-) TimerEvent: {}
+[37.375553] (-) TimerEvent: {}
+[37.476313] (-) TimerEvent: {}
+[37.577071] (-) TimerEvent: {}
+[37.677793] (-) TimerEvent: {}
+[37.778517] (-) TimerEvent: {}
+[37.879263] (-) TimerEvent: {}
+[37.980013] (-) TimerEvent: {}
+[38.080815] (-) TimerEvent: {}
+[38.181561] (-) TimerEvent: {}
+[38.282296] (-) TimerEvent: {}
+[38.383073] (-) TimerEvent: {}
+[38.483804] (-) TimerEvent: {}
+[38.584549] (-) TimerEvent: {}
+[38.685321] (-) TimerEvent: {}
+[38.786022] (-) TimerEvent: {}
+[38.886726] (-) TimerEvent: {}
+[38.987509] (-) TimerEvent: {}
+[39.088253] (-) TimerEvent: {}
+[39.188987] (-) TimerEvent: {}
+[39.289739] (-) TimerEvent: {}
+[39.390500] (-) TimerEvent: {}
+[39.491249] (-) TimerEvent: {}
+[39.592004] (-) TimerEvent: {}
+[39.692776] (-) TimerEvent: {}
+[39.793569] (-) TimerEvent: {}
+[39.894329] (-) TimerEvent: {}
+[39.995041] (-) TimerEvent: {}
+[40.095752] (-) TimerEvent: {}
+[40.196491] (-) TimerEvent: {}
+[40.297219] (-) TimerEvent: {}
+[40.397934] (-) TimerEvent: {}
+[40.498668] (-) TimerEvent: {}
+[40.599422] (-) TimerEvent: {}
+[40.700182] (-) TimerEvent: {}
+[40.800946] (-) TimerEvent: {}
+[40.901734] (-) TimerEvent: {}
+[41.002533] (-) TimerEvent: {}
+[41.103288] (-) TimerEvent: {}
+[41.204031] (-) TimerEvent: {}
+[41.304768] (-) TimerEvent: {}
+[41.405539] (-) TimerEvent: {}
+[41.506270] (-) TimerEvent: {}
+[41.607018] (-) TimerEvent: {}
+[41.707734] (-) TimerEvent: {}
+[41.808429] (-) TimerEvent: {}
+[41.909188] (-) TimerEvent: {}
+[42.009897] (-) TimerEvent: {}
+[42.110591] (-) TimerEvent: {}
+[42.211591] (-) TimerEvent: {}
+[42.312360] (-) TimerEvent: {}
+[42.413158] (-) TimerEvent: {}
+[42.513881] (-) TimerEvent: {}
+[42.614629] (-) TimerEvent: {}
+[42.715364] (-) TimerEvent: {}
+[42.816067] (-) TimerEvent: {}
+[42.916805] (-) TimerEvent: {}
+[43.017552] (-) TimerEvent: {}
+[43.118307] (-) TimerEvent: {}
+[43.219049] (-) TimerEvent: {}
+[43.319793] (-) TimerEvent: {}
+[43.420536] (-) TimerEvent: {}
+[43.521257] (-) TimerEvent: {}
+[43.621978] (-) TimerEvent: {}
+[43.722735] (-) TimerEvent: {}
+[43.823463] (-) TimerEvent: {}
+[43.924140] (-) TimerEvent: {}
+[44.024834] (-) TimerEvent: {}
+[44.125614] (-) TimerEvent: {}
+[44.226361] (-) TimerEvent: {}
+[44.327105] (-) TimerEvent: {}
+[44.427861] (-) TimerEvent: {}
+[44.528617] (-) TimerEvent: {}
+[44.629375] (-) TimerEvent: {}
+[44.730125] (-) TimerEvent: {}
+[44.830873] (-) TimerEvent: {}
+[44.931593] (-) TimerEvent: {}
+[45.032307] (-) TimerEvent: {}
+[45.133035] (-) TimerEvent: {}
+[45.233824] (-) TimerEvent: {}
+[45.334596] (-) TimerEvent: {}
+[45.435382] (-) TimerEvent: {}
+[45.536165] (-) TimerEvent: {}
+[45.636907] (-) TimerEvent: {}
+[45.737655] (-) TimerEvent: {}
+[45.838405] (-) TimerEvent: {}
+[45.939166] (-) TimerEvent: {}
+[46.039922] (-) TimerEvent: {}
+[46.140658] (-) TimerEvent: {}
+[46.241360] (-) TimerEvent: {}
+[46.342059] (-) TimerEvent: {}
+[46.442785] (-) TimerEvent: {}
+[46.543532] (-) TimerEvent: {}
+[46.671186] (-) TimerEvent: {}
+[46.771961] (-) TimerEvent: {}
+[46.872753] (-) TimerEvent: {}
+[46.973564] (-) TimerEvent: {}
+[47.074308] (-) TimerEvent: {}
+[47.175086] (-) TimerEvent: {}
+[47.275848] (-) TimerEvent: {}
+[47.376559] (-) TimerEvent: {}
+[47.477349] (-) TimerEvent: {}
+[47.578100] (-) TimerEvent: {}
+[47.678853] (-) TimerEvent: {}
+[47.779628] (-) TimerEvent: {}
+[47.880401] (-) TimerEvent: {}
+[47.981173] (-) TimerEvent: {}
+[48.081932] (-) TimerEvent: {}
+[48.182697] (-) TimerEvent: {}
+[48.283486] (-) TimerEvent: {}
+[48.384219] (-) TimerEvent: {}
+[48.484900] (-) TimerEvent: {}
+[48.585610] (-) TimerEvent: {}
+[48.686350] (-) TimerEvent: {}
+[48.787099] (-) TimerEvent: {}
+[48.887855] (-) TimerEvent: {}
+[48.988625] (-) TimerEvent: {}
+[49.089417] (-) TimerEvent: {}
+[49.190158] (-) TimerEvent: {}
+[49.290912] (-) TimerEvent: {}
+[49.391654] (-) TimerEvent: {}
+[49.492429] (-) TimerEvent: {}
+[49.593222] (-) TimerEvent: {}
+[49.693946] (-) TimerEvent: {}
+[49.794682] (-) TimerEvent: {}
+[49.895401] (-) TimerEvent: {}
+[49.996173] (-) TimerEvent: {}
+[50.096972] (-) TimerEvent: {}
+[50.197746] (-) TimerEvent: {}
+[50.298497] (-) TimerEvent: {}
+[50.399243] (-) TimerEvent: {}
+[50.499983] (-) TimerEvent: {}
+[50.600751] (-) TimerEvent: {}
+[50.701508] (-) TimerEvent: {}
+[50.802239] (-) TimerEvent: {}
+[50.902983] (-) TimerEvent: {}
+[51.003679] (-) TimerEvent: {}
+[51.104384] (-) TimerEvent: {}
+[51.205133] (-) TimerEvent: {}
+[51.305862] (-) TimerEvent: {}
+[51.406620] (-) TimerEvent: {}
+[51.507409] (-) TimerEvent: {}
+[51.608178] (-) TimerEvent: {}
+[51.708983] (-) TimerEvent: {}
+[51.809748] (-) TimerEvent: {}
+[51.910476] (-) TimerEvent: {}
+[52.011237] (-) TimerEvent: {}
+[52.111993] (-) TimerEvent: {}
+[52.212732] (-) TimerEvent: {}
+[52.313451] (-) TimerEvent: {}
+[52.414179] (-) TimerEvent: {}
+[52.514917] (-) TimerEvent: {}
+[52.615674] (-) TimerEvent: {}
+[52.716436] (-) TimerEvent: {}
+[52.817229] (-) TimerEvent: {}
+[52.917955] (-) TimerEvent: {}
+[53.018689] (-) TimerEvent: {}
+[53.119438] (-) TimerEvent: {}
+[53.220182] (-) TimerEvent: {}
+[53.320926] (-) TimerEvent: {}
+[53.421650] (-) TimerEvent: {}
+[53.522345] (-) TimerEvent: {}
+[53.623076] (-) TimerEvent: {}
+[53.723837] (-) TimerEvent: {}
+[53.824602] (-) TimerEvent: {}
+[53.925344] (-) TimerEvent: {}
+[54.026100] (-) TimerEvent: {}
+[54.126835] (-) TimerEvent: {}
+[54.227537] (-) TimerEvent: {}
+[54.328266] (-) TimerEvent: {}
+[54.429020] (-) TimerEvent: {}
+[54.529748] (-) TimerEvent: {}
+[54.630438] (-) TimerEvent: {}
+[54.731183] (-) TimerEvent: {}
+[54.831973] (-) TimerEvent: {}
+[54.932729] (-) TimerEvent: {}
+[55.033496] (-) TimerEvent: {}
+[55.134275] (-) TimerEvent: {}
+[55.235038] (-) TimerEvent: {}
+[55.335792] (-) TimerEvent: {}
+[55.436587] (-) TimerEvent: {}
+[55.537377] (-) TimerEvent: {}
+[55.638109] (-) TimerEvent: {}
+[55.738899] (-) TimerEvent: {}
+[55.839659] (-) TimerEvent: {}
+[55.940423] (-) TimerEvent: {}
+[56.041242] (-) TimerEvent: {}
+[56.141998] (-) TimerEvent: {}
+[56.242766] (-) TimerEvent: {}
+[56.343525] (-) TimerEvent: {}
+[56.444306] (-) TimerEvent: {}
+[56.545126] (-) TimerEvent: {}
+[56.645888] (-) TimerEvent: {}
+[56.746664] (-) TimerEvent: {}
+[56.847423] (-) TimerEvent: {}
+[56.948150] (-) TimerEvent: {}
+[57.048919] (-) TimerEvent: {}
+[57.149695] (-) TimerEvent: {}
+[57.250444] (-) TimerEvent: {}
+[57.351192] (-) TimerEvent: {}
+[57.451929] (-) TimerEvent: {}
+[57.552711] (-) TimerEvent: {}
+[57.653506] (-) TimerEvent: {}
+[57.754237] (-) TimerEvent: {}
+[57.854986] (-) TimerEvent: {}
+[57.955752] (-) TimerEvent: {}
+[58.056518] (-) TimerEvent: {}
+[58.157253] (-) TimerEvent: {}
+[58.258010] (-) TimerEvent: {}
+[58.358778] (-) TimerEvent: {}
+[58.459550] (-) TimerEvent: {}
+[58.560290] (-) TimerEvent: {}
+[58.661104] (-) TimerEvent: {}
+[58.761816] (-) TimerEvent: {}
+[58.862589] (-) TimerEvent: {}
+[58.963340] (-) TimerEvent: {}
+[59.064098] (-) TimerEvent: {}
+[59.164833] (-) TimerEvent: {}
+[59.265592] (-) TimerEvent: {}
+[59.366365] (-) TimerEvent: {}
+[59.467120] (-) TimerEvent: {}
+[59.567926] (-) TimerEvent: {}
+[59.668717] (-) TimerEvent: {}
+[59.769441] (-) TimerEvent: {}
+[59.870207] (-) TimerEvent: {}
+[59.971003] (-) TimerEvent: {}
+[60.071796] (-) TimerEvent: {}
+[60.172539] (-) TimerEvent: {}
+[60.273318] (-) TimerEvent: {}
+[60.374072] (-) TimerEvent: {}
+[60.474830] (-) TimerEvent: {}
+[60.575611] (-) TimerEvent: {}
+[60.676385] (-) TimerEvent: {}
+[60.777232] (-) TimerEvent: {}
+[60.877980] (-) TimerEvent: {}
+[60.978734] (-) TimerEvent: {}
+[61.079487] (-) TimerEvent: {}
+[61.180271] (-) TimerEvent: {}
+[61.281039] (-) TimerEvent: {}
+[61.381778] (-) TimerEvent: {}
+[61.482572] (-) TimerEvent: {}
+[61.583341] (-) TimerEvent: {}
+[61.684129] (-) TimerEvent: {}
+[61.784923] (-) TimerEvent: {}
+[61.885678] (-) TimerEvent: {}
+[61.986465] (-) TimerEvent: {}
+[62.087244] (-) TimerEvent: {}
+[62.188065] (-) TimerEvent: {}
+[62.288903] (-) TimerEvent: {}
+[62.389737] (-) TimerEvent: {}
+[62.490512] (-) TimerEvent: {}
+[62.591336] (-) TimerEvent: {}
+[62.692124] (-) TimerEvent: {}
+[62.792928] (-) TimerEvent: {}
+[62.893765] (-) TimerEvent: {}
+[62.994526] (-) TimerEvent: {}
+[63.095286] (-) TimerEvent: {}
+[63.196036] (-) TimerEvent: {}
+[63.296833] (-) TimerEvent: {}
+[63.397673] (-) TimerEvent: {}
+[63.498459] (-) TimerEvent: {}
+[63.599235] (-) TimerEvent: {}
+[63.699989] (-) TimerEvent: {}
+[63.800740] (-) TimerEvent: {}
+[63.901516] (-) TimerEvent: {}
+[64.002264] (-) TimerEvent: {}
+[64.103034] (-) TimerEvent: {}
+[64.203803] (-) TimerEvent: {}
+[64.304605] (-) TimerEvent: {}
+[64.405361] (-) TimerEvent: {}
+[64.506121] (-) TimerEvent: {}
+[64.606879] (-) TimerEvent: {}
+[64.707690] (-) TimerEvent: {}
+[64.808472] (-) TimerEvent: {}
+[64.909280] (-) TimerEvent: {}
+[65.010062] (-) TimerEvent: {}
+[65.110793] (-) TimerEvent: {}
+[65.211545] (-) TimerEvent: {}
+[65.312316] (-) TimerEvent: {}
+[65.413120] (-) TimerEvent: {}
+[65.513878] (-) TimerEvent: {}
+[65.614654] (-) TimerEvent: {}
+[65.715424] (-) TimerEvent: {}
+[65.816155] (-) TimerEvent: {}
+[65.916912] (-) TimerEvent: {}
+[66.017685] (-) TimerEvent: {}
+[66.118420] (-) TimerEvent: {}
+[66.219187] (-) TimerEvent: {}
+[66.319925] (-) TimerEvent: {}
+[66.420668] (-) TimerEvent: {}
+[66.521481] (-) TimerEvent: {}
+[66.622224] (-) TimerEvent: {}
+[66.722986] (-) TimerEvent: {}
+[66.823746] (-) TimerEvent: {}
+[66.924543] (-) TimerEvent: {}
+[67.025317] (-) TimerEvent: {}
+[67.149552] (-) TimerEvent: {}
+[67.250278] (-) TimerEvent: {}
+[67.351021] (-) TimerEvent: {}
+[67.451784] (-) TimerEvent: {}
+[67.552525] (-) TimerEvent: {}
+[67.653330] (-) TimerEvent: {}
+[67.754094] (-) TimerEvent: {}
+[67.854867] (-) TimerEvent: {}
+[67.955626] (-) TimerEvent: {}
+[68.056347] (-) TimerEvent: {}
+[68.157130] (-) TimerEvent: {}
+[68.257848] (-) TimerEvent: {}
+[68.358633] (-) TimerEvent: {}
+[68.459394] (-) TimerEvent: {}
+[68.560132] (-) TimerEvent: {}
+[68.660882] (-) TimerEvent: {}
+[68.761654] (-) TimerEvent: {}
+[68.862408] (-) TimerEvent: {}
+[68.963154] (-) TimerEvent: {}
+[69.063871] (-) TimerEvent: {}
+[69.164662] (-) TimerEvent: {}
+[69.265483] (-) TimerEvent: {}
+[69.366215] (-) TimerEvent: {}
+[69.466951] (-) TimerEvent: {}
+[69.567731] (-) TimerEvent: {}
+[69.668452] (-) TimerEvent: {}
+[69.769233] (-) TimerEvent: {}
+[69.869936] (-) TimerEvent: {}
+[69.970680] (-) TimerEvent: {}
+[70.071408] (-) TimerEvent: {}
+[70.172161] (-) TimerEvent: {}
+[70.272900] (-) TimerEvent: {}
+[70.373695] (-) TimerEvent: {}
+[70.474442] (-) TimerEvent: {}
+[70.575197] (-) TimerEvent: {}
+[70.675950] (-) TimerEvent: {}
+[70.776722] (-) TimerEvent: {}
+[70.877498] (-) TimerEvent: {}
+[70.978245] (-) TimerEvent: {}
+[71.078983] (-) TimerEvent: {}
+[71.179732] (-) TimerEvent: {}
+[71.280466] (-) TimerEvent: {}
+[71.381257] (-) TimerEvent: {}
+[71.482019] (-) TimerEvent: {}
+[71.582750] (-) TimerEvent: {}
+[71.683490] (-) TimerEvent: {}
+[71.784234] (-) TimerEvent: {}
+[71.885004] (-) TimerEvent: {}
+[71.985743] (-) TimerEvent: {}
+[72.086469] (-) TimerEvent: {}
+[72.187223] (-) TimerEvent: {}
+[72.287991] (-) TimerEvent: {}
+[72.388760] (-) TimerEvent: {}
+[72.489531] (-) TimerEvent: {}
+[72.590292] (-) TimerEvent: {}
+[72.691042] (-) TimerEvent: {}
+[72.791787] (-) TimerEvent: {}
+[72.892515] (-) TimerEvent: {}
+[72.993260] (-) TimerEvent: {}
+[73.093986] (-) TimerEvent: {}
+[73.194744] (-) TimerEvent: {}
+[73.295501] (-) TimerEvent: {}
+[73.396290] (-) TimerEvent: {}
+[73.497037] (-) TimerEvent: {}
+[73.597808] (-) TimerEvent: {}
+[73.698552] (-) TimerEvent: {}
+[73.799314] (-) TimerEvent: {}
+[73.900073] (-) TimerEvent: {}
+[74.000844] (-) TimerEvent: {}
+[74.101594] (-) TimerEvent: {}
+[74.202325] (-) TimerEvent: {}
+[74.303066] (-) TimerEvent: {}
+[74.403812] (-) TimerEvent: {}
+[74.504541] (-) TimerEvent: {}
+[74.605261] (-) TimerEvent: {}
+[74.705991] (-) TimerEvent: {}
+[74.806724] (-) TimerEvent: {}
+[74.907444] (-) TimerEvent: {}
+[75.008213] (-) TimerEvent: {}
+[75.109114] (-) TimerEvent: {}
+[75.209801] (-) TimerEvent: {}
+[75.310519] (-) TimerEvent: {}
+[75.411315] (-) TimerEvent: {}
+[75.512019] (-) TimerEvent: {}
+[75.612754] (-) TimerEvent: {}
+[75.713519] (-) TimerEvent: {}
+[75.814266] (-) TimerEvent: {}
+[75.914993] (-) TimerEvent: {}
+[76.015724] (-) TimerEvent: {}
+[76.116424] (-) TimerEvent: {}
+[76.217144] (-) TimerEvent: {}
+[76.317853] (-) TimerEvent: {}
+[76.418580] (-) TimerEvent: {}
+[76.519297] (-) TimerEvent: {}
+[76.620016] (-) TimerEvent: {}
+[76.720718] (-) TimerEvent: {}
+[76.821496] (-) TimerEvent: {}
+[76.922203] (-) TimerEvent: {}
+[77.022914] (-) TimerEvent: {}
+[77.123629] (-) TimerEvent: {}
+[77.224344] (-) TimerEvent: {}
+[77.325143] (-) TimerEvent: {}
+[77.425870] (-) TimerEvent: {}
+[77.526663] (-) TimerEvent: {}
+[77.627388] (-) TimerEvent: {}
+[77.728103] (-) TimerEvent: {}
+[77.828817] (-) TimerEvent: {}
+[77.929558] (-) TimerEvent: {}
+[78.030279] (-) TimerEvent: {}
+[78.131012] (-) TimerEvent: {}
+[78.231738] (-) TimerEvent: {}
+[78.332506] (-) TimerEvent: {}
+[78.433236] (-) TimerEvent: {}
+[78.533982] (-) TimerEvent: {}
+[78.634718] (-) TimerEvent: {}
+[78.735446] (-) TimerEvent: {}
+[78.836175] (-) TimerEvent: {}
+[78.936896] (-) TimerEvent: {}
+[79.037641] (-) TimerEvent: {}
+[79.138363] (-) TimerEvent: {}
+[79.239072] (-) TimerEvent: {}
+[79.339801] (-) TimerEvent: {}
+[79.440518] (-) TimerEvent: {}
+[79.541244] (-) TimerEvent: {}
+[79.641969] (-) TimerEvent: {}
+[79.742687] (-) TimerEvent: {}
+[79.843420] (-) TimerEvent: {}
+[79.944150] (-) TimerEvent: {}
+[80.044894] (-) TimerEvent: {}
+[80.145673] (-) TimerEvent: {}
+[80.246376] (-) TimerEvent: {}
+[80.347055] (-) TimerEvent: {}
+[80.447780] (-) TimerEvent: {}
+[80.548506] (-) TimerEvent: {}
+[80.649226] (-) TimerEvent: {}
+[80.749944] (-) TimerEvent: {}
+[80.850640] (-) TimerEvent: {}
+[80.951342] (-) TimerEvent: {}
+[81.052076] (-) TimerEvent: {}
+[81.152757] (-) TimerEvent: {}
+[81.253463] (-) TimerEvent: {}
+[81.354155] (-) TimerEvent: {}
+[81.454857] (-) TimerEvent: {}
+[81.510101] (zed_components) StdoutLine: {'line': b'[ 92%] \x1b[32m\x1b[1mLinking CXX shared library libzed_camera_one_component.so\x1b[0m\n'}
+[81.555039] (-) TimerEvent: {}
+[81.655753] (-) TimerEvent: {}
+[81.756484] (-) TimerEvent: {}
+[81.857216] (-) TimerEvent: {}
+[81.957966] (-) TimerEvent: {}
+[82.058707] (-) TimerEvent: {}
+[82.159450] (-) TimerEvent: {}
+[82.260236] (-) TimerEvent: {}
+[82.360951] (-) TimerEvent: {}
+[82.461688] (-) TimerEvent: {}
+[82.474729] (zed_components) StdoutLine: {'line': b'[ 92%] Built target zed_camera_one_component\n'}
+[82.561867] (-) TimerEvent: {}
+[82.662568] (-) TimerEvent: {}
+[82.763262] (-) TimerEvent: {}
+[82.863944] (-) TimerEvent: {}
+[82.964621] (-) TimerEvent: {}
+[83.065325] (-) TimerEvent: {}
+[83.165990] (-) TimerEvent: {}
+[83.266646] (-) TimerEvent: {}
+[83.367326] (-) TimerEvent: {}
+[83.468024] (-) TimerEvent: {}
+[83.568702] (-) TimerEvent: {}
+[83.669412] (-) TimerEvent: {}
+[83.770103] (-) TimerEvent: {}
+[83.870798] (-) TimerEvent: {}
+[83.971494] (-) TimerEvent: {}
+[84.072171] (-) TimerEvent: {}
+[84.172842] (-) TimerEvent: {}
+[84.273558] (-) TimerEvent: {}
+[84.374254] (-) TimerEvent: {}
+[84.474930] (-) TimerEvent: {}
+[84.575635] (-) TimerEvent: {}
+[84.676324] (-) TimerEvent: {}
+[84.777005] (-) TimerEvent: {}
+[84.877698] (-) TimerEvent: {}
+[84.978379] (-) TimerEvent: {}
+[85.079066] (-) TimerEvent: {}
+[85.179757] (-) TimerEvent: {}
+[85.280438] (-) TimerEvent: {}
+[85.381158] (-) TimerEvent: {}
+[85.481857] (-) TimerEvent: {}
+[85.582546] (-) TimerEvent: {}
+[85.683229] (-) TimerEvent: {}
+[85.783923] (-) TimerEvent: {}
+[85.884615] (-) TimerEvent: {}
+[85.985303] (-) TimerEvent: {}
+[86.085956] (-) TimerEvent: {}
+[86.186633] (-) TimerEvent: {}
+[86.287342] (-) TimerEvent: {}
+[86.388041] (-) TimerEvent: {}
+[86.488738] (-) TimerEvent: {}
+[86.589467] (-) TimerEvent: {}
+[86.690151] (-) TimerEvent: {}
+[86.790835] (-) TimerEvent: {}
+[86.891538] (-) TimerEvent: {}
+[86.992227] (-) TimerEvent: {}
+[87.092928] (-) TimerEvent: {}
+[87.193660] (-) TimerEvent: {}
+[87.294403] (-) TimerEvent: {}
+[87.395115] (-) TimerEvent: {}
+[87.495824] (-) TimerEvent: {}
+[87.596509] (-) TimerEvent: {}
+[87.697232] (-) TimerEvent: {}
+[87.797949] (-) TimerEvent: {}
+[87.898648] (-) TimerEvent: {}
+[87.999331] (-) TimerEvent: {}
+[88.100006] (-) TimerEvent: {}
+[88.200722] (-) TimerEvent: {}
+[88.301417] (-) TimerEvent: {}
+[88.402101] (-) TimerEvent: {}
+[88.502779] (-) TimerEvent: {}
+[88.603464] (-) TimerEvent: {}
+[88.704136] (-) TimerEvent: {}
+[88.804831] (-) TimerEvent: {}
+[88.905536] (-) TimerEvent: {}
+[89.006210] (-) TimerEvent: {}
+[89.106886] (-) TimerEvent: {}
+[89.207559] (-) TimerEvent: {}
+[89.308241] (-) TimerEvent: {}
+[89.408910] (-) TimerEvent: {}
+[89.509610] (-) TimerEvent: {}
+[89.610274] (-) TimerEvent: {}
+[89.710946] (-) TimerEvent: {}
+[89.811628] (-) TimerEvent: {}
+[89.912303] (-) TimerEvent: {}
+[90.012967] (-) TimerEvent: {}
+[90.113651] (-) TimerEvent: {}
+[90.214311] (-) TimerEvent: {}
+[90.314996] (-) TimerEvent: {}
+[90.415684] (-) TimerEvent: {}
+[90.516366] (-) TimerEvent: {}
+[90.617043] (-) TimerEvent: {}
+[90.717759] (-) TimerEvent: {}
+[90.818450] (-) TimerEvent: {}
+[90.919130] (-) TimerEvent: {}
+[91.019809] (-) TimerEvent: {}
+[91.120493] (-) TimerEvent: {}
+[91.221213] (-) TimerEvent: {}
+[91.321924] (-) TimerEvent: {}
+[91.422636] (-) TimerEvent: {}
+[91.523338] (-) TimerEvent: {}
+[91.624045] (-) TimerEvent: {}
+[91.724755] (-) TimerEvent: {}
+[91.825488] (-) TimerEvent: {}
+[91.926214] (-) TimerEvent: {}
+[92.026957] (-) TimerEvent: {}
+[92.127671] (-) TimerEvent: {}
+[92.228376] (-) TimerEvent: {}
+[92.329100] (-) TimerEvent: {}
+[92.429803] (-) TimerEvent: {}
+[92.530524] (-) TimerEvent: {}
+[92.631238] (-) TimerEvent: {}
+[92.751236] (-) TimerEvent: {}
+[92.851943] (-) TimerEvent: {}
+[92.952631] (-) TimerEvent: {}
+[93.053351] (-) TimerEvent: {}
+[93.154014] (-) TimerEvent: {}
+[93.254664] (-) TimerEvent: {}
+[93.355352] (-) TimerEvent: {}
+[93.456042] (-) TimerEvent: {}
+[93.556760] (-) TimerEvent: {}
+[93.657493] (-) TimerEvent: {}
+[93.758198] (-) TimerEvent: {}
+[93.858890] (-) TimerEvent: {}
+[93.959603] (-) TimerEvent: {}
+[94.060300] (-) TimerEvent: {}
+[94.160996] (-) TimerEvent: {}
+[94.261712] (-) TimerEvent: {}
+[94.362427] (-) TimerEvent: {}
+[94.463140] (-) TimerEvent: {}
+[94.563831] (-) TimerEvent: {}
+[94.664610] (-) TimerEvent: {}
+[94.765299] (-) TimerEvent: {}
+[94.865991] (-) TimerEvent: {}
+[94.966698] (-) TimerEvent: {}
+[95.067408] (-) TimerEvent: {}
+[95.168097] (-) TimerEvent: {}
+[95.268785] (-) TimerEvent: {}
+[95.369511] (-) TimerEvent: {}
+[95.470216] (-) TimerEvent: {}
+[95.570918] (-) TimerEvent: {}
+[95.671638] (-) TimerEvent: {}
+[95.772295] (-) TimerEvent: {}
+[95.872961] (-) TimerEvent: {}
+[95.973670] (-) TimerEvent: {}
+[96.074362] (-) TimerEvent: {}
+[96.175046] (-) TimerEvent: {}
+[96.275718] (-) TimerEvent: {}
+[96.376408] (-) TimerEvent: {}
+[96.477126] (-) TimerEvent: {}
+[96.577798] (-) TimerEvent: {}
+[96.678495] (-) TimerEvent: {}
+[96.779132] (-) TimerEvent: {}
+[96.879820] (-) TimerEvent: {}
+[96.980524] (-) TimerEvent: {}
+[97.081212] (-) TimerEvent: {}
+[97.181882] (-) TimerEvent: {}
+[97.282549] (-) TimerEvent: {}
+[97.383235] (-) TimerEvent: {}
+[97.483917] (-) TimerEvent: {}
+[97.584592] (-) TimerEvent: {}
+[97.685298] (-) TimerEvent: {}
+[97.785984] (-) TimerEvent: {}
+[97.886649] (-) TimerEvent: {}
+[97.987335] (-) TimerEvent: {}
+[98.088044] (-) TimerEvent: {}
+[98.188735] (-) TimerEvent: {}
+[98.289431] (-) TimerEvent: {}
+[98.390123] (-) TimerEvent: {}
+[98.490825] (-) TimerEvent: {}
+[98.591508] (-) TimerEvent: {}
+[98.692162] (-) TimerEvent: {}
+[98.792814] (-) TimerEvent: {}
+[98.893488] (-) TimerEvent: {}
+[98.994132] (-) TimerEvent: {}
+[99.094768] (-) TimerEvent: {}
+[99.195410] (-) TimerEvent: {}
+[99.296042] (-) TimerEvent: {}
+[99.396683] (-) TimerEvent: {}
+[99.497367] (-) TimerEvent: {}
+[99.598023] (-) TimerEvent: {}
+[99.700564] (-) TimerEvent: {}
+[99.801207] (-) TimerEvent: {}
+[99.901849] (-) TimerEvent: {}
+[100.002494] (-) TimerEvent: {}
+[100.103152] (-) TimerEvent: {}
+[100.203796] (-) TimerEvent: {}
+[100.304459] (-) TimerEvent: {}
+[100.405150] (-) TimerEvent: {}
+[100.505805] (-) TimerEvent: {}
+[100.606438] (-) TimerEvent: {}
+[100.707082] (-) TimerEvent: {}
+[100.807727] (-) TimerEvent: {}
+[100.908380] (-) TimerEvent: {}
+[101.009028] (-) TimerEvent: {}
+[101.109681] (-) TimerEvent: {}
+[101.210321] (-) TimerEvent: {}
+[101.310970] (-) TimerEvent: {}
+[101.411611] (-) TimerEvent: {}
+[101.512258] (-) TimerEvent: {}
+[101.612909] (-) TimerEvent: {}
+[101.713581] (-) TimerEvent: {}
+[101.814235] (-) TimerEvent: {}
+[101.914884] (-) TimerEvent: {}
+[102.015544] (-) TimerEvent: {}
+[102.116179] (-) TimerEvent: {}
+[102.216818] (-) TimerEvent: {}
+[102.317486] (-) TimerEvent: {}
+[102.418121] (-) TimerEvent: {}
+[102.518758] (-) TimerEvent: {}
+[102.619401] (-) TimerEvent: {}
+[102.720051] (-) TimerEvent: {}
+[102.820728] (-) TimerEvent: {}
+[102.921414] (-) TimerEvent: {}
+[103.022061] (-) TimerEvent: {}
+[103.122692] (-) TimerEvent: {}
+[103.223339] (-) TimerEvent: {}
+[103.323973] (-) TimerEvent: {}
+[103.424625] (-) TimerEvent: {}
+[103.525299] (-) TimerEvent: {}
+[103.625946] (-) TimerEvent: {}
+[103.726600] (-) TimerEvent: {}
+[103.827245] (-) TimerEvent: {}
+[103.927889] (-) TimerEvent: {}
+[104.028530] (-) TimerEvent: {}
+[104.129186] (-) TimerEvent: {}
+[104.229833] (-) TimerEvent: {}
+[104.330684] (-) TimerEvent: {}
+[104.431336] (-) TimerEvent: {}
+[104.531992] (-) TimerEvent: {}
+[104.632648] (-) TimerEvent: {}
+[104.733325] (-) TimerEvent: {}
+[104.833981] (-) TimerEvent: {}
+[104.934637] (-) TimerEvent: {}
+[105.035282] (-) TimerEvent: {}
+[105.135929] (-) TimerEvent: {}
+[105.236585] (-) TimerEvent: {}
+[105.337241] (-) TimerEvent: {}
+[105.437900] (-) TimerEvent: {}
+[105.538568] (-) TimerEvent: {}
+[105.639238] (-) TimerEvent: {}
+[105.739899] (-) TimerEvent: {}
+[105.840564] (-) TimerEvent: {}
+[105.941222] (-) TimerEvent: {}
+[106.041871] (-) TimerEvent: {}
+[106.142523] (-) TimerEvent: {}
+[106.243194] (-) TimerEvent: {}
+[106.343863] (-) TimerEvent: {}
+[106.444542] (-) TimerEvent: {}
+[106.545225] (-) TimerEvent: {}
+[106.645932] (-) TimerEvent: {}
+[106.746589] (-) TimerEvent: {}
+[106.847246] (-) TimerEvent: {}
+[106.947906] (-) TimerEvent: {}
+[107.048556] (-) TimerEvent: {}
+[107.149214] (-) TimerEvent: {}
+[107.249864] (-) TimerEvent: {}
+[107.350517] (-) TimerEvent: {}
+[107.451171] (-) TimerEvent: {}
+[107.551818] (-) TimerEvent: {}
+[107.652484] (-) TimerEvent: {}
+[107.753162] (-) TimerEvent: {}
+[107.853812] (-) TimerEvent: {}
+[107.954468] (-) TimerEvent: {}
+[108.055132] (-) TimerEvent: {}
+[108.155803] (-) TimerEvent: {}
+[108.256456] (-) TimerEvent: {}
+[108.357140] (-) TimerEvent: {}
+[108.457800] (-) TimerEvent: {}
+[108.558461] (-) TimerEvent: {}
+[108.659114] (-) TimerEvent: {}
+[108.759789] (-) TimerEvent: {}
+[108.860458] (-) TimerEvent: {}
+[108.961135] (-) TimerEvent: {}
+[109.061774] (-) TimerEvent: {}
+[109.162430] (-) TimerEvent: {}
+[109.263097] (-) TimerEvent: {}
+[109.363755] (-) TimerEvent: {}
+[109.464432] (-) TimerEvent: {}
+[109.565127] (-) TimerEvent: {}
+[109.665791] (-) TimerEvent: {}
+[109.766461] (-) TimerEvent: {}
+[109.867134] (-) TimerEvent: {}
+[109.967789] (-) TimerEvent: {}
+[110.068465] (-) TimerEvent: {}
+[110.169132] (-) TimerEvent: {}
+[110.269796] (-) TimerEvent: {}
+[110.370463] (-) TimerEvent: {}
+[110.471117] (-) TimerEvent: {}
+[110.571781] (-) TimerEvent: {}
+[110.672444] (-) TimerEvent: {}
+[110.773110] (-) TimerEvent: {}
+[110.873745] (-) TimerEvent: {}
+[110.974397] (-) TimerEvent: {}
+[111.075046] (-) TimerEvent: {}
+[111.175645] (-) TimerEvent: {}
+[111.276291] (-) TimerEvent: {}
+[111.376950] (-) TimerEvent: {}
+[111.477617] (-) TimerEvent: {}
+[111.578279] (-) TimerEvent: {}
+[111.678946] (-) TimerEvent: {}
+[111.779621] (-) TimerEvent: {}
+[111.880250] (-) TimerEvent: {}
+[111.980895] (-) TimerEvent: {}
+[112.081589] (-) TimerEvent: {}
+[112.182216] (-) TimerEvent: {}
+[112.282836] (-) TimerEvent: {}
+[112.383490] (-) TimerEvent: {}
+[112.484138] (-) TimerEvent: {}
+[112.584806] (-) TimerEvent: {}
+[112.685463] (-) TimerEvent: {}
+[112.786109] (-) TimerEvent: {}
+[112.886750] (-) TimerEvent: {}
+[112.987397] (-) TimerEvent: {}
+[113.088049] (-) TimerEvent: {}
+[113.188678] (-) TimerEvent: {}
+[113.289336] (-) TimerEvent: {}
+[113.389989] (-) TimerEvent: {}
+[113.490633] (-) TimerEvent: {}
+[113.591294] (-) TimerEvent: {}
+[113.691960] (-) TimerEvent: {}
+[113.792626] (-) TimerEvent: {}
+[113.893306] (-) TimerEvent: {}
+[113.993980] (-) TimerEvent: {}
+[114.094650] (-) TimerEvent: {}
+[114.195332] (-) TimerEvent: {}
+[114.295999] (-) TimerEvent: {}
+[114.396658] (-) TimerEvent: {}
+[114.497358] (-) TimerEvent: {}
+[114.598045] (-) TimerEvent: {}
+[114.698810] (-) TimerEvent: {}
+[114.799473] (-) TimerEvent: {}
+[114.900115] (-) TimerEvent: {}
+[115.000782] (-) TimerEvent: {}
+[115.101482] (-) TimerEvent: {}
+[115.202154] (-) TimerEvent: {}
+[115.302830] (-) TimerEvent: {}
+[115.403468] (-) TimerEvent: {}
+[115.504121] (-) TimerEvent: {}
+[115.604797] (-) TimerEvent: {}
+[115.705500] (-) TimerEvent: {}
+[115.806181] (-) TimerEvent: {}
+[115.906893] (-) TimerEvent: {}
+[116.007577] (-) TimerEvent: {}
+[116.108266] (-) TimerEvent: {}
+[116.208935] (-) TimerEvent: {}
+[116.309665] (-) TimerEvent: {}
+[116.410347] (-) TimerEvent: {}
+[116.511024] (-) TimerEvent: {}
+[116.611715] (-) TimerEvent: {}
+[116.712393] (-) TimerEvent: {}
+[116.813046] (-) TimerEvent: {}
+[116.913722] (-) TimerEvent: {}
+[117.014384] (-) TimerEvent: {}
+[117.115098] (-) TimerEvent: {}
+[117.215799] (-) TimerEvent: {}
+[117.316494] (-) TimerEvent: {}
+[117.417223] (-) TimerEvent: {}
+[117.517953] (-) TimerEvent: {}
+[117.618668] (-) TimerEvent: {}
+[117.719334] (-) TimerEvent: {}
+[117.820011] (-) TimerEvent: {}
+[117.920689] (-) TimerEvent: {}
+[118.021350] (-) TimerEvent: {}
+[118.122013] (-) TimerEvent: {}
+[118.222677] (-) TimerEvent: {}
+[118.323341] (-) TimerEvent: {}
+[118.424001] (-) TimerEvent: {}
+[118.524651] (-) TimerEvent: {}
+[118.625308] (-) TimerEvent: {}
+[118.725959] (-) TimerEvent: {}
+[118.826612] (-) TimerEvent: {}
+[118.927278] (-) TimerEvent: {}
+[119.027932] (-) TimerEvent: {}
+[119.128589] (-) TimerEvent: {}
+[119.229221] (-) TimerEvent: {}
+[119.329874] (-) TimerEvent: {}
+[119.430536] (-) TimerEvent: {}
+[119.531246] (-) TimerEvent: {}
+[119.631906] (-) TimerEvent: {}
+[119.749531] (-) TimerEvent: {}
+[119.850183] (-) TimerEvent: {}
+[119.950826] (-) TimerEvent: {}
+[120.051457] (-) TimerEvent: {}
+[120.152085] (-) TimerEvent: {}
+[120.252726] (-) TimerEvent: {}
+[120.353390] (-) TimerEvent: {}
+[120.454050] (-) TimerEvent: {}
+[120.554716] (-) TimerEvent: {}
+[120.655390] (-) TimerEvent: {}
+[120.756043] (-) TimerEvent: {}
+[120.856735] (-) TimerEvent: {}
+[120.957393] (-) TimerEvent: {}
+[121.058025] (-) TimerEvent: {}
+[121.158685] (-) TimerEvent: {}
+[121.259349] (-) TimerEvent: {}
+[121.359985] (-) TimerEvent: {}
+[121.460665] (-) TimerEvent: {}
+[121.561354] (-) TimerEvent: {}
+[121.662022] (-) TimerEvent: {}
+[121.762693] (-) TimerEvent: {}
+[121.863350] (-) TimerEvent: {}
+[121.964011] (-) TimerEvent: {}
+[122.064666] (-) TimerEvent: {}
+[122.165321] (-) TimerEvent: {}
+[122.265954] (-) TimerEvent: {}
+[122.366599] (-) TimerEvent: {}
+[122.467248] (-) TimerEvent: {}
+[122.567885] (-) TimerEvent: {}
+[122.668536] (-) TimerEvent: {}
+[122.769209] (-) TimerEvent: {}
+[122.869863] (-) TimerEvent: {}
+[122.970527] (-) TimerEvent: {}
+[123.071189] (-) TimerEvent: {}
+[123.171849] (-) TimerEvent: {}
+[123.272505] (-) TimerEvent: {}
+[123.373189] (-) TimerEvent: {}
+[123.473869] (-) TimerEvent: {}
+[123.574515] (-) TimerEvent: {}
+[123.675180] (-) TimerEvent: {}
+[123.775847] (-) TimerEvent: {}
+[123.876510] (-) TimerEvent: {}
+[123.977220] (-) TimerEvent: {}
+[124.077868] (-) TimerEvent: {}
+[124.178535] (-) TimerEvent: {}
+[124.279188] (-) TimerEvent: {}
+[124.379853] (-) TimerEvent: {}
+[124.480531] (-) TimerEvent: {}
+[124.581214] (-) TimerEvent: {}
+[124.681860] (-) TimerEvent: {}
+[124.782490] (-) TimerEvent: {}
+[124.883149] (-) TimerEvent: {}
+[124.983795] (-) TimerEvent: {}
+[125.084431] (-) TimerEvent: {}
+[125.185122] (-) TimerEvent: {}
+[125.285835] (-) TimerEvent: {}
+[125.386506] (-) TimerEvent: {}
+[125.487166] (-) TimerEvent: {}
+[125.587818] (-) TimerEvent: {}
+[125.688500] (-) TimerEvent: {}
+[125.789172] (-) TimerEvent: {}
+[125.889833] (-) TimerEvent: {}
+[125.990480] (-) TimerEvent: {}
+[126.091142] (-) TimerEvent: {}
+[126.191819] (-) TimerEvent: {}
+[126.292518] (-) TimerEvent: {}
+[126.393197] (-) TimerEvent: {}
+[126.493856] (-) TimerEvent: {}
+[126.594558] (-) TimerEvent: {}
+[126.695249] (-) TimerEvent: {}
+[126.795925] (-) TimerEvent: {}
+[126.896608] (-) TimerEvent: {}
+[126.997257] (-) TimerEvent: {}
+[127.097944] (-) TimerEvent: {}
+[127.198660] (-) TimerEvent: {}
+[127.299345] (-) TimerEvent: {}
+[127.400034] (-) TimerEvent: {}
+[127.500699] (-) TimerEvent: {}
+[127.601395] (-) TimerEvent: {}
+[127.702067] (-) TimerEvent: {}
+[127.802781] (-) TimerEvent: {}
+[127.903487] (-) TimerEvent: {}
+[128.004195] (-) TimerEvent: {}
+[128.104892] (-) TimerEvent: {}
+[128.205604] (-) TimerEvent: {}
+[128.306279] (-) TimerEvent: {}
+[128.406967] (-) TimerEvent: {}
+[128.507644] (-) TimerEvent: {}
+[128.608285] (-) TimerEvent: {}
+[128.708972] (-) TimerEvent: {}
+[128.809695] (-) TimerEvent: {}
+[128.910380] (-) TimerEvent: {}
+[129.011076] (-) TimerEvent: {}
+[129.111760] (-) TimerEvent: {}
+[129.212409] (-) TimerEvent: {}
+[129.313077] (-) TimerEvent: {}
+[129.413755] (-) TimerEvent: {}
+[129.514430] (-) TimerEvent: {}
+[129.615121] (-) TimerEvent: {}
+[129.715798] (-) TimerEvent: {}
+[129.816560] (-) TimerEvent: {}
+[129.917244] (-) TimerEvent: {}
+[130.017936] (-) TimerEvent: {}
+[130.118625] (-) TimerEvent: {}
+[130.219330] (-) TimerEvent: {}
+[130.319975] (-) TimerEvent: {}
+[130.420665] (-) TimerEvent: {}
+[130.521341] (-) TimerEvent: {}
+[130.621954] (-) TimerEvent: {}
+[130.722588] (-) TimerEvent: {}
+[130.823226] (-) TimerEvent: {}
+[130.923872] (-) TimerEvent: {}
+[131.024545] (-) TimerEvent: {}
+[131.125255] (-) TimerEvent: {}
+[131.225932] (-) TimerEvent: {}
+[131.326618] (-) TimerEvent: {}
+[131.427319] (-) TimerEvent: {}
+[131.528030] (-) TimerEvent: {}
+[131.628736] (-) TimerEvent: {}
+[131.729442] (-) TimerEvent: {}
+[131.830141] (-) TimerEvent: {}
+[131.930855] (-) TimerEvent: {}
+[132.031552] (-) TimerEvent: {}
+[132.132244] (-) TimerEvent: {}
+[132.232944] (-) TimerEvent: {}
+[132.333636] (-) TimerEvent: {}
+[132.434355] (-) TimerEvent: {}
+[132.535031] (-) TimerEvent: {}
+[132.635702] (-) TimerEvent: {}
+[132.736363] (-) TimerEvent: {}
+[132.837029] (-) TimerEvent: {}
+[132.937735] (-) TimerEvent: {}
+[133.038429] (-) TimerEvent: {}
+[133.139114] (-) TimerEvent: {}
+[133.239760] (-) TimerEvent: {}
+[133.340407] (-) TimerEvent: {}
+[133.441106] (-) TimerEvent: {}
+[133.541740] (-) TimerEvent: {}
+[133.642336] (-) TimerEvent: {}
+[133.742997] (-) TimerEvent: {}
+[133.843671] (-) TimerEvent: {}
+[133.944373] (-) TimerEvent: {}
+[134.045083] (-) TimerEvent: {}
+[134.145765] (-) TimerEvent: {}
+[134.246442] (-) TimerEvent: {}
+[134.347106] (-) TimerEvent: {}
+[134.447773] (-) TimerEvent: {}
+[134.548452] (-) TimerEvent: {}
+[134.649159] (-) TimerEvent: {}
+[134.749802] (-) TimerEvent: {}
+[134.850482] (-) TimerEvent: {}
+[134.951138] (-) TimerEvent: {}
+[135.051764] (-) TimerEvent: {}
+[135.152397] (-) TimerEvent: {}
+[135.253022] (-) TimerEvent: {}
+[135.353709] (-) TimerEvent: {}
+[135.454346] (-) TimerEvent: {}
+[135.555018] (-) TimerEvent: {}
+[135.655673] (-) TimerEvent: {}
+[135.756358] (-) TimerEvent: {}
+[135.857076] (-) TimerEvent: {}
+[135.957777] (-) TimerEvent: {}
+[136.058445] (-) TimerEvent: {}
+[136.159103] (-) TimerEvent: {}
+[136.259789] (-) TimerEvent: {}
+[136.360488] (-) TimerEvent: {}
+[136.461204] (-) TimerEvent: {}
+[136.561886] (-) TimerEvent: {}
+[136.662565] (-) TimerEvent: {}
+[136.763307] (-) TimerEvent: {}
+[136.863970] (-) TimerEvent: {}
+[136.964643] (-) TimerEvent: {}
+[137.065330] (-) TimerEvent: {}
+[137.166001] (-) TimerEvent: {}
+[137.266684] (-) TimerEvent: {}
+[137.367378] (-) TimerEvent: {}
+[137.468057] (-) TimerEvent: {}
+[137.568740] (-) TimerEvent: {}
+[137.669444] (-) TimerEvent: {}
+[137.770117] (-) TimerEvent: {}
+[137.870783] (-) TimerEvent: {}
+[137.971489] (-) TimerEvent: {}
+[138.072162] (-) TimerEvent: {}
+[138.172851] (-) TimerEvent: {}
+[138.273536] (-) TimerEvent: {}
+[138.374223] (-) TimerEvent: {}
+[138.474909] (-) TimerEvent: {}
+[138.575604] (-) TimerEvent: {}
+[138.676301] (-) TimerEvent: {}
+[138.777018] (-) TimerEvent: {}
+[138.877745] (-) TimerEvent: {}
+[138.978462] (-) TimerEvent: {}
+[139.079134] (-) TimerEvent: {}
+[139.179812] (-) TimerEvent: {}
+[139.280516] (-) TimerEvent: {}
+[139.381202] (-) TimerEvent: {}
+[139.481870] (-) TimerEvent: {}
+[139.582562] (-) TimerEvent: {}
+[139.683278] (-) TimerEvent: {}
+[139.783967] (-) TimerEvent: {}
+[139.884671] (-) TimerEvent: {}
+[139.985384] (-) TimerEvent: {}
+[140.086059] (-) TimerEvent: {}
+[140.186736] (-) TimerEvent: {}
+[140.287414] (-) TimerEvent: {}
+[140.388072] (-) TimerEvent: {}
+[140.488749] (-) TimerEvent: {}
+[140.589462] (-) TimerEvent: {}
+[140.690163] (-) TimerEvent: {}
+[140.790852] (-) TimerEvent: {}
+[140.891533] (-) TimerEvent: {}
+[140.992219] (-) TimerEvent: {}
+[141.092885] (-) TimerEvent: {}
+[141.193563] (-) TimerEvent: {}
+[141.294242] (-) TimerEvent: {}
+[141.394953] (-) TimerEvent: {}
+[141.495615] (-) TimerEvent: {}
+[141.596324] (-) TimerEvent: {}
+[141.697011] (-) TimerEvent: {}
+[141.833388] (-) TimerEvent: {}
+[141.934063] (-) TimerEvent: {}
+[142.034725] (-) TimerEvent: {}
+[142.135361] (-) TimerEvent: {}
+[142.235993] (-) TimerEvent: {}
+[142.336633] (-) TimerEvent: {}
+[142.437292] (-) TimerEvent: {}
+[142.537937] (-) TimerEvent: {}
+[142.638580] (-) TimerEvent: {}
+[142.739221] (-) TimerEvent: {}
+[142.839883] (-) TimerEvent: {}
+[142.940523] (-) TimerEvent: {}
+[143.041198] (-) TimerEvent: {}
+[143.141850] (-) TimerEvent: {}
+[143.242495] (-) TimerEvent: {}
+[143.343125] (-) TimerEvent: {}
+[143.443780] (-) TimerEvent: {}
+[143.544440] (-) TimerEvent: {}
+[143.645115] (-) TimerEvent: {}
+[143.745778] (-) TimerEvent: {}
+[143.846425] (-) TimerEvent: {}
+[143.947086] (-) TimerEvent: {}
+[144.047791] (-) TimerEvent: {}
+[144.148501] (-) TimerEvent: {}
+[144.249203] (-) TimerEvent: {}
+[144.349875] (-) TimerEvent: {}
+[144.450562] (-) TimerEvent: {}
+[144.551237] (-) TimerEvent: {}
+[144.651931] (-) TimerEvent: {}
+[144.752623] (-) TimerEvent: {}
+[144.853330] (-) TimerEvent: {}
+[144.954003] (-) TimerEvent: {}
+[145.054679] (-) TimerEvent: {}
+[145.155374] (-) TimerEvent: {}
+[145.256049] (-) TimerEvent: {}
+[145.356797] (-) TimerEvent: {}
+[145.457532] (-) TimerEvent: {}
+[145.558226] (-) TimerEvent: {}
+[145.658913] (-) TimerEvent: {}
+[145.759633] (-) TimerEvent: {}
+[145.860348] (-) TimerEvent: {}
+[145.961072] (-) TimerEvent: {}
+[146.061756] (-) TimerEvent: {}
+[146.162420] (-) TimerEvent: {}
+[146.263061] (-) TimerEvent: {}
+[146.363701] (-) TimerEvent: {}
+[146.464348] (-) TimerEvent: {}
+[146.565006] (-) TimerEvent: {}
+[146.665663] (-) TimerEvent: {}
+[146.766308] (-) TimerEvent: {}
+[146.867039] (-) TimerEvent: {}
+[146.967721] (-) TimerEvent: {}
+[147.068389] (-) TimerEvent: {}
+[147.169043] (-) TimerEvent: {}
+[147.269726] (-) TimerEvent: {}
+[147.370430] (-) TimerEvent: {}
+[147.471116] (-) TimerEvent: {}
+[147.571815] (-) TimerEvent: {}
+[147.672553] (-) TimerEvent: {}
+[147.773272] (-) TimerEvent: {}
+[147.873954] (-) TimerEvent: {}
+[147.974645] (-) TimerEvent: {}
+[148.075312] (-) TimerEvent: {}
+[148.176039] (-) TimerEvent: {}
+[148.276704] (-) TimerEvent: {}
+[148.377390] (-) TimerEvent: {}
+[148.478051] (-) TimerEvent: {}
+[148.578728] (-) TimerEvent: {}
+[148.679392] (-) TimerEvent: {}
+[148.780050] (-) TimerEvent: {}
+[148.880715] (-) TimerEvent: {}
+[148.981356] (-) TimerEvent: {}
+[149.082017] (-) TimerEvent: {}
+[149.182695] (-) TimerEvent: {}
+[149.283384] (-) TimerEvent: {}
+[149.384079] (-) TimerEvent: {}
+[149.484758] (-) TimerEvent: {}
+[149.585444] (-) TimerEvent: {}
+[149.686136] (-) TimerEvent: {}
+[149.786833] (-) TimerEvent: {}
+[149.887477] (-) TimerEvent: {}
+[149.988124] (-) TimerEvent: {}
+[150.088806] (-) TimerEvent: {}
+[150.189507] (-) TimerEvent: {}
+[150.290179] (-) TimerEvent: {}
+[150.390865] (-) TimerEvent: {}
+[150.491546] (-) TimerEvent: {}
+[150.592222] (-) TimerEvent: {}
+[150.692905] (-) TimerEvent: {}
+[150.793601] (-) TimerEvent: {}
+[150.894256] (-) TimerEvent: {}
+[150.994924] (-) TimerEvent: {}
+[151.095564] (-) TimerEvent: {}
+[151.196217] (-) TimerEvent: {}
+[151.296872] (-) TimerEvent: {}
+[151.397559] (-) TimerEvent: {}
+[151.498234] (-) TimerEvent: {}
+[151.598905] (-) TimerEvent: {}
+[151.699595] (-) TimerEvent: {}
+[151.800280] (-) TimerEvent: {}
+[151.903321] (-) TimerEvent: {}
+[152.003988] (-) TimerEvent: {}
+[152.104660] (-) TimerEvent: {}
+[152.205349] (-) TimerEvent: {}
+[152.306042] (-) TimerEvent: {}
+[152.406718] (-) TimerEvent: {}
+[152.507386] (-) TimerEvent: {}
+[152.608047] (-) TimerEvent: {}
+[152.708737] (-) TimerEvent: {}
+[152.809421] (-) TimerEvent: {}
+[152.910084] (-) TimerEvent: {}
+[153.010752] (-) TimerEvent: {}
+[153.111425] (-) TimerEvent: {}
+[153.212106] (-) TimerEvent: {}
+[153.312773] (-) TimerEvent: {}
+[153.413480] (-) TimerEvent: {}
+[153.514145] (-) TimerEvent: {}
+[153.614807] (-) TimerEvent: {}
+[153.715461] (-) TimerEvent: {}
+[153.816120] (-) TimerEvent: {}
+[153.916799] (-) TimerEvent: {}
+[154.017502] (-) TimerEvent: {}
+[154.118181] (-) TimerEvent: {}
+[154.218847] (-) TimerEvent: {}
+[154.319536] (-) TimerEvent: {}
+[154.420294] (-) TimerEvent: {}
+[154.520975] (-) TimerEvent: {}
+[154.621669] (-) TimerEvent: {}
+[154.722327] (-) TimerEvent: {}
+[154.822978] (-) TimerEvent: {}
+[154.923620] (-) TimerEvent: {}
+[155.024232] (-) TimerEvent: {}
+[155.124887] (-) TimerEvent: {}
+[155.225568] (-) TimerEvent: {}
+[155.326235] (-) TimerEvent: {}
+[155.426911] (-) TimerEvent: {}
+[155.527575] (-) TimerEvent: {}
+[155.628253] (-) TimerEvent: {}
+[155.728933] (-) TimerEvent: {}
+[155.829618] (-) TimerEvent: {}
+[155.930296] (-) TimerEvent: {}
+[156.030959] (-) TimerEvent: {}
+[156.131615] (-) TimerEvent: {}
+[156.232275] (-) TimerEvent: {}
+[156.332948] (-) TimerEvent: {}
+[156.433626] (-) TimerEvent: {}
+[156.534307] (-) TimerEvent: {}
+[156.634976] (-) TimerEvent: {}
+[156.735639] (-) TimerEvent: {}
+[156.836298] (-) TimerEvent: {}
+[156.936955] (-) TimerEvent: {}
+[157.037638] (-) TimerEvent: {}
+[157.138283] (-) TimerEvent: {}
+[157.238922] (-) TimerEvent: {}
+[157.339559] (-) TimerEvent: {}
+[157.440200] (-) TimerEvent: {}
+[157.540857] (-) TimerEvent: {}
+[157.641541] (-) TimerEvent: {}
+[157.742202] (-) TimerEvent: {}
+[157.842860] (-) TimerEvent: {}
+[157.943529] (-) TimerEvent: {}
+[158.044161] (-) TimerEvent: {}
+[158.144828] (-) TimerEvent: {}
+[158.262169] (-) TimerEvent: {}
+[158.362832] (-) TimerEvent: {}
+[158.463498] (-) TimerEvent: {}
+[158.564171] (-) TimerEvent: {}
+[158.664850] (-) TimerEvent: {}
+[158.765555] (-) TimerEvent: {}
+[158.866242] (-) TimerEvent: {}
+[158.966918] (-) TimerEvent: {}
+[159.067603] (-) TimerEvent: {}
+[159.168268] (-) TimerEvent: {}
+[159.268903] (-) TimerEvent: {}
+[159.369548] (-) TimerEvent: {}
+[159.470192] (-) TimerEvent: {}
+[159.570861] (-) TimerEvent: {}
+[159.671530] (-) TimerEvent: {}
+[159.772175] (-) TimerEvent: {}
+[159.872845] (-) TimerEvent: {}
+[159.973547] (-) TimerEvent: {}
+[160.074212] (-) TimerEvent: {}
+[160.174908] (-) TimerEvent: {}
+[160.275568] (-) TimerEvent: {}
+[160.376208] (-) TimerEvent: {}
+[160.476865] (-) TimerEvent: {}
+[160.577559] (-) TimerEvent: {}
+[160.678228] (-) TimerEvent: {}
+[160.778922] (-) TimerEvent: {}
+[160.879610] (-) TimerEvent: {}
+[160.980254] (-) TimerEvent: {}
+[161.080925] (-) TimerEvent: {}
+[161.181618] (-) TimerEvent: {}
+[161.282276] (-) TimerEvent: {}
+[161.382922] (-) TimerEvent: {}
+[161.483597] (-) TimerEvent: {}
+[161.584274] (-) TimerEvent: {}
+[161.684930] (-) TimerEvent: {}
+[161.785612] (-) TimerEvent: {}
+[161.886295] (-) TimerEvent: {}
+[161.986958] (-) TimerEvent: {}
+[162.087610] (-) TimerEvent: {}
+[162.188264] (-) TimerEvent: {}
+[162.288921] (-) TimerEvent: {}
+[162.389592] (-) TimerEvent: {}
+[162.490261] (-) TimerEvent: {}
+[162.590917] (-) TimerEvent: {}
+[162.691586] (-) TimerEvent: {}
+[162.792265] (-) TimerEvent: {}
+[162.892951] (-) TimerEvent: {}
+[162.993651] (-) TimerEvent: {}
+[163.094310] (-) TimerEvent: {}
+[163.194955] (-) TimerEvent: {}
+[163.295628] (-) TimerEvent: {}
+[163.396290] (-) TimerEvent: {}
+[163.496965] (-) TimerEvent: {}
+[163.597721] (-) TimerEvent: {}
+[163.698376] (-) TimerEvent: {}
+[163.799069] (-) TimerEvent: {}
+[163.899762] (-) TimerEvent: {}
+[164.000413] (-) TimerEvent: {}
+[164.101102] (-) TimerEvent: {}
+[164.201750] (-) TimerEvent: {}
+[164.302399] (-) TimerEvent: {}
+[164.403061] (-) TimerEvent: {}
+[164.503730] (-) TimerEvent: {}
+[164.604415] (-) TimerEvent: {}
+[164.705135] (-) TimerEvent: {}
+[164.805812] (-) TimerEvent: {}
+[164.906474] (-) TimerEvent: {}
+[165.007131] (-) TimerEvent: {}
+[165.107793] (-) TimerEvent: {}
+[165.208443] (-) TimerEvent: {}
+[165.309122] (-) TimerEvent: {}
+[165.409768] (-) TimerEvent: {}
+[165.510411] (-) TimerEvent: {}
+[165.611057] (-) TimerEvent: {}
+[165.711729] (-) TimerEvent: {}
+[165.812407] (-) TimerEvent: {}
+[165.913104] (-) TimerEvent: {}
+[166.013766] (-) TimerEvent: {}
+[166.114426] (-) TimerEvent: {}
+[166.215078] (-) TimerEvent: {}
+[166.315709] (-) TimerEvent: {}
+[166.416368] (-) TimerEvent: {}
+[166.517023] (-) TimerEvent: {}
+[166.617696] (-) TimerEvent: {}
+[166.718357] (-) TimerEvent: {}
+[166.819032] (-) TimerEvent: {}
+[166.919676] (-) TimerEvent: {}
+[167.020333] (-) TimerEvent: {}
+[167.120988] (-) TimerEvent: {}
+[167.221670] (-) TimerEvent: {}
+[167.322326] (-) TimerEvent: {}
+[167.422972] (-) TimerEvent: {}
+[167.523643] (-) TimerEvent: {}
+[167.624342] (-) TimerEvent: {}
+[167.725040] (-) TimerEvent: {}
+[167.825760] (-) TimerEvent: {}
+[167.926436] (-) TimerEvent: {}
+[168.027132] (-) TimerEvent: {}
+[168.127774] (-) TimerEvent: {}
+[168.228404] (-) TimerEvent: {}
+[168.329029] (-) TimerEvent: {}
+[168.429686] (-) TimerEvent: {}
+[168.530322] (-) TimerEvent: {}
+[168.630962] (-) TimerEvent: {}
+[168.731584] (-) TimerEvent: {}
+[168.832210] (-) TimerEvent: {}
+[168.932849] (-) TimerEvent: {}
+[169.033532] (-) TimerEvent: {}
+[169.134167] (-) TimerEvent: {}
+[169.234831] (-) TimerEvent: {}
+[169.335500] (-) TimerEvent: {}
+[169.436147] (-) TimerEvent: {}
+[169.536799] (-) TimerEvent: {}
+[169.637475] (-) TimerEvent: {}
+[169.738141] (-) TimerEvent: {}
+[169.838776] (-) TimerEvent: {}
+[169.939464] (-) TimerEvent: {}
+[170.040108] (-) TimerEvent: {}
+[170.140771] (-) TimerEvent: {}
+[170.241412] (-) TimerEvent: {}
+[170.342072] (-) TimerEvent: {}
+[170.442762] (-) TimerEvent: {}
+[170.543422] (-) TimerEvent: {}
+[170.644105] (-) TimerEvent: {}
+[170.744761] (-) TimerEvent: {}
+[170.845450] (-) TimerEvent: {}
+[170.946106] (-) TimerEvent: {}
+[171.046768] (-) TimerEvent: {}
+[171.147487] (-) TimerEvent: {}
+[171.248161] (-) TimerEvent: {}
+[171.348826] (-) TimerEvent: {}
+[171.449503] (-) TimerEvent: {}
+[171.550165] (-) TimerEvent: {}
+[171.650820] (-) TimerEvent: {}
+[171.751463] (-) TimerEvent: {}
+[171.852131] (-) TimerEvent: {}
+[171.952776] (-) TimerEvent: {}
+[172.053449] (-) TimerEvent: {}
+[172.154084] (-) TimerEvent: {}
+[172.254743] (-) TimerEvent: {}
+[172.355382] (-) TimerEvent: {}
+[172.456041] (-) TimerEvent: {}
+[172.556712] (-) TimerEvent: {}
+[172.657389] (-) TimerEvent: {}
+[172.758050] (-) TimerEvent: {}
+[172.858705] (-) TimerEvent: {}
+[172.959360] (-) TimerEvent: {}
+[173.060022] (-) TimerEvent: {}
+[173.160687] (-) TimerEvent: {}
+[173.261387] (-) TimerEvent: {}
+[173.362054] (-) TimerEvent: {}
+[173.462720] (-) TimerEvent: {}
+[173.563368] (-) TimerEvent: {}
+[173.664020] (-) TimerEvent: {}
+[173.764660] (-) TimerEvent: {}
+[173.865327] (-) TimerEvent: {}
+[173.965970] (-) TimerEvent: {}
+[174.066625] (-) TimerEvent: {}
+[174.167287] (-) TimerEvent: {}
+[174.267968] (-) TimerEvent: {}
+[174.368615] (-) TimerEvent: {}
+[174.469250] (-) TimerEvent: {}
+[174.569910] (-) TimerEvent: {}
+[174.670569] (-) TimerEvent: {}
+[174.771229] (-) TimerEvent: {}
+[174.871893] (-) TimerEvent: {}
+[174.972563] (-) TimerEvent: {}
+[175.073238] (-) TimerEvent: {}
+[175.173880] (-) TimerEvent: {}
+[175.274546] (-) TimerEvent: {}
+[175.375201] (-) TimerEvent: {}
+[175.475854] (-) TimerEvent: {}
+[175.576542] (-) TimerEvent: {}
+[175.677217] (-) TimerEvent: {}
+[175.777880] (-) TimerEvent: {}
+[175.878545] (-) TimerEvent: {}
+[175.979212] (-) TimerEvent: {}
+[176.079893] (-) TimerEvent: {}
+[176.180549] (-) TimerEvent: {}
+[176.281222] (-) TimerEvent: {}
+[176.381898] (-) TimerEvent: {}
+[176.482573] (-) TimerEvent: {}
+[176.583246] (-) TimerEvent: {}
+[176.683939] (-) TimerEvent: {}
+[176.784626] (-) TimerEvent: {}
+[176.885307] (-) TimerEvent: {}
+[176.985985] (-) TimerEvent: {}
+[177.086678] (-) TimerEvent: {}
+[177.187342] (-) TimerEvent: {}
+[177.288035] (-) TimerEvent: {}
+[177.388717] (-) TimerEvent: {}
+[177.489423] (-) TimerEvent: {}
+[177.590101] (-) TimerEvent: {}
+[177.690782] (-) TimerEvent: {}
+[177.791454] (-) TimerEvent: {}
+[177.892138] (-) TimerEvent: {}
+[177.992816] (-) TimerEvent: {}
+[178.093521] (-) TimerEvent: {}
+[178.194202] (-) TimerEvent: {}
+[178.294883] (-) TimerEvent: {}
+[178.402969] (-) TimerEvent: {}
+[178.503636] (-) TimerEvent: {}
+[178.604326] (-) TimerEvent: {}
+[178.705018] (-) TimerEvent: {}
+[178.805712] (-) TimerEvent: {}
+[178.906390] (-) TimerEvent: {}
+[179.007067] (-) TimerEvent: {}
+[179.107757] (-) TimerEvent: {}
+[179.208444] (-) TimerEvent: {}
+[179.309121] (-) TimerEvent: {}
+[179.409774] (-) TimerEvent: {}
+[179.510454] (-) TimerEvent: {}
+[179.611139] (-) TimerEvent: {}
+[179.711816] (-) TimerEvent: {}
+[179.812522] (-) TimerEvent: {}
+[179.913219] (-) TimerEvent: {}
+[180.013911] (-) TimerEvent: {}
+[180.114611] (-) TimerEvent: {}
+[180.215247] (-) TimerEvent: {}
+[180.315888] (-) TimerEvent: {}
+[180.416574] (-) TimerEvent: {}
+[180.517298] (-) TimerEvent: {}
+[180.617986] (-) TimerEvent: {}
+[180.718675] (-) TimerEvent: {}
+[180.819361] (-) TimerEvent: {}
+[180.920050] (-) TimerEvent: {}
+[181.020738] (-) TimerEvent: {}
+[181.121398] (-) TimerEvent: {}
+[181.222072] (-) TimerEvent: {}
+[181.322758] (-) TimerEvent: {}
+[181.423450] (-) TimerEvent: {}
+[181.524173] (-) TimerEvent: {}
+[181.624884] (-) TimerEvent: {}
+[181.725575] (-) TimerEvent: {}
+[181.826260] (-) TimerEvent: {}
+[181.926928] (-) TimerEvent: {}
+[182.027591] (-) TimerEvent: {}
+[182.128273] (-) TimerEvent: {}
+[182.228950] (-) TimerEvent: {}
+[182.329621] (-) TimerEvent: {}
+[182.430283] (-) TimerEvent: {}
+[182.530961] (-) TimerEvent: {}
+[182.631642] (-) TimerEvent: {}
+[182.732332] (-) TimerEvent: {}
+[182.833075] (-) TimerEvent: {}
+[182.933758] (-) TimerEvent: {}
+[183.034423] (-) TimerEvent: {}
+[183.135094] (-) TimerEvent: {}
+[183.235774] (-) TimerEvent: {}
+[183.336455] (-) TimerEvent: {}
+[183.437182] (-) TimerEvent: {}
+[183.537850] (-) TimerEvent: {}
+[183.638514] (-) TimerEvent: {}
+[183.739158] (-) TimerEvent: {}
+[183.839834] (-) TimerEvent: {}
+[183.940510] (-) TimerEvent: {}
+[184.041217] (-) TimerEvent: {}
+[184.141866] (-) TimerEvent: {}
+[184.242516] (-) TimerEvent: {}
+[184.343183] (-) TimerEvent: {}
+[184.443840] (-) TimerEvent: {}
+[184.544503] (-) TimerEvent: {}
+[184.645203] (-) TimerEvent: {}
+[184.745873] (-) TimerEvent: {}
+[184.846556] (-) TimerEvent: {}
+[184.947214] (-) TimerEvent: {}
+[185.047915] (-) TimerEvent: {}
+[185.148572] (-) TimerEvent: {}
+[185.249215] (-) TimerEvent: {}
+[185.349871] (-) TimerEvent: {}
+[185.450537] (-) TimerEvent: {}
+[185.551198] (-) TimerEvent: {}
+[185.651870] (-) TimerEvent: {}
+[185.752560] (-) TimerEvent: {}
+[185.853223] (-) TimerEvent: {}
+[185.953886] (-) TimerEvent: {}
+[186.054556] (-) TimerEvent: {}
+[186.155220] (-) TimerEvent: {}
+[186.255925] (-) TimerEvent: {}
+[186.356611] (-) TimerEvent: {}
+[186.457302] (-) TimerEvent: {}
+[186.557944] (-) TimerEvent: {}
+[186.658596] (-) TimerEvent: {}
+[186.759282] (-) TimerEvent: {}
+[186.859916] (-) TimerEvent: {}
+[186.960589] (-) TimerEvent: {}
+[187.061273] (-) TimerEvent: {}
+[187.161924] (-) TimerEvent: {}
+[187.262563] (-) TimerEvent: {}
+[187.363238] (-) TimerEvent: {}
+[187.463924] (-) TimerEvent: {}
+[187.564595] (-) TimerEvent: {}
+[187.665269] (-) TimerEvent: {}
+[187.765947] (-) TimerEvent: {}
+[187.866609] (-) TimerEvent: {}
+[187.967280] (-) TimerEvent: {}
+[188.067937] (-) TimerEvent: {}
+[188.168612] (-) TimerEvent: {}
+[188.269309] (-) TimerEvent: {}
+[188.369990] (-) TimerEvent: {}
+[188.470723] (-) TimerEvent: {}
+[188.571353] (-) TimerEvent: {}
+[188.672016] (-) TimerEvent: {}
+[188.772683] (-) TimerEvent: {}
+[188.873381] (-) TimerEvent: {}
+[188.974064] (-) TimerEvent: {}
+[189.074751] (-) TimerEvent: {}
+[189.175384] (-) TimerEvent: {}
+[189.275978] (-) TimerEvent: {}
+[189.376561] (-) TimerEvent: {}
+[189.477200] (-) TimerEvent: {}
+[189.577892] (-) TimerEvent: {}
+[189.678591] (-) TimerEvent: {}
+[189.779288] (-) TimerEvent: {}
+[189.879976] (-) TimerEvent: {}
+[189.980670] (-) TimerEvent: {}
+[190.081382] (-) TimerEvent: {}
+[190.182044] (-) TimerEvent: {}
+[190.282708] (-) TimerEvent: {}
+[190.383395] (-) TimerEvent: {}
+[190.484074] (-) TimerEvent: {}
+[190.584763] (-) TimerEvent: {}
+[190.685483] (-) TimerEvent: {}
+[190.786145] (-) TimerEvent: {}
+[190.886788] (-) TimerEvent: {}
+[190.987441] (-) TimerEvent: {}
+[191.088079] (-) TimerEvent: {}
+[191.188721] (-) TimerEvent: {}
+[191.289345] (-) TimerEvent: {}
+[191.389950] (-) TimerEvent: {}
+[191.490559] (-) TimerEvent: {}
+[191.591183] (-) TimerEvent: {}
+[191.691798] (-) TimerEvent: {}
+[191.792450] (-) TimerEvent: {}
+[191.893163] (-) TimerEvent: {}
+[191.993847] (-) TimerEvent: {}
+[192.094512] (-) TimerEvent: {}
+[192.195202] (-) TimerEvent: {}
+[192.295887] (-) TimerEvent: {}
+[192.396562] (-) TimerEvent: {}
+[192.497256] (-) TimerEvent: {}
+[192.597951] (-) TimerEvent: {}
+[192.698636] (-) TimerEvent: {}
+[192.799338] (-) TimerEvent: {}
+[192.900039] (-) TimerEvent: {}
+[193.000723] (-) TimerEvent: {}
+[193.101413] (-) TimerEvent: {}
+[193.202101] (-) TimerEvent: {}
+[193.302788] (-) TimerEvent: {}
+[193.403470] (-) TimerEvent: {}
+[193.504206] (-) TimerEvent: {}
+[193.604940] (-) TimerEvent: {}
+[193.705614] (-) TimerEvent: {}
+[193.806253] (-) TimerEvent: {}
+[193.906939] (-) TimerEvent: {}
+[194.007633] (-) TimerEvent: {}
+[194.108306] (-) TimerEvent: {}
+[194.208964] (-) TimerEvent: {}
+[194.309662] (-) TimerEvent: {}
+[194.410323] (-) TimerEvent: {}
+[194.510989] (-) TimerEvent: {}
+[194.611645] (-) TimerEvent: {}
+[194.712304] (-) TimerEvent: {}
+[194.812991] (-) TimerEvent: {}
+[194.913720] (-) TimerEvent: {}
+[195.014403] (-) TimerEvent: {}
+[195.115074] (-) TimerEvent: {}
+[195.215740] (-) TimerEvent: {}
+[195.316417] (-) TimerEvent: {}
+[195.417088] (-) TimerEvent: {}
+[195.517779] (-) TimerEvent: {}
+[195.618463] (-) TimerEvent: {}
+[195.719152] (-) TimerEvent: {}
+[195.819862] (-) TimerEvent: {}
+[195.920542] (-) TimerEvent: {}
+[196.021227] (-) TimerEvent: {}
+[196.121929] (-) TimerEvent: {}
+[196.222593] (-) TimerEvent: {}
+[196.323281] (-) TimerEvent: {}
+[196.423970] (-) TimerEvent: {}
+[196.524657] (-) TimerEvent: {}
+[196.625356] (-) TimerEvent: {}
+[196.726022] (-) TimerEvent: {}
+[196.826672] (-) TimerEvent: {}
+[196.927341] (-) TimerEvent: {}
+[197.027995] (-) TimerEvent: {}
+[197.128663] (-) TimerEvent: {}
+[197.229361] (-) TimerEvent: {}
+[197.330042] (-) TimerEvent: {}
+[197.430741] (-) TimerEvent: {}
+[197.531425] (-) TimerEvent: {}
+[197.632117] (-) TimerEvent: {}
+[197.732781] (-) TimerEvent: {}
+[197.833448] (-) TimerEvent: {}
+[197.934112] (-) TimerEvent: {}
+[198.034756] (-) TimerEvent: {}
+[198.135385] (-) TimerEvent: {}
+[198.235996] (-) TimerEvent: {}
+[198.336635] (-) TimerEvent: {}
+[198.437264] (-) TimerEvent: {}
+[198.537888] (-) TimerEvent: {}
+[198.638519] (-) TimerEvent: {}
+[198.739149] (-) TimerEvent: {}
+[198.839789] (-) TimerEvent: {}
+[198.940421] (-) TimerEvent: {}
+[199.041040] (-) TimerEvent: {}
+[199.141703] (-) TimerEvent: {}
+[199.242329] (-) TimerEvent: {}
+[199.342984] (-) TimerEvent: {}
+[199.443635] (-) TimerEvent: {}
+[199.544290] (-) TimerEvent: {}
+[199.644948] (-) TimerEvent: {}
+[199.745640] (-) TimerEvent: {}
+[199.846288] (-) TimerEvent: {}
+[199.946965] (-) TimerEvent: {}
+[200.047645] (-) TimerEvent: {}
+[200.148315] (-) TimerEvent: {}
+[200.248972] (-) TimerEvent: {}
+[200.349600] (-) TimerEvent: {}
+[200.450217] (-) TimerEvent: {}
+[200.550886] (-) TimerEvent: {}
+[200.651571] (-) TimerEvent: {}
+[200.752248] (-) TimerEvent: {}
+[200.852920] (-) TimerEvent: {}
+[200.953573] (-) TimerEvent: {}
+[201.054221] (-) TimerEvent: {}
+[201.154847] (-) TimerEvent: {}
+[201.255455] (-) TimerEvent: {}
+[201.356055] (-) TimerEvent: {}
+[201.456651] (-) TimerEvent: {}
+[201.557284] (-) TimerEvent: {}
+[201.657887] (-) TimerEvent: {}
+[201.758491] (-) TimerEvent: {}
+[201.859098] (-) TimerEvent: {}
+[201.959720] (-) TimerEvent: {}
+[202.060349] (-) TimerEvent: {}
+[202.160977] (-) TimerEvent: {}
+[202.261610] (-) TimerEvent: {}
+[202.362183] (-) TimerEvent: {}
+[202.462757] (-) TimerEvent: {}
+[202.563353] (-) TimerEvent: {}
+[202.663954] (-) TimerEvent: {}
+[202.764547] (-) TimerEvent: {}
+[202.865148] (-) TimerEvent: {}
+[202.965723] (-) TimerEvent: {}
+[203.066308] (-) TimerEvent: {}
+[203.166886] (-) TimerEvent: {}
+[203.267454] (-) TimerEvent: {}
+[203.368047] (-) TimerEvent: {}
+[203.468701] (-) TimerEvent: {}
+[203.569438] (-) TimerEvent: {}
+[203.670120] (-) TimerEvent: {}
+[203.770815] (-) TimerEvent: {}
+[203.871546] (-) TimerEvent: {}
+[203.933844] (zed_components) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX shared library libzed_camera_component.so\x1b[0m\n'}
+[203.971730] (-) TimerEvent: {}
+[204.072399] (-) TimerEvent: {}
+[204.173141] (-) TimerEvent: {}
+[204.273828] (-) TimerEvent: {}
+[204.374506] (-) TimerEvent: {}
+[204.475192] (-) TimerEvent: {}
+[204.575881] (-) TimerEvent: {}
+[204.676558] (-) TimerEvent: {}
+[204.777296] (-) TimerEvent: {}
+[204.878020] (-) TimerEvent: {}
+[204.978702] (-) TimerEvent: {}
+[205.079367] (-) TimerEvent: {}
+[205.180042] (-) TimerEvent: {}
+[205.280727] (-) TimerEvent: {}
+[205.381431] (-) TimerEvent: {}
+[205.459271] (zed_components) StdoutLine: {'line': b'[100%] Built target zed_camera_component\n'}
+[205.481564] (-) TimerEvent: {}
+[205.503191] (zed_components) CommandEnded: {'returncode': 0}
+[205.505707] (zed_components) JobProgress: {'identifier': 'zed_components', 'progress': 'install'}
+[205.525769] (zed_components) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/user/vision_ws/build/zed_components'], 'cwd': '/home/user/vision_ws/build/zed_components', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_ZA:en'), ('USER', 'user'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/autorover_ws/install/zed_components/lib:/home/user/autorover_ws/install/mavros_extras/lib:/home/user/autorover_ws/install/mavros/lib:/home/user/autorover_ws/install/mavros_msgs/lib:/home/user/autorover_ws/install/libmavconn/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/vision_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1496'), ('SYSTEMD_EXEC_PID', '2171'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3250'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/user/autorover_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'user'), ('JOURNAL_STREAM', '8:45951'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'user'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/rovertut-desktop:@/tmp/.ICE-unix/2143,unix/rovertut-desktop:/tmp/.ICE-unix/2143'), ('INVOCATION_ID', '2d9cf8d595a1462d86831f651acd0db1'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_ZA.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:24ee3358-e131-4420-9dd7-5b18d714a25d'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/user/vision_ws/build/zed_components'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/user/autorover_ws/build/autorover_bringup:/home/user/autorover_ws/install/mavros/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/mavros_msgs/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/autorover_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble')]), 'shell': False}
+[205.541642] (zed_components) StdoutLine: {'line': b'-- Install configuration: "Release"\n'}
+[205.542495] (zed_components) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[205.543394] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/lib/libzed_camera_component.so\n'}
+[205.559805] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/lib/libzed_camera_one_component.so\n'}
+[205.576749] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//cost_traversability.hpp\n'}
+[205.581634] (-) TimerEvent: {}
+[205.594582] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//zed_camera_component.hpp\n'}
+[205.612397] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//zed_camera_one_component.hpp\n'}
+[205.630209] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//gnss_replay.hpp\n'}
+[205.646977] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//json.hpp\n'}
+[205.663172] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//sl_logging.hpp\n'}
+[205.680593] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//sl_tools.hpp\n'}
+[205.681722] (-) TimerEvent: {}
+[205.696906] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//sl_types.hpp\n'}
+[205.714271] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//sl_win_avg.hpp\n'}
+[205.732274] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//visibility_control.hpp\n'}
+[205.750105] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/library_path.sh\n'}
+[205.767269] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/library_path.dsv\n'}
+[205.781874] (-) TimerEvent: {}
+[205.784868] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/package_run_dependencies/zed_components\n'}
+[205.802982] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/parent_prefix_path/zed_components\n'}
+[205.825581] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/ament_prefix_path.sh\n'}
+[205.843929] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/ament_prefix_path.dsv\n'}
+[205.861717] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/path.sh\n'}
+[205.879777] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/path.dsv\n'}
+[205.881969] (-) TimerEvent: {}
+[205.897353] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.bash\n'}
+[205.915427] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.sh\n'}
+[205.932913] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.zsh\n'}
+[205.950589] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.dsv\n'}
+[205.968863] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/package.dsv\n'}
+[205.982144] (-) TimerEvent: {}
+[205.986559] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/packages/zed_components\n'}
+[206.003612] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/rclcpp_components/zed_components\n'}
+[206.021621] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[206.038582] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[206.056299] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[206.074123] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/zed_componentsConfig.cmake\n'}
+[206.082221] (-) TimerEvent: {}
+[206.092728] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/zed_componentsConfig-version.cmake\n'}
+[206.111395] (zed_components) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/package.xml\n'}
+[206.132683] (zed_components) CommandEnded: {'returncode': 0}
+[206.182433] (-) TimerEvent: {}
+[206.200438] (zed_components) JobEnded: {'identifier': 'zed_components', 'rc': 0}
+[206.203419] (zed_wrapper) JobStarted: {'identifier': 'zed_wrapper'}
+[206.224081] (zed_wrapper) JobProgress: {'identifier': 'zed_wrapper', 'progress': 'cmake'}
+[206.225293] (zed_wrapper) Command: {'cmd': ['/usr/bin/cmake', '/home/user/vision_ws/src/zed-ros2-wrapper/zed_wrapper', '-DCMAKE_BUILD_TYPE=Release', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_wrapper'], 'cwd': '/home/user/vision_ws/build/zed_wrapper', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_ZA:en'), ('USER', 'user'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/vision_ws/install/zed_components/lib:/home/user/autorover_ws/install/zed_components/lib:/home/user/autorover_ws/install/mavros_extras/lib:/home/user/autorover_ws/install/mavros/lib:/home/user/autorover_ws/install/mavros_msgs/lib:/home/user/autorover_ws/install/libmavconn/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/vision_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1496'), ('SYSTEMD_EXEC_PID', '2171'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3250'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/user/autorover_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'user'), ('JOURNAL_STREAM', '8:45951'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'user'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/rovertut-desktop:@/tmp/.ICE-unix/2143,unix/rovertut-desktop:/tmp/.ICE-unix/2143'), ('INVOCATION_ID', '2d9cf8d595a1462d86831f651acd0db1'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_ZA.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:24ee3358-e131-4420-9dd7-5b18d714a25d'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/user/vision_ws/build/zed_wrapper'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/user/autorover_ws/build/autorover_bringup:/home/user/autorover_ws/install/mavros/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/mavros_msgs/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/autorover_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble')]), 'shell': False}
+[206.282619] (-) TimerEvent: {}
+[206.331294] (zed_wrapper) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[206.382802] (-) TimerEvent: {}
+[206.438851] (zed_wrapper) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[206.459872] (zed_wrapper) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[206.482922] (-) TimerEvent: {}
+[206.583504] (-) TimerEvent: {}
+[206.599638] (zed_wrapper) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[206.622580] (zed_wrapper) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[206.623410] (zed_wrapper) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[206.624309] (zed_wrapper) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[206.630871] (zed_wrapper) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[206.683679] (-) TimerEvent: {}
+[206.784314] (-) TimerEvent: {}
+[206.796672] (zed_wrapper) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[206.821762] (zed_wrapper) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[206.822453] (zed_wrapper) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[206.823564] (zed_wrapper) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[206.829802] (zed_wrapper) StdoutLine: {'line': b'-- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)\n'}
+[206.884441] (-) TimerEvent: {}
+[206.984980] (-) TimerEvent: {}
+[207.085566] (-) TimerEvent: {}
+[207.168527] (zed_wrapper) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[207.185695] (-) TimerEvent: {}
+[207.286191] (-) TimerEvent: {}
+[207.312889] (zed_wrapper) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[207.386369] (-) TimerEvent: {}
+[207.486958] (-) TimerEvent: {}
+[207.587572] (-) TimerEvent: {}
+[207.661077] (zed_wrapper) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[207.672590] (zed_wrapper) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[207.687625] (-) TimerEvent: {}
+[207.691224] (zed_wrapper) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[207.717344] (zed_wrapper) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[207.752893] (zed_wrapper) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[207.787724] (-) TimerEvent: {}
+[207.850217] (zed_wrapper) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[207.856686] (zed_wrapper) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[207.887813] (-) TimerEvent: {}
+[207.988301] (-) TimerEvent: {}
+[208.015472] (zed_wrapper) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[208.071159] (zed_wrapper) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[208.088383] (-) TimerEvent: {}
+[208.151541] (zed_wrapper) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[208.171509] (zed_wrapper) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[208.188527] (-) TimerEvent: {}
+[208.289094] (-) TimerEvent: {}
+[208.312460] (zed_wrapper) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[208.313215] (zed_wrapper) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[208.389224] (-) TimerEvent: {}
+[208.460093] (zed_wrapper) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[208.463765] (zed_wrapper) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[208.489328] (-) TimerEvent: {}
+[208.589937] (-) TimerEvent: {}
+[208.690542] (-) TimerEvent: {}
+[208.791153] (-) TimerEvent: {}
+[208.891823] (-) TimerEvent: {}
+[208.949852] (zed_wrapper) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)\n'}
+[208.952249] (zed_wrapper) StdoutLine: {'line': b'-- Found Eigen3: TRUE (found version "3.4.0") \n'}
+[208.952460] (zed_wrapper) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[208.991924] (-) TimerEvent: {}
+[209.092455] (-) TimerEvent: {}
+[209.193046] (-) TimerEvent: {}
+[209.293668] (-) TimerEvent: {}
+[209.354920] (zed_wrapper) StdoutLine: {'line': b'-- Configuring done\n'}
+[209.368773] (zed_wrapper) StdoutLine: {'line': b'-- Generating done\n'}
+[209.374162] (zed_wrapper) StdoutLine: {'line': b'-- Build files have been written to: /home/user/vision_ws/build/zed_wrapper\n'}
+[209.393784] (-) TimerEvent: {}
+[209.403154] (zed_wrapper) CommandEnded: {'returncode': 0}
+[209.404816] (zed_wrapper) JobProgress: {'identifier': 'zed_wrapper', 'progress': 'build'}
+[209.405802] (zed_wrapper) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/user/vision_ws/build/zed_wrapper', '--', '-j4', '-l4'], 'cwd': '/home/user/vision_ws/build/zed_wrapper', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_ZA:en'), ('USER', 'user'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/vision_ws/install/zed_components/lib:/home/user/autorover_ws/install/zed_components/lib:/home/user/autorover_ws/install/mavros_extras/lib:/home/user/autorover_ws/install/mavros/lib:/home/user/autorover_ws/install/mavros_msgs/lib:/home/user/autorover_ws/install/libmavconn/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/vision_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1496'), ('SYSTEMD_EXEC_PID', '2171'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3250'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/user/autorover_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'user'), ('JOURNAL_STREAM', '8:45951'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'user'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/rovertut-desktop:@/tmp/.ICE-unix/2143,unix/rovertut-desktop:/tmp/.ICE-unix/2143'), ('INVOCATION_ID', '2d9cf8d595a1462d86831f651acd0db1'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_ZA.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:24ee3358-e131-4420-9dd7-5b18d714a25d'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/user/vision_ws/build/zed_wrapper'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/user/autorover_ws/build/autorover_bringup:/home/user/autorover_ws/install/mavros/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/mavros_msgs/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/autorover_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble')]), 'shell': False}
+[209.492077] (zed_wrapper) CommandEnded: {'returncode': 0}
+[209.493954] (-) TimerEvent: {}
+[209.494836] (zed_wrapper) JobProgress: {'identifier': 'zed_wrapper', 'progress': 'install'}
+[209.495657] (zed_wrapper) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/user/vision_ws/build/zed_wrapper'], 'cwd': '/home/user/vision_ws/build/zed_wrapper', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_ZA:en'), ('USER', 'user'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/vision_ws/install/zed_components/lib:/home/user/autorover_ws/install/zed_components/lib:/home/user/autorover_ws/install/mavros_extras/lib:/home/user/autorover_ws/install/mavros/lib:/home/user/autorover_ws/install/mavros_msgs/lib:/home/user/autorover_ws/install/libmavconn/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/vision_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1496'), ('SYSTEMD_EXEC_PID', '2171'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3250'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/user/autorover_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'user'), ('JOURNAL_STREAM', '8:45951'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'user'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/rovertut-desktop:@/tmp/.ICE-unix/2143,unix/rovertut-desktop:/tmp/.ICE-unix/2143'), ('INVOCATION_ID', '2d9cf8d595a1462d86831f651acd0db1'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_ZA.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:24ee3358-e131-4420-9dd7-5b18d714a25d'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/user/vision_ws/build/zed_wrapper'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/user/autorover_ws/build/autorover_bringup:/home/user/autorover_ws/install/mavros/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/mavros_msgs/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/autorover_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble')]), 'shell': False}
+[209.512487] (zed_wrapper) StdoutLine: {'line': b'-- Install configuration: "Release"\n'}
+[209.513295] (zed_wrapper) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[209.514682] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/common_mono.yaml\n'}
+[209.532291] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/common_stereo.yaml\n'}
+[209.550894] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/custom_object_detection.yaml\n'}
+[209.567766] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/ffmpeg.yaml\n'}
+[209.584771] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/object_detection.yaml\n'}
+[209.594058] (-) TimerEvent: {}
+[209.603301] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/virtual.yaml\n'}
+[209.620863] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zed.yaml\n'}
+[209.639769] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zed2.yaml\n'}
+[209.657663] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zed2i.yaml\n'}
+[209.676106] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zedm.yaml\n'}
+[209.693635] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zedx.yaml\n'}
+[209.694161] (-) TimerEvent: {}
+[209.711325] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zedxm.yaml\n'}
+[209.732525] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zedxone4k.yaml\n'}
+[209.750032] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zedxonegs.yaml\n'}
+[209.768090] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/urdf/include/materials.urdf.xacro\n'}
+[209.785017] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/urdf/zed_descr.urdf.xacro\n'}
+[209.794274] (-) TimerEvent: {}
+[209.803737] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/urdf/zed_macro.urdf.xacro\n'}
+[209.822191] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/launch/zed_camera.launch.py\n'}
+[209.841187] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/ament_index/resource_index/package_run_dependencies/zed_wrapper\n'}
+[209.859351] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/ament_index/resource_index/parent_prefix_path/zed_wrapper\n'}
+[209.877308] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/environment/ament_prefix_path.sh\n'}
+[209.894482] (-) TimerEvent: {}
+[209.895207] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/environment/ament_prefix_path.dsv\n'}
+[209.912897] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/environment/path.sh\n'}
+[209.932037] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/environment/path.dsv\n'}
+[209.949558] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/local_setup.bash\n'}
+[209.967253] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/local_setup.sh\n'}
+[209.985669] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/local_setup.zsh\n'}
+[209.994562] (-) TimerEvent: {}
+[210.003762] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/local_setup.dsv\n'}
+[210.021907] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/package.dsv\n'}
+[210.040814] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/ament_index/resource_index/packages/zed_wrapper\n'}
+[210.058871] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/cmake/zed_wrapperConfig.cmake\n'}
+[210.076478] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/cmake/zed_wrapperConfig-version.cmake\n'}
+[210.094611] (zed_wrapper) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/package.xml\n'}
+[210.095070] (-) TimerEvent: {}
+[210.116582] (zed_wrapper) CommandEnded: {'returncode': 0}
+[210.153603] (zed_wrapper) JobEnded: {'identifier': 'zed_wrapper', 'rc': 0}
+[210.156938] (zed_ros2) JobStarted: {'identifier': 'zed_ros2'}
+[210.178747] (zed_ros2) JobProgress: {'identifier': 'zed_ros2', 'progress': 'cmake'}
+[210.179747] (zed_ros2) Command: {'cmd': ['/usr/bin/cmake', '/home/user/vision_ws/src/zed-ros2-wrapper/zed_ros2', '-DCMAKE_BUILD_TYPE=Release', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_ros2'], 'cwd': '/home/user/vision_ws/build/zed_ros2', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_ZA:en'), ('USER', 'user'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/vision_ws/install/zed_components/lib:/home/user/autorover_ws/install/zed_components/lib:/home/user/autorover_ws/install/mavros_extras/lib:/home/user/autorover_ws/install/mavros/lib:/home/user/autorover_ws/install/mavros_msgs/lib:/home/user/autorover_ws/install/libmavconn/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/vision_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1496'), ('SYSTEMD_EXEC_PID', '2171'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3250'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/user/autorover_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'user'), ('JOURNAL_STREAM', '8:45951'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'user'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/rovertut-desktop:@/tmp/.ICE-unix/2143,unix/rovertut-desktop:/tmp/.ICE-unix/2143'), ('INVOCATION_ID', '2d9cf8d595a1462d86831f651acd0db1'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_ZA.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:24ee3358-e131-4420-9dd7-5b18d714a25d'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/user/vision_ws/build/zed_ros2'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/user/autorover_ws/build/autorover_bringup:/home/user/autorover_ws/install/mavros/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/mavros_msgs/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/autorover_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble')]), 'shell': False}
+[210.195233] (-) TimerEvent: {}
+[210.217264] (zed_ros2) StdoutLine: {'line': b'-- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)\n'}
+[210.295402] (-) TimerEvent: {}
+[210.396009] (-) TimerEvent: {}
+[210.496618] (-) TimerEvent: {}
+[210.591728] (zed_ros2) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[210.596714] (-) TimerEvent: {}
+[210.697268] (-) TimerEvent: {}
+[210.736864] (zed_ros2) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[210.797402] (-) TimerEvent: {}
+[210.897968] (-) TimerEvent: {}
+[210.967321] (zed_ros2) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[210.998055] (-) TimerEvent: {}
+[211.017447] (zed_ros2) StdoutLine: {'line': b"-- Added test 'copyright' to check source files copyright and LICENSE\n"}
+[211.019578] (zed_ros2) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[211.021651] (zed_ros2) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[211.025247] (zed_ros2) StdoutLine: {'line': b'-- Configuring done\n'}
+[211.032184] (zed_ros2) StdoutLine: {'line': b'-- Generating done\n'}
+[211.035468] (zed_ros2) StdoutLine: {'line': b'-- Build files have been written to: /home/user/vision_ws/build/zed_ros2\n'}
+[211.041200] (zed_ros2) CommandEnded: {'returncode': 0}
+[211.042566] (zed_ros2) JobProgress: {'identifier': 'zed_ros2', 'progress': 'build'}
+[211.043226] (zed_ros2) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/user/vision_ws/build/zed_ros2', '--', '-j4', '-l4'], 'cwd': '/home/user/vision_ws/build/zed_ros2', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_ZA:en'), ('USER', 'user'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/vision_ws/install/zed_components/lib:/home/user/autorover_ws/install/zed_components/lib:/home/user/autorover_ws/install/mavros_extras/lib:/home/user/autorover_ws/install/mavros/lib:/home/user/autorover_ws/install/mavros_msgs/lib:/home/user/autorover_ws/install/libmavconn/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/vision_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1496'), ('SYSTEMD_EXEC_PID', '2171'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3250'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/user/autorover_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'user'), ('JOURNAL_STREAM', '8:45951'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'user'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/rovertut-desktop:@/tmp/.ICE-unix/2143,unix/rovertut-desktop:/tmp/.ICE-unix/2143'), ('INVOCATION_ID', '2d9cf8d595a1462d86831f651acd0db1'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_ZA.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:24ee3358-e131-4420-9dd7-5b18d714a25d'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/user/vision_ws/build/zed_ros2'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/user/autorover_ws/build/autorover_bringup:/home/user/autorover_ws/install/mavros/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/mavros_msgs/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/autorover_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble')]), 'shell': False}
+[211.098480] (-) TimerEvent: {}
+[211.118295] (zed_ros2) CommandEnded: {'returncode': 0}
+[211.120231] (zed_ros2) JobProgress: {'identifier': 'zed_ros2', 'progress': 'install'}
+[211.120758] (zed_ros2) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/user/vision_ws/build/zed_ros2'], 'cwd': '/home/user/vision_ws/build/zed_ros2', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_ZA:en'), ('USER', 'user'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/user/vision_ws/install/zed_components/lib:/home/user/autorover_ws/install/zed_components/lib:/home/user/autorover_ws/install/mavros_extras/lib:/home/user/autorover_ws/install/mavros/lib:/home/user/autorover_ws/install/mavros_msgs/lib:/home/user/autorover_ws/install/libmavconn/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/user'), ('OLDPWD', '/home/user/vision_ws/src'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('MANAGERPID', '1496'), ('SYSTEMD_EXEC_PID', '2171'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator21a9d5db22c73a993ff0b42f64b396873'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3250'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/user/autorover_ws/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'user'), ('JOURNAL_STREAM', '8:45951'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'user'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/home/user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/rovertut-desktop:@/tmp/.ICE-unix/2143,unix/rovertut-desktop:/tmp/.ICE-unix/2143'), ('INVOCATION_ID', '2d9cf8d595a1462d86831f651acd0db1'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':0'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_ZA.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('TERMINATOR_UUID', 'urn:uuid:24ee3358-e131-4420-9dd7-5b18d714a25d'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/user/vision_ws/build/zed_ros2'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/user/autorover_ws/build/autorover_bringup:/home/user/autorover_ws/install/mavros/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/mavros_msgs/local/lib/python3.10/dist-packages:/home/user/autorover_ws/install/autorover_bringup/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble')]), 'shell': False}
+[211.138448] (zed_ros2) StdoutLine: {'line': b'-- Install configuration: "Release"\n'}
+[211.139065] (zed_ros2) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[211.139793] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/ament_index/resource_index/package_run_dependencies/zed_ros2\n'}
+[211.157449] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/ament_index/resource_index/parent_prefix_path/zed_ros2\n'}
+[211.174192] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/environment/ament_prefix_path.sh\n'}
+[211.191533] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/environment/ament_prefix_path.dsv\n'}
+[211.198560] (-) TimerEvent: {}
+[211.208857] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/environment/path.sh\n'}
+[211.226071] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/environment/path.dsv\n'}
+[211.248256] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/local_setup.bash\n'}
+[211.266965] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/local_setup.sh\n'}
+[211.285089] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/local_setup.zsh\n'}
+[211.298686] (-) TimerEvent: {}
+[211.303327] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/local_setup.dsv\n'}
+[211.322135] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/package.dsv\n'}
+[211.340934] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/ament_index/resource_index/packages/zed_ros2\n'}
+[211.358849] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/cmake/zed_ros2Config.cmake\n'}
+[211.376649] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/cmake/zed_ros2Config-version.cmake\n'}
+[211.394909] (zed_ros2) StdoutLine: {'line': b'-- Symlinking: /home/user/vision_ws/install/zed_ros2/share/zed_ros2/package.xml\n'}
+[211.398768] (-) TimerEvent: {}
+[211.417073] (zed_ros2) CommandEnded: {'returncode': 0}
+[211.455734] (zed_ros2) JobEnded: {'identifier': 'zed_ros2', 'rc': 0}
+[211.457786] (-) EventReactorShutdown: {}

@@ -1,0 +1,23 @@
+[0.073s] Invoking command in '/home/user/vision_ws/build/zed_tutorial_depth': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_tutorial_depth -- -j8 -l8
+[0.239s] [100%] Built target zed_tutorial_depth
+[0.301s] Invoked command in '/home/user/vision_ws/build/zed_tutorial_depth' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_tutorial_depth -- -j8 -l8
+[0.305s] Invoking command in '/home/user/vision_ws/build/zed_tutorial_depth': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_tutorial_depth
+[0.321s] -- Install configuration: "Release"
+[0.322s] -- Execute custom install script
+[0.323s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/lib/zed_tutorial_depth/zed_tutorial_depth
+[0.323s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/ament_index/resource_index/package_run_dependencies/zed_tutorial_depth
+[0.324s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/ament_index/resource_index/parent_prefix_path/zed_tutorial_depth
+[0.324s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/environment/ament_prefix_path.sh
+[0.325s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/environment/ament_prefix_path.dsv
+[0.325s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/environment/path.sh
+[0.325s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/environment/path.dsv
+[0.326s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/local_setup.bash
+[0.326s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/local_setup.sh
+[0.327s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/local_setup.zsh
+[0.327s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/local_setup.dsv
+[0.327s] -- Symlinking: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/package.dsv
+[0.351s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/ament_index/resource_index/packages/zed_tutorial_depth
+[0.351s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/cmake/zed_tutorial_depthConfig.cmake
+[0.352s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/cmake/zed_tutorial_depthConfig-version.cmake
+[0.353s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_tutorial_depth/share/zed_tutorial_depth/package.xml
+[0.430s] Invoked command in '/home/user/vision_ws/build/zed_tutorial_depth' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_tutorial_depth

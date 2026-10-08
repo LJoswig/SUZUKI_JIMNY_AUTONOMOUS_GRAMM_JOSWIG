@@ -1,0 +1,46 @@
+[0.049s] Invoking command in '/home/user/vision_ws/build/zed_robot_integration': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_robot_integration -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_robot_integration
+[0.166s] -- The C compiler identification is GNU 11.4.0
+[0.279s] -- The CXX compiler identification is GNU 11.4.0
+[0.294s] -- Detecting C compiler ABI info
+[0.449s] -- Detecting C compiler ABI info - done
+[0.458s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.459s] -- Detecting C compile features
+[0.459s] -- Detecting C compile features - done
+[0.466s] -- Detecting CXX compiler ABI info
+[0.645s] -- Detecting CXX compiler ABI info - done
+[0.655s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.655s] -- Detecting CXX compile features
+[0.657s] -- Detecting CXX compile features - done
+[0.665s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[1.057s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.233s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.472s] -- Configuring done
+[1.480s] -- Generating done
+[1.484s] -- Build files have been written to: /home/user/vision_ws/build/zed_robot_integration
+[1.498s] Invoked command in '/home/user/vision_ws/build/zed_robot_integration' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_robot_integration -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_robot_integration
+[1.499s] Invoking command in '/home/user/vision_ws/build/zed_robot_integration': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_robot_integration -- -j4 -l4
+[1.593s] Invoked command in '/home/user/vision_ws/build/zed_robot_integration' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_robot_integration -- -j4 -l4
+[1.594s] Invoking command in '/home/user/vision_ws/build/zed_robot_integration': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_robot_integration
+[1.615s] -- Install configuration: "Release"
+[1.617s] -- Execute custom install script
+[1.619s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration//launch/view_dual_zed.launch.py
+[1.643s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration//launch/view_mono_zed.launch.py
+[1.665s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration//urdf/zed_robot_dual.urdf.xacro
+[1.688s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration//urdf/zed_robot_mono.urdf.xacro
+[1.710s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration//rviz2/view_config.rviz
+[1.734s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/ament_index/resource_index/package_run_dependencies/zed_robot_integration
+[1.756s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/ament_index/resource_index/parent_prefix_path/zed_robot_integration
+[1.780s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/environment/ament_prefix_path.sh
+[1.802s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/environment/ament_prefix_path.dsv
+[1.826s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/environment/path.sh
+[1.848s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/environment/path.dsv
+[1.871s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/local_setup.bash
+[1.892s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/local_setup.sh
+[1.914s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/local_setup.zsh
+[1.936s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/local_setup.dsv
+[1.958s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/package.dsv
+[1.979s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/ament_index/resource_index/packages/zed_robot_integration
+[2.001s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/cmake/zed_robot_integrationConfig.cmake
+[2.024s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/cmake/zed_robot_integrationConfig-version.cmake
+[2.046s] -- Symlinking: /home/user/vision_ws/install/zed_robot_integration/share/zed_robot_integration/package.xml
+[2.077s] Invoked command in '/home/user/vision_ws/build/zed_robot_integration' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_robot_integration

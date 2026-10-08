@@ -1,0 +1,43 @@
+[0.054s] Invoking command in '/home/user/vision_ws/build/zed_components': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_components -- -j4 -l4
+[0.181s] [35m[1mConsolidate compiler generated dependencies of target zed_camera_component[0m
+[0.204s] [35m[1mConsolidate compiler generated dependencies of target zed_camera_one_component[0m
+[0.271s] [ 42%] Built target zed_camera_one_component
+[0.295s] [100%] Built target zed_camera_component
+[0.338s] Invoked command in '/home/user/vision_ws/build/zed_components' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_components -- -j4 -l4
+[0.362s] Invoking command in '/home/user/vision_ws/build/zed_components': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_components
+[0.380s] -- Install configuration: "Release"
+[0.381s] -- Execute custom install script
+[0.382s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/lib/libzed_camera_component.so
+[0.382s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/lib/libzed_camera_one_component.so
+[0.383s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/include/zed_components//cost_traversability.hpp
+[0.383s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/include/zed_components//zed_camera_component.hpp
+[0.383s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/include/zed_components//zed_camera_one_component.hpp
+[0.384s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/include/zed_components//gnss_replay.hpp
+[0.384s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/include/zed_components//json.hpp
+[0.384s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/include/zed_components//sl_logging.hpp
+[0.384s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/include/zed_components//sl_tools.hpp
+[0.385s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/include/zed_components//sl_types.hpp
+[0.385s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/include/zed_components//sl_win_avg.hpp
+[0.385s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/include/zed_components//visibility_control.hpp
+[0.386s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/environment/library_path.sh
+[0.386s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/environment/library_path.dsv
+[0.386s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/package_run_dependencies/zed_components
+[0.387s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/parent_prefix_path/zed_components
+[0.387s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/environment/ament_prefix_path.sh
+[0.388s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/environment/ament_prefix_path.dsv
+[0.388s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/environment/path.sh
+[0.388s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/environment/path.dsv
+[0.388s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.bash
+[0.389s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.sh
+[0.389s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.zsh
+[0.389s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.dsv
+[0.389s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/package.dsv
+[0.415s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/packages/zed_components
+[0.415s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/rclcpp_components/zed_components
+[0.415s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/ament_cmake_export_include_directories-extras.cmake
+[0.415s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/ament_cmake_export_libraries-extras.cmake
+[0.415s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/ament_cmake_export_dependencies-extras.cmake
+[0.416s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/zed_componentsConfig.cmake
+[0.416s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/zed_componentsConfig-version.cmake
+[0.416s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_components/share/zed_components/package.xml
+[0.421s] Invoked command in '/home/user/vision_ws/build/zed_components' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_components

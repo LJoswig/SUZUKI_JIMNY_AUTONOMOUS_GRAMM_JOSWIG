@@ -1,0 +1,109 @@
+[0.019s] Invoking command in '/home/user/vision_ws/build/zed_components': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-wrapper/zed_components -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_components
+[0.125s] -- The C compiler identification is GNU 11.4.0
+[0.237s] -- The CXX compiler identification is GNU 11.4.0
+[0.256s] -- Detecting C compiler ABI info
+[0.395s] -- Detecting C compiler ABI info - done
+[0.419s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.420s] -- Detecting C compile features
+[0.421s] -- Detecting C compile features - done
+[0.432s] -- Detecting CXX compiler ABI info
+[0.593s] -- Detecting CXX compiler ABI info - done
+[0.619s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.620s] -- Detecting CXX compile features
+[0.621s] -- Detecting CXX compile features - done
+[0.637s] -- Looking for sgemm_
+[0.776s] -- Looking for sgemm_ - not found
+[0.778s] -- Looking for pthread.h
+[0.915s] -- Looking for pthread.h - found
+[0.915s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.062s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.064s] -- Found Threads: TRUE  
+[1.143s] -- Looking for sgemm_
+[1.328s] -- Looking for sgemm_ - found
+[1.330s] -- Found BLAS: /usr/lib/aarch64-linux-gnu/libopenblas.so  
+[1.401s] -- Found CUDA: /usr/local/cuda (found suitable version "12.2", minimum required is "12.2") 
+[1.450s] -- Found CUDA: /usr/local/cuda (found version "12.2") 
+[1.457s] -- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[1.809s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.963s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[2.271s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[2.283s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[2.302s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[2.327s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.364s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.594s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[2.600s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[2.768s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[2.822s] -- Found FastRTPS: /opt/ros/humble/include  
+[2.912s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.441s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[3.444s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[3.444s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[3.681s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[3.767s] -- Added test 'copyright' to check source files copyright and LICENSE
+[3.771s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[3.772s] -- Configured cppcheck include dirs: /home/user/vision_ws/src/zed-ros2-wrapper/zed_components/src/include;/home/user/vision_ws/src/zed-ros2-wrapper/zed_components/src/zed_camera/include;/home/user/vision_ws/src/zed-ros2-wrapper/zed_components/src/tools/include
+[3.772s] -- Configured cppcheck exclude dirs and/or files: 
+[3.773s] -- Added test 'lint_cmake' to check CMake code style
+[3.777s] -- Added test 'uncrustify' to check C / C++ code style
+[3.777s] -- Configured uncrustify additional arguments: 
+[3.778s] -- Added test 'xmllint' to check XML markup files
+[3.786s] -- Configuring done
+[3.854s] -- Generating done
+[3.876s] -- Build files have been written to: /home/user/vision_ws/build/zed_components
+[3.914s] Invoked command in '/home/user/vision_ws/build/zed_components' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-wrapper/zed_components -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_components
+[3.921s] Invoking command in '/home/user/vision_ws/build/zed_components': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_components -- -j4 -l4
+[4.035s] [ 14%] [32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/tools/src/sl_win_avg.cpp.o[0m
+[4.036s] [ 14%] [32mBuilding CXX object CMakeFiles/zed_camera_one_component.dir/src/tools/src/sl_win_avg.cpp.o[0m
+[4.043s] [ 21%] [32mBuilding CXX object CMakeFiles/zed_camera_one_component.dir/src/tools/src/sl_tools.cpp.o[0m
+[4.047s] [ 28%] [32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/tools/src/sl_tools.cpp.o[0m
+[5.392s] [ 35%] [32mBuilding CXX object CMakeFiles/zed_camera_one_component.dir/src/tools/src/gnss_replay.cpp.o[0m
+[5.395s] [ 42%] [32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/tools/src/gnss_replay.cpp.o[0m
+[19.426s] [ 50%] [32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/tools/src/sl_types.cpp.o[0m
+[19.497s] [ 57%] [32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/zed_camera/src/zed_camera_component_main.cpp.o[0m
+[20.110s] [ 64%] [32mBuilding CXX object CMakeFiles/zed_camera_one_component.dir/src/tools/src/sl_types.cpp.o[0m
+[20.179s] [ 71%] [32mBuilding CXX object CMakeFiles/zed_camera_one_component.dir/src/zed_camera/src/zed_camera_one_component.cpp.o[0m
+[34.729s] [ 78%] [32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/zed_camera/src/zed_camera_component_objdet.cpp.o[0m
+[35.582s] [ 85%] [32mBuilding CXX object CMakeFiles/zed_camera_component.dir/src/zed_camera/src/zed_camera_component_bodytrk.cpp.o[0m
+[81.509s] [ 92%] [32m[1mLinking CXX shared library libzed_camera_one_component.so[0m
+[82.473s] [ 92%] Built target zed_camera_one_component
+[203.932s] [100%] [32m[1mLinking CXX shared library libzed_camera_component.so[0m
+[205.458s] [100%] Built target zed_camera_component
+[205.502s] Invoked command in '/home/user/vision_ws/build/zed_components' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_components -- -j4 -l4
+[205.526s] Invoking command in '/home/user/vision_ws/build/zed_components': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_components
+[205.540s] -- Install configuration: "Release"
+[205.541s] -- Execute custom install script
+[205.542s] -- Symlinking: /home/user/vision_ws/install/zed_components/lib/libzed_camera_component.so
+[205.558s] -- Symlinking: /home/user/vision_ws/install/zed_components/lib/libzed_camera_one_component.so
+[205.575s] -- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//cost_traversability.hpp
+[205.593s] -- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//zed_camera_component.hpp
+[205.611s] -- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//zed_camera_one_component.hpp
+[205.629s] -- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//gnss_replay.hpp
+[205.645s] -- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//json.hpp
+[205.662s] -- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//sl_logging.hpp
+[205.679s] -- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//sl_tools.hpp
+[205.695s] -- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//sl_types.hpp
+[205.713s] -- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//sl_win_avg.hpp
+[205.731s] -- Symlinking: /home/user/vision_ws/install/zed_components/include/zed_components//visibility_control.hpp
+[205.749s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/library_path.sh
+[205.766s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/library_path.dsv
+[205.784s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/package_run_dependencies/zed_components
+[205.802s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/parent_prefix_path/zed_components
+[205.824s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/ament_prefix_path.sh
+[205.843s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/ament_prefix_path.dsv
+[205.860s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/path.sh
+[205.878s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/environment/path.dsv
+[205.896s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.bash
+[205.914s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.sh
+[205.932s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.zsh
+[205.949s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/local_setup.dsv
+[205.967s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/package.dsv
+[205.985s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/packages/zed_components
+[206.002s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/ament_index/resource_index/rclcpp_components/zed_components
+[206.020s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/ament_cmake_export_include_directories-extras.cmake
+[206.037s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/ament_cmake_export_libraries-extras.cmake
+[206.055s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/ament_cmake_export_dependencies-extras.cmake
+[206.073s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/zed_componentsConfig.cmake
+[206.091s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/cmake/zed_componentsConfig-version.cmake
+[206.110s] -- Symlinking: /home/user/vision_ws/install/zed_components/share/zed_components/package.xml
+[206.132s] Invoked command in '/home/user/vision_ws/build/zed_components' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_components

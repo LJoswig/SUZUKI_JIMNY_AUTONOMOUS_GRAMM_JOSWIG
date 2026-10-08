@@ -1,0 +1,49 @@
+[0.034s] Invoking command in '/home/user/vision_ws/build/zed_multi_camera': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_multi_camera -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_multi_camera
+[0.189s] -- The C compiler identification is GNU 11.4.0
+[0.307s] -- The CXX compiler identification is GNU 11.4.0
+[0.323s] -- Detecting C compiler ABI info
+[0.480s] -- Detecting C compiler ABI info - done
+[0.492s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.494s] -- Detecting C compile features
+[0.496s] -- Detecting C compile features - done
+[0.503s] -- Detecting CXX compiler ABI info
+[0.700s] -- Detecting CXX compiler ABI info - done
+[0.709s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.709s] -- Detecting CXX compile features
+[0.710s] -- Detecting CXX compile features - done
+[0.716s] -- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[1.080s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.240s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.465s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.541s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.545s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.547s] -- Added test 'lint_cmake' to check CMake code style
+[1.548s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.552s] -- Added test 'xmllint' to check XML markup files
+[1.557s] -- Configuring done
+[1.569s] -- Generating done
+[1.574s] -- Build files have been written to: /home/user/vision_ws/build/zed_multi_camera
+[1.588s] Invoked command in '/home/user/vision_ws/build/zed_multi_camera' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tutorials/zed_multi_camera -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_multi_camera
+[1.589s] Invoking command in '/home/user/vision_ws/build/zed_multi_camera': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_multi_camera -- -j4 -l4
+[1.700s] Invoked command in '/home/user/vision_ws/build/zed_multi_camera' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_multi_camera -- -j4 -l4
+[1.701s] Invoking command in '/home/user/vision_ws/build/zed_multi_camera': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_multi_camera
+[1.716s] -- Install configuration: "Release"
+[1.716s] -- Execute custom install script
+[1.717s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/launch/zed_multi_camera.launch.py
+[1.735s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/urdf/zed_multi.urdf.xacro
+[1.756s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/ament_index/resource_index/package_run_dependencies/zed_multi_camera
+[1.775s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/ament_index/resource_index/parent_prefix_path/zed_multi_camera
+[1.795s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/environment/ament_prefix_path.sh
+[1.812s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/environment/ament_prefix_path.dsv
+[1.839s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/environment/path.sh
+[1.862s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/environment/path.dsv
+[1.888s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/local_setup.bash
+[1.922s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/local_setup.sh
+[1.945s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/local_setup.zsh
+[1.968s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/local_setup.dsv
+[1.991s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/package.dsv
+[2.012s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/ament_index/resource_index/packages/zed_multi_camera
+[2.035s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/cmake/zed_multi_cameraConfig.cmake
+[2.056s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/cmake/zed_multi_cameraConfig-version.cmake
+[2.075s] -- Symlinking: /home/user/vision_ws/install/zed_multi_camera/share/zed_multi_camera/package.xml
+[2.108s] Invoked command in '/home/user/vision_ws/build/zed_multi_camera' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_multi_camera

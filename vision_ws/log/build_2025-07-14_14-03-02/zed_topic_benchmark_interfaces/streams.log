@@ -1,0 +1,155 @@
+[0.075s] Invoking command in '/home/user/vision_ws/build/zed_topic_benchmark_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tools/zed_benchmark_interfaces -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_topic_benchmark_interfaces
+[0.119s] -- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[0.432s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.739s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.746s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.761s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.787s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.820s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.897s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.410s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[2.242s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.574s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.626s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[2.677s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[2.677s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[2.677s] -- Using PYTHON_LIBRARIES: /usr/lib/aarch64-linux-gnu/libpython3.10.so
+[2.763s] -- Added test 'copyright' to check source files copyright and LICENSE
+[2.765s] -- Added test 'lint_cmake' to check CMake code style
+[2.767s] -- Added test 'xmllint' to check XML markup files
+[2.780s] -- Configuring done
+[2.876s] -- Generating done
+[2.904s] -- Build files have been written to: /home/user/vision_ws/build/zed_topic_benchmark_interfaces
+[2.920s] Invoked command in '/home/user/vision_ws/build/zed_topic_benchmark_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/tools/zed_benchmark_interfaces -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_topic_benchmark_interfaces
+[2.923s] Invoking command in '/home/user/vision_ws/build/zed_topic_benchmark_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_topic_benchmark_interfaces -- -j8 -l8
+[3.014s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_generator_c[0m
+[3.035s] [  3%] Built target zed_topic_benchmark_interfaces__cpp
+[3.041s] [ 12%] Built target zed_topic_benchmark_interfaces__rosidl_generator_c
+[3.055s] [ 12%] Built target ament_cmake_python_symlink_zed_topic_benchmark_interfaces
+[3.058s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_typesupport_cpp[0m
+[3.059s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_typesupport_introspection_cpp[0m
+[3.061s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_cpp[0m
+[3.077s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_c[0m
+[3.082s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_typesupport_introspection_c[0m
+[3.088s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_typesupport_c[0m
+[3.098s] [ 22%] Built target zed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_cpp
+[3.098s] [ 32%] Built target zed_topic_benchmark_interfaces__rosidl_typesupport_cpp
+[3.110s] [ 41%] Built target zed_topic_benchmark_interfaces__rosidl_typesupport_introspection_cpp
+[3.117s] [ 61%] Built target zed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_c
+[3.118s] [ 61%] Built target zed_topic_benchmark_interfaces__rosidl_typesupport_introspection_c
+[3.125s] [ 70%] Built target zed_topic_benchmark_interfaces__rosidl_typesupport_c
+[3.173s] [ 70%] Built target zed_topic_benchmark_interfaces
+[3.221s] [ 74%] Built target zed_topic_benchmark_interfaces__py
+[3.245s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_generator_py[0m
+[3.278s] [ 80%] Built target zed_topic_benchmark_interfaces__rosidl_generator_py
+[3.301s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_c__pyext[0m
+[3.302s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_typesupport_c__pyext[0m
+[3.302s] [35m[1mConsolidate compiler generated dependencies of target zed_topic_benchmark_interfaces__rosidl_typesupport_introspection_c__pyext[0m
+[3.332s] [100%] Built target zed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_c__pyext
+[3.332s] [100%] Built target zed_topic_benchmark_interfaces__rosidl_typesupport_introspection_c__pyext
+[3.332s] [100%] Built target zed_topic_benchmark_interfaces__rosidl_typesupport_c__pyext
+[3.677s] running egg_info
+[3.678s] writing zed_topic_benchmark_interfaces.egg-info/PKG-INFO
+[3.679s] writing dependency_links to zed_topic_benchmark_interfaces.egg-info/dependency_links.txt
+[3.679s] writing top-level names to zed_topic_benchmark_interfaces.egg-info/top_level.txt
+[3.686s] reading manifest file 'zed_topic_benchmark_interfaces.egg-info/SOURCES.txt'
+[3.687s] writing manifest file 'zed_topic_benchmark_interfaces.egg-info/SOURCES.txt'
+[3.761s] [100%] Built target ament_cmake_python_build_zed_topic_benchmark_interfaces_egg
+[3.785s] Invoked command in '/home/user/vision_ws/build/zed_topic_benchmark_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_topic_benchmark_interfaces -- -j8 -l8
+[3.789s] Invoking command in '/home/user/vision_ws/build/zed_topic_benchmark_interfaces': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_topic_benchmark_interfaces
+[3.806s] -- Install configuration: "Release"
+[3.807s] -- Execute custom install script
+[3.872s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/ament_index/resource_index/rosidl_interfaces/zed_topic_benchmark_interfaces
+[3.874s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/benchmark_stats_stamped.h
+[3.874s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__functions.h
+[3.874s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__struct.h
+[3.875s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__type_support.h
+[3.875s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/rosidl_generator_c__visibility_control.h
+[3.875s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/environment/library_path.sh
+[3.876s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/environment/library_path.dsv
+[3.877s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__rosidl_typesupport_fastrtps_c.h
+[3.877s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[3.878s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/benchmark_stats_stamped.hpp
+[3.878s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__builder.hpp
+[3.879s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__struct.hpp
+[3.879s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__traits.hpp
+[3.879s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__type_support.hpp
+[3.880s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/rosidl_generator_cpp__visibility_control.hpp
+[3.881s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__rosidl_typesupport_fastrtps_cpp.hpp
+[3.881s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[3.882s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__rosidl_typesupport_introspection_c.h
+[3.882s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[3.883s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/include/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces/msg/detail/benchmark_stats_stamped__rosidl_typesupport_introspection_cpp.hpp
+[3.883s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/environment/pythonpath.sh
+[3.883s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/environment/pythonpath.dsv
+[3.884s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces-5.0.0-py3.10.egg-info/PKG-INFO
+[3.884s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces-5.0.0-py3.10.egg-info/SOURCES.txt
+[3.885s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces-5.0.0-py3.10.egg-info/dependency_links.txt
+[3.885s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces-5.0.0-py3.10.egg-info/top_level.txt
+[3.886s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/__init__.py
+[3.886s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/_zed_topic_benchmark_interfaces_s.ep.rosidl_typesupport_c.c
+[3.887s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/_zed_topic_benchmark_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c
+[3.887s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/_zed_topic_benchmark_interfaces_s.ep.rosidl_typesupport_introspection_c.c
+[3.887s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/libzed_topic_benchmark_interfaces__rosidl_generator_py.so
+[3.888s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/msg/__init__.py
+[3.888s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/msg/_benchmark_stats_stamped.py
+[3.889s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/msg/_benchmark_stats_stamped_s.c
+[3.889s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces_s__rosidl_typesupport_c.cpython-310-aarch64-linux-gnu.so
+[3.889s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-aarch64-linux-gnu.so
+[3.889s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-aarch64-linux-gnu.so
+[3.890s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-aarch64-linux-gnu.so
+[3.890s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-aarch64-linux-gnu.so
+[3.891s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/zed_topic_benchmark_interfaces_s__rosidl_typesupport_c.cpython-310-aarch64-linux-gnu.so
+[3.891s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/msg/BenchmarkStatsStamped.idl
+[3.892s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/msg/BenchmarkStatsStamped.msg
+[3.892s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/ament_index/resource_index/package_run_dependencies/zed_topic_benchmark_interfaces
+[3.893s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/ament_index/resource_index/parent_prefix_path/zed_topic_benchmark_interfaces
+[3.893s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/environment/ament_prefix_path.sh
+[3.894s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/environment/ament_prefix_path.dsv
+[3.894s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/environment/path.sh
+[3.894s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/environment/path.dsv
+[3.895s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/local_setup.bash
+[3.895s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/local_setup.sh
+[3.895s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/local_setup.zsh
+[3.896s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/local_setup.dsv
+[3.896s] -- Symlinking: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/package.dsv
+[3.916s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/ament_index/resource_index/packages/zed_topic_benchmark_interfaces
+[3.916s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/rosidl_cmake-extras.cmake
+[3.916s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake
+[3.917s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake
+[3.917s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/ament_cmake_export_libraries-extras.cmake
+[3.917s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/ament_cmake_export_targets-extras.cmake
+[3.918s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[3.918s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[3.919s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/zed_topic_benchmark_interfacesConfig.cmake
+[3.919s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/zed_topic_benchmark_interfacesConfig-version.cmake
+[3.919s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/package.xml
+[3.920s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib/libzed_topic_benchmark_interfaces__rosidl_generator_c.so
+[3.921s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib/libzed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_c.so
+[3.921s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib/libzed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[3.922s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib/libzed_topic_benchmark_interfaces__rosidl_typesupport_introspection_c.so
+[3.922s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib/libzed_topic_benchmark_interfaces__rosidl_typesupport_c.so
+[3.923s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib/libzed_topic_benchmark_interfaces__rosidl_typesupport_introspection_cpp.so
+[3.923s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib/libzed_topic_benchmark_interfaces__rosidl_typesupport_cpp.so
+[4.008s] Listing '/home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces'...
+[4.008s] Compiling '/home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/__init__.py'...
+[4.008s] Listing '/home/user/vision_ws/install/zed_topic_benchmark_interfaces/local/lib/python3.10/dist-packages/zed_topic_benchmark_interfaces/msg'...
+[4.021s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/lib/libzed_topic_benchmark_interfaces__rosidl_generator_py.so
+[4.022s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/export_zed_topic_benchmark_interfaces__rosidl_generator_cExport.cmake
+[4.022s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/export_zed_topic_benchmark_interfaces__rosidl_generator_cExport-release.cmake
+[4.022s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/export_zed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_cExport.cmake
+[4.022s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/export_zed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_cExport-release.cmake
+[4.022s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/export_zed_topic_benchmark_interfaces__rosidl_generator_cppExport.cmake
+[4.023s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/export_zed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake
+[4.023s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/export_zed_topic_benchmark_interfaces__rosidl_typesupport_fastrtps_cppExport-release.cmake
+[4.023s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/zed_topic_benchmark_interfaces__rosidl_typesupport_introspection_cExport.cmake
+[4.023s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/zed_topic_benchmark_interfaces__rosidl_typesupport_introspection_cExport-release.cmake
+[4.024s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/zed_topic_benchmark_interfaces__rosidl_typesupport_cExport.cmake
+[4.024s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/zed_topic_benchmark_interfaces__rosidl_typesupport_cExport-release.cmake
+[4.024s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/zed_topic_benchmark_interfaces__rosidl_typesupport_introspection_cppExport.cmake
+[4.024s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/zed_topic_benchmark_interfaces__rosidl_typesupport_introspection_cppExport-release.cmake
+[4.024s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/zed_topic_benchmark_interfaces__rosidl_typesupport_cppExport.cmake
+[4.024s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/zed_topic_benchmark_interfaces__rosidl_typesupport_cppExport-release.cmake
+[4.025s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/export_zed_topic_benchmark_interfaces__rosidl_generator_pyExport.cmake
+[4.025s] -- Up-to-date: /home/user/vision_ws/install/zed_topic_benchmark_interfaces/share/zed_topic_benchmark_interfaces/cmake/export_zed_topic_benchmark_interfaces__rosidl_generator_pyExport-release.cmake
+[4.031s] Invoked command in '/home/user/vision_ws/build/zed_topic_benchmark_interfaces' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/teleop_twist_keyboard:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_topic_benchmark_interfaces

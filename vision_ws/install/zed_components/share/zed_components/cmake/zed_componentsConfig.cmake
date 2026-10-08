@@ -1,0 +1,1 @@
+/home/user/vision_ws/build/zed_components/ament_cmake_core/zed_componentsConfig.cmake

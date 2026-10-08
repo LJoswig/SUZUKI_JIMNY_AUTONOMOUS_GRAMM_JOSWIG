@@ -1,0 +1,130 @@
+[0.051s] Invoking command in '/home/user/vision_ws/build/rviz_plugin_zed_od': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/rviz-plugin-zed-od -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/rviz_plugin_zed_od
+[0.193s] -- The C compiler identification is GNU 11.4.0
+[0.323s] -- The CXX compiler identification is GNU 11.4.0
+[0.338s] -- Detecting C compiler ABI info
+[0.488s] -- Detecting C compiler ABI info - done
+[0.504s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.504s] -- Detecting C compile features
+[0.504s] -- Detecting C compile features - done
+[0.514s] -- Detecting CXX compiler ABI info
+[0.691s] -- Detecting CXX compiler ABI info - done
+[0.734s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.734s] -- Detecting CXX compile features
+[0.735s] -- Detecting CXX compile features - done
+[0.736s] -- Enabling tests requiring a display
+[0.740s] -- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[1.145s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.345s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.704s] -- Setting OGRE_DIR to: '/opt/ros/humble/share/rviz_ogre_vendor/cmake/../../../opt/rviz_ogre_vendor/lib/OGRE/cmake'
+[1.716s] -- Found OGRE
+[1.717s] --   static     : OFF
+[1.718s] --   components : HLMS;MeshLodGenerator;Overlay;Paging;Property;RTShaderSystem;Terrain;Volume
+[1.719s] --   plugins    : Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[1.719s] --   media      : /opt/ros/humble/opt/rviz_ogre_vendor/share/OGRE/Media
+[1.720s] -- OGRE_LIBRARIES: OgreHLMS;OgreMeshLodGenerator;OgreOverlay;OgrePaging;OgreProperty;OgreRTShaderSystem;OgreTerrain;OgreVolume;OgreMain
+[1.720s] -- OGRE_LIBRARY_DIRS: /opt/ros/humble/opt/rviz_ogre_vendor/lib
+[1.721s] -- OGRE_PLUGINS: Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[1.721s] -- OGRE_PLUGIN_DIR: /opt/ros/humble/opt/rviz_ogre_vendor/lib/OGRE
+[1.722s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_RELEASE: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[1.722s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_DEBUG: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[1.723s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_RELEASE: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[1.724s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_DEBUG: /opt/ros/humble/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[1.747s] -- Could not find freeimage library
+[1.799s] -- Found ZLIB: /usr/lib/aarch64-linux-gnu/libz.so (found version "1.2.11") 
+[1.826s] -- Found OpenGL: /usr/lib/aarch64-linux-gnu/libOpenGL.so   
+[2.241s] -- Found X11: /usr/include   
+[2.242s] -- Looking for XOpenDisplay in /usr/lib/aarch64-linux-gnu/libX11.so;/usr/lib/aarch64-linux-gnu/libXext.so
+[2.430s] -- Looking for XOpenDisplay in /usr/lib/aarch64-linux-gnu/libX11.so;/usr/lib/aarch64-linux-gnu/libXext.so - found
+[2.431s] -- Looking for gethostbyname
+[2.578s] -- Looking for gethostbyname - found
+[2.578s] -- Looking for connect
+[2.757s] -- Looking for connect - found
+[2.757s] -- Looking for remove
+[2.968s] -- Looking for remove - found
+[2.969s] -- Looking for shmat
+[3.137s] -- Looking for shmat - found
+[3.137s] -- Looking for IceConnectionNumber in ICE
+[3.282s] -- Looking for IceConnectionNumber in ICE - found
+[3.387s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[3.400s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[3.428s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[3.459s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[3.504s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[3.764s] -- Found rviz_common: 11.2.17 (/opt/ros/humble/share/rviz_common/cmake)
+[3.828s] -- Setting assimp_DIR to: '/opt/ros/humble/share/rviz_assimp_vendor/cmake/../../../opt/rviz_assimp_vendor/lib/cmake/assimp-4.1'
+[4.077s] -- library: /usr/lib/aarch64-linux-gnu/libcurl.so
+[4.270s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[4.278s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[4.358s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.718s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[4.731s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.762s] -- Found FastRTPS: /opt/ros/humble/include  
+[4.770s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.803s] -- Found TinyXML2 via Config file: TinyXML2_DIR-NOTFOUND
+[4.838s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[4.861s] -- Looking for pthread.h
+[5.156s] -- Looking for pthread.h - found
+[5.157s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[5.449s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[5.449s] -- Found Threads: TRUE  
+[5.695s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[5.696s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[6.109s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[6.314s] -- Added test 'copyright' to check source files copyright and LICENSE
+[6.326s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[6.332s] -- Configured cppcheck include dirs: /home/user/vision_ws/src/zed-ros2-examples/rviz-plugin-zed-od/src/include;/home/user/vision_ws/src/zed-ros2-examples/rviz-plugin-zed-od/src/plugin/include;$<BUILD_INTERFACE:/home/user/vision_ws/src/zed-ros2-examples/rviz-plugin-zed-od/include>
+[6.333s] -- Configured cppcheck exclude dirs and/or files: 
+[6.337s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[6.345s] -- Configured cpplint exclude dirs and/or files: 
+[6.348s] -- Added test 'lint_cmake' to check CMake code style
+[6.352s] -- Added test 'uncrustify' to check C / C++ code style
+[6.356s] -- Configured uncrustify additional arguments: 
+[6.359s] -- Added test 'xmllint' to check XML markup files
+[6.376s] -- Configuring done
+[6.683s] -- Generating done
+[6.701s] -- Build files have been written to: /home/user/vision_ws/build/rviz_plugin_zed_od
+[6.755s] Invoked command in '/home/user/vision_ws/build/rviz_plugin_zed_od' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/rviz-plugin-zed-od -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/rviz_plugin_zed_od
+[6.756s] Invoking command in '/home/user/vision_ws/build/rviz_plugin_zed_od': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/rviz_plugin_zed_od -- -j4 -l4
+[7.005s] [ 20%] [34m[1mAutomatic MOC and UIC for target rviz_plugin_zed_od[0m
+[9.534s] [ 20%] Built target rviz_plugin_zed_od_autogen
+[9.586s] [ 40%] [32mBuilding CXX object CMakeFiles/rviz_plugin_zed_od.dir/rviz_plugin_zed_od_autogen/mocs_compilation.cpp.o[0m
+[9.619s] [ 80%] [32mBuilding CXX object CMakeFiles/rviz_plugin_zed_od.dir/src/plugin/src/zed_od_info.cpp.o[0m
+[9.624s] [ 80%] [32mBuilding CXX object CMakeFiles/rviz_plugin_zed_od.dir/src/plugin/src/zed_od_display.cpp.o[0m
+[63.926s] [100%] [32m[1mLinking CXX shared library librviz_plugin_zed_od.so[0m
+[66.455s] [100%] Built target rviz_plugin_zed_od
+[66.503s] Invoked command in '/home/user/vision_ws/build/rviz_plugin_zed_od' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/rviz_plugin_zed_od -- -j4 -l4
+[66.504s] Invoking command in '/home/user/vision_ws/build/rviz_plugin_zed_od': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/rviz_plugin_zed_od
+[66.525s] -- Install configuration: "Release"
+[66.525s] -- Execute custom install script
+[66.526s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od//plugins_description.xml
+[66.546s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/library_path.sh
+[66.567s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/library_path.dsv
+[66.587s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/include/rviz_plugin_zed_od//visibility_control.hpp
+[66.608s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/include/rviz_plugin_zed_od//zed_body_parts.hpp
+[66.628s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/include/rviz_plugin_zed_od//zed_od_display.hpp
+[66.648s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/include/rviz_plugin_zed_od//zed_od_info.hpp
+[66.670s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/icons/ZedObjDet.png
+[66.690s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/ament_index/resource_index/package_run_dependencies/rviz_plugin_zed_od
+[66.710s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/ament_index/resource_index/parent_prefix_path/rviz_plugin_zed_od
+[66.730s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/ament_prefix_path.sh
+[66.751s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/ament_prefix_path.dsv
+[66.772s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/path.sh
+[66.791s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/path.dsv
+[66.812s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/local_setup.bash
+[66.832s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/local_setup.sh
+[66.852s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/local_setup.zsh
+[66.871s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/local_setup.dsv
+[66.889s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/package.dsv
+[66.911s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/ament_index/resource_index/packages/rviz_plugin_zed_od
+[66.932s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/ament_index/resource_index/rviz_common__pluginlib__plugin/rviz_plugin_zed_od
+[66.952s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/ament_cmake_export_include_directories-extras.cmake
+[66.972s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/ament_cmake_export_targets-extras.cmake
+[66.992s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/ament_cmake_export_dependencies-extras.cmake
+[67.013s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/rviz_plugin_zed_odConfig.cmake
+[67.034s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/rviz_plugin_zed_odConfig-version.cmake
+[67.054s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/package.xml
+[67.073s] -- Installing: /home/user/vision_ws/install/rviz_plugin_zed_od/lib/librviz_plugin_zed_od.so
+[67.077s] -- Set runtime path of "/home/user/vision_ws/install/rviz_plugin_zed_od/lib/librviz_plugin_zed_od.so" to ""
+[67.077s] -- Installing: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/rviz_plugin_zed_odExport.cmake
+[67.077s] -- Installing: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/rviz_plugin_zed_odExport-release.cmake
+[67.088s] Invoked command in '/home/user/vision_ws/build/rviz_plugin_zed_od' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/rviz_plugin_zed_od

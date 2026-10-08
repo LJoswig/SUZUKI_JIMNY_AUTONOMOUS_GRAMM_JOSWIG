@@ -1,0 +1,50 @@
+[0.051s] Invoking command in '/home/user/vision_ws/build/zed_display_rviz2': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/zed_display_rviz2 -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_display_rviz2
+[0.204s] -- The C compiler identification is GNU 11.4.0
+[0.329s] -- The CXX compiler identification is GNU 11.4.0
+[0.347s] -- Detecting C compiler ABI info
+[0.505s] -- Detecting C compiler ABI info - done
+[0.517s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.519s] -- Detecting C compile features
+[0.520s] -- Detecting C compile features - done
+[0.527s] -- Detecting CXX compiler ABI info
+[0.709s] -- Detecting CXX compiler ABI info - done
+[0.720s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.721s] -- Detecting CXX compile features
+[0.723s] -- Detecting CXX compile features - done
+[0.730s] -- Found ament_cmake_auto: 1.3.11 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[1.141s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[1.325s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.589s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.672s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.680s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.682s] -- Added test 'lint_cmake' to check CMake code style
+[1.685s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.688s] -- Added test 'xmllint' to check XML markup files
+[1.692s] -- Configuring done
+[1.702s] -- Generating done
+[1.707s] -- Build files have been written to: /home/user/vision_ws/build/zed_display_rviz2
+[1.725s] Invoked command in '/home/user/vision_ws/build/zed_display_rviz2' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake /home/user/vision_ws/src/zed-ros2-examples/zed_display_rviz2 -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/user/vision_ws/install/zed_display_rviz2
+[1.726s] Invoking command in '/home/user/vision_ws/build/zed_display_rviz2': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_display_rviz2 -- -j4 -l4
+[1.824s] Invoked command in '/home/user/vision_ws/build/zed_display_rviz2' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_display_rviz2 -- -j4 -l4
+[1.826s] Invoking command in '/home/user/vision_ws/build/zed_display_rviz2': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_display_rviz2
+[1.845s] -- Install configuration: "Release"
+[1.847s] -- Execute custom install script
+[1.850s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/launch/display_zed_cam.launch.py
+[1.877s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/rviz2/zed_mono.rviz
+[1.904s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/rviz2/zed_stereo.rviz
+[1.926s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/ament_index/resource_index/package_run_dependencies/zed_display_rviz2
+[1.946s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/ament_index/resource_index/parent_prefix_path/zed_display_rviz2
+[1.969s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/environment/ament_prefix_path.sh
+[2.005s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/environment/ament_prefix_path.dsv
+[2.026s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/environment/path.sh
+[2.056s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/environment/path.dsv
+[2.078s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/local_setup.bash
+[2.111s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/local_setup.sh
+[2.132s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/local_setup.zsh
+[2.153s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/local_setup.dsv
+[2.174s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/package.dsv
+[2.208s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/ament_index/resource_index/packages/zed_display_rviz2
+[2.229s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/cmake/zed_display_rviz2Config.cmake
+[2.249s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/cmake/zed_display_rviz2Config-version.cmake
+[2.270s] -- Symlinking: /home/user/vision_ws/install/zed_display_rviz2/share/zed_display_rviz2/package.xml
+[2.313s] Invoked command in '/home/user/vision_ws/build/zed_display_rviz2' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_wrapper:/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_display_rviz2

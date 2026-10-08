@@ -1,0 +1,1 @@
+/home/user/vision_ws/build/rviz_plugin_zed_od/ament_cmake_environment_hooks/local_setup.sh

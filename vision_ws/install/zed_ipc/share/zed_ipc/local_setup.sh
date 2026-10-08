@@ -1,0 +1,1 @@
+/home/user/vision_ws/build/zed_ipc/ament_cmake_environment_hooks/local_setup.sh

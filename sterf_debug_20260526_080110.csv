@@ -1,0 +1,1 @@
+pc_time,t_ms,hbSignal,checkedMode,serialHbOk,noAck,ackAgeMs,steerCmdRx,steerRateRx,targetJump,steerCmdCan,steerRateCan,steerFb,steerRateFb,axelAlive,steeringAlive,brakeAlive,serialCmdCount,serialHbCount,canSteerTxCount

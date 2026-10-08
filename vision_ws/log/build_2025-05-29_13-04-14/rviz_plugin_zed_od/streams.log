@@ -1,0 +1,39 @@
+[0.072s] Invoking command in '/home/user/vision_ws/build/rviz_plugin_zed_od': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/rviz_plugin_zed_od -- -j8 -l8
+[0.190s] [ 20%] [34m[1mAutomatic MOC and UIC for target rviz_plugin_zed_od[0m
+[0.262s] [ 20%] Built target rviz_plugin_zed_od_autogen
+[0.337s] [100%] Built target rviz_plugin_zed_od
+[0.441s] Invoked command in '/home/user/vision_ws/build/rviz_plugin_zed_od' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/rviz_plugin_zed_od -- -j8 -l8
+[0.444s] Invoking command in '/home/user/vision_ws/build/rviz_plugin_zed_od': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/rviz_plugin_zed_od
+[0.541s] -- Install configuration: "Release"
+[0.541s] -- Execute custom install script
+[0.542s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od//plugins_description.xml
+[0.542s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/library_path.sh
+[0.543s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/library_path.dsv
+[0.544s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/include/rviz_plugin_zed_od//visibility_control.hpp
+[0.546s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/include/rviz_plugin_zed_od//zed_body_parts.hpp
+[0.546s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/include/rviz_plugin_zed_od//zed_od_display.hpp
+[0.546s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/include/rviz_plugin_zed_od//zed_od_info.hpp
+[0.546s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/icons/ZedObjDet.png
+[0.546s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/ament_index/resource_index/package_run_dependencies/rviz_plugin_zed_od
+[0.546s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/ament_index/resource_index/parent_prefix_path/rviz_plugin_zed_od
+[0.547s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/ament_prefix_path.sh
+[0.547s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/ament_prefix_path.dsv
+[0.547s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/path.sh
+[0.548s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/environment/path.dsv
+[0.548s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/local_setup.bash
+[0.548s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/local_setup.sh
+[0.548s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/local_setup.zsh
+[0.549s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/local_setup.dsv
+[0.549s] -- Symlinking: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/package.dsv
+[0.549s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/ament_index/resource_index/packages/rviz_plugin_zed_od
+[0.550s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/ament_index/resource_index/rviz_common__pluginlib__plugin/rviz_plugin_zed_od
+[0.550s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/ament_cmake_export_include_directories-extras.cmake
+[0.550s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/ament_cmake_export_targets-extras.cmake
+[0.551s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/ament_cmake_export_dependencies-extras.cmake
+[0.551s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/rviz_plugin_zed_odConfig.cmake
+[0.551s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/rviz_plugin_zed_odConfig-version.cmake
+[0.551s] -- Up-to-date symlink: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/package.xml
+[0.552s] -- Up-to-date: /home/user/vision_ws/install/rviz_plugin_zed_od/lib/librviz_plugin_zed_od.so
+[0.553s] -- Up-to-date: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/rviz_plugin_zed_odExport.cmake
+[0.553s] -- Up-to-date: /home/user/vision_ws/install/rviz_plugin_zed_od/share/rviz_plugin_zed_od/cmake/rviz_plugin_zed_odExport-release.cmake
+[0.554s] Invoked command in '/home/user/vision_ws/build/rviz_plugin_zed_od' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/rviz_plugin_zed_od

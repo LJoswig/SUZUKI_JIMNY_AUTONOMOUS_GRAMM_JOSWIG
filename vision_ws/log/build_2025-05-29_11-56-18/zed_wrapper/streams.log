@@ -1,0 +1,39 @@
+[0.051s] Invoking command in '/home/user/vision_ws/build/zed_wrapper': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/vision_ws/install/zed_wrapper:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_wrapper -- -j4 -l4
+[0.170s] Invoked command in '/home/user/vision_ws/build/zed_wrapper' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/vision_ws/install/zed_wrapper:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --build /home/user/vision_ws/build/zed_wrapper -- -j4 -l4
+[0.173s] Invoking command in '/home/user/vision_ws/build/zed_wrapper': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/vision_ws/install/zed_wrapper:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_wrapper
+[0.191s] -- Install configuration: "Release"
+[0.193s] -- Execute custom install script
+[0.195s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/common_mono.yaml
+[0.195s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/common_stereo.yaml
+[0.196s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/custom_object_detection.yaml
+[0.196s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/ffmpeg.yaml
+[0.197s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/object_detection.yaml
+[0.198s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/virtual.yaml
+[0.198s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zed.yaml
+[0.199s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zed2.yaml
+[0.200s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zed2i.yaml
+[0.201s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zedm.yaml
+[0.201s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zedx.yaml
+[0.202s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zedxm.yaml
+[0.202s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zedxone4k.yaml
+[0.203s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/config/zedxonegs.yaml
+[0.204s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/urdf/include/materials.urdf.xacro
+[0.205s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/urdf/zed_descr.urdf.xacro
+[0.205s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/urdf/zed_macro.urdf.xacro
+[0.206s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/launch/zed_camera.launch.py
+[0.207s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/ament_index/resource_index/package_run_dependencies/zed_wrapper
+[0.208s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/ament_index/resource_index/parent_prefix_path/zed_wrapper
+[0.209s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/environment/ament_prefix_path.sh
+[0.209s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/environment/ament_prefix_path.dsv
+[0.210s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/environment/path.sh
+[0.211s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/environment/path.dsv
+[0.211s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/local_setup.bash
+[0.212s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/local_setup.sh
+[0.213s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/local_setup.zsh
+[0.213s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/local_setup.dsv
+[0.214s] -- Symlinking: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/package.dsv
+[0.237s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/ament_index/resource_index/packages/zed_wrapper
+[0.237s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/cmake/zed_wrapperConfig.cmake
+[0.237s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/cmake/zed_wrapperConfig-version.cmake
+[0.239s] -- Up-to-date symlink: /home/user/vision_ws/install/zed_wrapper/share/zed_wrapper/package.xml
+[0.244s] Invoked command in '/home/user/vision_ws/build/zed_wrapper' returned '0': CMAKE_PREFIX_PATH=/home/user/vision_ws/install/zed_components:/home/user/vision_ws/install/zed_ros2:/home/user/vision_ws/install/zed_wrapper:/home/user/autorover_ws/install/zed_components:/home/user/autorover_ws/install/mavros_extras:/home/user/autorover_ws/install/mavros:/home/user/autorover_ws/install/mavros_msgs:/home/user/autorover_ws/install/libmavconn:/home/user/autorover_ws/install/autorover_bringup:/opt/ros/humble /usr/bin/cmake --install /home/user/vision_ws/build/zed_wrapper
