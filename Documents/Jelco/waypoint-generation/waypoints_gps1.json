@@ -1,0 +1,115 @@
+{
+  "waypoints": [
+    {
+      "latitude": -25.3837890625,
+      "longitude": 28.376981735229492,
+      "altitude": 1152.73583984375
+    },
+    {
+      "latitude": -25.38378143310547,
+      "longitude": 28.37697410583496,
+      "altitude": 1152.5299072265625
+    },
+    {
+      "latitude": -25.383766174316406,
+      "longitude": 28.3769588470459,
+      "altitude": 1152.0880126953125
+    },
+    {
+      "latitude": -25.383731842041016,
+      "longitude": 28.37691879272461,
+      "altitude": 1151.046142578125
+    },
+    {
+      "latitude": -25.38369369506836,
+      "longitude": 28.376867294311523,
+      "altitude": 1149.6611328125
+    }
+  ],
+  "metadata": {
+    "base_position": {
+      "has_fix": true,
+      "latitude": -25.3838114,
+      "longitude": 28.3770166,
+      "altitude": 1151.714,
+      "gnss_mode": 3,
+      "gnss_status": 2,
+      "timestamp_ns": 1759914847000000000
+    },
+    "camera_pose": {
+      "rotation": {
+        "pitch": 0.12343484908342361,
+        "yaw": 0.18704351782798767,
+        "roll": -1.5818926095962524
+      },
+      "heading_deg": -90.63577017280129
+    },
+    "capture_timestamp": 1759914847,
+    "capture_time": "2025-10-08 11:14:07",
+    "total_waypoints": 5,
+    "valid_waypoints": 5,
+    "source": "centerline_extraction",
+    "depth_mode": "actual",
+    "invalid_depth_count": 0,
+    "sorted_by": "depth_m_ascending",
+    "heading_source": "roll",
+    "heading_formula": "180 - roll"
+  },
+  "waypoints_detailed": [
+    {
+      "waypoint_id": 0,
+      "x_pixel": 838.2193316175238,
+      "y_pixel": 782.8534187757992,
+      "latitude": -25.3837890625,
+      "longitude": 28.376981735229492,
+      "altitude": 1152.73583984375,
+      "depth_m": 4.225835800170898,
+      "distance_2d_m": 4.267819018515744,
+      "depth_source": "actual"
+    },
+    {
+      "waypoint_id": 1,
+      "x_pixel": 871.7966203468064,
+      "y_pixel": 716.7716247228522,
+      "latitude": -25.38378143310547,
+      "longitude": 28.37697410583496,
+      "altitude": 1152.5299072265625,
+      "depth_m": 5.400814056396484,
+      "distance_2d_m": 5.425233004440069,
+      "depth_source": "actual"
+    },
+    {
+      "waypoint_id": 2,
+      "x_pixel": 891.1276877782028,
+      "y_pixel": 642.0331526252527,
+      "latitude": -25.383766174316406,
+      "longitude": 28.3769588470459,
+      "altitude": 1152.0880126953125,
+      "depth_m": 7.722559928894043,
+      "distance_2d_m": 7.740738533921496,
+      "depth_source": "actual"
+    },
+    {
+      "waypoint_id": 3,
+      "x_pixel": 894.5029739230381,
+      "y_pixel": 569.8566311378802,
+      "latitude": -25.383731842041016,
+      "longitude": 28.37691879272461,
+      "altitude": 1151.046142578125,
+      "depth_m": 13.178464889526367,
+      "distance_2d_m": 13.20544312120361,
+      "depth_source": "actual"
+    },
+    {
+      "waypoint_id": 4,
+      "x_pixel": 886.8088023251271,
+      "y_pixel": 531.386454406218,
+      "latitude": -25.38369369506836,
+      "longitude": 28.376867294311523,
+      "altitude": 1149.6611328125,
+      "depth_m": 19.833471298217773,
+      "distance_2d_m": 19.888561300543305,
+      "depth_source": "actual"
+    }
+  ]
+}

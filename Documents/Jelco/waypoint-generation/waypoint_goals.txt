@@ -1,0 +1,6 @@
+Goal: Generate waypoints for orangecube to navigate to
+
+- Generate waypoints and display them on map v
+- Input waypoints on map, so they can be used for navigation by orangecube
+- Go from waypoints on image to waypoints IRL
+- Compare orangecube gps accuracy to zed+GNSS

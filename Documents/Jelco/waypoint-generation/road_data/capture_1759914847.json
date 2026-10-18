@@ -1,0 +1,47 @@
+{
+  "timestamp": 1759914847,
+  "timestamp_iso": "2025-10-08 11:14:07",
+  "gps": {
+    "has_fix": true,
+    "latitude": -25.3838114,
+    "longitude": 28.3770166,
+    "altitude": 1151.714,
+    "gnss_mode": 3,
+    "gnss_status": 2,
+    "timestamp_ns": 1759914847000000000
+  },
+  "camera_pose": {
+    "rotation": {
+      "pitch": 0.12343484908342361,
+      "yaw": 0.18704351782798767,
+      "roll": -1.5818926095962524
+    },
+    "heading_deg": -90.63577017280129
+  },
+  "camera_calibration": {
+    "fx": 728.214599609375,
+    "fy": 728.214599609375,
+    "cx": 941.123046875,
+    "cy": 606.7609252929688,
+    "width": 1920,
+    "height": 1200
+  },
+  "image_resolution": {
+    "width": 1920,
+    "height": 1200
+  },
+  "depth_file": "depth_1759914847.npy",
+  "depth_available": true,
+  "detection_labels": [
+    "house",
+    "dirt road paved road",
+    "caravan",
+    "caravan"
+  ],
+  "detection_scores": [
+    0.6048721075057983,
+    0.414460688829422,
+    0.3860090374946594,
+    0.30437925457954407
+  ]
+}
