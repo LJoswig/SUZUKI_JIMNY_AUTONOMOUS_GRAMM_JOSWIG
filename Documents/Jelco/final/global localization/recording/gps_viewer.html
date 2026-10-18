@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GPS Route Viewer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        #map { height: 100vh; width: 100%; }
+        .controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            width: 250px;
+        }
+        .file-input, .index-controls { margin-bottom: 10px; }
+        .index-controls label, .index-controls input { display: block; margin-bottom: 5px; }
+        .index-controls input { width: 100px; padding: 3px; }
+        .info-box {
+            position: absolute;
+            bottom: 20px;
+            left: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            font-size: 14px;
+        }
+        /* Style for the marker toggles */
+        .toggle-controls { 
+            margin-top: 10px; 
+            padding-top: 10px; 
+            border-top: 1px solid #ccc;
+        }
+        .toggle-controls div {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="file-input">
+            <label>Load GPS Data:</label><br>
+            <input type="file" id="fileInput" accept=".json" />
+        </div>
+        <div id="fileInfo"></div>
+        
+        <div class="index-controls">
+            <strong>Route Segment:</strong>
+            <label>Start Index (Inclusive):</label>
+            <input type="number" id="startIndex" value="0" min="0" disabled>
+            <label>End Index (Exclusive):</label>
+            <input type="number" id="endIndex" value="" min="1" disabled>
+            <small id="maxIndexInfo" style="color: gray;">Total points: 0</small>
+        </div>
+        <div class="toggle-controls">
+            <strong>Toggle Markers:</strong>
+            <div>
+                <input type="checkbox" id="toggleStart" checked>
+                <label for="toggleStart">Show Start Marker</label>
+            </div>
+            <div>
+                <input type="checkbox" id="toggleEnd" checked>
+                <label for="toggleEnd">Show End Marker</label>
+            </div>
+        </div>
+        </div>
+    
+    <div class="info-box" id="infoBox">
+        Load a JSON file to view your route
+    </div>
+    
+    <div id="map"></div>
+    
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([-25.7479, 28.2293], 13);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        
+        let routeLayer = null;
+        let markerLayer = L.layerGroup().addTo(map); // Layer to manage all markers
+        let allPoints = []; // Stores the full set of points loaded from the file
+        let startMarker = null; 
+        let endMarker = null; // Global variables to hold the current markers
+
+        const fileInput = document.getElementById('fileInput');
+        const startIndexInput = document.getElementById('startIndex');
+        const endIndexInput = document.getElementById('endIndex');
+        const maxIndexInfo = document.getElementById('maxIndexInfo');
+        const toggleStart = document.getElementById('toggleStart');
+        const toggleEnd = document.getElementById('toggleEnd');
+        
+        // --- Event Listeners ---
+        
+        // File input handler
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const data = JSON.parse(event.target.result);
+                    processData(data); // New function to parse and store data
+                } catch (error) {
+                    alert('Error reading file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        // Event listener for index changes (route segment)
+        startIndexInput.addEventListener('change', redrawRoute);
+        endIndexInput.addEventListener('change', redrawRoute);
+
+        // Event listeners for marker toggles
+        toggleStart.addEventListener('change', toggleMarkerVisibility);
+        toggleEnd.addEventListener('change', toggleMarkerVisibility);
+
+        // --- Core Functions ---
+
+        function toggleMarkerVisibility() {
+            if (startMarker) {
+                if (toggleStart.checked) {
+                    markerLayer.addLayer(startMarker);
+                } else {
+                    markerLayer.removeLayer(startMarker);
+                }
+            }
+            if (endMarker) {
+                if (toggleEnd.checked) {
+                    markerLayer.addLayer(endMarker);
+                } else {
+                    markerLayer.removeLayer(endMarker);
+                }
+            }
+        }
+
+        function processData(data) {
+            // Detect file format and extract all points
+            allPoints = [];
+            if (data.waypoints) {
+                allPoints = data.waypoints.map(wp => [wp.latitude, wp.longitude]);
+            } else if (data.GNSS && Array.isArray(data.GNSS)) {
+                allPoints = data.GNSS.map(gps => {
+                    if (gps.coordinates) {
+                        return [gps.coordinates.latitude, gps.coordinates.longitude];
+                    } else if (gps.Geopoint) {
+                        return [gps.Geopoint.Latitude, gps.Geopoint.Longitude];
+                    }
+                }).filter(p => p);
+            } else if (Array.isArray(data)) {
+                allPoints = data.map(gps => {
+                    if (gps.latitude && gps.longitude) {
+                        return [gps.latitude, gps.longitude];
+                    } else if (gps.coordinates) {
+                        return [gps.coordinates.latitude, gps.coordinates.longitude];
+                    }
+                }).filter(p => p);
+            }
+
+            if (allPoints.length === 0) {
+                alert('No GPS points found in file');
+                startIndexInput.disabled = true;
+                endIndexInput.disabled = true;
+                maxIndexInfo.textContent = 'Total points: 0';
+                return;
+            }
+
+            // Update controls with max index info
+            startIndexInput.disabled = false;
+            endIndexInput.disabled = false;
+            startIndexInput.value = 0;
+            endIndexInput.value = allPoints.length; // Set default end to length (exclusive)
+            endIndexInput.max = allPoints.length; 
+            maxIndexInfo.textContent = `Total points: ${allPoints.length} (Max Index: ${allPoints.length - 1})`;
+            
+            // Ensure toggles are checked by default when loading new data
+            toggleStart.checked = true;
+            toggleEnd.checked = true;
+
+            redrawRoute(); // Draw the full route initially
+        }
+        
+        function redrawRoute() {
+            // Remove previous route and markers
+            if (routeLayer) {
+                map.removeLayer(routeLayer);
+            }
+            markerLayer.clearLayers(); // Clears all existing markers
+            startMarker = null; 
+            endMarker = null;
+
+            const totalPoints = allPoints.length;
+            if (totalPoints === 0) return;
+
+            // Get user-defined start and end indices
+            let start = parseInt(startIndexInput.value) || 0;
+            let end = parseInt(endIndexInput.value) || totalPoints;
+
+            // Input validation and clamping
+            start = Math.max(0, start);
+            start = Math.min(start, totalPoints); // Start can be totalPoints only if end is totalPoints
+            
+            end = Math.max(1, end); 
+            end = Math.min(end, totalPoints); 
+            
+            // Ensure end > start (if possible)
+            if (end <= start && start < totalPoints) {
+                end = start + 1;
+            } else if (end <= start && start === totalPoints) {
+                // If start is max, the list is empty, but we clamp start earlier
+                start = totalPoints - 1;
+                end = totalPoints;
+            }
+            // Re-apply to inputs
+            startIndexInput.value = start;
+            endIndexInput.value = end;
+
+            // Apply the slice to get the subset of points
+            const points = allPoints.slice(start, end);
+            
+            if (points.length === 0) {
+                document.getElementById('infoBox').innerHTML = '<strong>Route Info:</strong><br>No points in selected range.';
+                return;
+            }
+
+            // --- Visualization ---
+            
+            // Draw route
+            routeLayer = L.polyline(points, {
+                color: '#2196F3',
+                weight: 4,
+                opacity: 0.8
+            }).addTo(map);
+            
+            // 1. Create Start Marker
+            startMarker = L.marker(points[0], {
+                icon: L.divIcon({
+                    className: 'custom-marker',
+                    html: '<div style="background: #4CAF50; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid white;">S</div>',
+                    iconSize: [30, 30]
+                })
+            }).bindPopup(`Start (Original Index: ${start})`);
+            
+            // 2. Create End Marker
+            endMarker = L.marker(points[points.length - 1], {
+                icon: L.divIcon({
+                    className: 'custom-marker',
+                    html: '<div style="background: #F44336; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid white;">E</div>',
+                    iconSize: [30, 30]
+                })
+            }).bindPopup(`End (Original Index: ${end - 1})`);
+            
+            // 3. Apply current toggle visibility (add to map only if checked)
+            if (toggleStart.checked) {
+                markerLayer.addLayer(startMarker);
+            }
+            if (toggleEnd.checked) {
+                markerLayer.addLayer(endMarker);
+            }
+            
+            // Fit map to route 
+            if (routeLayer.getBounds().isValid()) {
+                map.fitBounds(routeLayer.getBounds(), { padding: [50, 50] });
+            }
+            
+            // Calculate distance
+            let totalDistance = 0;
+            for (let i = 1; i < points.length; i++) {
+                totalDistance += map.distance(points[i-1], points[i]);
+            }
+            
+            // Update info
+            document.getElementById('infoBox').innerHTML = `
+                <strong>Route Info:</strong><br>
+                Points: ${points.length} (Indices: ${start} to ${end - 1} of ${totalPoints - 1})<br>
+                Distance: ${(totalDistance / 1000).toFixed(2)} km
+            `;
+            
+            document.getElementById('fileInfo').innerHTML = `
+                <div style="color: green; margin-top: 5px;">✓ Route segment loaded</div>
+            `;
+        }
+    </script>
+</body>
+</html>

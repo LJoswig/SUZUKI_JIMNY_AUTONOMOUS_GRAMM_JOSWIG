@@ -1,0 +1,84 @@
+{
+  "GNSS": [
+    {
+      "ts": 1761839835000000000,
+      "coordinates": {
+        "latitude": -25.3836211,
+        "longitude": 28.3773364,
+        "altitude": 1151.715
+      },
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1761839836000000000,
+      "coordinates": {
+        "latitude": -25.3836211,
+        "longitude": 28.3773364,
+        "altitude": 1151.714
+      },
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1761839837000000000,
+      "coordinates": {
+        "latitude": -25.3836211,
+        "longitude": 28.3773363,
+        "altitude": 1151.715
+      },
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1761839838000000000,
+      "coordinates": {
+        "latitude": -25.3836211,
+        "longitude": 28.3773363,
+        "altitude": 1151.716
+      },
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1761839839000000000,
+      "coordinates": {
+        "latitude": -25.3836211,
+        "longitude": 28.3773363,
+        "altitude": 1151.717
+      },
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1761839840000000000,
+      "coordinates": {
+        "latitude": -25.383621,
+        "longitude": 28.3773363,
+        "altitude": 1151.733
+      },
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1761839841000000000,
+      "coordinates": {
+        "latitude": -25.3836209,
+        "longitude": 28.3773362,
+        "altitude": 1151.745
+      },
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1761839842000000000,
+      "coordinates": {
+        "latitude": -25.3836209,
+        "longitude": 28.3773362,
+        "altitude": 1151.747
+      },
+      "mode": 3,
+      "status": 2
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "GNSS": [
+    {
+      "ts": 1761839825000000000,
+      "coordinates": {
+        "latitude": -25.3836213,
+        "longitude": 28.3773366,
+        "altitude": 1151.729
+      },
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1761839826000000000,
+      "coordinates": {
+        "latitude": -25.3836213,
+        "longitude": 28.3773366,
+        "altitude": 1151.723
+      },
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1761839827000000000,
+      "coordinates": {
+        "latitude": -25.3836212,
+        "longitude": 28.3773366,
+        "altitude": 1151.727
+      },
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1761839828000000000,
+      "coordinates": {
+        "latitude": -25.3836212,
+        "longitude": 28.3773365,
+        "altitude": 1151.731
+      },
+      "mode": 3,
+      "status": 2
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "GNSS": [
+    {
+      "ts": 1760528183000000000,
+      "coordinates": {
+        "latitude": -25.3844936,
+        "longitude": 28.3764228,
+        "altitude": 1152.414
+      },
+      "position_covariance": [
+        1.4018559999999998,
+        0.0,
+        0.0,
+        0.0,
+        1.6103609999999997,
+        0.0,
+        0.0,
+        0.0,
+        3.250809
+      ],
+      "longitude_std": 1.184,
+      "latitude_std": 1.269,
+      "altitude_std": 1.803,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528184000000000,
+      "coordinates": {
+        "latitude": -25.3844994,
+        "longitude": 28.3764096,
+        "altitude": 1152.413
+      },
+      "position_covariance": [
+        1.4018559999999998,
+        0.0,
+        0.0,
+        0.0,
+        1.6103609999999997,
+        0.0,
+        0.0,
+        0.0,
+        3.247204
+      ],
+      "longitude_std": 1.184,
+      "latitude_std": 1.269,
+      "altitude_std": 1.802,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528185000000000,
+      "coordinates": {
+        "latitude": -25.3845051,
+        "longitude": 28.3763959,
+        "altitude": 1152.398
+      },
+      "position_covariance": [
+        1.4018559999999998,
+        0.0,
+        0.0,
+        0.0,
+        1.6103609999999997,
+        0.0,
+        0.0,
+        0.0,
+        3.243601
+      ],
+      "longitude_std": 1.184,
+      "latitude_std": 1.269,
+      "altitude_std": 1.801,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528186000000000,
+      "coordinates": {
+        "latitude": -25.3845103,
+        "longitude": 28.3763816,
+        "altitude": 1152.37
+      },
+      "position_covariance": [
+        1.4018559999999998,
+        0.0,
+        0.0,
+        0.0,
+        1.6129,
+        0.0,
+        0.0,
+        0.0,
+        3.24
+      ],
+      "longitude_std": 1.184,
+      "latitude_std": 1.27,
+      "altitude_std": 1.8,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528187000000000,
+      "coordinates": {
+        "latitude": -25.3845147,
+        "longitude": 28.3763667,
+        "altitude": 1152.373
+      },
+      "position_covariance": [
+        1.4520250000000001,
+        0.0,
+        0.0,
+        0.0,
+        1.6848040000000002,
+        0.0,
+        0.0,
+        0.0,
+        3.24
+      ],
+      "longitude_std": 1.205,
+      "latitude_std": 1.298,
+      "altitude_std": 1.8,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528188000000000,
+      "coordinates": {
+        "latitude": -25.3845196,
+        "longitude": 28.376352,
+        "altitude": 1152.349
+      },
+      "position_covariance": [
+        1.459264,
+        0.0,
+        0.0,
+        0.0,
+        1.819801,
+        0.0,
+        0.0,
+        0.0,
+        3.236401
+      ],
+      "longitude_std": 1.208,
+      "latitude_std": 1.349,
+      "altitude_std": 1.799,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528189000000000,
+      "coordinates": {
+        "latitude": -25.3845245,
+        "longitude": 28.3763379,
+        "altitude": 1152.349
+      },
+      "position_covariance": [
+        1.4161,
+        0.0,
+        0.0,
+        0.0,
+        1.7056360000000002,
+        0.0,
+        0.0,
+        0.0,
+        3.2328040000000002
+      ],
+      "longitude_std": 1.19,
+      "latitude_std": 1.306,
+      "altitude_std": 1.798,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528190000000000,
+      "coordinates": {
+        "latitude": -25.3845291,
+        "longitude": 28.3763239,
+        "altitude": 1152.326
+      },
+      "position_covariance": [
+        1.418481,
+        0.0,
+        0.0,
+        0.0,
+        1.7056360000000002,
+        0.0,
+        0.0,
+        0.0,
+        3.2292089999999996
+      ],
+      "longitude_std": 1.191,
+      "latitude_std": 1.306,
+      "altitude_std": 1.797,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528191000000000,
+      "coordinates": {
+        "latitude": -25.3845337,
+        "longitude": 28.3763097,
+        "altitude": 1152.328
+      },
+      "position_covariance": [
+        1.418481,
+        0.0,
+        0.0,
+        0.0,
+        1.7056360000000002,
+        0.0,
+        0.0,
+        0.0,
+        3.225616
+      ],
+      "longitude_std": 1.191,
+      "latitude_std": 1.306,
+      "altitude_std": 1.796,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528192000000000,
+      "coordinates": {
+        "latitude": -25.3845385,
+        "longitude": 28.3762955,
+        "altitude": 1152.324
+      },
+      "position_covariance": [
+        1.418481,
+        0.0,
+        0.0,
+        0.0,
+        1.7056360000000002,
+        0.0,
+        0.0,
+        0.0,
+        3.222025
+      ],
+      "longitude_std": 1.191,
+      "latitude_std": 1.306,
+      "altitude_std": 1.795,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528193000000000,
+      "coordinates": {
+        "latitude": -25.3845436,
+        "longitude": 28.3762815,
+        "altitude": 1152.331
+      },
+      "position_covariance": [
+        1.4161,
+        0.0,
+        0.0,
+        0.0,
+        1.708249,
+        0.0,
+        0.0,
+        0.0,
+        3.218436
+      ],
+      "longitude_std": 1.19,
+      "latitude_std": 1.307,
+      "altitude_std": 1.794,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528194000000000,
+      "coordinates": {
+        "latitude": -25.384549,
+        "longitude": 28.3762672,
+        "altitude": 1152.343
+      },
+      "position_covariance": [
+        1.4161,
+        0.0,
+        0.0,
+        0.0,
+        1.708249,
+        0.0,
+        0.0,
+        0.0,
+        3.218436
+      ],
+      "longitude_std": 1.19,
+      "latitude_std": 1.307,
+      "altitude_std": 1.794,
+      "mode": 3,
+      "status": 2
+    },
+    {
+      "ts": 1760528195000000000,
+      "coordinates": {
+        "latitude": -25.3845551,
+        "longitude": 28.3762527,
+        "altitude": 1152.347
+      },
+      "position_covariance": [
+        1.420864,
+        0.0,
+        0.0,
+        0.0,
+        1.7056360000000002,
+        0.0,
+        0.0,
+        0.0,
+        3.2148489999999996
+      ],
+      "longitude_std": 1.192,
+      "latitude_std": 1.306,
+      "altitude_std": 1.793,
+      "mode": 3,
+      "status": 2
+    }
+  ]
+}

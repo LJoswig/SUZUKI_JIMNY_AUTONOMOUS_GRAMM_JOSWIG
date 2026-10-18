@@ -1,0 +1,76 @@
+{
+  "GNSS": [
+    {
+      "ts": 1760527024000000000,
+      "coordinates": {
+        "latitude": -25.3836412,
+        "longitude": 28.3772216,
+        "altitude": 1160.894
+      },
+      "position_covariance": [
+        0.6400000000000001,
+        0.0,
+        0.0,
+        0.0,
+        0.6400000000000001,
+        0.0,
+        0.0,
+        0.0,
+        2.374681
+      ],
+      "longitude_std": 0.8,
+      "latitude_std": 0.8,
+      "altitude_std": 1.541,
+      "mode": 3,
+      "status": 1
+    },
+    {
+      "ts": 1760527025000000000,
+      "coordinates": {
+        "latitude": -25.383641,
+        "longitude": 28.3772216,
+        "altitude": 1160.785
+      },
+      "position_covariance": [
+        24.176889,
+        0.0,
+        0.0,
+        0.0,
+        33.756099999999996,
+        0.0,
+        0.0,
+        0.0,
+        2.387025
+      ],
+      "longitude_std": 4.917,
+      "latitude_std": 5.81,
+      "altitude_std": 1.545,
+      "mode": 3,
+      "status": 1
+    },
+    {
+      "ts": 1760527026000000000,
+      "coordinates": {
+        "latitude": -25.3836409,
+        "longitude": 28.3772216,
+        "altitude": 1160.676
+      },
+      "position_covariance": [
+        24.176889,
+        0.0,
+        0.0,
+        0.0,
+        33.756099999999996,
+        0.0,
+        0.0,
+        0.0,
+        2.3994009999999997
+      ],
+      "longitude_std": 4.917,
+      "latitude_std": 5.81,
+      "altitude_std": 1.549,
+      "mode": 3,
+      "status": 1
+    }
+  ]
+}

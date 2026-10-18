@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GPS Recorder - Live Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: Arial, sans-serif; 
+            overflow: hidden;
+        }
+        #map { 
+            height: 100vh; 
+            width: 100%; 
+        }
+        .info-panel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            min-width: 280px;
+            font-size: 14px;
+        }
+        .info-panel h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            border-bottom: 2px solid #F44336;
+            padding-bottom: 5px;
+            color: #F44336;
+        }
+        .recording-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #F44336;
+            animation: pulse 1.5s infinite;
+            margin-right: 8px;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .info-row {
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #555;
+        }
+        .info-value {
+            color: #000;
+            font-family: monospace;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .status-ok { background: #4CAF50; }
+        .status-waiting { background: #FFC107; }
+        .status-error { background: #F44336; }
+        .controls {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+        .checkbox-group {
+            margin: 8px 0;
+        }
+        .stats-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+        }
+        .stat-item {
+            margin: 5px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-panel">
+        <h3>
+            <span class="recording-indicator"></span>
+            GPS RECORDING
+        </h3>
+        
+        <div class="info-row">
+            <span class="info-label">Status:</span>
+            <span>
+                <span class="status-indicator" id="statusIndicator"></span>
+                <span id="statusText">Connecting...</span>
+            </span>
+        </div>
+        
+        <div class="info-row">
+            <span class="info-label">Heading:</span>
+            <span class="info-value" id="heading">--</span>
+        </div>
+        
+        <div class="info-row">
+            <span class="info-label">Position:</span>
+            <span class="info-value" id="position">--, --</span>
+        </div>
+        
+        <div class="info-row">
+            <span class="info-label">Speed:</span>
+            <span class="info-value" id="speed">--</span>
+        </div>
+        
+        <div class="stats-section">
+            <strong>Recording Statistics:</strong>
+            <div class="stat-item">Points Received: <span id="pointsReceived">0</span></div>
+            <div class="stat-item">Points Saved: <span id="pointsSaved">0</span></div>
+            <div class="stat-item">Recording Time: <span id="recordingTime">0:00</span></div>
+            <div class="stat-item">Update Rate: <span id="updateRate">-- Hz</span></div>
+        </div>
+        
+        <div class="controls">
+            <strong>Display Options:</strong>
+            <div class="checkbox-group">
+                <input type="checkbox" id="followCar" checked>
+                <label for="followCar">Follow Car</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="showTrail" checked>
+                <label for="showTrail">Show Route Trail</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="showWaypoints" checked>
+                <label for="showWaypoints">Show 5m Projection</label>
+            </div>
+        </div>
+    </div>
+    
+    <div id="map"></div>
+    
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([-25.7479, 28.2293], 16);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        
+        // Layers
+        let currentPositionMarker = null;
+        let waypointLineLayer = null;
+        let trailLayer = L.polyline([], {
+            color: '#2196F3',
+            weight: 3,
+            opacity: 0.7
+        }).addTo(map);
+        
+        // Update tracking
+        let lastUpdateTime = Date.now();
+        let updateCount = 0;
+        
+        // Get DOM elements
+        const statusIndicator = document.getElementById('statusIndicator');
+        const statusText = document.getElementById('statusText');
+        const headingEl = document.getElementById('heading');
+        const positionEl = document.getElementById('position');
+        const speedEl = document.getElementById('speed');
+        const pointsReceivedEl = document.getElementById('pointsReceived');
+        const pointsSavedEl = document.getElementById('pointsSaved');
+        const recordingTimeEl = document.getElementById('recordingTime');
+        const updateRateEl = document.getElementById('updateRate');
+        const followCarCheckbox = document.getElementById('followCar');
+        const showTrailCheckbox = document.getElementById('showTrail');
+        const showWaypointsCheckbox = document.getElementById('showWaypoints');
+        
+        // Update status indicator
+        function setStatus(status) {
+            statusIndicator.className = 'status-indicator status-' + status;
+            if (status === 'ok') {
+                statusText.textContent = 'Recording';
+            } else if (status === 'waiting') {
+                statusText.textContent = 'Waiting for GPS...';
+            } else {
+                statusText.textContent = 'Connection Error';
+            }
+        }
+        
+        // Format time as MM:SS
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Fetch data from server
+        async function fetchData() {
+            try {
+                const response = await fetch('http://localhost:8000/data');
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                updateMap(data);
+                
+                // Track update rate
+                updateCount++;
+                
+                return true;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setStatus('error');
+                return false;
+            }
+        }
+        
+        // Update map with new data
+        function updateMap(data) {
+            const { waypoints, position, heading, speed, trail, stats, timestamp } = data;
+            
+            // Check if we have valid data
+            if (!position) {
+                setStatus('waiting');
+                return;
+            }
+            
+            setStatus('ok');
+            
+            // Update info panel
+            if (heading !== null && heading !== undefined) {
+                headingEl.textContent = heading.toFixed(1) + '°';
+            } else {
+                headingEl.textContent = '-- (need movement)';
+            }
+            
+            positionEl.textContent = position.latitude.toFixed(6) + ', ' + position.longitude.toFixed(6);
+            speedEl.textContent = (speed * 3.6).toFixed(1) + ' km/h';
+            
+            // Update statistics
+            if (stats) {
+                pointsReceivedEl.textContent = stats.points_received;
+                pointsSavedEl.textContent = stats.points_saved;
+                recordingTimeEl.textContent = formatTime(stats.recording_time);
+            }
+            
+            // Update current position marker
+            const currentLatLng = [position.latitude, position.longitude];
+            
+            if (currentPositionMarker) {
+                currentPositionMarker.setLatLng(currentLatLng);
+            } else {
+                currentPositionMarker = L.marker(currentLatLng, {
+                    icon: L.divIcon({
+                        className: 'car-marker',
+                        html: `<div style="
+                            background: #F44336;
+                            color: white;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: bold;
+                            border: 3px solid white;
+                            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+                        ">●</div>`,
+                        iconSize: [28, 28]
+                    }),
+                    zIndexOffset: 1000
+                }).addTo(map);
+                currentPositionMarker.bindPopup('Current Position');
+            }
+            
+            // Update waypoint projection (5m ahead)
+            if (waypointLineLayer) {
+                map.removeLayer(waypointLineLayer);
+                waypointLineLayer = null;
+            }
+            
+            if (showWaypointsCheckbox.checked && waypoints && waypoints.length > 0) {
+                const waypointLatLngs = waypoints.map(wp => [wp.latitude, wp.longitude]);
+                
+                // Create layer group
+                waypointLineLayer = L.layerGroup();
+                
+                // Draw line
+                L.polyline(waypointLatLngs, {
+                    color: '#4CAF50',
+                    weight: 4,
+                    opacity: 0.8,
+                    dashArray: '10, 5'
+                }).addTo(waypointLineLayer);
+                
+                // Add markers
+                waypoints.forEach((wp, index) => {
+                    L.circleMarker([wp.latitude, wp.longitude], {
+                        radius: 4,
+                        fillColor: '#4CAF50',
+                        color: 'white',
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    }).addTo(waypointLineLayer).bindPopup(`${index}m ahead`);
+                });
+                
+                waypointLineLayer.addTo(map);
+            }
+            
+            // Update route trail (NEVER DELETED - this is the full recorded route!)
+            if (showTrailCheckbox.checked && trail && trail.length > 0) {
+                const trailLatLngs = trail.map(pt => [pt.latitude, pt.longitude]);
+                trailLayer.setLatLngs(trailLatLngs);
+                
+                if (!map.hasLayer(trailLayer)) {
+                    trailLayer.addTo(map);
+                }
+            } else {
+                if (map.hasLayer(trailLayer)) {
+                    map.removeLayer(trailLayer);
+                }
+            }
+            
+            // Follow car if enabled
+            if (followCarCheckbox.checked) {
+                map.setView(currentLatLng, map.getZoom());
+            }
+        }
+        
+        // Calculate and display update rate
+        function updateUpdateRate() {
+            const now = Date.now();
+            const elapsed = (now - lastUpdateTime) / 1000;
+            const rate = updateCount / elapsed;
+            updateRateEl.textContent = rate.toFixed(1) + ' Hz';
+            
+            // Reset counters
+            lastUpdateTime = now;
+            updateCount = 0;
+        }
+        
+        // Start fetching data
+        setStatus('waiting');
+        setInterval(fetchData, 100);  // Fetch at 10 Hz
+        
+        // Update rate display every 2 seconds
+        setInterval(updateUpdateRate, 2000);
+        
+        // Checkbox event listeners
+        showTrailCheckbox.addEventListener('change', () => {
+            if (!showTrailCheckbox.checked && map.hasLayer(trailLayer)) {
+                map.removeLayer(trailLayer);
+            }
+        });
+        
+        showWaypointsCheckbox.addEventListener('change', () => {
+            if (!showWaypointsCheckbox.checked && waypointLineLayer) {
+                map.removeLayer(waypointLineLayer);
+                waypointLineLayer = null;
+            }
+        });
+        
+        console.log('GPS Recorder initialized');
+        console.log('Fetching data from http://localhost:8000/data');
+    </script>
+</body>
+</html>
