@@ -27,7 +27,7 @@ from gps_msgs.msg import GPSFix
 from sensor_msgs.msg import Imu
 from std_msgs.msg import Float32
 from geopy.distance import geodesic
-from zed_capture import ZEDCAMERA
+from .zed_capture import ZEDCAMERA
 import csv
 import os
 from datetime import datetime
