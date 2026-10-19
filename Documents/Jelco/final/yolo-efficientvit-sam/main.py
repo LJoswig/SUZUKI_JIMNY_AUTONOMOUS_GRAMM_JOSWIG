@@ -34,7 +34,11 @@ from utils.sam_utils import (
 )
 from utils.warmup import warmup_engines
 from utils.visualization import create_output_image
-from utils.centerline import extract_centerline
+from utils.centerline import (
+    TemporalCenterlineKalmanFilter,
+    TemporalCenterlineSmoother,
+    extract_centerline,
+)
 from utils.zed_camera import ZEDCamera
 
 
@@ -181,6 +185,16 @@ class RealtimeRoadSegmentation:
         # Detection state
         self.frame_counter = 0
         self.current_detections = None
+        self.centerline_smoother = TemporalCenterlineSmoother(
+            alpha=CENTERLINE_TEMPORAL_ALPHA
+        )
+        self.centerline_kalman_filter = TemporalCenterlineKalmanFilter(
+            process_noise=CENTERLINE_KALMAN_PROCESS_NOISE,
+            measurement_noise=CENTERLINE_KALMAN_MEASUREMENT_NOISE,
+            max_gap_seconds=CENTERLINE_KALMAN_MAX_GAP_SECONDS,
+        )
+        if CENTERLINE_TEMPORAL_FILTER_TYPE not in ("ema", "kalman"):
+            raise ValueError("CENTERLINE_TEMPORAL_FILTER_TYPE must be 'ema' or 'kalman'")
         
         # PRE-ALLOCATE BUFFERS (avoid repeated allocations)
         self.processing_buffer = np.zeros((self.processing_height, self.processing_width, 3), dtype=np.uint8)
@@ -473,15 +487,29 @@ class RealtimeRoadSegmentation:
 
                 centerline_points = None
                 centerline_confidence = 0.0
-                centerline_time = 0.0
+                centerline_start = time.perf_counter()
                 if self.current_detections is not None:
-                    start = time.perf_counter()
                     centerline_points, centerline_confidence = extract_centerline(
-                        self.current_detections['centerline_mask']
+                        self.current_detections['centerline_mask'],
+                        use_curve_fit=CENTERLINE_USE_CURVE_FIT,
+                        fit_degree=CENTERLINE_POLYNOMIAL_DEGREE,
                     )
-                    centerline_time = time.perf_counter() - start
                     if centerline_confidence < 0.25:
                         centerline_points = None
+
+                if CENTERLINE_USE_TEMPORAL_FILTER:
+                    if CENTERLINE_TEMPORAL_FILTER_TYPE == "ema":
+                        centerline_points = self.centerline_smoother.update(
+                            centerline_points
+                        )
+                    else:
+                        centerline_points = self.centerline_kalman_filter.update(
+                            centerline_points, centerline_confidence
+                        )
+                else:
+                    self.centerline_smoother.reset()
+                    self.centerline_kalman_filter.reset()
+                centerline_time = time.perf_counter() - centerline_start
                 
                 # Prepare display image
                 if self.display_buffer is not None:

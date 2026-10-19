@@ -55,6 +55,16 @@ PROCESSING_HEIGHT = 400
 # Histogram equalization (improves detection in varying lighting)
 USE_HISTOGRAM_EQUALIZATION = True
 
+# Centerline curve fit: False uses the existing row-wise Gaussian smoothing.
+CENTERLINE_USE_CURVE_FIT = False
+CENTERLINE_POLYNOMIAL_DEGREE = 2  # Allowed: 1, 2, or 3
+CENTERLINE_USE_TEMPORAL_FILTER = False
+CENTERLINE_TEMPORAL_FILTER_TYPE = "ema"  # "ema" or "kalman"
+CENTERLINE_TEMPORAL_ALPHA = 0.35  # EMA only: lower is smoother, higher responds faster
+CENTERLINE_KALMAN_PROCESS_NOISE = 2500.0  # Acceleration variance, pixels^2 / second^4
+CENTERLINE_KALMAN_MEASUREMENT_NOISE = 25.0  # Position variance, pixels^2
+CENTERLINE_KALMAN_MAX_GAP_SECONDS = 0.5  # Reset rows unseen longer than this
+
 # ============================================================================
 # Visualization - OPTIMIZED
 # ============================================================================
