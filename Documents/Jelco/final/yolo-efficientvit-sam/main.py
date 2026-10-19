@@ -34,6 +34,7 @@ from utils.sam_utils import (
 )
 from utils.warmup import warmup_engines
 from utils.visualization import create_output_image
+from utils.centerline import extract_centerline
 from utils.zed_camera import ZEDCamera
 
 
@@ -72,12 +73,13 @@ class DetailedInferenceTimer:
         self.sam_decoder = deque(maxlen=window_size)
         self.sam_postprocess = deque(maxlen=window_size)
         
+        self.centerline = deque(maxlen=window_size)
         self.visualization = deque(maxlen=window_size)
         
         self.total_times = deque(maxlen=window_size)
     
     def add_measurement(self, frame_grab, downscale, yolo_pre, yolo_inf, yolo_post,
-                       sam_pre, sam_enc, sam_dec, sam_post, viz):
+                       sam_pre, sam_enc, sam_dec, sam_post, centerline, viz):
         self.frame_grab.append(frame_grab)
         self.downscale.append(downscale)
         self.yolo_preprocess.append(yolo_pre)
@@ -89,10 +91,11 @@ class DetailedInferenceTimer:
         self.sam_decoder.append(sam_dec)
         self.sam_postprocess.append(sam_post)
         
+        self.centerline.append(centerline)
         self.visualization.append(viz)
         
         total = (frame_grab + downscale + yolo_pre + yolo_inf + yolo_post + 
-                sam_pre + sam_enc + sam_dec + sam_post + viz)
+            sam_pre + sam_enc + sam_dec + sam_post + centerline + viz)
         self.total_times.append(total)
     
     def get_averages(self):
@@ -114,6 +117,7 @@ class DetailedInferenceTimer:
             'sam_postprocess': avg(self.sam_postprocess),
             'sam_total': avg(self.sam_preprocess) + avg(self.sam_encoder) + avg(self.sam_decoder) + avg(self.sam_postprocess),
             
+            'centerline': avg(self.centerline),
             'visualization': avg(self.visualization),
             'total': avg(self.total_times)
         }
@@ -336,6 +340,7 @@ class RealtimeRoadSegmentation:
         detections = {
             'boxes': full_res_boxes,
             'masks': full_res_masks,
+            'centerline_mask': np.any(masks, axis=0).astype(np.uint8) * 255,
             'confidences': confidences
         }
         
@@ -465,6 +470,18 @@ class RealtimeRoadSegmentation:
                 # Run detection on processing resolution
                 self.current_detections, timing = self.process_frame(self.processing_buffer)
                 yolo_pre, yolo_inf, yolo_post, sam_pre, sam_enc, sam_dec, sam_post = timing
+
+                centerline_points = None
+                centerline_confidence = 0.0
+                centerline_time = 0.0
+                if self.current_detections is not None:
+                    start = time.perf_counter()
+                    centerline_points, centerline_confidence = extract_centerline(
+                        self.current_detections['centerline_mask']
+                    )
+                    centerline_time = time.perf_counter() - start
+                    if centerline_confidence < 0.25:
+                        centerline_points = None
                 
                 # Prepare display image
                 if self.display_buffer is not None:
@@ -503,13 +520,28 @@ class RealtimeRoadSegmentation:
                 
                 # Draw detections
                 display_image, viz_time = self.draw_detections_fast(display_image, display_detections)
+
+                if centerline_points is not None and len(centerline_points) > 1:
+                    display_points = centerline_points * np.array([
+                        self.display_width / self.processing_width,
+                        self.display_height / self.processing_height,
+                    ], dtype=np.float32)
+                    display_points = np.rint(display_points).astype(np.int32)
+                    cv2.polylines(
+                        display_image,
+                        [display_points.reshape(-1, 1, 2)],
+                        isClosed=False,
+                        color=(255, 0, 255),
+                        thickness=3,
+                        lineType=cv2.LINE_AA,
+                    )
                 
                 # Record all timings
                 self.inference_timer.add_measurement(
                     frame_grab_time, downscale_time,
                     yolo_pre, yolo_inf, yolo_post,
                     sam_pre, sam_enc, sam_dec, sam_post,
-                    viz_time
+                    centerline_time, viz_time
                 )
                 
                 # Get timing info
@@ -588,6 +620,9 @@ class RealtimeRoadSegmentation:
                     
                     # Visualization and total
                     cv2.putText(display_image, f"Visualization: {avg_times['visualization']:.1f}ms", (10, y),
+                               cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 0), 1)
+                    y += spacing
+                    cv2.putText(display_image, f"Centerline: {avg_times['centerline']:.1f}ms", (10, y),
                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 0), 1)
                     y += spacing + 5
                     cv2.putText(display_image, f"TOTAL: {avg_times['total']:.1f}ms", (10, y),
