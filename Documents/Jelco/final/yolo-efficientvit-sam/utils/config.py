@@ -42,6 +42,11 @@ ZED_RESOLUTION = "SVGA"  # Options: "HD2K", "HD1080", "HD720", "SVGA", "AUTO"
 ZED_FPS = 30
 ZED_DEPTH_MODE = "NEURAL"  # Options: "NEURAL", "ULTRA", "QUALITY", "PERFORMANCE"
 
+# Select "svo" to replay a ZED recording, or "live" to use the camera.
+INPUT_MODE = "svo"
+SVO_FILE_PATH = "/home/user/Documents/testfahrt_20261020_181157.svo2"
+SVO_REAL_TIME_MODE =  True # False processes as fast as inference allows
+
 # ============================================================================
 # Processing Parameters - OPTIMIZED
 # ============================================================================
@@ -55,15 +60,21 @@ PROCESSING_HEIGHT = 400
 # Histogram equalization (improves detection in varying lighting)
 USE_HISTOGRAM_EQUALIZATION = True
 
-# Centerline curve fit: False uses the existing row-wise Gaussian smoothing.
-CENTERLINE_USE_CURVE_FIT = False
+# Fit a quadratic curve before temporal filtering.
+CENTERLINE_USE_CURVE_FIT = True
 CENTERLINE_POLYNOMIAL_DEGREE = 2  # Allowed: 1, 2, or 3
-CENTERLINE_USE_TEMPORAL_FILTER = False
-CENTERLINE_TEMPORAL_FILTER_TYPE = "ema"  # "ema" or "kalman"
-CENTERLINE_TEMPORAL_ALPHA = 0.35  # EMA only: lower is smoother, higher responds faster
-CENTERLINE_KALMAN_PROCESS_NOISE = 2500.0  # Acceleration variance, pixels^2 / second^4
-CENTERLINE_KALMAN_MEASUREMENT_NOISE = 25.0  # Position variance, pixels^2
-CENTERLINE_KALMAN_MAX_GAP_SECONDS = 0.5  # Reset rows unseen longer than this
+CENTERLINE_USE_TEMPORAL_FILTER = True
+CENTERLINE_TEMPORAL_FILTER_TYPE = "kalman"  # "ema" or "kalman"
+CENTERLINE_TEMPORAL_ALPHA = 0.35  # default 0.35 EMA only: lower is smoother, higher responds faster
+CENTERLINE_KALMAN_PROCESS_NOISE = 1000#2500.0  # Acceleration variance, pixels^2 / second^4
+CENTERLINE_KALMAN_MEASUREMENT_NOISE = 10.0  # Curve coefficient variance, pixels^2
+CENTERLINE_KALMAN_MAX_COAST_SECONDS = 1 #0.25
+CENTERLINE_KALMAN_MAX_POSITION_STD = 35.0  # Maximum predicted x uncertainty, pixels
+CENTERLINE_KALMAN_INNOVATION_GATE = 7.8#11.34  # 99% chi-square gate for 3 coefficients
+CENTERLINE_KALMAN_MIN_CONFIDENCE = 0.25
+CENTERLINE_KALMAN_MIN_VERTICAL_SPAN = 0.25
+CENTERLINE_KALMAN_MIN_POINTS = 8
+CENTERLINE_KALMAN_INITIAL_VELOCITY_VARIANCE = 2500.0
 
 # ============================================================================
 # Visualization - OPTIMIZED
@@ -86,6 +97,15 @@ DISPLAY_SCALE = 1.0
 OUTPUT_DIR = "road_captures"
 SAVE_DEPTH_MAPS = True
 SAVE_FULL_RESOLUTION = True  # Save at camera's native resolution
+SAVE_ANNOTATED_VIDEO = True
+ANNOTATED_VIDEO_PATH = os.path.join(OUTPUT_DIR, "road_segmentation.mp4")
+
+# SSH-friendly preview; forward this port in VS Code and open the printed URL.
+ENABLE_REMOTE_PREVIEW = True
+REMOTE_PREVIEW_HOST = "127.0.0.1"
+REMOTE_PREVIEW_PORT = 8765
+REMOTE_PREVIEW_JPEG_QUALITY = 75
+SHOW_LOCAL_WINDOW = False
 
 # ============================================================================
 # Warmup Settings

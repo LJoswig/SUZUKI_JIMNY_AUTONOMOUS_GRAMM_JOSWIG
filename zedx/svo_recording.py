@@ -27,9 +27,10 @@
 
 import sys
 import pyzed.sl as sl
-from signal import signal, SIGINT
-import argparse 
-import os 
+import argparse
+import os
+import subprocess
+from signal import signal, SIGINT, SIGTERM
 
 from datetime import datetime
 
@@ -43,16 +44,33 @@ DEFAULT_OUTPUT = os.path.join(
 )
 
 cam = sl.Camera()
+rosbag_process = None
+stop_requested = False
 
-#Handler to deal with CTRL+C properly
+# Defer shutdown to the main loop so both recordings can be finalized.
 def handler(signal_received, frame):
-    cam.disable_recording()
-    cam.close()
-    sys.exit(0)
+    global stop_requested
+    stop_requested = True
 
 signal(SIGINT, handler)
+signal(SIGTERM, handler)
+
+
+def stop_rosbag(process):
+    if process is None or process.poll() is not None:
+        return
+
+    print("Stopping ROS bag recording...")
+    process.send_signal(SIGINT)
+    try:
+        process.wait(timeout=15)
+    except subprocess.TimeoutExpired:
+        print("ROS bag did not stop cleanly; terminating it.")
+        process.terminate()
+        process.wait(timeout=5)
 
 def main(opt):
+    global rosbag_process
 
     init = sl.InitParameters()
     init.depth_mode = sl.DEPTH_MODE.NONE # Set configuration parameters for the ZED
@@ -60,21 +78,53 @@ def main(opt):
     status = cam.open(init) 
     if status > sl.ERROR_CODE.SUCCESS: 
         print("Camera Open", status, "Exit program.")
-        exit(1)
-        
-    recording_param = sl.RecordingParameters(opt.output_svo_file, sl.SVO_COMPRESSION_MODE.H265) # Enable recording with the filename specified in argument
-    err = cam.enable_recording(recording_param)
-    if err > sl.ERROR_CODE.SUCCESS:
-        print("Recording ZED : ", err)
-        exit(1)
+        return 1
 
-    print("SVO is Recording, use Ctrl-C to stop.") # Start recording SVO, stop with Ctrl-C command
-    frames_recorded = 0
+    recording_enabled = False
+    bag_output = os.path.splitext(os.path.abspath(opt.output_svo_file))[0] + "_rosbag"
+    try:
+        recording_param = sl.RecordingParameters(
+            opt.output_svo_file,
+            sl.SVO_COMPRESSION_MODE.H265,
+        )
+        err = cam.enable_recording(recording_param)
+        if err > sl.ERROR_CODE.SUCCESS:
+            raise RuntimeError(f"Failed to enable SVO recording: {err}")
+        recording_enabled = True
 
-    while True:
-        if cam.grab() == sl.ERROR_CODE.SUCCESS : # Check that a new image is successfully acquired
-            frames_recorded += 1
-            print("Frame count: " + str(frames_recorded), end="\r")
+        print(f"Starting ROS 2 bag recording to: {bag_output}")
+        rosbag_process = subprocess.Popen([
+            "ros2", "bag", "record", "--all", "--output", bag_output
+        ])
+
+        print("SVO and ROS 2 bag are recording. Use Ctrl-C to stop.")
+        frames_recorded = 0
+        while not stop_requested:
+            if rosbag_process.poll() is not None:
+                raise RuntimeError(
+                    f"ROS bag recorder exited with code {rosbag_process.returncode}"
+                )
+
+            if cam.grab() == sl.ERROR_CODE.SUCCESS:
+                frames_recorded += 1
+                print(f"Frame count: {frames_recorded}", end="\r", flush=True)
+            else:
+                print("\nCamera frame grab failed; stopping both recordings.")
+                break
+    finally:
+        try:
+            if recording_enabled:
+                cam.disable_recording()
+        finally:
+            try:
+                cam.close()
+            finally:
+                stop_rosbag(rosbag_process)
+                rosbag_process = None
+
+    print(f"\nSaved SVO: {opt.output_svo_file}")
+    print(f"Saved ROS 2 bag: {bag_output}")
+    return 0
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -87,7 +137,7 @@ if __name__ == "__main__":
     opt = parser.parse_args()
     if not opt.output_svo_file.endswith((".svo", ".svo2")):
         print("--output_svo_file parameter should be a .svo file but is not : ",opt.output_svo_file,"Exit program.")
-        exit()
-    main(opt)
+        sys.exit(2)
+    sys.exit(main(opt))
 
 

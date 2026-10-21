@@ -40,6 +40,8 @@ from utils.centerline import (
     extract_centerline,
 )
 from utils.zed_camera import ZEDCamera
+from utils.svo_camera import SVOReplayCamera
+from utils.mjpeg_preview import MJPEGPreviewServer
 
 
 class PerformanceMonitor:
@@ -142,9 +144,14 @@ class RealtimeRoadSegmentation:
         print("  ZED + YOLO + SAM Real-Time Road Segmentation [OPTIMIZED]")
         print("="*70 + "\n")
         
-        # Initialize ZED camera
-        print("Initializing camera...")
-        self.camera = ZEDCamera()
+        # Initialize the configured input source.
+        print(f"Initializing {INPUT_MODE} input...")
+        if INPUT_MODE == "live":
+            self.camera = ZEDCamera()
+        elif INPUT_MODE == "svo":
+            self.camera = SVOReplayCamera(SVO_FILE_PATH)
+        else:
+            raise ValueError("INPUT_MODE must be 'live' or 'svo'")
         cam_w, cam_h = self.camera.get_resolution()
         
         # Processing size (downscaled for speed)
@@ -177,6 +184,23 @@ class RealtimeRoadSegmentation:
         
         # Setup output directory
         os.makedirs(OUTPUT_DIR, exist_ok=True)
+        self.video_writer = None
+        if SAVE_ANNOTATED_VIDEO:
+            self.video_writer = cv2.VideoWriter(
+                ANNOTATED_VIDEO_PATH,
+                cv2.VideoWriter_fourcc(*"mp4v"),
+                self.camera.get_fps(),
+                (self.display_width, self.display_height),
+            )
+            if not self.video_writer.isOpened():
+                raise RuntimeError(f"Could not open output video: {ANNOTATED_VIDEO_PATH}")
+        self.preview_server = None
+        if ENABLE_REMOTE_PREVIEW:
+            self.preview_server = MJPEGPreviewServer(
+                REMOTE_PREVIEW_HOST,
+                REMOTE_PREVIEW_PORT,
+                REMOTE_PREVIEW_JPEG_QUALITY,
+            )
         
         # Performance monitoring
         self.fps_monitor = PerformanceMonitor()
@@ -191,7 +215,13 @@ class RealtimeRoadSegmentation:
         self.centerline_kalman_filter = TemporalCenterlineKalmanFilter(
             process_noise=CENTERLINE_KALMAN_PROCESS_NOISE,
             measurement_noise=CENTERLINE_KALMAN_MEASUREMENT_NOISE,
-            max_gap_seconds=CENTERLINE_KALMAN_MAX_GAP_SECONDS,
+            max_coast_seconds=CENTERLINE_KALMAN_MAX_COAST_SECONDS,
+            max_position_std=CENTERLINE_KALMAN_MAX_POSITION_STD,
+            innovation_gate_threshold=CENTERLINE_KALMAN_INNOVATION_GATE,
+            min_confidence=CENTERLINE_KALMAN_MIN_CONFIDENCE,
+            min_vertical_span_fraction=CENTERLINE_KALMAN_MIN_VERTICAL_SPAN,
+            min_points=CENTERLINE_KALMAN_MIN_POINTS,
+            initial_velocity_variance=CENTERLINE_KALMAN_INITIAL_VELOCITY_VARIANCE,
         )
         if CENTERLINE_TEMPORAL_FILTER_TYPE not in ("ema", "kalman"):
             raise ValueError("CENTERLINE_TEMPORAL_FILTER_TYPE must be 'ema' or 'kalman'")
@@ -451,12 +481,20 @@ class RealtimeRoadSegmentation:
     def run(self):
         """Main processing loop - OPTIMIZED"""
         print("\n" + "="*70)
-        print("Starting real-time processing...")
+        print("Starting road segmentation...")
+        if self.preview_server is not None:
+            self.preview_server.start()
+            print(
+                f"Remote preview: http://{REMOTE_PREVIEW_HOST}:{REMOTE_PREVIEW_PORT}/"
+            )
         print("\nControls:")
-        print("  'q' - Quit")
-        print("  's' - Save current frame + masks + depth")
-        print("  'p' - Show camera pose")
-        print("  't' - Toggle timing display")
+        if SHOW_LOCAL_WINDOW:
+            print("  'q' - Quit")
+            print("  's' - Save current frame + masks + depth")
+            print("  'p' - Show camera pose")
+            print("  't' - Toggle timing display")
+        else:
+            print("  Ctrl-C - Stop processing")
         print("="*70 + "\n")
         
         self.running = True
@@ -470,8 +508,15 @@ class RealtimeRoadSegmentation:
                 frame_grab_time = time.perf_counter() - start
                 
                 if not success:
-                    print("Failed to grab frame")
+                    if INPUT_MODE == "svo":
+                        print("End of SVO playback.")
+                    else:
+                        print("Failed to grab frame")
                     break
+
+                frame_timestamp = self.camera.get_timestamp_seconds()
+                if frame_timestamp is None:
+                    frame_timestamp = time.perf_counter()
                 
                 # Downscale ONCE to processing resolution - TIME THIS
                 start = time.perf_counter()
@@ -487,6 +532,7 @@ class RealtimeRoadSegmentation:
 
                 centerline_points = None
                 centerline_confidence = 0.0
+                centerline_status = TemporalCenterlineKalmanFilter.LOST
                 centerline_start = time.perf_counter()
                 if self.current_detections is not None:
                     centerline_points, centerline_confidence = extract_centerline(
@@ -494,21 +540,36 @@ class RealtimeRoadSegmentation:
                         use_curve_fit=CENTERLINE_USE_CURVE_FIT,
                         fit_degree=CENTERLINE_POLYNOMIAL_DEGREE,
                     )
-                    if centerline_confidence < 0.25:
-                        centerline_points = None
 
                 if CENTERLINE_USE_TEMPORAL_FILTER:
                     if CENTERLINE_TEMPORAL_FILTER_TYPE == "ema":
+                        if centerline_confidence < 0.25:
+                            centerline_points = None
                         centerline_points = self.centerline_smoother.update(
                             centerline_points
                         )
+                        centerline_status = (
+                            TemporalCenterlineKalmanFilter.OBSERVED
+                            if centerline_points is not None
+                            else TemporalCenterlineKalmanFilter.LOST
+                        )
                     else:
                         centerline_points = self.centerline_kalman_filter.update(
-                            centerline_points, centerline_confidence
+                            centerline_points,
+                            centerline_confidence,
+                            timestamp=frame_timestamp,
+                            image_height=self.processing_height,
+                            image_width=self.processing_width,
                         )
+                        centerline_status = self.centerline_kalman_filter.status
                 else:
                     self.centerline_smoother.reset()
                     self.centerline_kalman_filter.reset()
+                    centerline_status = (
+                        TemporalCenterlineKalmanFilter.OBSERVED
+                        if centerline_points is not None
+                        else TemporalCenterlineKalmanFilter.LOST
+                    )
                 centerline_time = time.perf_counter() - centerline_start
                 
                 # Prepare display image
@@ -555,14 +616,31 @@ class RealtimeRoadSegmentation:
                         self.display_height / self.processing_height,
                     ], dtype=np.float32)
                     display_points = np.rint(display_points).astype(np.int32)
+                    centerline_color = {
+                        TemporalCenterlineKalmanFilter.OBSERVED: (0, 255, 0),
+                        TemporalCenterlineKalmanFilter.COASTING: (255, 165, 0),
+                    }.get(centerline_status, (255, 0, 0))
                     cv2.polylines(
                         display_image,
                         [display_points.reshape(-1, 1, 2)],
                         isClosed=False,
-                        color=(255, 0, 255),
+                        color=centerline_color,
                         thickness=3,
                         lineType=cv2.LINE_AA,
                     )
+                cv2.putText(
+                    display_image,
+                    f"Centerline: {centerline_status.upper()}",
+                    (10, self.display_height - 15),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.6,
+                    (0, 255, 0) if centerline_status == TemporalCenterlineKalmanFilter.OBSERVED else (
+                        (255, 165, 0)
+                        if centerline_status == TemporalCenterlineKalmanFilter.COASTING
+                        else (255, 0, 0)
+                    ),
+                    2,
+                )
                 
                 # Record all timings
                 self.inference_timer.add_measurement(
@@ -658,10 +736,15 @@ class RealtimeRoadSegmentation:
                 
                 # Convert RGB to BGR for display
                 display_image_bgr = cv2.cvtColor(display_image, cv2.COLOR_RGB2BGR)
-                cv2.imshow("ZED Road Segmentation", display_image_bgr)
+                if self.video_writer is not None:
+                    self.video_writer.write(display_image_bgr)
+                if self.preview_server is not None:
+                    self.preview_server.publish(display_image_bgr)
+                if SHOW_LOCAL_WINDOW:
+                    cv2.imshow("Road Segmentation", display_image_bgr)
                 
                 # Handle keyboard
-                key = cv2.waitKey(1) & 0xFF
+                key = (cv2.waitKey(1) & 0xFF) if SHOW_LOCAL_WINDOW else -1
                 
                 if key == ord('q'):
                     break
@@ -700,7 +783,13 @@ class RealtimeRoadSegmentation:
         print("\nCleaning up...")
         self.running = False
         self.camera.close()
-        cv2.destroyAllWindows()
+        if self.video_writer is not None:
+            self.video_writer.release()
+            print(f"✓ Saved annotated video: {ANNOTATED_VIDEO_PATH}")
+        if self.preview_server is not None:
+            self.preview_server.close()
+        if SHOW_LOCAL_WINDOW:
+            cv2.destroyAllWindows()
         print("✓ Cleanup complete")
 
 

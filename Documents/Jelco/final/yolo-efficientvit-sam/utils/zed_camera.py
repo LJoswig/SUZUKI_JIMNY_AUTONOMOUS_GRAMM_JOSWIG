@@ -70,6 +70,7 @@ class ZEDCamera:
         camera_info = self.zed.get_camera_information()
         self.camera_width = camera_info.camera_configuration.resolution.width
         self.camera_height = camera_info.camera_configuration.resolution.height
+        self.camera_fps = camera_info.camera_configuration.fps
         
         # Get calibration
         calibration = camera_info.camera_configuration.calibration_parameters
@@ -129,6 +130,18 @@ class ZEDCamera:
     def get_resolution(self) -> Tuple[int, int]:
         """Get camera resolution (width, height)"""
         return self.camera_width, self.camera_height
+
+    def get_fps(self) -> float:
+        """Get the camera frame rate"""
+        return float(self.camera_fps)
+
+    def get_timestamp_seconds(self) -> Optional[float]:
+        """Get the capture timestamp for the most recently grabbed image."""
+        try:
+            timestamp = self.zed.get_timestamp(sl.TIME_REFERENCE.IMAGE)
+            return float(timestamp.get_nanoseconds()) * 1e-9
+        except Exception:
+            return None
     
     def get_calibration(self) -> Dict:
         """Get camera calibration parameters"""
