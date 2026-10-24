@@ -243,7 +243,9 @@ def run_follower(events, odometry, bag, follower, rate_hz):
     for t in grid:
         while next_event < len(events) and events[next_event][0] <= t:
             _, stamp, ground, pose, epoch, status = events[next_event]
-            if ground is not None:
+            if status == CenterlinePathMemory.LOST:
+                follower.clear_path()  # Same as the ROS node on an empty path
+            elif ground is not None:
                 follower.update_path(ground, pose, epoch, stamp, status)
             next_event += 1
         pose, epoch = odometry.at(t)
@@ -331,6 +333,49 @@ def summarize(rows, offset_deg, rate_hz):
     return lines
 
 
+def export_bag(events, bag_uri, out_uri):
+    """Write the bag's motion topics plus /centerline/path and /centerline/status as they
+    would have arrived live (image time + perception delay), for replaying into the ROS node.
+    """
+    import rosbag2_py
+    from rclpy.serialization import serialize_message
+    from std_msgs.msg import String
+    from utils.ros_publishers import build_path_message
+
+    reader = rosbag2_py.SequentialReader()
+    reader.open(rosbag2_py.StorageOptions(uri=bag_uri, storage_id="sqlite3"),
+                rosbag2_py.ConverterOptions("", ""))
+    types = {t.name: t.type for t in reader.get_all_topics_and_types()}
+    copied = [cfg.CENTERLINE_TOPIC_IMU_ATTITUDE, cfg.CENTERLINE_TOPIC_FEEDBACK_DATA,
+              cfg.CENTERLINE_TOPIC_STEERING_FEEDBACK, cfg.CENTERLINE_TOPIC_ACKERMANN_CMD]
+    records = []
+    while reader.has_next():
+        topic, payload, stamp_ns = reader.read_next()
+        if topic in copied:
+            records.append((stamp_ns, topic, payload))
+    for arrival, stamp, ground, _, _, status in events:
+        arrival_ns = int(arrival * 1e9)
+        status_message = String()
+        status_message.data = status
+        records.append((arrival_ns - 1000, cfg.CENTERLINE_TOPIC_STATUS, serialize_message(status_message)))
+        path = build_path_message(None if status == "lost" else ground, stamp, cfg.CENTERLINE_PATH_FRAME_ID)
+        records.append((arrival_ns, cfg.CENTERLINE_TOPIC_PATH, serialize_message(path)))
+    records.sort(key=lambda record: record[0])
+
+    writer = rosbag2_py.SequentialWriter()
+    writer.open(rosbag2_py.StorageOptions(uri=str(out_uri), storage_id="sqlite3"),
+                rosbag2_py.ConverterOptions("cdr", "cdr"))
+    topic_types = {name: types[name] for name in copied}
+    topic_types[cfg.CENTERLINE_TOPIC_STATUS] = "std_msgs/msg/String"
+    topic_types[cfg.CENTERLINE_TOPIC_PATH] = "nav_msgs/msg/Path"
+    for name, type_name in topic_types.items():
+        writer.create_topic(rosbag2_py.TopicMetadata(name=name, type=type_name, serialization_format="cdr"))
+    for stamp_ns, topic, payload in records:
+        writer.write(topic, payload, stamp_ns)
+    del writer
+    print(f"[export] wrote {len(records)} messages to {out_uri}")
+
+
 def write_outputs(rows, summary, out_dir, name, offset_deg):
     import csv
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -383,6 +428,8 @@ def main():
     parser.add_argument("--lookahead", type=float, default=cfg.FOLLOWER_LOOKAHEAD_DISTANCE)
     parser.add_argument("--steering-ratio", type=float, default=cfg.FOLLOWER_STEERING_RATIO)
     parser.add_argument("--max-steering-rate", type=float, default=cfg.FOLLOWER_MAX_STEERING_RATE_DEG_S)
+    parser.add_argument("--export-bag", default=None,
+                        help="also write a bag with motion topics + /centerline/* for replaying into the ROS node")
     parser.add_argument("--fusion-weight", type=float, default=cfg.CENTERLINE_PATH_FUSION_WEIGHT,
                         help="weight of a new observation in the path fusion; 1.0 = no fusion")
     args = parser.parse_args()
@@ -437,6 +484,8 @@ def main():
         f"> 0.5 m in {np.mean(jumps > 0.5):.1%} of frames; fusion rejected {memory.rejected_observations} observations",
     ] + summarize(rows, args.steering_offset_deg, cfg.FOLLOWER_RATE_HZ)
     paths = write_outputs(rows, summary, out_dir, name, args.steering_offset_deg)
+    if args.export_bag:
+        export_bag(events, args.bag, args.export_bag)
     print("\n".join(summary))
     print("\nwrote:", *paths, sep="\n  ")
 

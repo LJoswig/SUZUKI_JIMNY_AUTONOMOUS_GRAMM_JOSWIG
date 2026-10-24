@@ -96,6 +96,13 @@ class PurePursuitFollower:
         self.path_stamp = float(stamp)
         self.path_status = path_status
 
+    def clear_path(self):
+        """Forget the path, e.g. when perception reports the road as lost."""
+        self.path_points = None
+        self.path_pose = None
+        self.path_epoch = None
+        self.path_stamp = None
+
     def _path_in_base_link(self, pose, epoch):
         if self.path_pose is None:
             return self.path_points
@@ -122,13 +129,15 @@ class PurePursuitFollower:
         return ahead[index - 1] + fraction * (ahead[index] - ahead[index - 1])
 
     def _limit(self, target_deg, now):
-        target_deg = float(np.clip(target_deg, -self.max_steering_wheel_deg, self.max_steering_wheel_deg))
+        limit = self.max_steering_wheel_deg
+        target_deg = float(np.clip(target_deg, -limit, limit))
         if self.last_command_time is None:
             self.steering_wheel_deg = target_deg
         else:
             delta_time = min(max(now - self.last_command_time, 0.0), 0.5)
             max_step = self.max_steering_rate_deg_s * delta_time
-            self.steering_wheel_deg += float(np.clip(target_deg - self.steering_wheel_deg, -max_step, max_step))
+            step = np.clip(target_deg - self.steering_wheel_deg, -max_step, max_step)
+            self.steering_wheel_deg += float(step)
         self.last_command_time = now
         return self.steering_wheel_deg
 
