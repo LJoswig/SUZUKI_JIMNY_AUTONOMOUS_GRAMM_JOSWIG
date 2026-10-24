@@ -127,22 +127,49 @@ class GroundProjector:
 
 
 class CenterlinePathMemory:
-    """Keep the last observed centerline in the odom frame and replay it while it is not seen."""
+    """Keep the observed centerline in the odom frame, fuse new observations into it,
+    and replay it while the road is not seen.
+
+    Fusion works in the odom frame, so vehicle motion between frames is removed before
+    observations are compared. A new observation that disagrees with the stored path is
+    treated as a glitch, unless several consecutive ones agree with each other (the road
+    really changed, e.g. after a fork), in which case the stored path is replaced.
+    """
 
     OBSERVED = "observed"
     REMEMBERED = "remembered"
     LOST = "lost"
 
-    def __init__(self, max_memory_seconds=3.0, max_memory_distance=8.0, min_remaining_length=3.0):
+    def __init__(
+        self,
+        max_memory_seconds=3.0,
+        max_memory_distance=8.0,
+        min_remaining_length=3.0,
+        fusion_weight=1.0,
+        mismatch_distance=0.8,
+        mismatch_frames=2,
+        fusion_step=0.5,
+    ):
         if max_memory_seconds <= 0.0:
             raise ValueError("Path memory duration must be positive")
         if max_memory_distance <= 0.0:
             raise ValueError("Path memory distance must be positive")
         if min_remaining_length < 0.0:
             raise ValueError("Path memory remaining length must be non-negative")
+        if not 0.0 < fusion_weight <= 1.0:
+            raise ValueError("Path fusion weight must be in (0, 1]")
+        if mismatch_distance <= 0.0 or fusion_step <= 0.0:
+            raise ValueError("Path fusion distances must be positive")
+        if mismatch_frames < 1:
+            raise ValueError("Path fusion mismatch frames must be at least 1")
         self.max_memory_seconds = float(max_memory_seconds)
         self.max_memory_distance = float(max_memory_distance)
         self.min_remaining_length = float(min_remaining_length)
+        # Weight of a new observation; 1.0 replaces the stored path (no fusion).
+        self.fusion_weight = float(fusion_weight)
+        self.mismatch_distance = float(mismatch_distance)
+        self.mismatch_frames = int(mismatch_frames)
+        self.fusion_step = float(fusion_step)
         self.reset()
 
     def reset(self):
@@ -151,31 +178,95 @@ class CenterlinePathMemory:
         self.stored_epoch = None
         self.stored_timestamp = None
         self.last_recall_age = None
+        self.rejected_observations = 0
+        self._mismatched = []
+
+    def _lateral_difference(self, path_a, path_b):
+        """Median lateral distance of two base_link paths over their overlap, or None."""
+        start = max(path_a[0, 0], path_b[0, 0])
+        end = min(path_a[-1, 0], path_b[-1, 0])
+        if end - start < 2.0 * self.fusion_step:
+            return None
+        xs = np.arange(start, end, self.fusion_step)
+        difference = np.interp(xs, path_b[:, 0], path_b[:, 1]) - np.interp(xs, path_a[:, 0], path_a[:, 1])
+        return float(np.median(np.abs(difference)))
+
+    def _fuse(self, stored, observed, pose, epoch):
+        """Blend an observation into the stored path (both base_link, sorted by x)."""
+        difference = self._lateral_difference(stored, observed)
+        if difference is not None and difference > self.mismatch_distance:
+            previous = self._mismatched[-1] if self._mismatched else None
+            if previous is not None and previous[1] == epoch:
+                agreement = self._lateral_difference(inverse_transform_points(previous[0], pose), observed)
+                if agreement is None or agreement > self.mismatch_distance:
+                    self._mismatched = []
+            self._mismatched.append((transform_points(observed, pose), epoch))
+            if len(self._mismatched) < self.mismatch_frames:
+                self.rejected_observations += 1
+                return None
+            self._mismatched = []
+            return observed
+        self._mismatched = []
+
+        xs = np.arange(min(stored[0, 0], observed[0, 0]), max(stored[-1, 0], observed[-1, 0]), self.fusion_step)
+        in_stored = (xs >= stored[0, 0]) & (xs <= stored[-1, 0])
+        in_observed = (xs >= observed[0, 0]) & (xs <= observed[-1, 0])
+        stored_y = np.interp(xs, stored[:, 0], stored[:, 1])
+        observed_y = np.interp(xs, observed[:, 0], observed[:, 1])
+        fused_y = np.where(
+            in_stored & in_observed,
+            stored_y + self.fusion_weight * (observed_y - stored_y),
+            np.where(in_observed, observed_y, stored_y),
+        )
+        keep = in_stored | in_observed
+        return np.column_stack((xs[keep], fused_y[keep]))
 
     def store(self, ground_points, pose, epoch, timestamp):
-        """Remember base_link ground points observed at the given odom pose."""
+        """Fuse base_link ground points observed at the given odom pose into the stored path."""
         if ground_points is None or len(ground_points) < 2 or pose is None:
             return False
-        self.odom_points = transform_points(np.asarray(ground_points, dtype=np.float64), pose)
+        observed = np.asarray(ground_points, dtype=np.float64)
+        observed = observed[np.argsort(observed[:, 0])]
+        if self.fusion_weight < 1.0 and self._is_current(pose, epoch, timestamp):
+            stored = inverse_transform_points(self.odom_points, pose)
+            observed = self._fuse(stored[np.argsort(stored[:, 0])], observed, pose, epoch)
+            if observed is None:
+                return False
+        self.odom_points = transform_points(observed, pose)
         self.stored_pose = tuple(pose)
         self.stored_epoch = epoch
         self.stored_timestamp = float(timestamp)
         return True
 
-    def recall(self, pose, epoch, timestamp):
-        """Return the remembered path ahead of the vehicle in base_link, or None."""
-        self.last_recall_age = None
+    def _is_current(self, pose, epoch, timestamp):
         if self.odom_points is None or pose is None or epoch != self.stored_epoch:
-            return None
+            return False
         age = float(timestamp) - self.stored_timestamp
-        if age < 0.0 or age > self.max_memory_seconds:
-            return None
         travelled = math.hypot(pose[0] - self.stored_pose[0], pose[1] - self.stored_pose[1])
-        if travelled > self.max_memory_distance:
+        return 0.0 <= age <= self.max_memory_seconds and travelled <= self.max_memory_distance
+
+    def recall(self, pose, epoch, timestamp):
+        """Return the stored path ahead of the vehicle in base_link, or None."""
+        self.last_recall_age = None
+        if not self._is_current(pose, epoch, timestamp):
             return None
         ground = inverse_transform_points(self.odom_points, pose)
         ahead = ground[ground[:, 0] > 0.0]
         if len(ahead) < 2 or np.max(ahead[:, 0]) < self.min_remaining_length:
             return None
-        self.last_recall_age = age
+        self.last_recall_age = float(timestamp) - self.stored_timestamp
         return ahead
+
+    def update(self, ground_points, status, pose, epoch, timestamp):
+        """Feed one frame's centerline (base_link) and filter status; return (path, status).
+
+        Observed frames are stored (fused). With fusion on, the fused path is used for every
+        frame; without it, the stored path only replaces a lost centerline.
+        """
+        if status == self.OBSERVED:
+            self.store(ground_points, pose, epoch, timestamp)
+        if status == self.LOST or self.fusion_weight < 1.0:
+            path = self.recall(pose, epoch, timestamp)
+            if path is not None:
+                return path, (self.REMEMBERED if status == self.LOST else status)
+        return ground_points, status

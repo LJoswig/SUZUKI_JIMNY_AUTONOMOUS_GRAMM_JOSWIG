@@ -35,7 +35,12 @@ sys.path.insert(0, str(REPO))
 import utils.config as cfg  # noqa: E402
 from utils.follower import PurePursuitFollower  # noqa: E402
 from utils.motion_inputs import PlanarOdometry  # noqa: E402
-from utils.path_memory import CenterlinePathMemory, GroundProjector  # noqa: E402
+from utils.path_memory import (  # noqa: E402
+    CenterlinePathMemory,
+    GroundProjector,
+    inverse_transform_points,
+    transform_points,
+)
 
 STEERING_LOSS_DEG = 90.0  # Measured vs commanded steering apart by more than this ...
 STEERING_LOSS_SECONDS = 1.0  # ... for this long marks a steering tracking loss (excluded)
@@ -193,24 +198,41 @@ def value_at(series, t):
     return np.nan if index < 0 else series[index, 1]
 
 
-def build_path_events(cache, odometry, projector, memory, fixed_latency):
-    """Per perception frame: the ground path the follower would receive, and when."""
-    events = []
+def lateral_at(ground, distance):
+    if ground is None or len(ground) < 2:
+        return None
+    ground = ground[np.argsort(ground[:, 0])]
+    if ground[0, 0] > distance or ground[-1, 0] < distance:
+        return None
+    return float(np.interp(distance, ground[:, 0], ground[:, 1]))
+
+
+def build_path_events(cache, odometry, projector, memory, fixed_latency, lookahead):
+    """Per perception frame: the ground path the follower would receive, and when.
+
+    Also returns the frame-to-frame lateral jumps of the path at the lookahead distance,
+    with vehicle motion removed (previous path moved into the current vehicle frame).
+    """
+    events, jumps = [], []
+    previous = None
     for record in cache["records"]:
         t = record["timestamp"]
         pose, epoch = odometry.at(t)
-        status = record["status"]
         ground = None
         if record["points"] is not None:
             ground = projector.image_to_ground(record["points"])
-        if status == "observed":
-            memory.store(ground, pose, epoch, t)
-        elif status == "lost":
-            ground = memory.recall(pose, epoch, t)
-            status = CenterlinePathMemory.REMEMBERED if ground is not None else status
+        ground, status = memory.update(ground, record["status"], pose, epoch, t)
         latency = record["latency"] if fixed_latency is None else fixed_latency
         events.append((t + latency, t, ground, pose, epoch, status))
-    return events
+
+        if ground is not None and pose is not None:
+            if previous is not None and previous[2] == epoch:
+                moved = inverse_transform_points(transform_points(previous[0], previous[1]), pose)
+                before, now = lateral_at(moved, lookahead), lateral_at(ground, lookahead)
+                if before is not None and now is not None:
+                    jumps.append(abs(now - before))
+            previous = (ground, pose, epoch)
+    return events, np.array(jumps)
 
 
 def run_follower(events, odometry, bag, follower, rate_hz):
@@ -361,6 +383,8 @@ def main():
     parser.add_argument("--lookahead", type=float, default=cfg.FOLLOWER_LOOKAHEAD_DISTANCE)
     parser.add_argument("--steering-ratio", type=float, default=cfg.FOLLOWER_STEERING_RATIO)
     parser.add_argument("--max-steering-rate", type=float, default=cfg.FOLLOWER_MAX_STEERING_RATE_DEG_S)
+    parser.add_argument("--fusion-weight", type=float, default=cfg.CENTERLINE_PATH_FUSION_WEIGHT,
+                        help="weight of a new observation in the path fusion; 1.0 = no fusion")
     args = parser.parse_args()
 
     name = Path(args.svo).stem
@@ -386,6 +410,9 @@ def main():
         max_memory_seconds=cfg.CENTERLINE_PATH_MEMORY_MAX_SECONDS,
         max_memory_distance=cfg.CENTERLINE_PATH_MEMORY_MAX_DISTANCE,
         min_remaining_length=cfg.CENTERLINE_PATH_MEMORY_MIN_REMAINING,
+        fusion_weight=args.fusion_weight,
+        mismatch_distance=cfg.CENTERLINE_PATH_FUSION_MISMATCH_DISTANCE,
+        mismatch_frames=cfg.CENTERLINE_PATH_FUSION_MISMATCH_FRAMES,
     )
     follower = PurePursuitFollower(
         wheelbase=cfg.FOLLOWER_WHEELBASE, steering_ratio=args.steering_ratio, steering_sign=cfg.FOLLOWER_STEERING_SIGN,
@@ -393,7 +420,7 @@ def main():
         max_steering_rate_deg_s=args.max_steering_rate, target_speed=cfg.FOLLOWER_TARGET_SPEED,
         max_path_age_seconds=cfg.FOLLOWER_MAX_PATH_AGE_SECONDS,
     )
-    events = build_path_events(cache, odometry, projector, memory, args.latency)
+    events, jumps = build_path_events(cache, odometry, projector, memory, args.latency, args.lookahead)
     if not any(e[3] is not None for e in events):
         raise RuntimeError("No odometry overlaps the SVO timestamps; is this the matching bag?")
     rows = run_follower(events, odometry, bag, follower, cfg.FOLLOWER_RATE_HZ)
@@ -402,9 +429,12 @@ def main():
     summary = [
         f"run: {name}",
         f"follower: lookahead {args.lookahead} m, steering ratio {args.steering_ratio}, "
-        f"max rate {args.max_steering_rate} deg/s",
+        f"max rate {args.max_steering_rate} deg/s, path fusion weight {args.fusion_weight}",
         f"perception: {len(latencies)} frames, delay median {np.median(latencies):.2f} s, "
         f"p90 {np.percentile(latencies, 90):.2f} s" + (f" (using fixed {args.latency} s)" if args.latency else ""),
+        f"path stability at the lookahead (frame-to-frame lateral jump, motion removed): "
+        f"median {np.median(jumps):.2f} m, p95 {np.percentile(jumps, 95):.2f} m, p99 {np.percentile(jumps, 99):.2f} m, "
+        f"> 0.5 m in {np.mean(jumps > 0.5):.1%} of frames; fusion rejected {memory.rejected_observations} observations",
     ] + summarize(rows, args.steering_offset_deg, cfg.FOLLOWER_RATE_HZ)
     paths = write_outputs(rows, summary, out_dir, name, args.steering_offset_deg)
     print("\n".join(summary))

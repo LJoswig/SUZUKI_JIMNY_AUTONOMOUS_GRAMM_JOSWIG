@@ -277,6 +277,9 @@ class RealtimeRoadSegmentation:
             max_memory_seconds=CENTERLINE_PATH_MEMORY_MAX_SECONDS,
             max_memory_distance=CENTERLINE_PATH_MEMORY_MAX_DISTANCE,
             min_remaining_length=CENTERLINE_PATH_MEMORY_MIN_REMAINING,
+            fusion_weight=CENTERLINE_PATH_FUSION_WEIGHT,
+            mismatch_distance=CENTERLINE_PATH_FUSION_MISMATCH_DISTANCE,
+            mismatch_frames=CENTERLINE_PATH_FUSION_MISMATCH_FRAMES,
         )
         self.ground_projector = GroundProjector(
             self.camera.get_calibration(),
@@ -591,26 +594,21 @@ class RealtimeRoadSegmentation:
             print(f"  Heading: {pose_info['heading_deg']:.1f}°")
     
     def apply_path_memory(self, points, status, motion_sample, timestamp):
-        """Store observed centerlines; replay the remembered one once the filter is lost.
+        """Fuse observed centerlines in the odom frame and replay them when the filter is lost.
 
-        Short gaps are left to the Kalman filter's own coasting, which replay showed to be
-        at least as accurate for the first second; the memory takes over when it gives up.
+        With fusion off, short gaps are left to the Kalman filter's own coasting, which replay
+        showed to be at least as accurate for the first second.
         """
         odom_pose = motion_sample.odom_pose if motion_sample is not None else None
         odom_epoch = motion_sample.odom_epoch if motion_sample is not None else None
-        if status == TemporalCenterlineKalmanFilter.OBSERVED:
-            self.path_memory.store(
-                self.ground_projector.image_to_ground(points),
-                odom_pose,
-                odom_epoch,
-                timestamp,
-            )
-        elif status == TemporalCenterlineKalmanFilter.LOST:
-            remembered = self.path_memory.recall(odom_pose, odom_epoch, timestamp)
-            image_points = self.ground_projector.ground_to_image(remembered)
-            if image_points is not None:
-                return image_points, CenterlinePathMemory.REMEMBERED
-        return points, status
+        ground = self.ground_projector.image_to_ground(points) if points is not None else None
+        path, path_status = self.path_memory.update(ground, status, odom_pose, odom_epoch, timestamp)
+        if path is ground:
+            return points, status
+        image_points = self.ground_projector.ground_to_image(path)
+        if image_points is None:
+            return points, status
+        return image_points, path_status
 
     def update_follower(self, points, status, motion_sample, timestamp):
         """Run the shadow follower on this frame's centerline; the command is only displayed."""
@@ -637,7 +635,11 @@ class RealtimeRoadSegmentation:
                 FOLLOWER_STEERING_SIGN * command.steering_wheel_deg / FOLLOWER_STEERING_RATIO
             )
             curvature = math.tan(road_wheel) / FOLLOWER_WHEELBASE
-            arc_length = np.linspace(0.0, 15.0, 40)
+            # Only up to the lookahead point: beyond it the arc is replanned every cycle.
+            chord = math.hypot(*command.lookahead_point)
+            half_angle = min(abs(curvature) * chord / 2.0, 1.0)
+            arc_end = chord if abs(curvature) < 1e-6 else 2.0 * math.asin(half_angle) / abs(curvature)
+            arc_length = np.linspace(0.0, arc_end, 40)
             if abs(curvature) < 1e-6:
                 arc = np.column_stack((arc_length, np.zeros_like(arc_length)))
             else:

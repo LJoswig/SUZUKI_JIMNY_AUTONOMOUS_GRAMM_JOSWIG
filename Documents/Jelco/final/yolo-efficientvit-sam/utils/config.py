@@ -112,6 +112,10 @@ CENTERLINE_PATH_MEMORY_ENABLED = True
 CENTERLINE_PATH_MEMORY_MAX_SECONDS = 3.0
 CENTERLINE_PATH_MEMORY_MAX_DISTANCE = 8.0  # Metres driven since the road was last seen
 CENTERLINE_PATH_MEMORY_MIN_REMAINING = 5.0  # Remembered path must still reach this far ahead of the rear axle, metres
+# Path fusion: blend each new observation into the stored path in the odom frame.
+CENTERLINE_PATH_FUSION_WEIGHT = 0.5  # Weight of a new observation; 1.0 = no fusion (newest replaces)
+CENTERLINE_PATH_FUSION_MISMATCH_DISTANCE = 0.8  # Metres; a larger median lateral difference is a mismatch
+CENTERLINE_PATH_FUSION_MISMATCH_FRAMES = 4  # Consecutive agreeing mismatches before the path is replaced (~0.8 s at 5 Hz)
 
 # Wheel/IMU odometry (validated against GPS on testfahrt_20261021_181107).
 CENTERLINE_ODOM_YAW_RATE_SIGN = -1.0  # The cube IMU reports positive yaw rate for right turns
