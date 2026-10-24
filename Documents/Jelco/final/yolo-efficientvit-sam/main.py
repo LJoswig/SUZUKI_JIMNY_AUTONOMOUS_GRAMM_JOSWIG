@@ -10,6 +10,7 @@ FINAL OPTIMIZED VERSION
 """
 
 import cv2
+import math
 import numpy as np
 import time
 import json
@@ -49,6 +50,7 @@ from utils.motion_inputs import (
     RosbagMotionProvider,
 )
 from utils.path_memory import CenterlinePathMemory, GroundProjector
+from utils.follower import PurePursuitFollower
 
 
 class PerformanceMonitor:
@@ -285,6 +287,17 @@ class RealtimeRoadSegmentation:
             camera_yaw_deg=CENTERLINE_CAMERA_YAW_DEG,
             fallback_pitch_down_deg=CENTERLINE_CAMERA_PITCH_DOWN_DEG,
             max_range=CENTERLINE_GROUND_MAX_RANGE,
+        )
+        # Shadow road follower: computed for the display only, nothing is commanded.
+        self.follower = PurePursuitFollower(
+            wheelbase=FOLLOWER_WHEELBASE,
+            steering_ratio=FOLLOWER_STEERING_RATIO,
+            steering_sign=FOLLOWER_STEERING_SIGN,
+            lookahead_distance=FOLLOWER_LOOKAHEAD_DISTANCE,
+            max_steering_wheel_deg=FOLLOWER_MAX_STEERING_WHEEL_DEG,
+            max_steering_rate_deg_s=FOLLOWER_MAX_STEERING_RATE_DEG_S,
+            target_speed=FOLLOWER_TARGET_SPEED,
+            max_path_age_seconds=FOLLOWER_MAX_PATH_AGE_SECONDS,
         )
 
         self.motion_provider = NullMotionProvider()
@@ -599,6 +612,74 @@ class RealtimeRoadSegmentation:
                 return image_points, CenterlinePathMemory.REMEMBERED
         return points, status
 
+    def update_follower(self, points, status, motion_sample, timestamp):
+        """Run the shadow follower on this frame's centerline; the command is only displayed."""
+        odom_pose = motion_sample.odom_pose if motion_sample is not None else None
+        odom_epoch = motion_sample.odom_epoch if motion_sample is not None else None
+        if points is not None and status != TemporalCenterlineKalmanFilter.LOST:
+            self.follower.update_path(
+                self.ground_projector.image_to_ground(points),
+                odom_pose,
+                odom_epoch,
+                timestamp,
+                status,
+            )
+        return self.follower.compute(odom_pose, odom_epoch, timestamp)
+
+    def draw_follower_overlay(self, image, command):
+        """Draw the follower's lookahead point, the arc its steering would drive, and the command."""
+        scale = np.array([
+            self.display_width / self.processing_width,
+            self.display_height / self.processing_height,
+        ], dtype=np.float32)
+        if command.tracking:
+            road_wheel = math.radians(
+                FOLLOWER_STEERING_SIGN * command.steering_wheel_deg / FOLLOWER_STEERING_RATIO
+            )
+            curvature = math.tan(road_wheel) / FOLLOWER_WHEELBASE
+            arc_length = np.linspace(0.0, 15.0, 40)
+            if abs(curvature) < 1e-6:
+                arc = np.column_stack((arc_length, np.zeros_like(arc_length)))
+            else:
+                arc = np.column_stack((
+                    np.sin(curvature * arc_length) / curvature,
+                    (1.0 - np.cos(curvature * arc_length)) / curvature,
+                ))
+            arc_pixels = self.ground_projector.ground_to_image(arc)
+            if arc_pixels is not None:
+                cv2.polylines(
+                    image,
+                    [np.rint(arc_pixels * scale).astype(np.int32).reshape(-1, 1, 2)],
+                    isClosed=False,
+                    color=(255, 0, 255),
+                    thickness=2,
+                    lineType=cv2.LINE_AA,
+                )
+            target_pixels = self.ground_projector.ground_to_image(
+                np.array([command.lookahead_point, command.lookahead_point])
+            )
+            if target_pixels is not None:
+                center = tuple(int(v) for v in np.rint(target_pixels[0] * scale))
+                cv2.circle(image, center, 9, (255, 255, 0), -1, lineType=cv2.LINE_AA)
+            side = "R" if command.steering_wheel_deg > 0 else "L"
+            label = (
+                f"Follower (shadow): {abs(command.steering_wheel_deg):.0f} deg {side}, "
+                f"{command.speed:.1f} m/s"
+            )
+            color = (255, 0, 255)
+        else:
+            label = f"Follower (shadow): STOP ({command.reason})"
+            color = (255, 0, 0)
+        cv2.putText(
+            image,
+            label,
+            (10, self.display_height - 45),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,
+            color,
+            2,
+        )
+
     def run(self):
         """Main processing loop - OPTIMIZED"""
         print("\n" + "="*70)
@@ -654,6 +735,7 @@ class RealtimeRoadSegmentation:
                 centerline_points = None
                 centerline_confidence = 0.0
                 centerline_status = TemporalCenterlineKalmanFilter.LOST
+                follower_command = None
                 centerline_start = time.perf_counter()
                 if self.current_detections is not None:
                     centerline_points, centerline_confidence = extract_centerline(
@@ -689,6 +771,13 @@ class RealtimeRoadSegmentation:
                         centerline_status = self.centerline_kalman_filter.status
                         if self.path_memory_active:
                             centerline_points, centerline_status = self.apply_path_memory(
+                                centerline_points,
+                                centerline_status,
+                                motion_sample,
+                                frame_timestamp,
+                            )
+                        if SHOW_FOLLOWER_OVERLAY:
+                            follower_command = self.update_follower(
                                 centerline_points,
                                 centerline_status,
                                 motion_sample,
@@ -761,6 +850,8 @@ class RealtimeRoadSegmentation:
                         thickness=3,
                         lineType=cv2.LINE_AA,
                     )
+                if follower_command is not None:
+                    self.draw_follower_overlay(display_image, follower_command)
                 centerline_label = f"Centerline: {centerline_status.upper()}"
                 if (
                     centerline_status == CenterlinePathMemory.REMEMBERED

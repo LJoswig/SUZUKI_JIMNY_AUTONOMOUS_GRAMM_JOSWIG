@@ -6,6 +6,7 @@ Records raw ZED SVO/SVO2 data for offline vision development.
 
 It saves:
 - run.svo2 / run.svo
+- rosbag/ (ros2 bag of the vehicle and centerline topics, same run folder)
 - metadata.json
 - camera_calibration.json
 - zed_pose.csv
@@ -13,6 +14,7 @@ It saves:
 Important:
 - Do NOT run main.py at the same time.
 - This script records raw camera data. Vision can be run later at home.
+- Source ROS first (source /opt/ros/humble/setup.bash) so the rosbag can be recorded.
 """
 
 import argparse
@@ -21,6 +23,7 @@ import json
 import os
 import shutil
 import signal
+import subprocess
 import sys
 import time
 from datetime import datetime
@@ -30,6 +33,61 @@ import pyzed.sl as sl
 
 
 RUNNING = True
+
+# Recorded next to the SVO so every camera recording has a matching bag.
+ROSBAG_TOPICS = [
+    # Motion and odometry
+    "/imu_attitude",
+    "/feedback_data",
+    "/steering_feedback",
+    "/gps",
+    "/gps_raw",
+    # Commands, modes and safety state
+    "/ackermann_cmd",
+    "/rc_inputs",
+    "/rc_steer_debug",
+    "/mode",
+    "/heartbeat",
+    "/signal_error",
+    # Centerline perception and road follower
+    "/centerline/path",
+    "/centerline/status",
+    "/centerline_follower/cmd_shadow",
+    "/centerline_follower/debug",
+]
+
+
+def start_rosbag(bag_dir: Path, topics, log_path: Path):
+    """Start `ros2 bag record` in its own process group; returns the process or None."""
+    if shutil.which("ros2") is None:
+        print("[WARNING] ros2 not found (ROS not sourced?); recording the SVO without a rosbag.")
+        return None
+    log_file = open(log_path, "w")
+    process = subprocess.Popen(
+        ["ros2", "bag", "record", "-o", str(bag_dir), *topics],
+        stdout=log_file,
+        stderr=subprocess.STDOUT,
+        start_new_session=True,  # CTRL+C stops the SVO first; the bag is stopped explicitly after it
+    )
+    time.sleep(2.0)
+    if process.poll() is not None:
+        print(f"[WARNING] rosbag recorder exited immediately; see {log_path}")
+        return None
+    print(f"[INFO] Rosbag recording started: {bag_dir}")
+    return process
+
+
+def stop_rosbag(process) -> bool:
+    if process is None:
+        return False
+    process.send_signal(signal.SIGINT)
+    try:
+        process.wait(timeout=15)
+    except subprocess.TimeoutExpired:
+        print("[WARNING] rosbag recorder did not stop in time; terminating it.")
+        process.terminate()
+        process.wait(timeout=5)
+    return process.returncode == 0
 
 
 def handle_signal(sig, frame):
@@ -281,6 +339,8 @@ def main():
                         help="Short notes about this run.")
     parser.add_argument("--min-free-gb", type=float, default=10.0,
                         help="Refuse to start if output drive has less free space.")
+    parser.add_argument("--no-rosbag", action="store_true",
+                        help="record only the SVO, without the matching rosbag")
     parser.add_argument("--pose-every-n", type=int, default=1,
                         help="Log ZED pose every N frames.")
     args = parser.parse_args()
@@ -300,6 +360,7 @@ def main():
     run_dir = make_run_dir(root, args.name)
 
     svo_path = run_dir / "run.svo2"
+    bag_dir = run_dir / "rosbag"
     metadata_path = run_dir / "metadata.json"
     calibration_path = run_dir / "camera_calibration.json"
     pose_csv_path = run_dir / "zed_pose.csv"
@@ -372,6 +433,8 @@ def main():
         "duration_requested_s": args.duration,
         "pose_logging_every_n_frames": args.pose_every_n,
         "positional_tracking_enabled": tracking_enabled,
+        "rosbag_path": None if args.no_rosbag else str(bag_dir),
+        "rosbag_topics": [] if args.no_rosbag else ROSBAG_TOPICS,
         "notes": args.notes,
         "important": {
             "vision_algorithm_was_not_run": True,
@@ -406,6 +469,11 @@ def main():
 
     runtime_params = sl.RuntimeParameters()
 
+    rosbag_process = None
+    if not args.no_rosbag:
+        rosbag_process = start_rosbag(bag_dir, ROSBAG_TOPICS, run_dir / "rosbag_record.log")
+    metadata["rosbag_started"] = rosbag_process is not None
+
     frame_id = 0
     start_time = time.time()
     last_print = time.time()
@@ -413,75 +481,78 @@ def main():
     print("[INFO] Recording started.")
     print("[INFO] Press CTRL+C to stop safely.")
 
-    with open(pose_csv_path, "w", newline="") as csvfile:
-        fieldnames = [
-            "frame_id",
-            "system_time_ns",
-            "elapsed_s",
-            "zed_timestamp_ns",
-            "tracking_state",
-            "tx", "ty", "tz",
-            "qx", "qy", "qz", "qw",
-            "rx", "ry", "rz",
-        ]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
-
-        while RUNNING:
-            now = time.time()
-            elapsed = now - start_time
-            if args.duration > 0 and elapsed >= args.duration:
-                print("[INFO] Requested duration reached.")
-                break
-
-            err = zed.grab(runtime_params)
-            if err == sl.ERROR_CODE.SUCCESS:
-                # In most ZED SDK Python versions, enabled recording records grabbed frames.
-                # Some versions expose zed.record(); call it if available.
-                if hasattr(zed, "record"):
-                    try:
-                        zed.record()
-                    except Exception:
-                        pass
-
-                if frame_id % args.pose_every_n == 0:
-                    timestamp_ns = ""
-                    try:
-                        timestamp_ns = int(zed.get_timestamp(sl.TIME_REFERENCE.IMAGE).get_nanoseconds())
-                    except Exception:
-                        pass
-
-                    pose_data = safe_pose_dict(zed)
-                    row = {
-                        "frame_id": frame_id,
-                        "system_time_ns": time.time_ns(),
-                        "elapsed_s": elapsed,
-                        "zed_timestamp_ns": timestamp_ns,
-                        **pose_data,
-                    }
-                    writer.writerow(row)
-
-                frame_id += 1
-
-                if time.time() - last_print > 2.0:
-                    current_free_gb = disk_free_gb(root)
-                    print(
-                        f"[INFO] frames={frame_id} "
-                        f"elapsed={elapsed:.1f}s "
-                        f"free={current_free_gb:.1f}GB"
-                    )
-                    last_print = time.time()
-
-            else:
-                print(f"[WARNING] grab failed: {err}")
-                time.sleep(0.01)
-
-    print("[INFO] Finalizing recording...")
-
     try:
-        zed.disable_recording()
-    except Exception:
-        pass
+        with open(pose_csv_path, "w", newline="") as csvfile:
+            fieldnames = [
+                "frame_id",
+                "system_time_ns",
+                "elapsed_s",
+                "zed_timestamp_ns",
+                "tracking_state",
+                "tx", "ty", "tz",
+                "qx", "qy", "qz", "qw",
+                "rx", "ry", "rz",
+            ]
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+
+            while RUNNING:
+                now = time.time()
+                elapsed = now - start_time
+                if args.duration > 0 and elapsed >= args.duration:
+                    print("[INFO] Requested duration reached.")
+                    break
+
+                err = zed.grab(runtime_params)
+                if err == sl.ERROR_CODE.SUCCESS:
+                    # In most ZED SDK Python versions, enabled recording records grabbed frames.
+                    # Some versions expose zed.record(); call it if available.
+                    if hasattr(zed, "record"):
+                        try:
+                            zed.record()
+                        except Exception:
+                            pass
+
+                    if frame_id % args.pose_every_n == 0:
+                        timestamp_ns = ""
+                        try:
+                            timestamp_ns = int(zed.get_timestamp(sl.TIME_REFERENCE.IMAGE).get_nanoseconds())
+                        except Exception:
+                            pass
+
+                        pose_data = safe_pose_dict(zed)
+                        row = {
+                            "frame_id": frame_id,
+                            "system_time_ns": time.time_ns(),
+                            "elapsed_s": elapsed,
+                            "zed_timestamp_ns": timestamp_ns,
+                            **pose_data,
+                        }
+                        writer.writerow(row)
+
+                    frame_id += 1
+
+                    if time.time() - last_print > 2.0:
+                        current_free_gb = disk_free_gb(root)
+                        print(
+                            f"[INFO] frames={frame_id} "
+                            f"elapsed={elapsed:.1f}s "
+                            f"free={current_free_gb:.1f}GB"
+                        )
+                        last_print = time.time()
+
+                else:
+                    print(f"[WARNING] grab failed: {err}")
+                    time.sleep(0.01)
+
+    finally:
+        print("[INFO] Finalizing recording...")
+        try:
+            zed.disable_recording()
+        except Exception:
+            pass
+        # Stop the bag only after the SVO is closed so it covers the whole recording.
+        metadata["rosbag_closed_cleanly"] = stop_rosbag(rosbag_process)
 
     try:
         zed.disable_positional_tracking()
@@ -505,6 +576,8 @@ def main():
     print(f"Run folder: {run_dir}")
     print(f"Frames:     {frame_id}")
     print(f"SVO size:   {final_size_gb:.2f} GB")
+    if rosbag_process is not None:
+        print(f"Rosbag:     {bag_dir}")
     print("=" * 80)
 
 

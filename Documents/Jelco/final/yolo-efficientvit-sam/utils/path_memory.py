@@ -17,13 +17,13 @@ def _rotation_2d(angle):
     return np.array([[c, -s], [s, c]], dtype=np.float64)
 
 
-def _transform_points(points, pose):
+def transform_points(points, pose):
     """Map (N, 2) points from a frame located at pose=(x, y, yaw) into its parent frame."""
     x, y, yaw = pose
     return points @ _rotation_2d(yaw).T + np.array([x, y])
 
 
-def _inverse_transform_points(points, pose):
+def inverse_transform_points(points, pose):
     x, y, yaw = pose
     return (points - np.array([x, y])) @ _rotation_2d(yaw)
 
@@ -99,7 +99,7 @@ class GroundProjector:
         level_points = level_points[in_range]
         if len(level_points) == 0:
             return None
-        ground = _transform_points(level_points, (*self.camera_offset, self.camera_yaw))
+        ground = transform_points(level_points, (*self.camera_offset, self.camera_yaw))
         return ground[np.argsort(ground[:, 0])]
 
     def ground_to_image(self, ground_points, tilt=None):
@@ -107,7 +107,7 @@ class GroundProjector:
         if ground_points is None or len(ground_points) == 0:
             return None
         tilt = self.fallback_tilt if tilt is None else tilt
-        level_xy = _inverse_transform_points(
+        level_xy = inverse_transform_points(
             np.asarray(ground_points, dtype=np.float64),
             (*self.camera_offset, self.camera_yaw),
         )
@@ -156,7 +156,7 @@ class CenterlinePathMemory:
         """Remember base_link ground points observed at the given odom pose."""
         if ground_points is None or len(ground_points) < 2 or pose is None:
             return False
-        self.odom_points = _transform_points(np.asarray(ground_points, dtype=np.float64), pose)
+        self.odom_points = transform_points(np.asarray(ground_points, dtype=np.float64), pose)
         self.stored_pose = tuple(pose)
         self.stored_epoch = epoch
         self.stored_timestamp = float(timestamp)
@@ -173,7 +173,7 @@ class CenterlinePathMemory:
         travelled = math.hypot(pose[0] - self.stored_pose[0], pose[1] - self.stored_pose[1])
         if travelled > self.max_memory_distance:
             return None
-        ground = _inverse_transform_points(self.odom_points, pose)
+        ground = inverse_transform_points(self.odom_points, pose)
         ahead = ground[ground[:, 0] > 0.0]
         if len(ahead) < 2 or np.max(ahead[:, 0]) < self.min_remaining_length:
             return None

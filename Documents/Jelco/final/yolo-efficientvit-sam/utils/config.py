@@ -118,12 +118,26 @@ CENTERLINE_ODOM_YAW_RATE_SIGN = -1.0  # The cube IMU reports positive yaw rate f
 CENTERLINE_ODOM_MAX_SPEED_AGE_SECONDS = 0.5  # /feedback_data arrives at ~5 Hz
 
 # Camera mounting for flat-ground projection. base_link = rear axle centre on the ground.
-CENTERLINE_CAMERA_HEIGHT = 1.78  # Metres above ground, fitted from ZED depth
+CENTERLINE_CAMERA_HEIGHT = 1.78  # Metres above ground; measured, matches the ZED depth fit
 CENTERLINE_CAMERA_PITCH_DOWN_DEG = 8.5  # Fitted from ZED depth
-CENTERLINE_CAMERA_X = 1.5  # Metres ahead of the rear axle; estimate, measure on the car
+CENTERLINE_CAMERA_X = 1.27  # Metres ahead of the rear axle (measured; ~1.0 m behind the front axle)
 CENTERLINE_CAMERA_Y = 0.0  # Metres left of the vehicle centreline
 CENTERLINE_CAMERA_YAW_DEG = 0.0  # Camera heading relative to the vehicle, positive = left
 CENTERLINE_GROUND_MAX_RANGE = 25.0  # Ignore centerline points further away, metres
+
+# ============================================================================
+# Road Follower (pure pursuit, shadow mode first)
+# ============================================================================
+# Steering output uses the /ackermann_cmd convention: steering-wheel degrees, positive = right.
+FOLLOWER_WHEELBASE = 2.27  # Metres; measured camera-to-axle distances (Jimny spec 2.25)
+FOLLOWER_STEERING_RATIO = 20.0  # Steering-wheel deg per road-wheel deg; fitted on testfahrt_20261021_181107 (nominal 14)
+FOLLOWER_STEERING_SIGN = -1.0  # A left turn (positive curvature) needs a negative steering_angle
+FOLLOWER_LOOKAHEAD_DISTANCE = 6.0  # Metres from the rear axle; must exceed CENTERLINE_CAMERA_X + ~4 m
+FOLLOWER_MAX_STEERING_WHEEL_DEG = 620.0  # Same clamp as the steering node
+FOLLOWER_MAX_STEERING_RATE_DEG_S = 120.0  # The steering actuator is slow; matches the RC rate scale
+FOLLOWER_TARGET_SPEED = 1.39  # m/s (5 km/h)
+FOLLOWER_MAX_PATH_AGE_SECONDS = 1.0  # Stop when the newest path is older; tune from live message intervals
+FOLLOWER_RATE_HZ = 20.0
 
 # ============================================================================
 # Visualization - OPTIMIZED
@@ -135,6 +149,9 @@ MASK_COLOR = (0, 255, 0)  # Green in RGB
 SHOW_LABELS = True
 SHOW_MASKS = True
 SHOW_BOXES = True
+# Shadow road follower in the preview: lookahead point (yellow), arc the steering
+# command would drive (magenta) and the command itself. Nothing is sent to the car.
+SHOW_FOLLOWER_OVERLAY = True
 
 # Display at native camera resolution (no scaling needed)
 # If you want to display smaller, change this value (e.g., 0.8 for 80% size)
