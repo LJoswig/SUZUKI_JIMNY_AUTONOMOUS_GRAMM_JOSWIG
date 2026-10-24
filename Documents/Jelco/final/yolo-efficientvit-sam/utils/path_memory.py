@@ -1,0 +1,181 @@
+"""Ground projection of the centerline and odom-frame memory to bridge detection dropouts.
+
+Frames used here:
+- camera:    ZED RIGHT_HANDED_Z_UP_X_FWD (x forward, y left, z up), tilted with the camera
+- level:     camera position, rotated so z is vertical and x is the camera heading
+- base_link: rear axle centre on the ground (x forward, y left)
+- odom:      fixed local frame in which the vehicle pose is dead-reckoned
+"""
+
+import math
+
+import numpy as np
+
+
+def _rotation_2d(angle):
+    c, s = math.cos(angle), math.sin(angle)
+    return np.array([[c, -s], [s, c]], dtype=np.float64)
+
+
+def _transform_points(points, pose):
+    """Map (N, 2) points from a frame located at pose=(x, y, yaw) into its parent frame."""
+    x, y, yaw = pose
+    return points @ _rotation_2d(yaw).T + np.array([x, y])
+
+
+def _inverse_transform_points(points, pose):
+    x, y, yaw = pose
+    return (points - np.array([x, y])) @ _rotation_2d(yaw)
+
+
+def tilt_from_angles(pitch_down_deg, roll_deg=0.0):
+    pitch = math.radians(pitch_down_deg)
+    roll = math.radians(roll_deg)
+    pitch_matrix = np.array([
+        [math.cos(pitch), 0.0, math.sin(pitch)],
+        [0.0, 1.0, 0.0],
+        [-math.sin(pitch), 0.0, math.cos(pitch)],
+    ])
+    roll_matrix = np.array([
+        [1.0, 0.0, 0.0],
+        [0.0, math.cos(roll), -math.sin(roll)],
+        [0.0, math.sin(roll), math.cos(roll)],
+    ])
+    return pitch_matrix @ roll_matrix
+
+
+class GroundProjector:
+    """Project processing-resolution pixels onto a flat ground plane around base_link."""
+
+    def __init__(
+        self,
+        calibration,
+        processing_size,
+        camera_height,
+        camera_x,
+        camera_y=0.0,
+        camera_yaw_deg=0.0,
+        fallback_pitch_down_deg=10.0,
+        fallback_roll_deg=0.0,
+        max_range=25.0,
+    ):
+        if camera_height <= 0.0:
+            raise ValueError("Camera height above ground must be positive")
+        if max_range <= 0.0:
+            raise ValueError("Ground projection range must be positive")
+        processing_width, processing_height = processing_size
+        scale_x = calibration["width"] / float(processing_width)
+        scale_y = calibration["height"] / float(processing_height)
+        self.fx = calibration["fx"] / scale_x
+        self.fy = calibration["fy"] / scale_y
+        self.cx = calibration["cx"] / scale_x
+        self.cy = calibration["cy"] / scale_y
+        self.width = processing_width
+        self.height = processing_height
+        self.camera_height = float(camera_height)
+        self.camera_offset = np.array([camera_x, camera_y], dtype=np.float64)
+        self.camera_yaw = math.radians(camera_yaw_deg)
+        self.fallback_tilt = tilt_from_angles(fallback_pitch_down_deg, fallback_roll_deg)
+        self.max_range = float(max_range)
+
+    def image_to_ground(self, points, tilt=None):
+        """Return base_link ground points (M, 2), nearest first, for image points (N, 2)."""
+        if points is None or len(points) == 0:
+            return None
+        tilt = self.fallback_tilt if tilt is None else tilt
+        points = np.asarray(points, dtype=np.float64)
+        rays = np.column_stack((
+            np.ones(len(points)),
+            -(points[:, 0] - self.cx) / self.fx,
+            -(points[:, 1] - self.cy) / self.fy,
+        ))
+        level_rays = rays @ tilt.T
+        below_horizon = level_rays[:, 2] < -1e-3
+        if not np.any(below_horizon):
+            return None
+        level_rays = level_rays[below_horizon]
+        level_points = level_rays[:, :2] * (self.camera_height / -level_rays[:, 2:3])
+        in_range = np.hypot(level_points[:, 0], level_points[:, 1]) <= self.max_range
+        level_points = level_points[in_range]
+        if len(level_points) == 0:
+            return None
+        ground = _transform_points(level_points, (*self.camera_offset, self.camera_yaw))
+        return ground[np.argsort(ground[:, 0])]
+
+    def ground_to_image(self, ground_points, tilt=None):
+        """Return processing-resolution pixels (M, 2) for base_link ground points (N, 2)."""
+        if ground_points is None or len(ground_points) == 0:
+            return None
+        tilt = self.fallback_tilt if tilt is None else tilt
+        level_xy = _inverse_transform_points(
+            np.asarray(ground_points, dtype=np.float64),
+            (*self.camera_offset, self.camera_yaw),
+        )
+        level_points = np.column_stack((level_xy, np.full(len(level_xy), -self.camera_height)))
+        camera_points = level_points @ tilt
+        in_front = camera_points[:, 0] > 0.1
+        camera_points = camera_points[in_front]
+        if len(camera_points) == 0:
+            return None
+        u = self.cx - self.fx * camera_points[:, 1] / camera_points[:, 0]
+        v = self.cy - self.fy * camera_points[:, 2] / camera_points[:, 0]
+        margin = 0.25 * self.width
+        visible = (u > -margin) & (u < self.width + margin) & (v >= 0.0) & (v < self.height)
+        if np.count_nonzero(visible) < 2:
+            return None
+        return np.column_stack((u[visible], v[visible])).astype(np.float32)
+
+
+class CenterlinePathMemory:
+    """Keep the last observed centerline in the odom frame and replay it while it is not seen."""
+
+    OBSERVED = "observed"
+    REMEMBERED = "remembered"
+    LOST = "lost"
+
+    def __init__(self, max_memory_seconds=3.0, max_memory_distance=8.0, min_remaining_length=3.0):
+        if max_memory_seconds <= 0.0:
+            raise ValueError("Path memory duration must be positive")
+        if max_memory_distance <= 0.0:
+            raise ValueError("Path memory distance must be positive")
+        if min_remaining_length < 0.0:
+            raise ValueError("Path memory remaining length must be non-negative")
+        self.max_memory_seconds = float(max_memory_seconds)
+        self.max_memory_distance = float(max_memory_distance)
+        self.min_remaining_length = float(min_remaining_length)
+        self.reset()
+
+    def reset(self):
+        self.odom_points = None
+        self.stored_pose = None
+        self.stored_epoch = None
+        self.stored_timestamp = None
+        self.last_recall_age = None
+
+    def store(self, ground_points, pose, epoch, timestamp):
+        """Remember base_link ground points observed at the given odom pose."""
+        if ground_points is None or len(ground_points) < 2 or pose is None:
+            return False
+        self.odom_points = _transform_points(np.asarray(ground_points, dtype=np.float64), pose)
+        self.stored_pose = tuple(pose)
+        self.stored_epoch = epoch
+        self.stored_timestamp = float(timestamp)
+        return True
+
+    def recall(self, pose, epoch, timestamp):
+        """Return the remembered path ahead of the vehicle in base_link, or None."""
+        self.last_recall_age = None
+        if self.odom_points is None or pose is None or epoch != self.stored_epoch:
+            return None
+        age = float(timestamp) - self.stored_timestamp
+        if age < 0.0 or age > self.max_memory_seconds:
+            return None
+        travelled = math.hypot(pose[0] - self.stored_pose[0], pose[1] - self.stored_pose[1])
+        if travelled > self.max_memory_distance:
+            return None
+        ground = _inverse_transform_points(self.odom_points, pose)
+        ahead = ground[ground[:, 0] > 0.0]
+        if len(ahead) < 2 or np.max(ahead[:, 0]) < self.min_remaining_length:
+            return None
+        self.last_recall_age = age
+        return ahead

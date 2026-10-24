@@ -68,7 +68,7 @@ CENTERLINE_TEMPORAL_FILTER_TYPE = "kalman"  # "ema" or "kalman"
 # Kalman sensor mode:
 # - "visual_only": centerline-only Kalman (no motion topics required)
 # - "motion_aided": Kalman prediction is conditioned on motion topics
-CENTERLINE_KALMAN_SENSOR_MODE = "motion_aided"  # "visual_only" or "motion_aided"
+CENTERLINE_KALMAN_SENSOR_MODE = "visual_only"  # "visual_only" or "motion_aided"
 CENTERLINE_KALMAN_VISUAL_ONLY = False # Backward-compatible alias for visual_only mode
 CENTERLINE_TEMPORAL_ALPHA = 0.35  # default 0.35 EMA only: lower is smoother, higher responds faster
 # Kalman state: centerline x at three anchor rows (fractions of image height),
@@ -90,7 +90,7 @@ CENTERLINE_KALMAN_MIN_POINTS = 8
 # Fitted on testfahrt_20261021_181107 (IMU angular_velocity.z), processing-resolution pixels / rad.
 CENTERLINE_KALMAN_YAW_RATE_GAIN = -60.0
 
-# Motion-aided Kalman input source:
+# Motion input source (motion-aided Kalman and path memory odometry):
 # - "none": disable motion provider
 # - "rosbag": consume motion signals from ROS2 bag replay
 # - "live": subscribe to live ROS2 topics
@@ -103,6 +103,27 @@ CENTERLINE_MOTION_LOOKAHEAD_SECONDS = 0.02
 CENTERLINE_TOPIC_ACKERMANN_CMD = "/ackermann_cmd"
 CENTERLINE_TOPIC_STEERING_FEEDBACK = "/steering_feedback"
 CENTERLINE_TOPIC_IMU_ATTITUDE = "/imu_attitude"
+CENTERLINE_TOPIC_FEEDBACK_DATA = "/feedback_data"  # data[1] = measured speed, m/s
+
+# Path memory: keep the last observed centerline in an odometry frame and replay it
+# once the Kalman filter has lost the road. Needs CENTERLINE_MOTION_SOURCE "rosbag"
+# (with a bag recorded alongside the SVO) or "live".
+CENTERLINE_PATH_MEMORY_ENABLED = True
+CENTERLINE_PATH_MEMORY_MAX_SECONDS = 3.0
+CENTERLINE_PATH_MEMORY_MAX_DISTANCE = 8.0  # Metres driven since the road was last seen
+CENTERLINE_PATH_MEMORY_MIN_REMAINING = 5.0  # Remembered path must still reach this far ahead of the rear axle, metres
+
+# Wheel/IMU odometry (validated against GPS on testfahrt_20261021_181107).
+CENTERLINE_ODOM_YAW_RATE_SIGN = -1.0  # The cube IMU reports positive yaw rate for right turns
+CENTERLINE_ODOM_MAX_SPEED_AGE_SECONDS = 0.5  # /feedback_data arrives at ~5 Hz
+
+# Camera mounting for flat-ground projection. base_link = rear axle centre on the ground.
+CENTERLINE_CAMERA_HEIGHT = 1.78  # Metres above ground, fitted from ZED depth
+CENTERLINE_CAMERA_PITCH_DOWN_DEG = 8.5  # Fitted from ZED depth
+CENTERLINE_CAMERA_X = 1.5  # Metres ahead of the rear axle; estimate, measure on the car
+CENTERLINE_CAMERA_Y = 0.0  # Metres left of the vehicle centreline
+CENTERLINE_CAMERA_YAW_DEG = 0.0  # Camera heading relative to the vehicle, positive = left
+CENTERLINE_GROUND_MAX_RANGE = 25.0  # Ignore centerline points further away, metres
 
 # ============================================================================
 # Visualization - OPTIMIZED
@@ -125,8 +146,8 @@ DISPLAY_SCALE = 1.0
 OUTPUT_DIR = "road_captures"
 SAVE_DEPTH_MAPS = True
 SAVE_FULL_RESOLUTION = True  # Save at camera's native resolution
-SAVE_ANNOTATED_VIDEO = False
-ANNOTATED_VIDEO_PATH = os.path.join(OUTPUT_DIR, "road_segmentation_ema.mp4")
+SAVE_ANNOTATED_VIDEO = True
+ANNOTATED_VIDEO_PATH = os.path.join(OUTPUT_DIR, "road_segmentation_new_kalman.mp4")
 
 # SSH-friendly preview; forward this port in VS Code and open the printed URL.
 ENABLE_REMOTE_PREVIEW = True

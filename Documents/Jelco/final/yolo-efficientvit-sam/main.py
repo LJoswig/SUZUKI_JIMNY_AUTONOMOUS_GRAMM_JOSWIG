@@ -45,8 +45,10 @@ from utils.mjpeg_preview import MJPEGPreviewServer
 from utils.motion_inputs import (
     LiveRosMotionProvider,
     NullMotionProvider,
+    PlanarOdometry,
     RosbagMotionProvider,
 )
+from utils.path_memory import CenterlinePathMemory, GroundProjector
 
 
 class PerformanceMonitor:
@@ -260,24 +262,56 @@ class RealtimeRoadSegmentation:
                     "Motion-aided mode requires CENTERLINE_MOTION_SOURCE to be 'rosbag' or 'live'"
                 )
 
+        # Path memory replays the last seen centerline from wheel/IMU odometry
+        # once the Kalman filter has lost the road.
+        self.path_memory_active = CENTERLINE_PATH_MEMORY_ENABLED
+        if self.path_memory_active and CENTERLINE_TEMPORAL_FILTER_TYPE != "kalman":
+            print("Warning: path memory needs the Kalman filter; disabling it.")
+            self.path_memory_active = False
+        if self.path_memory_active and CENTERLINE_MOTION_SOURCE == "none":
+            print("Warning: path memory needs CENTERLINE_MOTION_SOURCE 'rosbag' or 'live'; disabling it.")
+            self.path_memory_active = False
+        self.path_memory = CenterlinePathMemory(
+            max_memory_seconds=CENTERLINE_PATH_MEMORY_MAX_SECONDS,
+            max_memory_distance=CENTERLINE_PATH_MEMORY_MAX_DISTANCE,
+            min_remaining_length=CENTERLINE_PATH_MEMORY_MIN_REMAINING,
+        )
+        self.ground_projector = GroundProjector(
+            self.camera.get_calibration(),
+            (self.processing_width, self.processing_height),
+            camera_height=CENTERLINE_CAMERA_HEIGHT,
+            camera_x=CENTERLINE_CAMERA_X,
+            camera_y=CENTERLINE_CAMERA_Y,
+            camera_yaw_deg=CENTERLINE_CAMERA_YAW_DEG,
+            fallback_pitch_down_deg=CENTERLINE_CAMERA_PITCH_DOWN_DEG,
+            max_range=CENTERLINE_GROUND_MAX_RANGE,
+        )
+
         self.motion_provider = NullMotionProvider()
-        if self.kalman_sensor_mode == "motion_aided":
+        if self.kalman_sensor_mode == "motion_aided" or self.path_memory_active:
             topic_names = {
                 "ackermann_cmd": CENTERLINE_TOPIC_ACKERMANN_CMD,
                 "steering_feedback": CENTERLINE_TOPIC_STEERING_FEEDBACK,
                 "imu_attitude": CENTERLINE_TOPIC_IMU_ATTITUDE,
+                "feedback_data": CENTERLINE_TOPIC_FEEDBACK_DATA,
             }
+            odometry = PlanarOdometry(
+                yaw_rate_sign=CENTERLINE_ODOM_YAW_RATE_SIGN,
+                max_speed_age_seconds=CENTERLINE_ODOM_MAX_SPEED_AGE_SECONDS,
+            )
             if CENTERLINE_MOTION_SOURCE == "rosbag":
                 self.motion_provider = RosbagMotionProvider(
                     bag_uri=CENTERLINE_MOTION_ROSBAG_URI,
                     topic_names=topic_names,
                     max_signal_age_seconds=CENTERLINE_MOTION_MAX_SIGNAL_AGE_SECONDS,
                     lookahead_seconds=CENTERLINE_MOTION_LOOKAHEAD_SECONDS,
+                    odometry=odometry,
                 )
             elif CENTERLINE_MOTION_SOURCE == "live":
                 self.motion_provider = LiveRosMotionProvider(
                     topic_names=topic_names,
                     max_signal_age_seconds=CENTERLINE_MOTION_MAX_SIGNAL_AGE_SECONDS,
+                    odometry=odometry,
                 )
         
         # PRE-ALLOCATE BUFFERS (avoid repeated allocations)
@@ -295,7 +329,10 @@ class RealtimeRoadSegmentation:
             f"  Centerline: {CENTERLINE_TEMPORAL_FILTER_TYPE} filter, "
             f"{self.kalman_sensor_mode}"
         )
-        if self.kalman_sensor_mode == "motion_aided":
+        print(
+            f"  Path memory: {'on (wheel/IMU odometry)' if self.path_memory_active else 'off'}"
+        )
+        if self.kalman_sensor_mode == "motion_aided" or self.path_memory_active:
             print(f"  Motion source: {CENTERLINE_MOTION_SOURCE}")
             if CENTERLINE_MOTION_SOURCE == "rosbag":
                 print(f"  Rosbag URI: {CENTERLINE_MOTION_ROSBAG_URI}")
@@ -540,6 +577,28 @@ class RealtimeRoadSegmentation:
             print(f"✓ Saved combined mask")
             print(f"  Heading: {pose_info['heading_deg']:.1f}°")
     
+    def apply_path_memory(self, points, status, motion_sample, timestamp):
+        """Store observed centerlines; replay the remembered one once the filter is lost.
+
+        Short gaps are left to the Kalman filter's own coasting, which replay showed to be
+        at least as accurate for the first second; the memory takes over when it gives up.
+        """
+        odom_pose = motion_sample.odom_pose if motion_sample is not None else None
+        odom_epoch = motion_sample.odom_epoch if motion_sample is not None else None
+        if status == TemporalCenterlineKalmanFilter.OBSERVED:
+            self.path_memory.store(
+                self.ground_projector.image_to_ground(points),
+                odom_pose,
+                odom_epoch,
+                timestamp,
+            )
+        elif status == TemporalCenterlineKalmanFilter.LOST:
+            remembered = self.path_memory.recall(odom_pose, odom_epoch, timestamp)
+            image_points = self.ground_projector.ground_to_image(remembered)
+            if image_points is not None:
+                return image_points, CenterlinePathMemory.REMEMBERED
+        return points, status
+
     def run(self):
         """Main processing loop - OPTIMIZED"""
         print("\n" + "="*70)
@@ -616,11 +675,9 @@ class RealtimeRoadSegmentation:
                             else TemporalCenterlineKalmanFilter.LOST
                         )
                     else:
-                        motion_sample = None
-                        if self.kalman_sensor_mode == "motion_aided":
-                            motion_sample = self.motion_provider.get_sample(
-                                frame_timestamp
-                            )
+                        motion_sample = self.motion_provider.get_sample(
+                            frame_timestamp
+                        )
                         centerline_points = self.centerline_kalman_filter.update(
                             centerline_points,
                             centerline_confidence,
@@ -630,6 +687,13 @@ class RealtimeRoadSegmentation:
                             motion_sample=motion_sample,
                         )
                         centerline_status = self.centerline_kalman_filter.status
+                        if self.path_memory_active:
+                            centerline_points, centerline_status = self.apply_path_memory(
+                                centerline_points,
+                                centerline_status,
+                                motion_sample,
+                                frame_timestamp,
+                            )
                 else:
                     self.centerline_smoother.reset()
                     self.centerline_kalman_filter.reset()
@@ -678,16 +742,17 @@ class RealtimeRoadSegmentation:
                 # Draw detections
                 display_image, viz_time = self.draw_detections_fast(display_image, display_detections)
 
+                centerline_color = {
+                    TemporalCenterlineKalmanFilter.OBSERVED: (0, 255, 0),
+                    TemporalCenterlineKalmanFilter.COASTING: (255, 165, 0),
+                    CenterlinePathMemory.REMEMBERED: (0, 200, 255),
+                }.get(centerline_status, (255, 0, 0))
                 if centerline_points is not None and len(centerline_points) > 1:
                     display_points = centerline_points * np.array([
                         self.display_width / self.processing_width,
                         self.display_height / self.processing_height,
                     ], dtype=np.float32)
                     display_points = np.rint(display_points).astype(np.int32)
-                    centerline_color = {
-                        TemporalCenterlineKalmanFilter.OBSERVED: (0, 255, 0),
-                        TemporalCenterlineKalmanFilter.COASTING: (255, 165, 0),
-                    }.get(centerline_status, (255, 0, 0))
                     cv2.polylines(
                         display_image,
                         [display_points.reshape(-1, 1, 2)],
@@ -696,17 +761,19 @@ class RealtimeRoadSegmentation:
                         thickness=3,
                         lineType=cv2.LINE_AA,
                     )
+                centerline_label = f"Centerline: {centerline_status.upper()}"
+                if (
+                    centerline_status == CenterlinePathMemory.REMEMBERED
+                    and self.path_memory.last_recall_age is not None
+                ):
+                    centerline_label += f" ({self.path_memory.last_recall_age:.1f} s)"
                 cv2.putText(
                     display_image,
-                    f"Centerline: {centerline_status.upper()}",
+                    centerline_label,
                     (10, self.display_height - 15),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.6,
-                    (0, 255, 0) if centerline_status == TemporalCenterlineKalmanFilter.OBSERVED else (
-                        (255, 165, 0)
-                        if centerline_status == TemporalCenterlineKalmanFilter.COASTING
-                        else (255, 0, 0)
-                    ),
+                    centerline_color,
                     2,
                 )
                 

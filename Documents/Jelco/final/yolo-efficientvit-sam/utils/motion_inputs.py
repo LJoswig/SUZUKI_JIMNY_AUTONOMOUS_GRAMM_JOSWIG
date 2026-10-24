@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+import math
 import threading
 from dataclasses import dataclass
-from typing import Dict, Optional
+from typing import Dict, Optional, Tuple
 
 
 @dataclass
@@ -13,7 +14,15 @@ class MotionSample:
     steering_angle_meas: Optional[float] = None
     steering_angle_cmd: Optional[float] = None
     speed_cmd: Optional[float] = None
+    # Raw IMU angular_velocity.z as published by the cube (positive = right turn).
     yaw_rate: Optional[float] = None
+    # Measured vehicle speed from the sterfBoard feedback, m/s (forward only).
+    speed_meas: Optional[float] = None
+    # Wheel/IMU odometry of the rear axle in a local odom frame (x forward at
+    # start, y left, yaw counter-clockwise). odom_epoch changes whenever the
+    # integration had to restart, so poses from different epochs are unrelated.
+    odom_pose: Optional[Tuple[float, float, float]] = None
+    odom_epoch: Optional[int] = None
 
     def has_any_signal(self) -> bool:
         return any(
@@ -23,8 +32,82 @@ class MotionSample:
                 self.steering_angle_cmd,
                 self.speed_cmd,
                 self.yaw_rate,
+                self.speed_meas,
+                self.odom_pose,
             )
         )
+
+
+class PlanarOdometry:
+    """Dead-reckon the rear-axle pose from measured speed and IMU yaw rate."""
+
+    def __init__(
+        self,
+        yaw_rate_sign: float = -1.0,
+        max_speed_age_seconds: float = 0.5,
+        max_step_seconds: float = 0.25,
+        min_moving_speed: float = 0.05,
+    ):
+        self.yaw_rate_sign = float(yaw_rate_sign)
+        self.max_speed_age_seconds = float(max_speed_age_seconds)
+        self.max_step_seconds = float(max_step_seconds)
+        self.min_moving_speed = float(min_moving_speed)
+        self.x = 0.0
+        self.y = 0.0
+        self.yaw = 0.0
+        self.epoch = 0
+        self.valid = False
+        self._speed = None
+        self._speed_timestamp = None
+        self._last_yaw_timestamp = None
+        self._last_pose_timestamp = None
+
+    def _restart(self) -> None:
+        self.epoch += 1
+        self.valid = False
+
+    def update_speed(self, speed: float, timestamp: float) -> None:
+        self._speed = float(speed)
+        self._speed_timestamp = float(timestamp)
+
+    def speed(self, timestamp: float) -> Optional[float]:
+        if self._speed_timestamp is None:
+            return None
+        if timestamp - self._speed_timestamp > self.max_speed_age_seconds:
+            return None
+        return self._speed
+
+    def update_yaw_rate(self, yaw_rate: float, timestamp: float) -> None:
+        timestamp = float(timestamp)
+        previous = self._last_yaw_timestamp
+        self._last_yaw_timestamp = timestamp
+        speed = self.speed(timestamp)
+        if previous is None or speed is None:
+            self._restart()
+            return
+        delta_time = timestamp - previous
+        if delta_time <= 0.0 or delta_time > self.max_step_seconds:
+            self._restart()
+            return
+
+        if not self.valid:
+            self.valid = True
+        # An Ackermann vehicle cannot turn in place; skipping yaw at standstill
+        # also stops the gyro bias from accumulating while parked.
+        if abs(speed) >= self.min_moving_speed:
+            yaw_rate_ccw = self.yaw_rate_sign * float(yaw_rate)
+            mid_yaw = self.yaw + 0.5 * yaw_rate_ccw * delta_time
+            self.x += speed * math.cos(mid_yaw) * delta_time
+            self.y += speed * math.sin(mid_yaw) * delta_time
+            self.yaw += yaw_rate_ccw * delta_time
+        self._last_pose_timestamp = timestamp
+
+    def pose(self, timestamp: float) -> Tuple[Optional[Tuple[float, float, float]], int]:
+        if not self.valid or self._last_pose_timestamp is None:
+            return None, self.epoch
+        if abs(timestamp - self._last_pose_timestamp) > self.max_step_seconds:
+            return None, self.epoch
+        return (self.x, self.y, self.yaw), self.epoch
 
 
 class BaseMotionProvider:
@@ -49,9 +132,11 @@ class RosbagMotionProvider(BaseMotionProvider):
         topic_names: Dict[str, str],
         max_signal_age_seconds: float = 0.15,
         lookahead_seconds: float = 0.02,
+        odometry: Optional[PlanarOdometry] = None,
     ):
         self.max_signal_age_seconds = float(max_signal_age_seconds)
         self.lookahead_seconds = float(lookahead_seconds)
+        self.odometry = odometry if odometry is not None else PlanarOdometry()
 
         self._latest_values: Dict[str, Optional[float]] = {
             "steering_angle_meas": None,
@@ -95,6 +180,7 @@ class RosbagMotionProvider(BaseMotionProvider):
             "ackermann_cmd": "ackermann",
             "steering_feedback": "steering_feedback",
             "imu_attitude": "imu",
+            "feedback_data": "feedback",
         }
         for logical_name, topic_name in topic_names.items():
             if logical_name not in mapping:
@@ -147,10 +233,20 @@ class RosbagMotionProvider(BaseMotionProvider):
                 self._update_signal("steering_angle_meas", data[0], timestamp)
             return
 
+        if signal_group == "feedback":
+            # [velocity_ctrl, velocity_fb, steering_rate_ctrl, steering_angle_fb]
+            data = getattr(msg, "data", None)
+            if data is not None and len(data) > 1:
+                self.odometry.update_speed(data[1], timestamp)
+            return
+
         if signal_group == "imu":
             angular_velocity = getattr(msg, "angular_velocity", None)
             if angular_velocity is not None:
-                self._update_signal("yaw_rate", getattr(angular_velocity, "z", None), timestamp)
+                yaw_rate = getattr(angular_velocity, "z", None)
+                self._update_signal("yaw_rate", yaw_rate, timestamp)
+                if yaw_rate is not None:
+                    self.odometry.update_yaw_rate(yaw_rate, timestamp)
 
     def _pump_until(self, frame_timestamp: float) -> None:
         limit = frame_timestamp + self.lookahead_seconds
@@ -173,12 +269,16 @@ class RosbagMotionProvider(BaseMotionProvider):
 
     def get_sample(self, frame_timestamp: float) -> Optional[MotionSample]:
         self._pump_until(frame_timestamp)
+        odom_pose, odom_epoch = self.odometry.pose(frame_timestamp)
         sample = MotionSample(
             timestamp=float(frame_timestamp),
             steering_angle_meas=self._value_if_fresh("steering_angle_meas", frame_timestamp),
             steering_angle_cmd=self._value_if_fresh("steering_angle_cmd", frame_timestamp),
             speed_cmd=self._value_if_fresh("speed_cmd", frame_timestamp),
             yaw_rate=self._value_if_fresh("yaw_rate", frame_timestamp),
+            speed_meas=self.odometry.speed(frame_timestamp),
+            odom_pose=odom_pose,
+            odom_epoch=odom_epoch,
         )
         return sample if sample.has_any_signal() else None
 
@@ -190,8 +290,10 @@ class LiveRosMotionProvider(BaseMotionProvider):
         self,
         topic_names: Dict[str, str],
         max_signal_age_seconds: float = 0.15,
+        odometry: Optional[PlanarOdometry] = None,
     ):
         self.max_signal_age_seconds = float(max_signal_age_seconds)
+        self.odometry = odometry if odometry is not None else PlanarOdometry()
         self._lock = threading.Lock()
         self._latest_values: Dict[str, Optional[float]] = {
             "steering_angle_meas": None,
@@ -251,8 +353,15 @@ class LiveRosMotionProvider(BaseMotionProvider):
             if len(msg.data) > 0:
                 update("steering_angle_meas", msg.data[0])
 
+        def feedback_callback(msg: Float32MultiArray) -> None:
+            if len(msg.data) > 1:
+                with provider._lock:
+                    provider.odometry.update_speed(msg.data[1], now_seconds())
+
         def imu_callback(msg: Imu) -> None:
             update("yaw_rate", msg.angular_velocity.z)
+            with provider._lock:
+                provider.odometry.update_yaw_rate(msg.angular_velocity.z, now_seconds())
 
         self._node.create_subscription(
             AckermannDrive,
@@ -272,6 +381,13 @@ class LiveRosMotionProvider(BaseMotionProvider):
             imu_callback,
             10,
         )
+        if "feedback_data" in topic_names:
+            self._node.create_subscription(
+                Float32MultiArray,
+                topic_names["feedback_data"],
+                feedback_callback,
+                10,
+            )
 
         self._running = True
 
@@ -293,12 +409,16 @@ class LiveRosMotionProvider(BaseMotionProvider):
 
     def get_sample(self, frame_timestamp: float) -> Optional[MotionSample]:
         with self._lock:
+            odom_pose, odom_epoch = self.odometry.pose(frame_timestamp)
             sample = MotionSample(
                 timestamp=float(frame_timestamp),
                 steering_angle_meas=self._value_if_fresh("steering_angle_meas", frame_timestamp),
                 steering_angle_cmd=self._value_if_fresh("steering_angle_cmd", frame_timestamp),
                 speed_cmd=self._value_if_fresh("speed_cmd", frame_timestamp),
                 yaw_rate=self._value_if_fresh("yaw_rate", frame_timestamp),
+                speed_meas=self.odometry.speed(frame_timestamp),
+                odom_pose=odom_pose,
+                odom_epoch=odom_epoch,
             )
         return sample if sample.has_any_signal() else None
 
