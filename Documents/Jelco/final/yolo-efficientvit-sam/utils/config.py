@@ -175,8 +175,14 @@ DISPLAY_SCALE = 1.0
 OUTPUT_DIR = "road_captures"
 SAVE_DEPTH_MAPS = True
 SAVE_FULL_RESOLUTION = True  # Save at camera's native resolution
-SAVE_ANNOTATED_VIDEO = True
+SAVE_ANNOTATED_VIDEO = False
 ANNOTATED_VIDEO_PATH = os.path.join(OUTPUT_DIR, "road_segmentation_new_kalman.mp4")
+
+# Live runs only: record the camera (SVO2, every processed frame) and a matching rosbag
+# into RECORD_RUN_DIR/run_<date>_<time>/, so the drive can be replayed later with
+# tools/shadow_follower.py. Needs ROS sourced for the bag.
+RECORD_RUN_ENABLED = False
+RECORD_RUN_DIR = "/home/user/recordings"
 
 # SSH-friendly preview; forward this port in VS Code and open the printed URL.
 ENABLE_REMOTE_PREVIEW = True

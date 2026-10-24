@@ -52,6 +52,7 @@ from utils.motion_inputs import (
 from utils.path_memory import CenterlinePathMemory, GroundProjector
 from utils.follower import PurePursuitFollower
 from utils.ros_publishers import CenterlineRosPublisher
+from utils.run_recording import ROSBAG_TOPICS, start_rosbag, stop_rosbag
 
 
 class PerformanceMonitor:
@@ -344,6 +345,22 @@ class RealtimeRoadSegmentation:
                     )
                 except RuntimeError as exc:
                     print(f"Warning: {exc} Not publishing the centerline.")
+
+        # Record the live drive (SVO + matching rosbag) for offline replay.
+        self.run_dir = None
+        self.rosbag_process = None
+        if RECORD_RUN_ENABLED:
+            if INPUT_MODE != "live":
+                print("Warning: RECORD_RUN_ENABLED only records live camera input; not recording.")
+            else:
+                self.run_dir = os.path.join(RECORD_RUN_DIR, time.strftime("run_%Y%m%d_%H%M%S"))
+                os.makedirs(self.run_dir, exist_ok=False)
+                self.camera.enable_recording(os.path.join(self.run_dir, "run.svo2"))
+                self.rosbag_process = start_rosbag(
+                    os.path.join(self.run_dir, "rosbag"),
+                    ROSBAG_TOPICS,
+                    os.path.join(self.run_dir, "rosbag_record.log"),
+                )
 
         # PRE-ALLOCATE BUFFERS (avoid repeated allocations)
         self.processing_buffer = np.zeros((self.processing_height, self.processing_width, 3), dtype=np.uint8)
@@ -1054,6 +1071,10 @@ class RealtimeRoadSegmentation:
         except Exception:
             pass
         self.camera.close()
+        if self.run_dir is not None:
+            # Stop the bag after the SVO is closed so it covers the whole recording.
+            stop_rosbag(self.rosbag_process)
+            print(f"✓ Recorded run: {self.run_dir}")
         if self.video_writer is not None:
             self.video_writer.release()
             print(f"✓ Saved annotated video: {ANNOTATED_VIDEO_PATH}")

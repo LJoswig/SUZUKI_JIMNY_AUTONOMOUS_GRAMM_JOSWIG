@@ -147,8 +147,24 @@ class ZEDCamera:
         """Get camera calibration parameters"""
         return self.camera_calibration.copy()
     
+    def enable_recording(self, svo_path) -> bool:
+        """Record to an SVO2 file; only frames fetched with grab_frame() are recorded"""
+        recording_params = sl.RecordingParameters()
+        recording_params.video_filename = str(svo_path)
+        recording_params.compression_mode = sl.SVO_COMPRESSION_MODE.H265
+        err = self.zed.enable_recording(recording_params)
+        if err != sl.ERROR_CODE.SUCCESS:
+            print(f"⚠ SVO recording failed: {err}")
+            return False
+        self.recording = True
+        print(f"✓ Recording SVO: {svo_path}")
+        return True
+
     def close(self):
         """Close camera"""
         if hasattr(self, 'zed'):
+            if getattr(self, 'recording', False):
+                self.zed.disable_recording()
+                self.recording = False
             self.zed.close()
             print("✓ ZED camera closed")
