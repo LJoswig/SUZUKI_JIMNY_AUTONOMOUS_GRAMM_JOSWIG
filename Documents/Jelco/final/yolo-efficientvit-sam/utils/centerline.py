@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import time
+from typing import Optional
 
 
 class TemporalCenterlineSmoother:
@@ -40,7 +41,14 @@ class TemporalCenterlineSmoother:
 
 
 class TemporalCenterlineKalmanFilter:
-    """Track a quadratic image-space centerline and its temporal change."""
+    """Track the centerline as x-positions at fixed anchor rows.
+
+    The three anchors define a quadratic, so the state describes the same curve as
+    polynomial coefficients but stays well conditioned: each state is a pixel position
+    inside the band of rows the road usually occupies. The measurement covariance is
+    derived from the least-squares geometry of each fit, so anchors outside the rows
+    that were actually observed automatically receive large uncertainty.
+    """
 
     OBSERVED = "observed"
     COASTING = "coasting"
@@ -48,18 +56,31 @@ class TemporalCenterlineKalmanFilter:
 
     def __init__(
         self,
-        process_noise=2500.0,
-        measurement_noise=25.0,
-        max_coast_seconds=0.25,
+        anchor_row_fractions=(0.475, 0.6, 0.725),
+        shared_process_noise=200.0,
+        independent_process_noise=80.0,
+        measurement_noise=16.0,
+        max_coast_seconds=1.0,
         max_position_std=35.0,
         innovation_gate_threshold=11.34,
+        relock_after_rejections=3,
         min_confidence=0.25,
-        min_vertical_span_fraction=0.15,
+        min_vertical_span_fraction=0.25,
         min_points=8,
-        initial_velocity_variance=2500.0,
+        use_motion_model=False,
+        yaw_rate_gain=-60.0,
     ):
-        if process_noise < 0.0:
+        anchor_row_fractions = np.asarray(anchor_row_fractions, dtype=np.float64)
+        if anchor_row_fractions.shape != (3,):
+            raise ValueError("Kalman anchor rows must contain exactly three fractions")
+        if np.any(anchor_row_fractions < 0.0) or np.any(anchor_row_fractions > 1.0):
+            raise ValueError("Kalman anchor rows must be fractions in [0, 1]")
+        if np.any(np.diff(anchor_row_fractions) <= 0.0):
+            raise ValueError("Kalman anchor rows must be strictly increasing")
+        if shared_process_noise < 0.0 or independent_process_noise < 0.0:
             raise ValueError("Kalman process noise must be non-negative")
+        if shared_process_noise + independent_process_noise <= 0.0:
+            raise ValueError("Kalman process noise must not be zero")
         if measurement_noise <= 0.0:
             raise ValueError("Kalman measurement noise must be positive")
         if max_coast_seconds <= 0.0:
@@ -68,41 +89,64 @@ class TemporalCenterlineKalmanFilter:
             raise ValueError("Kalman maximum position uncertainty must be positive")
         if innovation_gate_threshold <= 0.0:
             raise ValueError("Kalman innovation gate threshold must be positive")
+        if relock_after_rejections < 1:
+            raise ValueError("Kalman relock count must be at least 1")
         if not 0.0 <= min_confidence <= 1.0:
             raise ValueError("Kalman minimum confidence must be in [0, 1]")
         if not 0.0 < min_vertical_span_fraction <= 1.0:
             raise ValueError("Kalman minimum vertical span must be in (0, 1]")
         if min_points < 3:
             raise ValueError("Kalman minimum points must be at least 3")
-        if initial_velocity_variance <= 0.0:
-            raise ValueError("Kalman initial velocity variance must be positive")
 
-        self.process_noise = float(process_noise)
+        self.anchor_row_fractions = anchor_row_fractions
+        self.shared_process_noise = float(shared_process_noise)
+        self.independent_process_noise = float(independent_process_noise)
         self.measurement_noise = float(measurement_noise)
         self.max_coast_seconds = float(max_coast_seconds)
         self.max_position_std = float(max_position_std)
         self.innovation_gate_threshold = float(innovation_gate_threshold)
+        self.relock_after_rejections = int(relock_after_rejections)
         self.min_confidence = float(min_confidence)
         self.min_vertical_span_fraction = float(min_vertical_span_fraction)
         self.min_points = int(min_points)
-        self.initial_velocity_variance = float(initial_velocity_variance)
+        self.use_motion_model = bool(use_motion_model)
+        # Horizontal image shift per radian of yaw, in processing-resolution pixels.
+        self.yaw_rate_gain = float(yaw_rate_gain)
         self.reset()
 
     def reset(self):
-        self.state = np.zeros(6, dtype=np.float64)
-        self.covariance = np.zeros((6, 6), dtype=np.float64)
+        self.state = np.zeros(3, dtype=np.float64)
+        self.covariance = np.zeros((3, 3), dtype=np.float64)
         self.initialized = False
         self.last_timestamp = None
         self.last_measurement_timestamp = None
         self.image_height = None
+        self.anchor_rows = None
+        self.anchor_design = None
         self.support_rows = None
         self.status = self.LOST
         self.last_innovation_distance = None
         self.last_rejection_reason = None
+        self.relocked = False
+        self._rejected_measurements = []
+
+    def _normalize_rows(self, rows, image_height):
+        row_center = (image_height - 1.0) / 2.0
+        return (np.asarray(rows, dtype=np.float64) - row_center) / max(row_center, 1.0)
 
     @staticmethod
     def _design_matrix(normalized_rows):
         return np.column_stack((normalized_rows ** 2, normalized_rows, np.ones_like(normalized_rows)))
+
+    def _anchor_design(self, image_height):
+        anchor_rows = self.anchor_row_fractions * (image_height - 1.0)
+        return anchor_rows, self._design_matrix(
+            self._normalize_rows(anchor_rows, image_height)
+        )
+
+    def _set_geometry(self, image_height):
+        self.image_height = image_height
+        self.anchor_rows, self.anchor_design = self._anchor_design(image_height)
 
     def _fit_measurement(self, points, confidence, image_height, image_width):
         if points is None or len(points) < self.min_points:
@@ -128,10 +172,7 @@ class TemporalCenterlineKalmanFilter:
             self.last_rejection_reason = "insufficient_vertical_span"
             return None
 
-        row_center = (image_height - 1.0) / 2.0
-        row_scale = max(row_center, 1.0)
-        normalized_rows = (rows - row_center) / row_scale
-        design = self._design_matrix(normalized_rows)
+        design = self._design_matrix(self._normalize_rows(rows, image_height))
         inliers = np.ones(len(rows), dtype=bool)
 
         for _ in range(3):
@@ -154,75 +195,79 @@ class TemporalCenterlineKalmanFilter:
                 break
             inliers = refined_inliers
 
+        inlier_design = design[inliers]
         coefficients, _, _, _ = np.linalg.lstsq(
-            design[inliers], x_values[inliers], rcond=None
+            inlier_design, x_values[inliers], rcond=None
         )
-        residuals = x_values[inliers] - design[inliers] @ coefficients
-        residual_variance = float(np.mean(residuals ** 2))
         if not np.all(np.isfinite(coefficients)):
             self.last_rejection_reason = "invalid_curve_fit"
             return None
+        residuals = x_values[inliers] - inlier_design @ coefficients
+        residual_variance = float(np.mean(residuals ** 2))
         if image_width is not None:
             support_rows = np.linspace(np.min(rows), np.max(rows), 16)
-            normalized_support = (support_rows - row_center) / row_scale
-            fitted_x = self._design_matrix(normalized_support) @ coefficients
+            fitted_x = self._design_matrix(
+                self._normalize_rows(support_rows, image_height)
+            ) @ coefficients
             margin = 0.05 * image_width
             if np.any(fitted_x < -margin) or np.any(fitted_x > image_width - 1 + margin):
                 self.last_rejection_reason = "curve_outside_image"
                 return None
 
+        _, anchor_design = self._anchor_design(image_height)
+
+        # Per-row noise mapped onto the anchors through the fit geometry: about one
+        # row's variance at anchors inside the observed span, much more outside it.
+        try:
+            normalized_information = inlier_design.T @ inlier_design / len(inlier_design)
+            anchor_shape = (
+                anchor_design
+                @ np.linalg.inv(normalized_information)
+                @ anchor_design.T
+            )
+        except np.linalg.LinAlgError:
+            self.last_rejection_reason = "singular_curve_fit"
+            return None
+
         confidence = float(np.clip(confidence, self.min_confidence, 1.0))
-        variance = self.measurement_noise / confidence + residual_variance
-        measurement_covariance = np.eye(3, dtype=np.float64) * variance
-        return coefficients, measurement_covariance, rows, image_height
+        row_variance = self.measurement_noise / confidence + residual_variance
+        anchor_x = anchor_design @ coefficients
+        measurement_covariance = row_variance * (anchor_shape + anchor_shape.T) / 2.0
+        return anchor_x, measurement_covariance, rows, image_height
 
-    def _predict(self, timestamp):
-        delta_time = timestamp - self.last_timestamp
-        transition = np.eye(6, dtype=np.float64)
-        transition[:3, 3:] = np.eye(3) * delta_time
-
-        dt_squared = delta_time * delta_time
-        dt_cubed = dt_squared * delta_time
-        dt_fourth = dt_squared * dt_squared
-        identity = np.eye(3, dtype=np.float64)
-        process_covariance = self.process_noise * np.block([
-            [identity * dt_fourth / 4.0, identity * dt_cubed / 2.0],
-            [identity * dt_cubed / 2.0, identity * dt_squared],
-        ])
-
-        self.state = transition @ self.state
-        self.covariance = (
-            transition @ self.covariance @ transition.T + process_covariance
+    def _process_covariance(self, delta_time):
+        return delta_time * (
+            self.shared_process_noise * np.ones((3, 3), dtype=np.float64)
+            + self.independent_process_noise * np.eye(3, dtype=np.float64)
         )
+
+    def _predict(self, timestamp, motion_sample=None):
+        delta_time = timestamp - self.last_timestamp
+        if self.use_motion_model and motion_sample is not None:
+            yaw_rate = getattr(motion_sample, "yaw_rate", None)
+            if yaw_rate is not None:
+                # Yaw shifts every row of the image sideways by the same amount.
+                self.state += self.yaw_rate_gain * float(yaw_rate) * delta_time
+        self.covariance = self.covariance + self._process_covariance(delta_time)
         self.last_timestamp = timestamp
 
     def _maximum_position_std(self):
-        maximum_variance = 0.0
-        for normalized_row in (-1.0, 0.0, 1.0):
-            observation = np.array(
-                [normalized_row ** 2, normalized_row, 1.0, 0.0, 0.0, 0.0]
-            )
-            variance = float(observation @ self.covariance @ observation.T)
-            maximum_variance = max(maximum_variance, variance)
-        return float(np.sqrt(max(maximum_variance, 0.0)))
+        return float(np.sqrt(max(np.max(np.diag(self.covariance)), 0.0)))
 
     def _initialize(self, measurement, timestamp):
-        coefficients, measurement_covariance, rows, image_height = measurement
-        self.state[:3] = coefficients
-        self.state[3:] = 0.0
-        self.covariance.fill(0.0)
-        self.covariance[:3, :3] = measurement_covariance
-        self.covariance[3:, 3:] = (
-            np.eye(3, dtype=np.float64) * self.initial_velocity_variance
-        )
+        anchor_x, measurement_covariance, rows, image_height = measurement
+        if image_height != self.image_height:
+            self._set_geometry(image_height)
+        self.state = anchor_x.copy()
+        self.covariance = measurement_covariance.copy()
         self.initialized = True
         self.last_timestamp = timestamp
         self.last_measurement_timestamp = timestamp
-        self.image_height = image_height
         self._set_support_rows(rows)
         self.status = self.OBSERVED
         self.last_innovation_distance = None
         self.last_rejection_reason = None
+        self._rejected_measurements = []
 
     def _set_support_rows(self, rows):
         first_row = float(np.min(rows))
@@ -233,45 +278,57 @@ class TemporalCenterlineKalmanFilter:
     def _get_points(self):
         if not self.initialized or self.support_rows is None:
             return None
-        row_center = (self.image_height - 1.0) / 2.0
-        row_scale = max(row_center, 1.0)
-        normalized_rows = (self.support_rows - row_center) / row_scale
-        x_values = self._design_matrix(normalized_rows) @ self.state[:3]
+        coefficients = np.linalg.solve(self.anchor_design, self.state)
+        x_values = self._design_matrix(
+            self._normalize_rows(self.support_rows, self.image_height)
+        ) @ coefficients
         return np.column_stack((x_values, self.support_rows)).astype(np.float32)
 
+    def _mahalanobis(self, difference, covariance):
+        try:
+            return float(difference @ np.linalg.solve(covariance, difference))
+        except np.linalg.LinAlgError:
+            return np.inf
+
+    def _agrees_with_rejected(self, measurement, timestamp):
+        """Whether a rejected measurement matches the previous rejected one."""
+        if not self._rejected_measurements:
+            return True
+        previous, previous_timestamp = self._rejected_measurements[-1]
+        covariance = (
+            previous[1]
+            + measurement[1]
+            + self._process_covariance(max(timestamp - previous_timestamp, 0.0))
+        )
+        distance = self._mahalanobis(measurement[0] - previous[0], covariance)
+        return distance <= self.innovation_gate_threshold
+
     def _update_measurement(self, measurement, timestamp):
-        coefficients, measurement_covariance, rows, image_height = measurement
+        anchor_x, measurement_covariance, rows, image_height = measurement
         if image_height != self.image_height:
             self._initialize(measurement, timestamp)
             return True
 
-        observation = np.zeros((3, 6), dtype=np.float64)
-        observation[:, :3] = np.eye(3)
-        innovation = coefficients - observation @ self.state
-        innovation_covariance = (
-            observation @ self.covariance @ observation.T + measurement_covariance
-        )
-        try:
-            weighted_innovation = np.linalg.solve(
-                innovation_covariance, innovation
-            )
-        except np.linalg.LinAlgError:
-            self.last_rejection_reason = "singular_innovation_covariance"
-            return False
-
-        distance = float(innovation @ weighted_innovation)
+        innovation = anchor_x - self.state
+        innovation_covariance = self.covariance + measurement_covariance
+        distance = self._mahalanobis(innovation, innovation_covariance)
         self.last_innovation_distance = distance
         if not np.isfinite(distance) or distance > self.innovation_gate_threshold:
             self.last_rejection_reason = "innovation_gate"
+            # Several rejected measurements that agree with each other mean the road
+            # really moved; re-lock onto it instead of coasting until the track expires.
+            if not self._agrees_with_rejected(measurement, timestamp):
+                self._rejected_measurements = []
+            self._rejected_measurements.append((measurement, timestamp))
+            if len(self._rejected_measurements) >= self.relock_after_rejections:
+                self._initialize(measurement, timestamp)
+                self.relocked = True
+                return True
             return False
 
-        gain = np.linalg.solve(
-            innovation_covariance,
-            observation @ self.covariance,
-        ).T
-        identity = np.eye(6, dtype=np.float64)
-        residual_projection = identity - gain @ observation
-        self.state += gain @ innovation
+        gain = np.linalg.solve(innovation_covariance, self.covariance).T
+        residual_projection = np.eye(3, dtype=np.float64) - gain @ np.eye(3)
+        self.state = self.state + gain @ innovation
         self.covariance = (
             residual_projection @ self.covariance @ residual_projection.T
             + gain @ measurement_covariance @ gain.T
@@ -281,6 +338,7 @@ class TemporalCenterlineKalmanFilter:
         self._set_support_rows(rows)
         self.status = self.OBSERVED
         self.last_rejection_reason = None
+        self._rejected_measurements = []
         return True
 
     def update(
@@ -290,6 +348,7 @@ class TemporalCenterlineKalmanFilter:
         timestamp=None,
         image_height=None,
         image_width=None,
+        motion_sample=None,
     ):
         """Update from a curve measurement or coast briefly when it is missing."""
         timestamp = time.perf_counter() if timestamp is None else float(timestamp)
@@ -307,6 +366,7 @@ class TemporalCenterlineKalmanFilter:
             return None
 
         self.last_rejection_reason = None
+        self.relocked = False
         measurement = self._fit_measurement(
             points, confidence, int(image_height), image_width
         )
@@ -315,7 +375,7 @@ class TemporalCenterlineKalmanFilter:
             self.reset()
 
         if self.initialized:
-            self._predict(timestamp)
+            self._predict(timestamp, motion_sample=motion_sample)
             elapsed_since_measurement = timestamp - self.last_measurement_timestamp
             expired = elapsed_since_measurement > self.max_coast_seconds
             too_uncertain = self._maximum_position_std() > self.max_position_std

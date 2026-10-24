@@ -44,7 +44,7 @@ ZED_DEPTH_MODE = "NEURAL"  # Options: "NEURAL", "ULTRA", "QUALITY", "PERFORMANCE
 
 # Select "svo" to replay a ZED recording, or "live" to use the camera.
 INPUT_MODE = "svo"
-SVO_FILE_PATH = "/home/user/Documents/testfahrt_20261020_181157.svo2"
+SVO_FILE_PATH = "/home/user/Documents/testfahrt_20261021_181107.svo2"  # Matches CENTERLINE_MOTION_ROSBAG_URI
 SVO_REAL_TIME_MODE =  True # False processes as fast as inference allows
 
 # ============================================================================
@@ -65,16 +65,44 @@ CENTERLINE_USE_CURVE_FIT = True
 CENTERLINE_POLYNOMIAL_DEGREE = 2  # Allowed: 1, 2, or 3
 CENTERLINE_USE_TEMPORAL_FILTER = True
 CENTERLINE_TEMPORAL_FILTER_TYPE = "kalman"  # "ema" or "kalman"
+# Kalman sensor mode:
+# - "visual_only": centerline-only Kalman (no motion topics required)
+# - "motion_aided": Kalman prediction is conditioned on motion topics
+CENTERLINE_KALMAN_SENSOR_MODE = "motion_aided"  # "visual_only" or "motion_aided"
+CENTERLINE_KALMAN_VISUAL_ONLY = False # Backward-compatible alias for visual_only mode
 CENTERLINE_TEMPORAL_ALPHA = 0.35  # default 0.35 EMA only: lower is smoother, higher responds faster
-CENTERLINE_KALMAN_PROCESS_NOISE = 1000#2500.0  # Acceleration variance, pixels^2 / second^4
-CENTERLINE_KALMAN_MEASUREMENT_NOISE = 10.0  # Curve coefficient variance, pixels^2
-CENTERLINE_KALMAN_MAX_COAST_SECONDS = 1 #0.25
+# Kalman state: centerline x at three anchor rows (fractions of image height),
+# placed inside the band the road usually occupies (rows ~180-300 of 400).
+# Baseline tuned on testfahrt_20261021_181107 at ~5 Hz.
+CENTERLINE_KALMAN_ANCHOR_ROWS = (0.475, 0.6, 0.725)
+CENTERLINE_KALMAN_SHARED_PROCESS_NOISE = 200.0  # Common sideways drift of all anchors, pixels^2 / second
+CENTERLINE_KALMAN_INDEPENDENT_PROCESS_NOISE = 80.0  # Per-anchor drift (curvature changes), pixels^2 / second
+CENTERLINE_KALMAN_MEASUREMENT_NOISE = 16.0  # Per-row centerline variance, pixels^2
+CENTERLINE_KALMAN_MAX_COAST_SECONDS = 1.0
 CENTERLINE_KALMAN_MAX_POSITION_STD = 35.0  # Maximum predicted x uncertainty, pixels
-CENTERLINE_KALMAN_INNOVATION_GATE = 7.8#11.34  # 99% chi-square gate for 3 coefficients
+CENTERLINE_KALMAN_INNOVATION_GATE = 11.34  # 99% chi-square gate for 3 anchors
+CENTERLINE_KALMAN_RELOCK_AFTER_REJECTIONS = 3  # Consecutive agreeing gate rejections before re-locking
 CENTERLINE_KALMAN_MIN_CONFIDENCE = 0.25
 CENTERLINE_KALMAN_MIN_VERTICAL_SPAN = 0.25
 CENTERLINE_KALMAN_MIN_POINTS = 8
-CENTERLINE_KALMAN_INITIAL_VELOCITY_VARIANCE = 2500.0
+
+# Motion-aided mode only: yaw rate shifts all anchors sideways by gain * yaw_rate * dt.
+# Fitted on testfahrt_20261021_181107 (IMU angular_velocity.z), processing-resolution pixels / rad.
+CENTERLINE_KALMAN_YAW_RATE_GAIN = -60.0
+
+# Motion-aided Kalman input source:
+# - "none": disable motion provider
+# - "rosbag": consume motion signals from ROS2 bag replay
+# - "live": subscribe to live ROS2 topics
+CENTERLINE_MOTION_SOURCE = "rosbag"  # "none", "rosbag", or "live"
+CENTERLINE_MOTION_ROSBAG_URI = "/home/user/Documents/testfahrt_20261021_181107_rosbag"
+CENTERLINE_MOTION_MAX_SIGNAL_AGE_SECONDS = 0.15
+CENTERLINE_MOTION_LOOKAHEAD_SECONDS = 0.02
+
+# Topic names used by both rosbag and live providers.
+CENTERLINE_TOPIC_ACKERMANN_CMD = "/ackermann_cmd"
+CENTERLINE_TOPIC_STEERING_FEEDBACK = "/steering_feedback"
+CENTERLINE_TOPIC_IMU_ATTITUDE = "/imu_attitude"
 
 # ============================================================================
 # Visualization - OPTIMIZED
@@ -97,8 +125,8 @@ DISPLAY_SCALE = 1.0
 OUTPUT_DIR = "road_captures"
 SAVE_DEPTH_MAPS = True
 SAVE_FULL_RESOLUTION = True  # Save at camera's native resolution
-SAVE_ANNOTATED_VIDEO = True
-ANNOTATED_VIDEO_PATH = os.path.join(OUTPUT_DIR, "road_segmentation.mp4")
+SAVE_ANNOTATED_VIDEO = False
+ANNOTATED_VIDEO_PATH = os.path.join(OUTPUT_DIR, "road_segmentation_ema.mp4")
 
 # SSH-friendly preview; forward this port in VS Code and open the printed URL.
 ENABLE_REMOTE_PREVIEW = True

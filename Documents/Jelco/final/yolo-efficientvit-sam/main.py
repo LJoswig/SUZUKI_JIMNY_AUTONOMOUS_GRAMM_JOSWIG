@@ -42,6 +42,11 @@ from utils.centerline import (
 from utils.zed_camera import ZEDCamera
 from utils.svo_camera import SVOReplayCamera
 from utils.mjpeg_preview import MJPEGPreviewServer
+from utils.motion_inputs import (
+    LiveRosMotionProvider,
+    NullMotionProvider,
+    RosbagMotionProvider,
+)
 
 
 class PerformanceMonitor:
@@ -209,22 +214,71 @@ class RealtimeRoadSegmentation:
         # Detection state
         self.frame_counter = 0
         self.current_detections = None
+
+        self.kalman_sensor_mode = (
+            "visual_only"
+            if CENTERLINE_KALMAN_VISUAL_ONLY
+            else CENTERLINE_KALMAN_SENSOR_MODE
+        )
+        if self.kalman_sensor_mode not in ("visual_only", "motion_aided"):
+            raise ValueError(
+                "CENTERLINE_KALMAN_SENSOR_MODE must be 'visual_only' or 'motion_aided'"
+            )
+        if CENTERLINE_MOTION_SOURCE not in ("none", "rosbag", "live"):
+            raise ValueError(
+                "CENTERLINE_MOTION_SOURCE must be 'none', 'rosbag', or 'live'"
+            )
+
         self.centerline_smoother = TemporalCenterlineSmoother(
             alpha=CENTERLINE_TEMPORAL_ALPHA
         )
         self.centerline_kalman_filter = TemporalCenterlineKalmanFilter(
-            process_noise=CENTERLINE_KALMAN_PROCESS_NOISE,
+            anchor_row_fractions=CENTERLINE_KALMAN_ANCHOR_ROWS,
+            shared_process_noise=CENTERLINE_KALMAN_SHARED_PROCESS_NOISE,
+            independent_process_noise=CENTERLINE_KALMAN_INDEPENDENT_PROCESS_NOISE,
             measurement_noise=CENTERLINE_KALMAN_MEASUREMENT_NOISE,
             max_coast_seconds=CENTERLINE_KALMAN_MAX_COAST_SECONDS,
             max_position_std=CENTERLINE_KALMAN_MAX_POSITION_STD,
             innovation_gate_threshold=CENTERLINE_KALMAN_INNOVATION_GATE,
+            relock_after_rejections=CENTERLINE_KALMAN_RELOCK_AFTER_REJECTIONS,
             min_confidence=CENTERLINE_KALMAN_MIN_CONFIDENCE,
             min_vertical_span_fraction=CENTERLINE_KALMAN_MIN_VERTICAL_SPAN,
             min_points=CENTERLINE_KALMAN_MIN_POINTS,
-            initial_velocity_variance=CENTERLINE_KALMAN_INITIAL_VELOCITY_VARIANCE,
+            use_motion_model=(self.kalman_sensor_mode == "motion_aided"),
+            yaw_rate_gain=CENTERLINE_KALMAN_YAW_RATE_GAIN,
         )
         if CENTERLINE_TEMPORAL_FILTER_TYPE not in ("ema", "kalman"):
             raise ValueError("CENTERLINE_TEMPORAL_FILTER_TYPE must be 'ema' or 'kalman'")
+
+        if self.kalman_sensor_mode == "motion_aided":
+            if CENTERLINE_TEMPORAL_FILTER_TYPE != "kalman":
+                raise ValueError(
+                    "Motion-aided mode requires CENTERLINE_TEMPORAL_FILTER_TYPE = 'kalman'"
+                )
+            if CENTERLINE_MOTION_SOURCE == "none":
+                raise ValueError(
+                    "Motion-aided mode requires CENTERLINE_MOTION_SOURCE to be 'rosbag' or 'live'"
+                )
+
+        self.motion_provider = NullMotionProvider()
+        if self.kalman_sensor_mode == "motion_aided":
+            topic_names = {
+                "ackermann_cmd": CENTERLINE_TOPIC_ACKERMANN_CMD,
+                "steering_feedback": CENTERLINE_TOPIC_STEERING_FEEDBACK,
+                "imu_attitude": CENTERLINE_TOPIC_IMU_ATTITUDE,
+            }
+            if CENTERLINE_MOTION_SOURCE == "rosbag":
+                self.motion_provider = RosbagMotionProvider(
+                    bag_uri=CENTERLINE_MOTION_ROSBAG_URI,
+                    topic_names=topic_names,
+                    max_signal_age_seconds=CENTERLINE_MOTION_MAX_SIGNAL_AGE_SECONDS,
+                    lookahead_seconds=CENTERLINE_MOTION_LOOKAHEAD_SECONDS,
+                )
+            elif CENTERLINE_MOTION_SOURCE == "live":
+                self.motion_provider = LiveRosMotionProvider(
+                    topic_names=topic_names,
+                    max_signal_age_seconds=CENTERLINE_MOTION_MAX_SIGNAL_AGE_SECONDS,
+                )
         
         # PRE-ALLOCATE BUFFERS (avoid repeated allocations)
         self.processing_buffer = np.zeros((self.processing_height, self.processing_width, 3), dtype=np.uint8)
@@ -237,6 +291,14 @@ class RealtimeRoadSegmentation:
         print(f"  Camera: {cam_w}x{cam_h} @ {ZED_FPS} FPS")
         print(f"  Processing: {self.processing_width}x{self.processing_height} (both YOLO & SAM)")
         print(f"  Display: {self.display_width}x{self.display_height}")
+        print(
+            f"  Centerline: {CENTERLINE_TEMPORAL_FILTER_TYPE} filter, "
+            f"{self.kalman_sensor_mode}"
+        )
+        if self.kalman_sensor_mode == "motion_aided":
+            print(f"  Motion source: {CENTERLINE_MOTION_SOURCE}")
+            if CENTERLINE_MOTION_SOURCE == "rosbag":
+                print(f"  Rosbag URI: {CENTERLINE_MOTION_ROSBAG_URI}")
         print(f"  OPTIMIZATIONS:")
         print(f"    - RGB pipeline (no unnecessary conversions)")
         print(f"    - Single downscale to {self.processing_width}x{self.processing_height}")
@@ -554,12 +616,18 @@ class RealtimeRoadSegmentation:
                             else TemporalCenterlineKalmanFilter.LOST
                         )
                     else:
+                        motion_sample = None
+                        if self.kalman_sensor_mode == "motion_aided":
+                            motion_sample = self.motion_provider.get_sample(
+                                frame_timestamp
+                            )
                         centerline_points = self.centerline_kalman_filter.update(
                             centerline_points,
                             centerline_confidence,
                             timestamp=frame_timestamp,
                             image_height=self.processing_height,
                             image_width=self.processing_width,
+                            motion_sample=motion_sample,
                         )
                         centerline_status = self.centerline_kalman_filter.status
                 else:
@@ -782,6 +850,10 @@ class RealtimeRoadSegmentation:
         """Cleanup resources"""
         print("\nCleaning up...")
         self.running = False
+        try:
+            self.motion_provider.close()
+        except Exception:
+            pass
         self.camera.close()
         if self.video_writer is not None:
             self.video_writer.release()
