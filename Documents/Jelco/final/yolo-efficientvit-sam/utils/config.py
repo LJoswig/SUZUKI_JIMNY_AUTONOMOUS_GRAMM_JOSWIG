@@ -105,6 +105,14 @@ CENTERLINE_TOPIC_STEERING_FEEDBACK = "/steering_feedback"
 CENTERLINE_TOPIC_IMU_ATTITUDE = "/imu_attitude"
 CENTERLINE_TOPIC_FEEDBACK_DATA = "/feedback_data"  # data[1] = measured speed, m/s
 
+# Published for the road follower: the path the follower uses (fused, in metres around
+# the rear axle at image time, header.stamp = image time) and the centerline status.
+# Needs ROS sourced; nothing listens to these topics yet.
+CENTERLINE_ROS_PUBLISH_ENABLED = True
+CENTERLINE_TOPIC_PATH = "/centerline/path"  # nav_msgs/Path, empty while lost
+CENTERLINE_TOPIC_STATUS = "/centerline/status"  # std_msgs/String: observed, coasting, remembered or lost
+CENTERLINE_PATH_FRAME_ID = "base_link"
+
 # Path memory: keep the last observed centerline in an odometry frame and replay it
 # once the Kalman filter has lost the road. Needs CENTERLINE_MOTION_SOURCE "rosbag"
 # (with a bag recorded alongside the SVO) or "live".

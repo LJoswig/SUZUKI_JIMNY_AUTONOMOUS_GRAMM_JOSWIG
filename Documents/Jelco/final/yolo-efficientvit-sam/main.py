@@ -51,6 +51,7 @@ from utils.motion_inputs import (
 )
 from utils.path_memory import CenterlinePathMemory, GroundProjector
 from utils.follower import PurePursuitFollower
+from utils.ros_publishers import CenterlineRosPublisher
 
 
 class PerformanceMonitor:
@@ -329,7 +330,21 @@ class RealtimeRoadSegmentation:
                     max_signal_age_seconds=CENTERLINE_MOTION_MAX_SIGNAL_AGE_SECONDS,
                     odometry=odometry,
                 )
-        
+
+        self.centerline_publisher = None
+        if CENTERLINE_ROS_PUBLISH_ENABLED:
+            if CENTERLINE_TEMPORAL_FILTER_TYPE != "kalman":
+                print("Warning: centerline publishing needs the Kalman filter; not publishing.")
+            else:
+                try:
+                    self.centerline_publisher = CenterlineRosPublisher(
+                        CENTERLINE_TOPIC_PATH,
+                        CENTERLINE_TOPIC_STATUS,
+                        frame_id=CENTERLINE_PATH_FRAME_ID,
+                    )
+                except RuntimeError as exc:
+                    print(f"Warning: {exc} Not publishing the centerline.")
+
         # PRE-ALLOCATE BUFFERS (avoid repeated allocations)
         self.processing_buffer = np.zeros((self.processing_height, self.processing_width, 3), dtype=np.uint8)
         if DISPLAY_SCALE != 1.0:
@@ -347,6 +362,12 @@ class RealtimeRoadSegmentation:
         )
         print(
             f"  Path memory: {'on (wheel/IMU odometry)' if self.path_memory_active else 'off'}"
+        )
+        print(
+            f"  Publishing: "
+            f"{CENTERLINE_TOPIC_PATH} + {CENTERLINE_TOPIC_STATUS}"
+            if self.centerline_publisher is not None
+            else "  Publishing: off"
         )
         if self.kalman_sensor_mode == "motion_aided" or self.path_memory_active:
             print(f"  Motion source: {CENTERLINE_MOTION_SOURCE}")
@@ -593,30 +614,28 @@ class RealtimeRoadSegmentation:
             print(f"✓ Saved combined mask")
             print(f"  Heading: {pose_info['heading_deg']:.1f}°")
     
-    def apply_path_memory(self, points, status, motion_sample, timestamp):
+    def apply_path_memory(self, points, ground, status, motion_sample, timestamp):
         """Fuse observed centerlines in the odom frame and replay them when the filter is lost.
 
-        With fusion off, short gaps are left to the Kalman filter's own coasting, which replay
-        showed to be at least as accurate for the first second.
+        Returns the image points to draw, the base_link ground path and its status. With fusion
+        off, short gaps are left to the Kalman filter's own coasting, which replay showed to be
+        at least as accurate for the first second.
         """
         odom_pose = motion_sample.odom_pose if motion_sample is not None else None
         odom_epoch = motion_sample.odom_epoch if motion_sample is not None else None
-        ground = self.ground_projector.image_to_ground(points) if points is not None else None
         path, path_status = self.path_memory.update(ground, status, odom_pose, odom_epoch, timestamp)
         if path is ground:
-            return points, status
+            return points, ground, status
         image_points = self.ground_projector.ground_to_image(path)
-        if image_points is None:
-            return points, status
-        return image_points, path_status
+        return (image_points if image_points is not None else points), path, path_status
 
-    def update_follower(self, points, status, motion_sample, timestamp):
-        """Run the shadow follower on this frame's centerline; the command is only displayed."""
+    def update_follower(self, ground, status, motion_sample, timestamp):
+        """Run the shadow follower on this frame's ground path; the command is only displayed."""
         odom_pose = motion_sample.odom_pose if motion_sample is not None else None
         odom_epoch = motion_sample.odom_epoch if motion_sample is not None else None
-        if points is not None and status != TemporalCenterlineKalmanFilter.LOST:
+        if ground is not None and status != TemporalCenterlineKalmanFilter.LOST:
             self.follower.update_path(
-                self.ground_projector.image_to_ground(points),
+                ground,
                 odom_pose,
                 odom_epoch,
                 timestamp,
@@ -771,18 +790,32 @@ class RealtimeRoadSegmentation:
                             motion_sample=motion_sample,
                         )
                         centerline_status = self.centerline_kalman_filter.status
+                        centerline_ground = (
+                            self.ground_projector.image_to_ground(centerline_points)
+                            if centerline_points is not None
+                            else None
+                        )
                         if self.path_memory_active:
-                            centerline_points, centerline_status = self.apply_path_memory(
+                            centerline_points, centerline_ground, centerline_status = self.apply_path_memory(
                                 centerline_points,
+                                centerline_ground,
                                 centerline_status,
                                 motion_sample,
                                 frame_timestamp,
                             )
                         if SHOW_FOLLOWER_OVERLAY:
                             follower_command = self.update_follower(
-                                centerline_points,
+                                centerline_ground,
                                 centerline_status,
                                 motion_sample,
+                                frame_timestamp,
+                            )
+                        if self.centerline_publisher is not None:
+                            self.centerline_publisher.publish(
+                                None
+                                if centerline_status == TemporalCenterlineKalmanFilter.LOST
+                                else centerline_ground,
+                                centerline_status,
                                 frame_timestamp,
                             )
                 else:
@@ -1010,6 +1043,12 @@ class RealtimeRoadSegmentation:
         """Cleanup resources"""
         print("\nCleaning up...")
         self.running = False
+        # Close the publisher before the motion provider, which may own the ROS context.
+        if self.centerline_publisher is not None:
+            try:
+                self.centerline_publisher.close()
+            except Exception:
+                pass
         try:
             self.motion_provider.close()
         except Exception:
