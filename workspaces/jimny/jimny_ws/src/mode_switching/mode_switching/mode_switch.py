@@ -150,6 +150,19 @@ class ModeSwitchNode(Node):
         self._last_rc_time = time.time()
         self._steering_angle_fb = 0.0
 
+        # --- RC emergency stop (Herelink button) ---
+        # estop_channel is the 1-based RC channel the button is assigned to in the Herelink settings.
+        # PWM above the threshold means pressed. Once triggered the stop is latched: it only clears
+        # after the button is released AND the vehicle has been disarmed.
+        self.ESTOP_CHANNEL = self.declare_parameter('estop_channel', 7).value
+        self.ESTOP_PWM_THRESHOLD = self.declare_parameter('estop_pwm_threshold', 1700).value
+        self.estop_latched = False
+        self._estop_msg = ""
+        self._estop_hold_angle = 0.0
+        self._last_cmd_steering = 0.0
+        self.get_logger().info(
+            f'RC e-stop on channel {self.ESTOP_CHANNEL}, pressed when PWM > {self.ESTOP_PWM_THRESHOLD}')
+
     def _heartbeat_callback(self, msg):
         self.last_heartbeat_time = time.time()
 
@@ -219,7 +232,37 @@ class ModeSwitchNode(Node):
             if not msg.data:
                 self.signal_error = False
 
+    def _update_estop(self, rc_msg):
+        idx = self.ESTOP_CHANNEL - 1
+        raw = rc_msg.channels_raw
+        if idx >= len(raw) or raw[idx] in (0, 65535):
+            # A configured e-stop that is not received counts as pressed: no driving without a working e-stop
+            pressed = True
+            reason = f'RC e-stop channel {self.ESTOP_CHANNEL} not received'
+        else:
+            pressed = raw[idx] > self.ESTOP_PWM_THRESHOLD
+            reason = 'RC emergency stop pressed'
+
+        if pressed and not self.estop_latched:
+            self.estop_latched = True
+            self._estop_hold_angle = self._last_cmd_steering
+            self.get_logger().error(f'{reason}! Stopping vehicle.')
+        elif pressed and self.estop_latched:
+            self.get_logger().error(reason, throttle_duration_sec=2.0)
+        elif self.estop_latched and not self.armed:
+            self.estop_latched = False
+            self.get_logger().info('RC emergency stop released and vehicle disarmed, e-stop cleared')
+
+        if self.estop_latched:
+            self._estop_msg = reason if pressed else 'RC emergency stop latched, disarm to clear'
+
     def _rc_callback(self, rc_msg):
+        self._update_estop(rc_msg)
+        if self.estop_latched:
+            # publish_ackermann_msg overrides the command with a stop while latched
+            self.publish_ackermann_msg()
+            return
+
         if self.mode == 'MANUAL' and self.armed:
             self.reset_mpc = True
 
@@ -341,7 +384,10 @@ class ModeSwitchNode(Node):
 
         msg = KeyValue()
 
-        if not self.armed:
+        if self.estop_latched:
+            msg.key = "2"
+            msg.value = self._estop_msg
+        elif not self.armed:
             msg.key = "0"
             msg.value = "Disarmed"
         elif not self.signal_error:
@@ -354,6 +400,12 @@ class ModeSwitchNode(Node):
         self.signal_error_publisher.publish(msg)
 
     def publish_ackermann_msg(self, steering_angle=0., steering_angle_rate=0., vel=0., acc=0., jerk=0.):
+        if self.estop_latched:
+            # Keep the wheel where it is and stop, whatever mode asked for the command
+            steering_angle = self._estop_hold_angle
+            steering_angle_rate = vel = acc = jerk = 0.
+        self._last_cmd_steering = steering_angle
+
         ackermann_msg = AckermannDrive()
         ackermann_msg.steering_angle = steering_angle
         ackermann_msg.steering_angle_velocity = steering_angle_rate

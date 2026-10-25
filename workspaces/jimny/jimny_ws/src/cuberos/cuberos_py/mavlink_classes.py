@@ -164,6 +164,9 @@ class RC_CHANNELS_RAW:
         self.chan3 = msg.chan3_raw
         self.chan4 = msg.chan4_raw
         self.chan5 = msg.chan5_raw
+        # All channels (RC_CHANNELS carries up to 18), e.g. for Herelink buttons on ch6+
+        self.chancount = msg.chancount
+        self.channels_raw = [getattr(msg, f'chan{i}_raw') for i in range(1, msg.chancount + 1)]
         self.rssi = msg.rssi
         self.dbm = (self.rssi / 1.9) - 127
 

@@ -124,6 +124,7 @@ class CubeROSNode(Node):
                 [1102, 1928],
                 [-1000, 1000]
             ).astype(int).tolist()
+            rc_msg.channels_raw = self.cube.rc.channels_raw
             self.publisher_rc.publish(rc_msg)
 
     def publish_imu_data(self):

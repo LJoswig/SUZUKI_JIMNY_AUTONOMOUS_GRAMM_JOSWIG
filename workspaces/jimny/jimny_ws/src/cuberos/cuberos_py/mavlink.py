@@ -187,5 +187,6 @@ if __name__ == "__main__":
                 print(f'Chan3: {cube.rc.chan3}')
                 print(f'Chan4: {cube.rc.chan4}')
                 print(f'Chan5: {cube.rc.chan5}')
+                print(f'All raw: {cube.rc.channels_raw}')
 
             t = time.time()
