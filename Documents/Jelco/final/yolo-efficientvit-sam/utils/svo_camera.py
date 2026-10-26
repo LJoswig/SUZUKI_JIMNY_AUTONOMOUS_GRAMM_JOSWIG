@@ -51,12 +51,14 @@ class SVOReplayCamera:
             "ULTRA": sl.DEPTH_MODE.ULTRA,
             "QUALITY": sl.DEPTH_MODE.QUALITY,
             "PERFORMANCE": sl.DEPTH_MODE.PERFORMANCE,
+            "NONE": sl.DEPTH_MODE.NONE,
         }
 
         init_params.depth_mode = depth_map.get(
             config.ZED_DEPTH_MODE,
             sl.DEPTH_MODE.NEURAL
         )
+        self.depth_enabled = init_params.depth_mode != sl.DEPTH_MODE.NONE
 
         init_params.coordinate_units = sl.UNIT.METER
         init_params.coordinate_system = sl.COORDINATE_SYSTEM.RIGHT_HANDED_Z_UP_X_FWD
@@ -65,11 +67,12 @@ class SVOReplayCamera:
         if err != sl.ERROR_CODE.SUCCESS:
             raise RuntimeError(f"Failed to open SVO file: {err}")
 
-        tracking_params = sl.PositionalTrackingParameters()
-        tracking_params.enable_imu_fusion = True
-        err = self.zed.enable_positional_tracking(tracking_params)
-        if err != sl.ERROR_CODE.SUCCESS:
-            print(f"Warning: positional tracking failed during SVO replay: {err}")
+        if self.depth_enabled:  # positional tracking needs depth
+            tracking_params = sl.PositionalTrackingParameters()
+            tracking_params.enable_imu_fusion = True
+            err = self.zed.enable_positional_tracking(tracking_params)
+            if err != sl.ERROR_CODE.SUCCESS:
+                print(f"Warning: positional tracking failed during SVO replay: {err}")
 
         camera_info = self.zed.get_camera_information()
         self.camera_width = camera_info.camera_configuration.resolution.width
@@ -98,8 +101,10 @@ class SVOReplayCamera:
         image = self.image_zed.get_data()
         image_rgb = cv2.cvtColor(image, cv2.COLOR_BGRA2RGB)
 
-        self.zed.retrieve_measure(self.depth_map, sl.MEASURE.DEPTH)
-        depth = self.depth_map.get_data()
+        depth = None  # None with ZED_DEPTH_MODE = "NONE"
+        if self.depth_enabled:
+            self.zed.retrieve_measure(self.depth_map, sl.MEASURE.DEPTH)
+            depth = self.depth_map.get_data()
 
         return True, image_rgb, depth
 

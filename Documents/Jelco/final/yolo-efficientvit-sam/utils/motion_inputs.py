@@ -319,12 +319,13 @@ class LiveRosMotionProvider(BaseMotionProvider):
             ) from exc
 
         self._rclpy = rclpy
-        self._executor = SingleThreadedExecutor()
-
         self._owns_rclpy_context = False
         if not self._rclpy.ok():
             self._rclpy.init(args=None)
             self._owns_rclpy_context = True
+
+        # The executor binds to the default context, so it must exist after init.
+        self._executor = SingleThreadedExecutor()
 
         provider = self
 

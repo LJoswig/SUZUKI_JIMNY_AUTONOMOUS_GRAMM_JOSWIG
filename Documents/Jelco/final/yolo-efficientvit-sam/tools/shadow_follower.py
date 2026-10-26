@@ -51,17 +51,20 @@ MIN_MOVING_SPEED = 0.5  # m/s
 # ---------------------------------------------------------------------------
 # Phase 1: perception
 # ---------------------------------------------------------------------------
-def run_perception(svo_path, cache_path):
+def run_perception(svo_path, cache_path, detection_selection, stride=0):
+    """stride 0: real-time replay, which skips frames like the live pipeline but not always
+    the same ones; stride N: every N-th frame, identical on every run (for comparisons)."""
     os.chdir(REPO)
     cfg.INPUT_MODE = "svo"
     cfg.SVO_FILE_PATH = svo_path
-    cfg.SVO_REAL_TIME_MODE = True  # Skip frames like the live pipeline does
+    cfg.SVO_REAL_TIME_MODE = stride == 0
     cfg.ENABLE_REMOTE_PREVIEW = False
     cfg.SHOW_LOCAL_WINDOW = False
     cfg.SAVE_ANNOTATED_VIDEO = False
     cfg.CENTERLINE_KALMAN_SENSOR_MODE = "visual_only"
     cfg.CENTERLINE_MOTION_SOURCE = "none"
     cfg.CENTERLINE_PATH_MEMORY_ENABLED = False  # Applied in phase 2 with bag odometry
+    cfg.CENTERLINE_DETECTION_SELECTION = detection_selection
 
     import cv2
     import main as pipeline
@@ -99,6 +102,8 @@ def run_perception(svo_path, cache_path):
             ))
             if len(records) % 100 == 0:
                 print(f"[perception] {len(records)} frames, {time.time() - started:.0f} s")
+            if stride > 1:
+                app.camera.zed.set_svo_position(app.camera.zed.get_svo_position() + stride - 1)
     finally:
         app.cleanup()
 
@@ -428,13 +433,22 @@ def main():
     parser.add_argument("--lookahead", type=float, default=cfg.FOLLOWER_LOOKAHEAD_DISTANCE)
     parser.add_argument("--steering-ratio", type=float, default=cfg.FOLLOWER_STEERING_RATIO)
     parser.add_argument("--max-steering-rate", type=float, default=cfg.FOLLOWER_MAX_STEERING_RATE_DEG_S)
+    parser.add_argument("--stride", type=int, default=0,
+                        help="0: real-time replay like live (frames vary between runs); N: every N-th frame, "
+                             "deterministic, for comparing settings (6 for 30 fps SVOs, 1 for recorded runs)")
+    parser.add_argument("--detection-selection", choices=("best", "union"), default=cfg.CENTERLINE_DETECTION_SELECTION,
+                        help="road detections the centerline is computed from (part of the cache and output names)")
+    parser.add_argument("--name", default=None,
+                        help="output name (default: SVO file name, or its folder name for run.svo2 recordings)")
     parser.add_argument("--export-bag", default=None,
                         help="also write a bag with motion topics + /centerline/* for replaying into the ROS node")
     parser.add_argument("--fusion-weight", type=float, default=cfg.CENTERLINE_PATH_FUSION_WEIGHT,
                         help="weight of a new observation in the path fusion; 1.0 = no fusion")
     args = parser.parse_args()
 
-    name = Path(args.svo).stem
+    svo = Path(args.svo)
+    run_name = args.name or (svo.parent.name if svo.stem == "run" else svo.stem)
+    name = f"{run_name}_{args.detection_selection}" + (f"_s{args.stride}" if args.stride else "")
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     cache_path = Path(args.cache) if args.cache else out_dir / f"{name}_perception.pkl"
@@ -443,7 +457,7 @@ def main():
             cache = pickle.load(f)
         print(f"[perception] using cache {cache_path} ({len(cache['records'])} frames)")
     else:
-        cache = run_perception(args.svo, cache_path)
+        cache = run_perception(args.svo, cache_path, args.detection_selection, args.stride)
 
     bag, messages = read_bag(args.bag)
     odometry = OdometryTrack(messages)

@@ -25,7 +25,7 @@ ROSBAG_TOPICS = [
     # Centerline perception and road follower
     "/centerline/path",
     "/centerline/status",
-    "/centerline_follower/cmd_shadow",
+    "/centerline_follower/cmd",
     "/centerline_follower/debug",
 ]
 
@@ -38,6 +38,9 @@ def start_rosbag(bag_dir: Path, topics, log_path: Path):
     log_file = open(log_path, "w")
     process = subprocess.Popen(
         ["ros2", "bag", "record", "-o", str(bag_dir), *topics],
+        # No terminal input: the recorder's keyboard controls (space = pause) would otherwise
+        # react to keys typed in the terminal running main.py.
+        stdin=subprocess.DEVNULL,
         stdout=log_file,
         stderr=subprocess.STDOUT,
         start_new_session=True,  # CTRL+C stops the SVO first; the bag is stopped explicitly after it

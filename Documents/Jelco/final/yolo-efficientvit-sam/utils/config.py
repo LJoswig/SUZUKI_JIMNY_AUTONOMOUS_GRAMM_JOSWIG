@@ -40,10 +40,10 @@ SAM_NORM_STD = np.array([58.395, 57.12, 57.375], dtype=np.float32)
 # ============================================================================
 ZED_RESOLUTION = "SVGA"  # Options: "HD2K", "HD1080", "HD720", "SVGA", "AUTO"
 ZED_FPS = 30
-ZED_DEPTH_MODE = "NEURAL"  # Options: "NEURAL", "ULTRA", "QUALITY", "PERFORMANCE"
+ZED_DEPTH_MODE = "NONE"  # "NONE" (no depth: faster, road following does not need it; no positional tracking or depth captures), "NEURAL", "ULTRA", "QUALITY", "PERFORMANCE"
 
 # Select "svo" to replay a ZED recording, or "live" to use the camera.
-INPUT_MODE = "svo"
+INPUT_MODE = "live"
 SVO_FILE_PATH = "/home/user/Documents/testfahrt_20261021_181107.svo2"  # Matches CENTERLINE_MOTION_ROSBAG_URI
 SVO_REAL_TIME_MODE =  True # False processes as fast as inference allows
 
@@ -63,13 +63,17 @@ USE_HISTOGRAM_EQUALIZATION = True
 # Fit a quadratic curve before temporal filtering.
 CENTERLINE_USE_CURVE_FIT = True
 CENTERLINE_POLYNOMIAL_DEGREE = 2  # Allowed: 1, 2, or 3
+# Road detections the centerline is computed from: "best" = only the most confident one
+# (keeps weak detections of the grass beside the road out), "union" = all of them.
+CENTERLINE_DETECTION_SELECTION = "best"  # "best" or "union"
+CENTERLINE_MIN_DETECTION_CONFIDENCE = 0.25  # Detections below this are ignored for the centerline
 CENTERLINE_USE_TEMPORAL_FILTER = True
 CENTERLINE_TEMPORAL_FILTER_TYPE = "kalman"  # "ema" or "kalman"
 # Kalman sensor mode:
 # - "visual_only": centerline-only Kalman (no motion topics required)
 # - "motion_aided": Kalman prediction is conditioned on motion topics
 CENTERLINE_KALMAN_SENSOR_MODE = "visual_only"  # "visual_only" or "motion_aided"
-CENTERLINE_KALMAN_VISUAL_ONLY = False # Backward-compatible alias for visual_only mode
+CENTERLINE_KALMAN_VISUAL_ONLY = True # Backward-compatible alias for visual_only mode
 CENTERLINE_TEMPORAL_ALPHA = 0.35  # default 0.35 EMA only: lower is smoother, higher responds faster
 # Kalman state: centerline x at three anchor rows (fractions of image height),
 # placed inside the band the road usually occupies (rows ~180-300 of 400).
@@ -94,7 +98,7 @@ CENTERLINE_KALMAN_YAW_RATE_GAIN = -60.0
 # - "none": disable motion provider
 # - "rosbag": consume motion signals from ROS2 bag replay
 # - "live": subscribe to live ROS2 topics
-CENTERLINE_MOTION_SOURCE = "rosbag"  # "none", "rosbag", or "live"
+CENTERLINE_MOTION_SOURCE = "live"  # "none", "rosbag", or "live"
 CENTERLINE_MOTION_ROSBAG_URI = "/home/user/Documents/testfahrt_20261021_181107_rosbag"
 CENTERLINE_MOTION_MAX_SIGNAL_AGE_SECONDS = 0.15
 CENTERLINE_MOTION_LOOKAHEAD_SECONDS = 0.02
@@ -173,7 +177,7 @@ DISPLAY_SCALE = 1.0
 # Output Parameters
 # ============================================================================
 OUTPUT_DIR = "road_captures"
-SAVE_DEPTH_MAPS = True
+SAVE_DEPTH_MAPS = False
 SAVE_FULL_RESOLUTION = True  # Save at camera's native resolution
 SAVE_ANNOTATED_VIDEO = False
 ANNOTATED_VIDEO_PATH = os.path.join(OUTPUT_DIR, "road_segmentation_new_kalman.mp4")
@@ -181,7 +185,7 @@ ANNOTATED_VIDEO_PATH = os.path.join(OUTPUT_DIR, "road_segmentation_new_kalman.mp
 # Live runs only: record the camera (SVO2, every processed frame) and a matching rosbag
 # into RECORD_RUN_DIR/run_<date>_<time>/, so the drive can be replayed later with
 # tools/shadow_follower.py. Needs ROS sourced for the bag.
-RECORD_RUN_ENABLED = False
+RECORD_RUN_ENABLED = True
 RECORD_RUN_DIR = "/home/user/recordings"
 
 # SSH-friendly preview; forward this port in VS Code and open the printed URL.

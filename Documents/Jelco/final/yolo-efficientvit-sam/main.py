@@ -255,6 +255,8 @@ class RealtimeRoadSegmentation:
         )
         if CENTERLINE_TEMPORAL_FILTER_TYPE not in ("ema", "kalman"):
             raise ValueError("CENTERLINE_TEMPORAL_FILTER_TYPE must be 'ema' or 'kalman'")
+        if CENTERLINE_DETECTION_SELECTION not in ("best", "union"):
+            raise ValueError("CENTERLINE_DETECTION_SELECTION must be 'best' or 'union'")
 
         if self.kalman_sensor_mode == "motion_aided":
             if CENTERLINE_TEMPORAL_FILTER_TYPE != "kalman":
@@ -533,11 +535,22 @@ class RealtimeRoadSegmentation:
             for m in masks
         ])
         
+        # Mask the centerline is computed from: only the most confident detection ("best"),
+        # which keeps weak detections of the grass beside the road out, or all of them ("union").
+        confidence_array = np.asarray(confidences)
+        selected = np.flatnonzero(confidence_array >= CENTERLINE_MIN_DETECTION_CONFIDENCE)
+        if CENTERLINE_DETECTION_SELECTION == "best" and len(selected) > 0:
+            selected = selected[[np.argmax(confidence_array[selected])]]
+        if len(selected) > 0:
+            centerline_mask = np.any(np.asarray(masks)[selected], axis=0)
+        else:
+            centerline_mask = np.zeros(np.asarray(masks[0]).shape, dtype=bool)
+
         # Return detections at camera resolution
         detections = {
             'boxes': full_res_boxes,
             'masks': full_res_masks,
-            'centerline_mask': np.any(masks, axis=0).astype(np.uint8) * 255,
+            'centerline_mask': centerline_mask.astype(np.uint8) * 255,
             'confidences': confidences
         }
         
@@ -605,7 +618,7 @@ class RealtimeRoadSegmentation:
             print(f"✓ Saved image: {image_path}")
         
         # Save depth
-        if SAVE_DEPTH_MAPS:
+        if SAVE_DEPTH_MAPS and depth_map is not None:
             depth_path = os.path.join(OUTPUT_DIR, f"depth_{timestamp}.npy")
             np.save(depth_path, depth_map)
             
