@@ -9,13 +9,16 @@ Subscribes:
   /feedback_data      std_msgs/Float32MultiArray, data[1] = measured speed in m/s
 
 Publishes:
-  /centerline_follower/cmd_shadow  ackermann_msgs/AckermannDrive (steering-wheel degrees,
-                                   positive = right, like /ackermann_cmd); nothing listens to it
+  /centerline_follower/cmd    ackermann_msgs/AckermannDrive (steering-wheel degrees, positive =
+                              right, like /ackermann_cmd); speed 0 means not tracking. mode_switch
+                              uses it in ACRO; in other modes nothing acts on it (shadow mode)
   /centerline_follower/debug       std_msgs/String with a JSON object per control cycle
 
 The path is kept in a dead-reckoned odom frame at the pose where its image was taken and
-evaluated at the current pose, which compensates the perception delay. All times come from
-the node clock, so the node also works on bag time with use_sim_time:=true.
+evaluated at the current pose, which compensates the perception delay. A path that jumps
+sideways by more than max_path_jump, or lies more than max_lateral_offset to the side at the
+lookahead, is rejected; the previous path then goes stale and the follower stops. All times
+come from the node clock, so the node also works on bag time with use_sim_time:=true.
 """
 
 import json
@@ -31,7 +34,7 @@ from sensor_msgs.msg import Imu
 from std_msgs.msg import Float32MultiArray, String
 
 from .odometry import PlanarOdometry
-from .pure_pursuit import PurePursuitFollower
+from .pure_pursuit import PurePursuitFollower, inverse_transform_points
 
 
 class CenterlineFollowerNode(Node):
@@ -47,6 +50,8 @@ class CenterlineFollowerNode(Node):
             'max_steering_rate_deg_s': 120.0,
             'target_speed': 1.39,
             'max_path_age_seconds': 1.0,
+            'max_path_jump': 1.0,
+            'max_lateral_offset': 1.5,
             'rate_hz': 20.0,
             'yaw_rate_sign': -1.0,
             'max_speed_age_seconds': 0.5,
@@ -54,7 +59,7 @@ class CenterlineFollowerNode(Node):
             'status_topic': '/centerline/status',
             'imu_topic': '/imu_attitude',
             'feedback_topic': '/feedback_data',
-            'command_topic': '/centerline_follower/cmd_shadow',
+            'command_topic': '/centerline_follower/cmd',
             'debug_topic': '/centerline_follower/debug',
         }
         for name, default in parameters.items():
@@ -78,6 +83,9 @@ class CenterlineFollowerNode(Node):
         # Recent poses, to look up where the vehicle was when a path's image was taken.
         self.pose_history = deque(maxlen=400)
         self.path_status = None
+        self.max_path_jump = param('max_path_jump')
+        self.max_lateral_offset = param('max_lateral_offset')
+        self.rejected_paths = 0
         self.previous_steering = None
         self.previous_time = None
 
@@ -91,8 +99,9 @@ class CenterlineFollowerNode(Node):
         self.debug_publisher = self.create_publisher(String, param('debug_topic'), 10)
         self.create_timer(1.0 / param('rate_hz'), self._control_callback)
         self.get_logger().info(
-            f"Shadow follower publishing on {param('command_topic')} "
-            f"(lookahead {param('lookahead_distance')} m)")
+            f"Follower publishing on {param('command_topic')} "
+            f"(lookahead {param('lookahead_distance')} m, "
+            f"steering limit {param('max_steering_wheel_deg')} deg)")
 
     def _now(self):
         return self.get_clock().now().nanoseconds * 1e-9
@@ -128,7 +137,47 @@ class CenterlineFollowerNode(Node):
         stamp = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
         points = np.array([[p.pose.position.x, p.pose.position.y] for p in msg.poses])
         pose, epoch = self._pose_at(stamp)
+        # Implausible paths (e.g. a false detection beside the road) are not used: the previous
+        # path then goes stale if the problem persists, so the follower stops instead of following.
+        offset = self._lateral_at_lookahead(points)
+        jump = self._path_jump(points, pose, epoch, stamp)
+        if offset is not None and abs(offset) > self.max_lateral_offset:
+            self._reject(f'lateral offset {offset:+.2f} m at the lookahead')
+            return
+        if jump is not None and jump > self.max_path_jump:
+            self._reject(f'lateral jump {jump:.2f} m at the lookahead')
+            return
         self.follower.update_path(points, pose, epoch, stamp, self.path_status)
+
+    def _reject(self, reason):
+        self.rejected_paths += 1
+        self.get_logger().warn(f'Rejected path: {reason}', throttle_duration_sec=1.0)
+
+    def _lateral_at_lookahead(self, points):
+        points = points[np.argsort(points[:, 0])]
+        lookahead = self.follower.lookahead_distance
+        if points[0, 0] > lookahead or points[-1, 0] < lookahead:
+            return None
+        return float(np.interp(lookahead, points[:, 0], points[:, 1]))
+
+    def _path_jump(self, points, pose, epoch, stamp):
+        """Lateral jump in metres between a new path and the current one, or None."""
+        follower = self.follower
+        if follower.path_points is None:
+            return None
+        if stamp - follower.path_stamp > follower.max_path_age_seconds:
+            return None
+        if follower.path_pose is None:
+            previous = follower.path_points
+        elif pose is None or epoch != follower.path_epoch:
+            return None
+        else:
+            previous = inverse_transform_points(follower.path_points, pose)
+        before = self._lateral_at_lookahead(previous)
+        now = self._lateral_at_lookahead(points)
+        if before is None or now is None:
+            return None
+        return abs(now - before)
 
     def _control_callback(self):
         now = self._now()
@@ -162,6 +211,7 @@ class CenterlineFollowerNode(Node):
             'curvature': round(command.curvature, 5),
             'path_age': None if command.path_age is None else round(command.path_age, 3),
             'odometry_ok': pose is not None,
+            'rejected_paths': self.rejected_paths,
         })
         self.debug_publisher.publish(debug)
 

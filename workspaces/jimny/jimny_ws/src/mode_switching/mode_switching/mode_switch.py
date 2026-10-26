@@ -163,6 +163,38 @@ class ModeSwitchNode(Node):
         self.get_logger().info(
             f'RC e-stop on channel {self.ESTOP_CHANNEL}, pressed when PWM > {self.ESTOP_PWM_THRESHOLD}')
 
+        # --- Road follower mode (ACRO) ---
+        # In ACRO the centerline follower steers (/centerline_follower/cmd) and the throttle stick
+        # sets the speed as a dead-man: centred or released means stop. The follower engages only
+        # when it is tracking, the vehicle is stopped and the stick is centred. Once engaged, any
+        # problem latches the same stop as the RC e-stop (full brake, steering held, disarm to clear).
+        self.ACRO_SOURCE = self.declare_parameter('acro_source', 'follower').value  # 'follower' or 'mpc'
+        self.FOLLOWER_TOPIC = self.declare_parameter('follower_topic', '/centerline_follower/cmd').value
+        self.FOLLOWER_CMD_TIMEOUT = self.declare_parameter('follower_cmd_timeout', 0.3).value  # s
+        self.RC_TIMEOUT = self.declare_parameter('rc_timeout', 0.3).value  # s
+        self.FOLLOWER_MAX_SPEED = self.declare_parameter('follower_max_speed', 1.39).value  # m/s
+        self.FOLLOWER_MAX_STEER = self.declare_parameter('follower_max_steering_deg', 300.0).value
+        self.STEER_ERROR_LIMIT = self.declare_parameter('steering_error_limit_deg', 100.0).value
+        self.STEER_ERROR_TIME = self.declare_parameter('steering_error_time', 1.0).value  # s
+        self.follower_engaged = False
+        self._follower_cmd = None
+        self._follower_cmd_time = None
+        self._last_rc_msg_time = None
+        self._vel_stick = 0.0
+        self._velocity_fb = None
+        self._steering_meas = None
+        self._steering_meas_time = None
+        self._steering_error_since = None
+        self.follower_subscriber = self.create_subscription(
+            AckermannDrive, self.FOLLOWER_TOPIC, self._follower_callback, 10)
+        self.steering_feedback_subscriber = self.create_subscription(
+            Float32MultiArray, 'steering_feedback', self._steering_feedback_callback, 10)
+        self.follower_watchdog_timer = self.create_timer(0.05, self._follower_watchdog)
+        self.get_logger().info(
+            f'ACRO source: {self.ACRO_SOURCE}'
+            + (f' (steering from {self.FOLLOWER_TOPIC}, limit {self.FOLLOWER_MAX_STEER} deg, '
+               f'stick speed up to {self.FOLLOWER_MAX_SPEED} m/s)' if self.ACRO_SOURCE == 'follower' else ''))
+
     def _heartbeat_callback(self, msg):
         self.last_heartbeat_time = time.time()
 
@@ -183,6 +215,7 @@ class ModeSwitchNode(Node):
             self.jimny.reset_des()
             self._manual_target_angle = self._steering_angle_fb
             self._last_rc_time = time.time()
+            self.follower_engaged = False
 
         mode_msg = String()
         mode_msg.data = msg.mode
@@ -192,6 +225,7 @@ class ModeSwitchNode(Node):
             self.mpc_started = False
             println(f"Armed status changed to: {msg.armed}")
             self.armed = msg.armed
+            self.follower_engaged = False
             self._manual_target_angle = self._steering_angle_fb
             self._last_rc_time = time.time()
 
@@ -209,6 +243,7 @@ class ModeSwitchNode(Node):
     def _feedback_callback(self, msg):
         velocity_fb = msg.data[1]
         steering_angle_fb = msg.data[3]
+        self._velocity_fb = velocity_fb
 
         self._steering_angle_fb = steering_angle_fb
 
@@ -232,6 +267,15 @@ class ModeSwitchNode(Node):
             if not msg.data:
                 self.signal_error = False
 
+    def _latch_stop(self, reason):
+        """Latch a stop: signal_error 2 (full brake), speed 0, steering held, until disarmed."""
+        if not self.estop_latched:
+            self.estop_latched = True
+            self._estop_hold_angle = self._last_cmd_steering
+            self.get_logger().error(f'{reason}! Stopping vehicle.')
+            self._estop_msg = f'{reason}, disarm to clear'
+        self.follower_engaged = False
+
     def _update_estop(self, rc_msg):
         idx = self.ESTOP_CHANNEL - 1
         raw = rc_msg.channels_raw
@@ -243,24 +287,107 @@ class ModeSwitchNode(Node):
             pressed = raw[idx] > self.ESTOP_PWM_THRESHOLD
             reason = 'RC emergency stop pressed'
 
-        if pressed and not self.estop_latched:
-            self.estop_latched = True
-            self._estop_hold_angle = self._last_cmd_steering
-            self.get_logger().error(f'{reason}! Stopping vehicle.')
-        elif pressed and self.estop_latched:
-            self.get_logger().error(reason, throttle_duration_sec=2.0)
+        if pressed:
+            if self.estop_latched:
+                self.get_logger().error(reason, throttle_duration_sec=2.0)
+            self._latch_stop(reason)
         elif self.estop_latched and not self.armed:
             self.estop_latched = False
-            self.get_logger().info('RC emergency stop released and vehicle disarmed, e-stop cleared')
+            self.get_logger().info('Stop released and vehicle disarmed, stop cleared')
 
+    def _follower_mode_active(self):
+        return self.mode == 'ACRO' and self.armed and self.ACRO_SOURCE == 'follower'
+
+    def _follower_callback(self, msg):
+        self._follower_cmd = msg
+        self._follower_cmd_time = time.time()
+
+    def _steering_feedback_callback(self, msg):
+        # [measured angle, target angle, ...] from the steering board
+        if len(msg.data) > 1:
+            self._steering_meas = (float(msg.data[0]), float(msg.data[1]))
+            self._steering_meas_time = time.time()
+
+    def _stick_speed(self):
+        """Throttle stick as dead-man: centred or backwards = 0, full forward = follower_max_speed."""
+        if self._vel_stick < self.RC_STICK_DEADBAND:
+            return 0.0
+        return round(float(np.interp(
+            self._vel_stick, [self.RC_STICK_DEADBAND, 1000], [0.0, self.FOLLOWER_MAX_SPEED])), 2)
+
+    def _follower_step(self):
+        """ACRO with the follower: follower steering, stick speed; engage only from a safe state."""
+        now = time.time()
+        command = self._follower_cmd
+        fresh = command is not None and now - self._follower_cmd_time <= self.FOLLOWER_CMD_TIMEOUT
+        tracking = fresh and command.speed > 0.0
+        speed = self._stick_speed()
+
+        if not self.follower_engaged:
+            stopped = self._velocity_fb is not None and abs(self._velocity_fb) < self.MPC_VEL_TOLERANCE
+            if tracking and stopped and speed == 0.0:
+                self.follower_engaged = True
+                self.get_logger().info('Follower engaged: throttle stick sets the speed, release to stop')
+            else:
+                self.publish_ackermann_msg(steering_angle=self._last_cmd_steering)
+                self.signal_error = True
+                self.signal_error_msg = (
+                    'Follower mode waiting: needs a tracking follower, vehicle stopped, throttle centred')
+                return
+
+        if not tracking:
+            self._latch_stop('Follower command missing' if not fresh else 'Follower is not tracking the road')
+            self.publish_ackermann_msg()
+            return
+
+        steering = float(np.clip(command.steering_angle, -self.FOLLOWER_MAX_STEER, self.FOLLOWER_MAX_STEER))
+        self.publish_ackermann_msg(
+            steering_angle=steering,
+            steering_angle_rate=command.steering_angle_velocity,
+            vel=speed,
+        )
+        self.signal_error = False
+
+    def _follower_watchdog(self):
+        """Stop when RC input, follower commands or steering tracking fail while in follower mode."""
+        if not self._follower_mode_active():
+            self._steering_error_since = None
+            return
+        now = time.time()
         if self.estop_latched:
-            self._estop_msg = reason if pressed else 'RC emergency stop latched, disarm to clear'
+            self.publish_ackermann_msg()
+            return
+        if self._last_rc_msg_time is None or now - self._last_rc_msg_time > self.RC_TIMEOUT:
+            self._latch_stop('RC input lost')
+            self.publish_ackermann_msg()
+            return
+        if not self.follower_engaged:
+            return
+        if self._follower_cmd_time is None or now - self._follower_cmd_time > self.FOLLOWER_CMD_TIMEOUT:
+            self._latch_stop('Follower command timeout')
+            self.publish_ackermann_msg()
+            return
+        if self._steering_meas is not None and now - self._steering_meas_time < 0.5:
+            measured, target = self._steering_meas
+            if abs(measured - target) > self.STEER_ERROR_LIMIT:
+                self._steering_error_since = self._steering_error_since or now
+                if now - self._steering_error_since > self.STEER_ERROR_TIME:
+                    self._latch_stop('Steering does not follow its target')
+                    self.publish_ackermann_msg()
+            else:
+                self._steering_error_since = None
 
     def _rc_callback(self, rc_msg):
+        self._last_rc_msg_time = time.time()
+        self._vel_stick = rc_msg.channels[1]
         self._update_estop(rc_msg)
         if self.estop_latched:
             # publish_ackermann_msg overrides the command with a stop while latched
             self.publish_ackermann_msg()
+            return
+
+        if self._follower_mode_active():
+            self._follower_step()
             return
 
         if self.mode == 'MANUAL' and self.armed:
@@ -345,7 +472,7 @@ class ModeSwitchNode(Node):
             println("Vehicle is not armed")
 
     def _mpc_callback(self, msg):
-        if self.mode == 'ACRO' and self.armed:
+        if self.mode == 'ACRO' and self.armed and self.ACRO_SOURCE == 'mpc':
             if not self.can_start_mpc and not self.mpc_started:
                 self.get_logger().info("Cannot start MPC. Stop the vehicle and set the steering to neutral.")
                 self.signal_error = True

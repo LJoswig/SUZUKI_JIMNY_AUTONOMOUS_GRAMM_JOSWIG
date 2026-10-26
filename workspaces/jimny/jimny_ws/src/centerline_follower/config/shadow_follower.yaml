@@ -1,16 +1,18 @@
-# Shadow road follower. Values mirror yolo-efficientvit-sam/utils/config.py (FOLLOWER_*).
+# Road follower (shadow mode in MANUAL, steers in ACRO via mode_switch). Values mirror yolo-efficientvit-sam/utils/config.py (FOLLOWER_*).
 centerline_follower:
   ros__parameters:
     wheelbase: 2.27                  # m, measured camera-to-axle distances
     steering_ratio: 20.0             # steering-wheel deg per road-wheel deg, fitted on testfahrt_20261021_181107
     steering_sign: -1.0              # positive steering_angle turns right
     lookahead_distance: 6.0          # m from the rear axle; must exceed camera x (1.27 m) + ~4 m
-    max_steering_wheel_deg: 620.0
+    max_steering_wheel_deg: 300.0    # first autonomous tests; 620 = full lock
     max_steering_rate_deg_s: 120.0
     target_speed: 1.39               # m/s (5 km/h)
-    max_path_age_seconds: 1.0        # tune from the measured live path rate
+    max_path_age_seconds: 1.0        # live: path age p99 0.5-0.7 s
+    max_path_jump: 1.0               # m at the lookahead; larger jumps are rejected as implausible
+    max_lateral_offset: 1.5          # m at the lookahead; ~12 m curve radius, enough for first tests
     rate_hz: 20.0
     yaw_rate_sign: -1.0              # cube IMU reports positive yaw rate for right turns
     max_speed_age_seconds: 0.5       # /feedback_data arrives at ~5 Hz
-    command_topic: /centerline_follower/cmd_shadow   # nothing listens to this
+    command_topic: /centerline_follower/cmd   # used by mode_switch in ACRO only
     debug_topic: /centerline_follower/debug
