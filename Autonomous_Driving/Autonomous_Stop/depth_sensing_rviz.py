@@ -126,19 +126,24 @@ class DepthSensingNode(Node):
             0.0, CAMERA_HEIGHT, 0.0
         ])
 
-        center_camera = rotation @ (
-            center_vehicle - camera_position
-        )
+        center_camera = np.array([
+            0.0,
+            -0.5,
+            3.0
+        ])
+            # rotation @ (
+           # center_vehicle - camera_position
+       # )
 
         marker.pose.position.x = float(center_camera[0])
         marker.pose.position.y = float(center_camera[1])
         marker.pose.position.z = float(center_camera[2])
 
         # Rotate box into camera frame
-        marker.pose.orientation.x = math.sin(theta / 2)
+        marker.pose.orientation.x = 0.0 #math.sin(theta / 2)
         marker.pose.orientation.y = 0.0
         marker.pose.orientation.z = 0.0
-        marker.pose.orientation.w = math.cos(theta / 2)
+        marker.pose.orientation.w =1.0  #math.cos(theta / 2)
 
         marker.scale.x = ROI_WIDTH
         marker.scale.y = ROI_MAX_HEIGHT - ROI_MIN_HEIGHT
