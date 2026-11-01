@@ -149,7 +149,8 @@ class DepthSensingNode(Node):
 
         marker.type = Marker.CUBE
         marker.action = Marker.ADD
-
+        
+        
         # ROI position directly in camera coordinates
         marker.pose.position.x = ROI_CENTER_X
         marker.pose.position.y = ROI_CENTER_Y
