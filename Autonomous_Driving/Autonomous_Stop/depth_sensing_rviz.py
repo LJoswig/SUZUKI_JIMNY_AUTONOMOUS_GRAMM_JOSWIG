@@ -11,7 +11,7 @@
 # Origin: ZED X camera center
 # X = forward (vehicle direction)
 # Y = up
-# Z = left
+# Z = right
 #
 # The camera is mounted approximately 1.72 m above ground
 # and tilted 10 degrees downward.
@@ -104,7 +104,7 @@ def transform_to_level_frame(points):
     Output (zed_camera_level):
         X = forward (horizontal vehicle direction)
         Y = up
-        Z = left
+        Z = right
 
     Camera pitch is assumed to be 10 degrees downward.
     """
@@ -113,7 +113,7 @@ def transform_to_level_frame(points):
 
     x_cam = points[:, 2]
     y_cam = points[:, 1]
-    z_cam = -points[:, 0]
+    z_cam = points[:, 0]
 
     # Undo the downward camera pitch
     x_level = (
