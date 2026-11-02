@@ -109,6 +109,13 @@ class ModeSwitchNode(Node):
         self.excitation_subscriber = self.create_subscription(
             AckermannDrive, 'excitation_cmd', self._excitation_callback, 10)
 
+        # Published by ackermann_to_steering_serial (steering board over USB, not on CAN).
+        self.steering_status_subscriber = self.create_subscription(
+            Bool, 'steering_status', self._steering_status_callback, 10)
+
+        self.steering_feedback_subscriber = self.create_subscription(
+            Float32MultiArray, 'steering_feedback', self._steering_feedback_callback, 10)
+
         self.rc_debug_publisher = self.create_publisher(Float32MultiArray, 'rc_steer_debug', 10)
         self.ackermann_publisher = self.create_publisher(AckermannDrive, 'ackermann_cmd', 10)
         self.mode_publisher = self.create_publisher(String, 'mode', 10)
@@ -120,6 +127,18 @@ class ModeSwitchNode(Node):
 
         self.last_heartbeat_time = time.time()
         self.heartbeat_timeout = 2
+
+        # Latched emergency: set by any lost link, cleared only while disarmed with all
+        # links healthy, so recovery is disarm -> arm. Starts latched.
+        self.emergency_latched = True
+        self.emergency_msg = "Startup: disarm to clear"
+
+        self.steering_ok = False
+        self.last_steering_status_time = time.time()
+        self.steering_status_timeout = 0.5   # s, bridge publishes at 10 Hz
+
+        self.last_feedback_time = time.time()
+        self.feedback_timeout = 1.0          # s, sterfBoard sends feedback at 5 Hz
 
         self.mode = None
         self.armed = False
@@ -183,10 +202,46 @@ class ModeSwitchNode(Node):
             self._last_rc_time = time.time()
 
     def _check_heartbeat(self):
-        if time.time() - self.last_heartbeat_time > self.heartbeat_timeout:
-            self.get_logger().warn("Lost cube connection! No heartbeat received")
-            self.signal_error = True
-            self.signal_error_msg = "Lost cube connection! No heartbeat received"
+        now = time.time()
+
+        if now - self.last_heartbeat_time > self.heartbeat_timeout:
+            self._latch_emergency("Lost cube connection! No heartbeat received")
+
+        if now - self.last_steering_status_time > self.steering_status_timeout:
+            self._latch_emergency("Lost steering bridge! No steering_status received")
+        elif not self.steering_ok:
+            self._latch_emergency("Steering board fault")
+
+        if now - self.last_feedback_time > self.feedback_timeout:
+            self._latch_emergency("Lost sterfBoard! No feedback_data received")
+
+        if self.emergency_latched and not self.armed and self._links_healthy(now):
+            self.get_logger().info(f"Emergency cleared (was: {self.emergency_msg})")
+            self.emergency_latched = False
+
+    def _links_healthy(self, now):
+        return (now - self.last_heartbeat_time <= self.heartbeat_timeout and
+                now - self.last_steering_status_time <= self.steering_status_timeout and
+                self.steering_ok and
+                now - self.last_feedback_time <= self.feedback_timeout)
+
+    def _latch_emergency(self, reason):
+        # Keep the first reason; follow-up symptoms of the same fault are not logged.
+        if not self.emergency_latched:
+            self.get_logger().error(f"EMERGENCY: {reason}")
+            self.emergency_latched = True
+            self.emergency_msg = reason
+
+    def _steering_status_callback(self, msg):
+        self.last_steering_status_time = time.time()
+        self.steering_ok = msg.data
+
+    def _steering_feedback_callback(self, msg):
+        # /feedback_data carries 0.0 for steering since the steering board moved to its own USB.
+        self._steering_angle_fb = msg.data[0]
+
+        if abs(self._steering_angle_fb) >= self.MAX_STEER:
+            self._latch_emergency("Steering feedback out of bounds")
 
     def _pub_disarmed(self):
         if not self.armed and self.mode is not None:
@@ -194,20 +249,16 @@ class ModeSwitchNode(Node):
             self.signal_error = False
 
     def _feedback_callback(self, msg):
+        self.last_feedback_time = time.time()
         velocity_fb = msg.data[1]
-        steering_angle_fb = msg.data[3]
-
-        self._steering_angle_fb = steering_angle_fb
 
         self.can_start_mpc = (
-            abs(steering_angle_fb) < self.MPC_STEER_TOLERANCE and
+            abs(self._steering_angle_fb) < self.MPC_STEER_TOLERANCE and
             abs(velocity_fb) < self.MPC_VEL_TOLERANCE
         )
 
-        if abs(velocity_fb) >= self.MAX_VEL or abs(steering_angle_fb) >= self.MAX_STEER:
-            self.get_logger().warn("Feedback signal out of bounds")
-            self.signal_error = True
-            self.signal_error_msg = "Feedback signal out of bounds"
+        if abs(velocity_fb) >= self.MAX_VEL:
+            self._latch_emergency("Velocity feedback out of bounds")
 
     def _error_state_callback(self, msg):
         if msg.data:
@@ -344,6 +395,9 @@ class ModeSwitchNode(Node):
         if not self.armed:
             msg.key = "0"
             msg.value = "Disarmed"
+        elif self.emergency_latched:
+            msg.key = "2"
+            msg.value = f"EMERGENCY (disarm to clear): {self.emergency_msg}"
         elif not self.signal_error:
             msg.key = "1"
             msg.value = "Armed, signal ok"
