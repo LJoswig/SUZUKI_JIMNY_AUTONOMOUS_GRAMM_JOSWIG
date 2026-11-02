@@ -51,7 +51,7 @@ from visualization_msgs.msg import Marker
 # These values are NOT calibrated to the Jimny.
 ROI_CENTER_X = 0.0
 ROI_CENTER_Y = -0.5
-ROI_CENTER_Z = 3.0
+ROI_CENTER_Z = -3.0
 
 ROI_WIDTH = 2.20
 ROI_HEIGHT = 1.35
@@ -90,9 +90,9 @@ class DepthSensingNode(Node):
         # -------------------------------------------------
 
         init = sl.InitParameters(
-            depth_mode=sl.DEPTH_MODE.NEURAL,
+            depth_mode=sl.DEPTH_MODE.NEURAL,  #PERFORMANCE,
             coordinate_units=sl.UNIT.METER,
-            coordinate_system=sl.COORDINATE_SYSTEM.RIGHT_HANDED_Y_UP
+            coordinate_system=sl.COORDINATE_SYSTEM.RIGHT_HANDED_Z_UP_X_FWD
         )
 
         # Select SVO recording or live camera
