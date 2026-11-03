@@ -29,7 +29,7 @@ from ackermann_msgs.msg import AckermannDrive
 from diagnostic_msgs.msg import KeyValue
 from gps_msgs.msg import GPSFix
 from rclpy.node import Node
-from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import Bool, Float32MultiArray
 
 
 class AckermannToVehicleNode(Node):
@@ -88,6 +88,10 @@ class AckermannToVehicleNode(Node):
         # Old mode_switch subscribes to /feedback_data and expects 4 fields:
         # [velocity_ctrl, velocity_fb, steering_rate_ctrl, steering_angle_fb]
         self.serial_data_publisher = self.create_publisher(Float32MultiArray, 'feedback_data', 10)
+
+        # sterfBoard's own latched emergency (e-button, missing CAN board, Jetson timeout).
+        # The steering board is not on CAN, so mode_switch needs this to make it hold.
+        self.sterf_emergency_publisher = self.create_publisher(Bool, 'sterfboard_emergency', 10)
 
         if self.send_to_serial:
             self.create_timer(0.02, self.read_from_serial_port)   # 50 Hz
@@ -217,6 +221,10 @@ class AckermannToVehicleNode(Node):
                     if len(parts) == 21:
                         self.sterf_dbg_writer.writerow([time.time()] + parts[1:])
                         self.sterf_dbg_file.flush()
+
+                        emergency = Bool()
+                        emergency.data = parts[20].strip() == '1'
+                        self.sterf_emergency_publisher.publish(emergency)
                     continue
 
                 if not data.startswith("<"):

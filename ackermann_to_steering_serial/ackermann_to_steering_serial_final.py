@@ -23,6 +23,7 @@ KEEPALIVE_PERIOD = 0.1   # s, "h" to the board (board holds after 300 ms of sile
 DATA_TIMEOUT = 0.3       # s, board prints DATA every 50 ms
 STATE_GRACE = 0.3        # s, time the board gets to confirm a state command
 REOPEN_PERIOD = 1.0      # s, retry interval after the port is lost
+BOOT_WAIT = 2.0          # s, opening the port resets the board; its bootloader must not get our bytes
 
 
 class AckermannToSteeringSerial(Node):
@@ -48,6 +49,7 @@ class AckermannToSteeringSerial(Node):
         self.last_data_time = 0.0
         self.last_state_cmd_time = 0.0
         self.last_reopen_try = 0.0
+        self.port_open_time = 0.0
         self.ino_state = STATE_OFF
 
         # Opening the port resets the board; it reports READY and DATA lines ~1-2 s later.
@@ -176,6 +178,7 @@ class AckermannToSteeringSerial(Node):
             self.serial_connection = None
             self.set_fault(f'Cannot open {self.serial_port}: {e}')
             return
+        self.port_open_time = time.time()
         self.ino_state = STATE_OFF
         self.get_logger().info(f'Connected to steering board on {self.serial_port}')
 
@@ -212,6 +215,8 @@ class AckermannToSteeringSerial(Node):
 
     def send_line(self, line: str):
         if self.serial_connection is None:
+            return
+        if time.time() - self.port_open_time < BOOT_WAIT:
             return
         msg = line.strip() + "\n"
         try:
@@ -324,6 +329,16 @@ class AckermannToSteeringSerial(Node):
 
                 if line.startswith("DATA,"):
                     parts = line.split(',')
+
+                    if len(parts) < 19 or not parts[1].isdigit():
+                        # Old sketch (no state column), the header line or a broken line.
+                        now = time.time()
+                        if (now - self._last_raw_print_time) >= 2.0:
+                            self._last_raw_print_time = now
+                            self.get_logger().warn(
+                                f"DATA line not used ({len(parts)} fields, need 19): {line}"
+                            )
+                        continue
 
                     if len(parts) >= 19:
                         try:

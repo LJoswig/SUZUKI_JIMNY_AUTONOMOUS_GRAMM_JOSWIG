@@ -116,6 +116,10 @@ class ModeSwitchNode(Node):
         self.steering_feedback_subscriber = self.create_subscription(
             Float32MultiArray, 'steering_feedback', self._steering_feedback_callback, 10)
 
+        # Published by to_vehicle from the sterfBoard DBG line (e-button, missing CAN board, ...).
+        self.sterf_emergency_subscriber = self.create_subscription(
+            Bool, 'sterfboard_emergency', self._sterf_emergency_callback, 10)
+
         self.rc_debug_publisher = self.create_publisher(Float32MultiArray, 'rc_steer_debug', 10)
         self.ackermann_publisher = self.create_publisher(AckermannDrive, 'ackermann_cmd', 10)
         self.mode_publisher = self.create_publisher(String, 'mode', 10)
@@ -139,6 +143,8 @@ class ModeSwitchNode(Node):
 
         self.last_feedback_time = time.time()
         self.feedback_timeout = 1.0          # s, sterfBoard sends feedback at 5 Hz
+
+        self.sterf_emergency = False
 
         self.mode = None
         self.armed = False
@@ -215,6 +221,9 @@ class ModeSwitchNode(Node):
         if now - self.last_feedback_time > self.feedback_timeout:
             self._latch_emergency("Lost sterfBoard! No feedback_data received")
 
+        if self.sterf_emergency:
+            self._latch_emergency("sterfBoard emergency (e-button or CAN board fault)")
+
         if self.emergency_latched and not self.armed and self._links_healthy(now):
             self.get_logger().info(f"Emergency cleared (was: {self.emergency_msg})")
             self.emergency_latched = False
@@ -223,7 +232,8 @@ class ModeSwitchNode(Node):
         return (now - self.last_heartbeat_time <= self.heartbeat_timeout and
                 now - self.last_steering_status_time <= self.steering_status_timeout and
                 self.steering_ok and
-                now - self.last_feedback_time <= self.feedback_timeout)
+                now - self.last_feedback_time <= self.feedback_timeout and
+                not self.sterf_emergency)
 
     def _latch_emergency(self, reason):
         # Keep the first reason; follow-up symptoms of the same fault are not logged.
@@ -235,6 +245,9 @@ class ModeSwitchNode(Node):
     def _steering_status_callback(self, msg):
         self.last_steering_status_time = time.time()
         self.steering_ok = msg.data
+
+    def _sterf_emergency_callback(self, msg):
+        self.sterf_emergency = msg.data
 
     def _steering_feedback_callback(self, msg):
         # /feedback_data carries 0.0 for steering since the steering board moved to its own USB.
