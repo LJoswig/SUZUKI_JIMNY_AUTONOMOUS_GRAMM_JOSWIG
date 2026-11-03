@@ -111,7 +111,7 @@ def transform_to_level_frame(points):
 
     theta = np.deg2rad(CAMERA_PITCH_DEG)
 
-    x_cam = points[:, 2]
+    x_cam = -points[:, 2]
     y_cam = points[:, 1]
     z_cam = points[:, 0]
 
