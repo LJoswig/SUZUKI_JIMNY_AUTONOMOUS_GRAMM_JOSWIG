@@ -3,6 +3,7 @@
 # ROS 2 topics:
 # /zed/point_cloud  -> 3D point cloud
 # /safety_stop/roi  -> Green ROI marker
+# /safety_stop/roi_points -> Filtered 3D point cloud
 #
 # Coordinate system: RIGHT_HANDED_Z_UP_X_FWD
 # X = forward
@@ -78,6 +79,13 @@ class DepthSensingNode(Node):
         self.cloud_pub = self.create_publisher(
             PointCloud2,
             "/zed/point_cloud",
+            10
+        )
+
+        # Publisher for points inside the ROI
+        self.roi_points_pub = self.create_publisher(
+            PointCloud2,
+            "/safety_stop/roi_points",
             10
         )
 
@@ -171,6 +179,34 @@ class DepthSensingNode(Node):
         self.roi_pub.publish(marker)
 
     # -----------------------------------------
+    # Filter points inside rotated ROI
+    # -----------------------------------------
+
+    def filter_roi(self, points):
+
+        # Translate points relative to ROI center
+        dx = points[:, 0] - ROI_CENTER_X
+        dy = points[:, 1] - ROI_CENTER_Y
+        dz = points[:, 2] - ROI_CENTER_Z
+
+        # Rotate points into ROI coordinate system
+        c = np.cos(CAMERA_PITCH)
+        s = np.sin(CAMERA_PITCH)
+
+        x_roi = c * dx - s * dz
+        y_roi = dy
+        z_roi = s * dx + c * dz
+
+        # Check ROI boundaries
+        inside = (
+            (np.abs(x_roi) <= ROI_LENGTH / 2.0) &
+            (np.abs(y_roi) <= ROI_WIDTH / 2.0) &
+            (np.abs(z_roi) <= ROI_HEIGHT / 2.0)
+        )
+
+        return points[inside]
+
+    # -----------------------------------------
     # Capture and publish point cloud
     # -----------------------------------------
 
@@ -223,16 +259,40 @@ class DepthSensingNode(Node):
         header.stamp = stamp
         header.frame_id = FRAME_ID
 
-        # Publish point cloud
+        # Publish full point cloud
         cloud_msg = point_cloud2.create_cloud_xyz32(
             header,
             points.tolist()
         )
-
         self.cloud_pub.publish(cloud_msg)
 
-        # Publish ROI
+        # Filter points inside ROI
+        roi_points = self.filter_roi(points)
+
+        self.get_logger().info(
+            f"ROI points: {len(roi_points)}",
+            throttle_duration_sec=1.0
+        )
+
+        # Publish filtered ROI point cloud
+        roi_msg = point_cloud2.create_cloud_xyz32(
+            header,
+            roi_points.tolist()
+        )
+        self.roi_points_pub.publish(roi_msg)
+
+        # Publish green ROI marker
         self.publish_roi(stamp)
+        ## Publish point cloud
+        #cloud_msg = point_cloud2.create_cloud_xyz32(
+            #header,
+            #points.tolist()
+        #)
+
+        #self.cloud_pub.publish(cloud_msg)
+
+        # Publish ROI
+        #self.publish_roi(stamp)
 
     # -----------------------------------------
     # Cleanup
