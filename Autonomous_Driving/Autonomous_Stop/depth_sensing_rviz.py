@@ -12,8 +12,6 @@
 # Origin: ZED X camera
 # Camera height: 1.72 m
 # Camera mounted centrally on Jimny roof
-#
-# Camera pitch is ignored for now.
 
 import argparse
 from pathlib import Path
@@ -41,10 +39,19 @@ ROI_LENGTH = 4.5
 ROI_WIDTH = 2.2
 ROI_HEIGHT = 1.5
 
-# ROI center relative to camera
-ROI_CENTER_X = ROI_START + ROI_LENGTH / 2.0
+## ROI center relative to camera
+#ROI_CENTER_X = ROI_START + ROI_LENGTH / 2.0
+#ROI_CENTER_Y = 0.0
+#ROI_CENTER_Z = -CAMERA_HEIGHT + ROI_HEIGHT / 2.0
+# Camera tilted 10 degrees downward
+CAMERA_PITCH = np.deg2rad(10.0)
+# ROI center in horizontal vehicle coordinates
+x = ROI_START + ROI_LENGTH / 2.0
+z = -CAMERA_HEIGHT + ROI_HEIGHT / 2.0
+# Transform ROI center into camera coordinates
+ROI_CENTER_X = np.cos(CAMERA_PITCH) * x - np.sin(CAMERA_PITCH) * z
 ROI_CENTER_Y = 0.0
-ROI_CENTER_Z = -CAMERA_HEIGHT + ROI_HEIGHT / 2.0
+ROI_CENTER_Z = np.sin(CAMERA_PITCH) * x + np.cos(CAMERA_PITCH) * z
 
 # Point cloud resolution
 CLOUD_WIDTH = 640
@@ -143,8 +150,11 @@ class DepthSensingNode(Node):
         marker.pose.position.y = ROI_CENTER_Y
         marker.pose.position.z = ROI_CENTER_Z
 
-        # No rotation
-        marker.pose.orientation.w = 1.0
+        ## No rotation
+        #marker.pose.orientation.w = 1.0
+        # Rotate ROI by -10 degrees around Y axis
+        marker.pose.orientation.y = -float(np.sin(CAMERA_PITCH / 2.0))
+        marker.pose.orientation.w = float(np.cos(CAMERA_PITCH / 2.0))
 
         # ROI dimensions
         marker.scale.x = ROI_LENGTH
