@@ -165,9 +165,10 @@ class ModeSwitchNode(Node):
 
         # --- Road follower mode (ACRO) ---
         # In ACRO the centerline follower steers (/centerline_follower/cmd) and the throttle stick
-        # sets the speed as a dead-man: centred or released means stop. The follower engages only
-        # when it is tracking, the vehicle is stopped and the stick is centred. Once engaged, any
-        # problem latches the same stop as the RC e-stop (full brake, steering held, disarm to clear).
+        # sets the speed as a dead-man. The follower engages only when it is tracking, the vehicle
+        # is stopped and the stick is centred. Once the stick has been pushed forward, releasing it
+        # for deadman_release_time latches a stop. That stop, and any other problem while engaged,
+        # is the same as the RC e-stop (full brake, steering held, disarm to clear).
         self.ACRO_SOURCE = self.declare_parameter('acro_source', 'follower').value  # 'follower' or 'mpc'
         self.FOLLOWER_TOPIC = self.declare_parameter('follower_topic', '/centerline_follower/cmd').value
         self.FOLLOWER_CMD_TIMEOUT = self.declare_parameter('follower_cmd_timeout', 0.3).value  # s
@@ -176,7 +177,10 @@ class ModeSwitchNode(Node):
         self.FOLLOWER_MAX_STEER = self.declare_parameter('follower_max_steering_deg', 620.0).value
         self.STEER_ERROR_LIMIT = self.declare_parameter('steering_error_limit_deg', 100.0).value
         self.STEER_ERROR_TIME = self.declare_parameter('steering_error_time', 1.0).value  # s
+        self.DEADMAN_RELEASE_TIME = self.declare_parameter('deadman_release_time', 0.2).value  # s
         self.follower_engaged = False
+        self._deadman_armed = False          # set once the stick was pushed after engaging
+        self._stick_released_since = None
         self._follower_cmd = None
         self._follower_cmd_time = None
         self._last_rc_msg_time = None
@@ -376,7 +380,10 @@ class ModeSwitchNode(Node):
             stopped = self._velocity_fb is not None and abs(self._velocity_fb) < self.MPC_VEL_TOLERANCE
             if tracking and stopped and speed == 0.0:
                 self.follower_engaged = True
-                self.get_logger().info('Follower engaged: throttle stick sets the speed, release to stop')
+                self._deadman_armed = False
+                self._stick_released_since = None
+                self.get_logger().info(
+                    'Follower engaged: throttle stick sets the speed, releasing it latches a stop')
             else:
                 self.publish_ackermann_msg(steering_angle=self._last_cmd_steering)
                 self.signal_error = True
@@ -388,6 +395,18 @@ class ModeSwitchNode(Node):
             self._latch_stop('Follower command missing' if not fresh else 'Follower is not tracking the road')
             self.publish_ackermann_msg()
             return
+
+        # Dead-man: armed by the first push after engaging (the follower engages with the stick
+        # centred), then a release longer than DEADMAN_RELEASE_TIME latches the stop.
+        if speed > 0.0:
+            self._deadman_armed = True
+            self._stick_released_since = None
+        elif self._deadman_armed:
+            self._stick_released_since = self._stick_released_since or now
+            if now - self._stick_released_since >= self.DEADMAN_RELEASE_TIME:
+                self._latch_stop('Dead-man stick released')
+                self.publish_ackermann_msg()
+                return
 
         steering = float(np.clip(command.steering_angle, -self.FOLLOWER_MAX_STEER, self.FOLLOWER_MAX_STEER))
         self.publish_ackermann_msg(
