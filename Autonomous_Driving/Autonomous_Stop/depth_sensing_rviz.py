@@ -102,7 +102,7 @@ class DepthSensingNode(Node):
         init.coordinate_system = (
             sl.COORDINATE_SYSTEM.RIGHT_HANDED_Z_UP_X_FWD
         )
-        init.depth_mode = sl.DEPTH_MODE.PERFORMANCE
+        init.depth_mode = sl.DEPTH_MODE.NEURAL #PERFORMANCE
 
         if self.is_svo:
             init.set_from_svo_file(str(svo_path))
