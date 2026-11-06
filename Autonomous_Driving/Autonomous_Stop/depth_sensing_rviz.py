@@ -47,7 +47,7 @@ ROI_HEIGHT = 1.5
 # Camera tilted 10 degrees downward
 CAMERA_PITCH = np.deg2rad(10.0)
 # ROI center in horizontal vehicle coordinates
-GROUND_CLEARANCE = 0.20  # 20 cm above ground
+GROUND_CLEARANCE = 0.30  # cm above ground
 x = ROI_START + ROI_LENGTH / 2.0
 z = -CAMERA_HEIGHT + GROUND_CLEARANCE + ROI_HEIGHT / 2.0
 # Transform ROI center into camera coordinates
@@ -174,7 +174,7 @@ class DepthSensingNode(Node):
         marker.color.r = 0.0
         marker.color.g = 1.0
         marker.color.b = 0.0
-        marker.color.a = 0.2
+        marker.color.a = 0.4
 
         self.roi_pub.publish(marker)
 
@@ -203,7 +203,7 @@ class DepthSensingNode(Node):
             (np.abs(y_roi) <= ROI_WIDTH / 2.0) &
             (np.abs(z_roi) <= ROI_HEIGHT / 2.0)
         )
-
+        
         return points[inside]
 
     # -----------------------------------------
