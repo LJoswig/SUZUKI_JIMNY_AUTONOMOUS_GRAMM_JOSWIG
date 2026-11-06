@@ -173,7 +173,7 @@ class ModeSwitchNode(Node):
         self.FOLLOWER_CMD_TIMEOUT = self.declare_parameter('follower_cmd_timeout', 0.3).value  # s
         self.RC_TIMEOUT = self.declare_parameter('rc_timeout', 0.3).value  # s
         self.FOLLOWER_MAX_SPEED = self.declare_parameter('follower_max_speed', 1.39).value  # m/s
-        self.FOLLOWER_MAX_STEER = self.declare_parameter('follower_max_steering_deg', 300.0).value
+        self.FOLLOWER_MAX_STEER = self.declare_parameter('follower_max_steering_deg', 620.0).value
         self.STEER_ERROR_LIMIT = self.declare_parameter('steering_error_limit_deg', 100.0).value
         self.STEER_ERROR_TIME = self.declare_parameter('steering_error_time', 1.0).value  # s
         self.follower_engaged = False
