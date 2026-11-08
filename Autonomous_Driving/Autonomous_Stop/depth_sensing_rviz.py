@@ -35,7 +35,7 @@ FRAME_ID = "zed_camera"
 
 CAMERA_HEIGHT = 1.76
 
-ROI_START = 4.0
+ROI_START = 6.5 #before 4.0
 ROI_LENGTH = 3.0
 ROI_WIDTH = 2.2
 ROI_HEIGHT = 1.5
@@ -47,7 +47,7 @@ ROI_HEIGHT = 1.5
 # Camera tilted 10 degrees downward
 CAMERA_PITCH = np.deg2rad(10.0)
 # ROI center in horizontal vehicle coordinates
-GROUND_CLEARANCE = 0.55  # cm above ground
+GROUND_CLEARANCE = 0.20  # cm above ground
 x = ROI_START + ROI_LENGTH / 2.0
 z = -CAMERA_HEIGHT + GROUND_CLEARANCE + ROI_HEIGHT / 2.0
 # Transform ROI center into camera coordinates
