@@ -4,6 +4,7 @@
 # /zed/point_cloud  -> 3D point cloud
 # /safety_stop/roi  -> Green ROI marker
 # /safety_stop/roi_points -> Filtered 3D point cloud
+# /stop_request          -> Boolean obstacle detection signal
 #
 # Coordinate system: RIGHT_HANDED_Z_UP_X_FWD
 # X = forward
@@ -24,7 +25,7 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import PointCloud2
 from sensor_msgs_py import point_cloud2
-from std_msgs.msg import Header
+from std_msgs.msg import Header, Bool
 from visualization_msgs.msg import Marker
 
 # -----------------------------------------
@@ -47,7 +48,9 @@ ROI_HEIGHT = 1.5
 # Camera tilted 10 degrees downward
 CAMERA_PITCH = np.deg2rad(10.0)
 # ROI center in horizontal vehicle coordinates
-GROUND_CLEARANCE = 0.20  # cm above ground
+GROUND_CLEARANCE = 0.20  # m above ground
+MIN_OBSTACLE_HEIGHT = 0.30  # Minimum height above ground [m]
+MIN_OBSTACLE_POINTS = 20    # Minimum number of obstacle points
 x = ROI_START + ROI_LENGTH / 2.0
 z = -CAMERA_HEIGHT + GROUND_CLEARANCE + ROI_HEIGHT / 2.0
 # Transform ROI center into camera coordinates
@@ -93,6 +96,10 @@ class DepthSensingNode(Node):
             Marker,
             "/safety_stop/roi",
             10
+        )
+
+        self.stop_pub = self.create_publisher(
+        Bool, "/stop_request", 10
         )
 
         # ZED initialization
@@ -203,15 +210,28 @@ class DepthSensingNode(Node):
             (np.abs(y_roi) <= ROI_WIDTH / 2.0) &
             (np.abs(z_roi) <= ROI_HEIGHT / 2.0)
         )
-        
-        if np.any(inside):
-             print(
-                "Filtered ROI Z range:",
-                np.min(z_roi[inside]),
-                np.max(z_roi[inside])
-             )
 
-        return points[inside]
+        #Calculate height above assumed ground
+        height_above_ground = (
+            z_roi + ROI_HEIGHT / 2.0 + GROUND_CLEARANCE
+        )
+
+        # Select obstacle candidates inside ROI
+        obstacle_mask = (
+            inside &
+            (height_above_ground >= MIN_OBSTACLE_HEIGHT)
+        )
+
+        return points[obstacle_mask]
+        
+        #if np.any(inside):
+             #print(
+                #"Filtered ROI Z range:",
+                #np.min(z_roi[inside]),
+                #np.max(z_roi[inside])
+             #)
+
+        #return points[inside]
 
     # -----------------------------------------
     # Capture and publish point cloud
@@ -276,10 +296,21 @@ class DepthSensingNode(Node):
         # Filter points inside ROI
         roi_points = self.filter_roi(points)
 
+        # Check whether enough obstacle points are detected
+        obstacle_detected = len(roi_points) >= MIN_OBSTACLE_POINTS
+
+        # Publish ROS 2 stop request
+        stop_msg = Bool()
+        stop_msg.data = obstacle_detected
+
+        self.stop_pub.publish(stop_msg)
+
+        # Debug output
         self.get_logger().info(
-            f"ROI points: {len(roi_points)}",
+            f"Obstacle points: {len(roi_points)} | "
+            f"Stop request: {obstacle_detected}",
             throttle_duration_sec=1.0
-        )
+        )   
 
         # Publish filtered ROI point cloud
         roi_msg = point_cloud2.create_cloud_xyz32(
@@ -370,3 +401,6 @@ if __name__ == "__main__":
 #Termianl 2:
 #source /opt/ros/humble/setup.bash
 #rviz2
+
+#Terminal 3:
+#ros2 topic echo /stop_request
