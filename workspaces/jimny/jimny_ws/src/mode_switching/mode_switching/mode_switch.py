@@ -106,6 +106,12 @@ class ModeSwitchNode(Node):
         self.mpc_error_subscriber = self.create_subscription(
             Bool, 'mpc_error_state', self._error_state_callback, 10)
 
+
+        # Autonomous safety stop
+        self.auto_stop_subscriber = self.create_subscription(
+            Bool, '/stop_request', self._auto_stop_callback, 10)
+        
+
         self.excitation_subscriber = self.create_subscription(
             AckermannDrive, 'excitation_cmd', self._excitation_callback, 10)
 
@@ -266,6 +272,14 @@ class ModeSwitchNode(Node):
             self.reset_mpc = False
             if not msg.data:
                 self.signal_error = False
+
+    
+    # Autonomous stop: ZED X detects obstacle -> stop_request = True -> emergency brake
+    # Stop remains active until disarmed; re-arm to resume driving !check that obstacle is gone   
+    def _auto_stop_callback(self, msg):
+        if msg.data:
+            self._latch_stop("Obstacle detected by ZED X")
+
 
     def _latch_stop(self, reason):
         """Latch a stop: signal_error 2 (full brake), speed 0, steering held, until disarmed."""
