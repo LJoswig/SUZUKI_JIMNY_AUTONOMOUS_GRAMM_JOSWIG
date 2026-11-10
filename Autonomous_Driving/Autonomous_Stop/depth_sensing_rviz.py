@@ -46,11 +46,11 @@ ROI_HEIGHT = 1.5
 #ROI_CENTER_Y = 0.0
 #ROI_CENTER_Z = -CAMERA_HEIGHT + ROI_HEIGHT / 2.0
 # Camera tilted 10 degrees downward
-CAMERA_PITCH = np.deg2rad(10.0)
+CAMERA_PITCH = np.deg2rad(12.5)
 # ROI center in horizontal vehicle coordinates
-GROUND_CLEARANCE = 0.20  # m above ground
-MIN_OBSTACLE_HEIGHT = 0.30  # Minimum height above ground [m]
-MIN_OBSTACLE_POINTS = 20    # Minimum number of obstacle points
+GROUND_CLEARANCE = 0.15  # m above ground
+MIN_OBSTACLE_HEIGHT = 0.20  # Minimum height above ground [m]
+MIN_OBSTACLE_POINTS = 70    # Minimum number of obstacle points
 x = ROI_START + ROI_LENGTH / 2.0
 z = -CAMERA_HEIGHT + GROUND_CLEARANCE + ROI_HEIGHT / 2.0
 # Transform ROI center into camera coordinates
@@ -222,16 +222,20 @@ class DepthSensingNode(Node):
             (height_above_ground >= MIN_OBSTACLE_HEIGHT)
         )
 
-        return points[obstacle_mask]
+        # Compare heights at near and far end of ROI
+        near = inside & (x_roi < 0)
+        far = inside & (x_roi >= 0)
         
-        #if np.any(inside):
-             #print(
-                #"Filtered ROI Z range:",
-                #np.min(z_roi[inside]),
-                #np.max(z_roi[inside])
-             #)
+        if np.any(near) and np.any(far):
+            self.get_logger().info(
+                f"Near ROI median height:"
+                f"{np.median(height_above_ground[near]):.2f} m | "
+                f"Far ROI median height: "
+                f"{np.median(height_above_ground[far]):.2f} m",
+                throttle_duration_sec=1.0
+            )
 
-        #return points[inside]
+        return points[obstacle_mask]
 
     # -----------------------------------------
     # Capture and publish point cloud
