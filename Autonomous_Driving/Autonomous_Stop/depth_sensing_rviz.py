@@ -3,7 +3,7 @@
 # ROS 2 topics:
 # /zed/point_cloud  -> 3D point cloud
 # /safety_stop/roi  -> Green ROI marker
-# /safety_stop/roi_points -> Filtered 3D point cloud
+# /safety_stop/roi_points -> obstacle points inside ROI (displayed as red points in RViz)
 # /stop_request          -> Boolean obstacle detection signal
 #
 # Coordinate system: RIGHT_HANDED_Z_UP_X_FWD
@@ -14,6 +14,7 @@
 # Origin: ZED X camera
 # Camera height: 1.76m
 # Camera mounted centrally on Jimny roof
+# Camera is tilted downwards
 
 import argparse
 from pathlib import Path
@@ -29,28 +30,31 @@ from std_msgs.msg import Header, Bool
 from visualization_msgs.msg import Marker
 
 # -----------------------------------------
-# Camera and ROI parameters (meters)
+# Camera
 # -----------------------------------------
 
 FRAME_ID = "zed_camera"
 
-CAMERA_HEIGHT = 1.76
+CAMERA_HEIGHT = 1.76           # Camera mounting height [m]
+CAMERA_PITCH = np.deg2rad(12.5) # Camera tilt angle [rad]
 
-ROI_START = 6.5 #before 4.0
-ROI_LENGTH = 3.0
-ROI_WIDTH = 2.2
-ROI_HEIGHT = 1.5
+# -----------------------------------------
+# Region of Interest (ROI)
+# -----------------------------------------
 
-## ROI center relative to camera
-#ROI_CENTER_X = ROI_START + ROI_LENGTH / 2.0
-#ROI_CENTER_Y = 0.0
-#ROI_CENTER_Z = -CAMERA_HEIGHT + ROI_HEIGHT / 2.0
-# Camera tilted 10 degrees downward
-CAMERA_PITCH = np.deg2rad(12.5)
-# ROI center in horizontal vehicle coordinates
-GROUND_CLEARANCE = 0.15  # m above ground
+ROI_START = 6.5        # Distance to ROI start [m]
+ROI_LENGTH = 3.0       # ROI length [m]
+ROI_WIDTH = 2.2        # ROI width [m]
+ROI_HEIGHT = 1.5       # ROI height [m]
+GROUND_CLEARANCE = 0.15  # ROI bottom above assumed ground [m]
+
+# -----------------------------------------
+# Obstacle detection
+# -----------------------------------------
+
 MIN_OBSTACLE_HEIGHT = 0.20  # Minimum height above ground [m]
-MIN_OBSTACLE_POINTS = 70    # Minimum number of obstacle points
+MIN_OBSTACLE_POINTS = 70    # Minimum number of candidate points
+
 x = ROI_START + ROI_LENGTH / 2.0
 z = -CAMERA_HEIGHT + GROUND_CLEARANCE + ROI_HEIGHT / 2.0
 # Transform ROI center into camera coordinates
@@ -168,7 +172,7 @@ class DepthSensingNode(Node):
 
         ## No rotation
         #marker.pose.orientation.w = 1.0
-        # Rotate ROI by -10 degrees around Y axis
+        # Rotate ROI by CAMERA_PITCH degrees
         marker.pose.orientation.y = -float(np.sin(CAMERA_PITCH / 2.0))
         marker.pose.orientation.w = float(np.cos(CAMERA_PITCH / 2.0))
 
@@ -211,7 +215,7 @@ class DepthSensingNode(Node):
             (np.abs(z_roi) <= ROI_HEIGHT / 2.0)
         )
 
-        #Calculate height above assumed ground
+        # Calculate height above assumed ground
         height_above_ground = (
             z_roi + ROI_HEIGHT / 2.0 + GROUND_CLEARANCE
         )
@@ -228,7 +232,7 @@ class DepthSensingNode(Node):
         
         if np.any(near) and np.any(far):
             self.get_logger().info(
-                f"Near ROI median height:"
+                f"Near ROI median height: "
                 f"{np.median(height_above_ground[near]):.2f} m | "
                 f"Far ROI median height: "
                 f"{np.median(height_above_ground[far]):.2f} m",
@@ -325,16 +329,6 @@ class DepthSensingNode(Node):
 
         # Publish green ROI marker
         self.publish_roi(stamp)
-        ## Publish point cloud
-        #cloud_msg = point_cloud2.create_cloud_xyz32(
-            #header,
-            #points.tolist()
-        #)
-
-        #self.cloud_pub.publish(cloud_msg)
-
-        # Publish ROI
-        #self.publish_roi(stamp)
 
     # -----------------------------------------
     # Cleanup
