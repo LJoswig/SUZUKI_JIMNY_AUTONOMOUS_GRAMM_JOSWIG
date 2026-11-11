@@ -1,0 +1,16 @@
+# navsat_transform_node: /gps/fix (lat/lon) -> /odometry/gps (x, y in the map frame).
+# Heading to align UTM with the map frame comes from /imu/data, which cuberos already publishes in
+# ENU relative to true north (ArduPilot applies the declination), so offsets are 0.
+navsat_transform:
+  ros__parameters:
+    frequency: 10.0
+    delay: 3.0                       # s to wait for the first IMU/odometry before computing the transform
+    magnetic_declination_radians: 0.0
+    yaw_offset: 0.0
+    zero_altitude: true
+    use_odometry_yaw: false
+    wait_for_datum: false            # set true + datum: [lat, lon, yaw] to fix the map origin
+    publish_filtered_gps: true
+    # The name of this flag differs between distros; unknown parameters are ignored.
+    broadcast_utm_transform: false
+    broadcast_cartesian_transform: false

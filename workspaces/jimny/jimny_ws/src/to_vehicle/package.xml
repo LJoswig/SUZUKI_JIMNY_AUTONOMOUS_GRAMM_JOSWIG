@@ -21,6 +21,7 @@
   <exec_depend>cuberos</exec_depend>
   <exec_depend>mode_switching</exec_depend>
   <exec_depend>mpc_driving_controller</exec_depend>
+  <exec_depend>jimny_localization</exec_depend>
   <exec_depend>launch</exec_depend>
 
   <!-- Testing dependencies -->

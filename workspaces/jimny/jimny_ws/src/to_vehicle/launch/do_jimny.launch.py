@@ -12,8 +12,18 @@ def generate_launch_description():
     # Path to controller launch file
     controller_launch_file = os.path.join(
         get_package_share_directory('mpc_driving_controller'), 'launch', 'controller.launch.py')
+    localization_launch_file = os.path.join(
+        get_package_share_directory('jimny_localization'), 'launch', 'localization.launch.py')
 
     return LaunchDescription([
+        # REP-105 localization (wheel_twist, ekf_local, ekf_global, navsat_transform).
+        # Off by default until the sensor mounting offsets are measured and it has been checked on bags.
+        DeclareLaunchArgument(
+            'use_localization',
+            default_value='false',
+            description='Start jimny_localization (odom/map EKFs + navsat_transform)'
+        ),
+
         # The GPS waypoint MPC is not used; start it only with use_mpc:=true.
         # While it runs it publishes /mpc_commands, which mode_switch forwards in ACRO.
         DeclareLaunchArgument(
@@ -50,5 +60,10 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(controller_launch_file),
             condition=IfCondition(LaunchConfiguration('use_mpc'))
+        ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(localization_launch_file),
+            condition=IfCondition(LaunchConfiguration('use_localization'))
         ),
     ])
