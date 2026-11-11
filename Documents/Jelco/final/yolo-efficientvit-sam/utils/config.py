@@ -40,12 +40,14 @@ SAM_NORM_STD = np.array([58.395, 57.12, 57.375], dtype=np.float32)
 # ============================================================================
 ZED_RESOLUTION = "SVGA"  # Options: "HD2K", "HD1080", "HD720", "SVGA", "AUTO"
 ZED_FPS = 30
-ZED_DEPTH_MODE = "NONE"  # "NONE" (no depth: faster, road following does not need it; no positional tracking or depth captures), "NEURAL", "ULTRA", "QUALITY", "PERFORMANCE"
+ZED_DEPTH_MODE = "NEURAL"  # "NONE" (no depth: faster, road following does not need it; no positional tracking or depth captures), "NEURAL", "ULTRA", "QUALITY", "PERFORMANCE"
 
 # Select "svo" to replay a ZED recording, or "live" to use the camera.
 INPUT_MODE = "live"
-SVO_FILE_PATH = "/home/user/Documents/testfahrt_20261021_181107.svo2"  # Matches CENTERLINE_MOTION_ROSBAG_URI
+SVO_FILE_PATH = "/home/user/recordings/run_20261110_180304/run.svo2"  # Matches CENTERLINE_MOTION_ROSBAG_URI
 SVO_REAL_TIME_MODE =  True # False processes as fast as inference allows
+SVO_START_SECONDS = 360.0 + 5.5*60 # Start the replay this far into the recording
+SVO_END_SECONDS = None  # Stop the replay here (seconds into the recording); None = until the end
 
 # ============================================================================
 # Processing Parameters - OPTIMIZED
@@ -98,7 +100,7 @@ CENTERLINE_KALMAN_YAW_RATE_GAIN = -60.0
 # - "none": disable motion provider
 # - "rosbag": consume motion signals from ROS2 bag replay
 # - "live": subscribe to live ROS2 topics
-CENTERLINE_MOTION_SOURCE = "live"  # "none", "rosbag", or "live"
+CENTERLINE_MOTION_SOURCE = "rosbag"  # "none", "rosbag", or "live"
 CENTERLINE_MOTION_ROSBAG_URI = "/home/user/Documents/testfahrt_20261021_181107_rosbag"
 CENTERLINE_MOTION_MAX_SIGNAL_AGE_SECONDS = 0.15
 CENTERLINE_MOTION_LOOKAHEAD_SECONDS = 0.02
@@ -156,6 +158,60 @@ FOLLOWER_MAX_PATH_AGE_SECONDS = 1.0  # Stop when the newest path is older; tune 
 FOLLOWER_RATE_HZ = 20.0
 
 # ============================================================================
+# Autonomous Stop (ZED X depth, obstacle in a box ahead -> /stop_request)
+# ============================================================================
+# Uses the same camera as the road following; mode_switch latches a full stop on True.
+AUTO_STOP_ENABLED = True
+AUTO_STOP_DEPTH_MODE = "NEURAL"  # Camera depth mode when ZED_DEPTH_MODE is "NONE" (the auto-stop needs depth)
+AUTO_STOP_PUBLISH_FULL_CLOUD = False  # /zed/point_cloud for RViz; slow (~230k points per frame), only for tuning
+AUTO_STOP_MIN_CONSECUTIVE_FRAMES = 2  # Frames in a row above MIN_OBSTACLE_POINTS before stopping; 1 = no debounce
+# Grab the camera in its own thread and run the auto-stop on every grabbed frame, instead of
+# once per YOLO+SAM frame. Faster stop, but depth then runs at camera rate (ZED_FPS) on the GPU.
+AUTO_STOP_THREADED = True
+
+def camera_depth_mode():
+    """Depth mode the camera opens with: the auto-stop needs depth even if ZED_DEPTH_MODE is "NONE"."""
+    if AUTO_STOP_ENABLED and ZED_DEPTH_MODE == "NONE":
+        return AUTO_STOP_DEPTH_MODE
+    return ZED_DEPTH_MODE
+
+# Tuning (same names as the old Autonomous_Driving/Autonomous_Stop/depth_sensing_rviz.py)
+# Coordinate system: RIGHT_HANDED_Z_UP_X_FWD (X = forward, Y = left, Z = up), origin: ZED X camera
+
+# Camera
+FRAME_ID = "zed_camera"
+CAMERA_HEIGHT = 1.76           # Camera mounting height [m]
+CAMERA_PITCH = np.deg2rad(12.5) # Camera tilt angle [rad]
+
+# Region of Interest (ROI)
+ROI_START = 6.5        # Distance to ROI start [m]
+ROI_LENGTH = 3.0       # ROI length [m]
+ROI_WIDTH = 2.2        # ROI width [m]
+ROI_HEIGHT = 1.5       # ROI height [m]
+GROUND_CLEARANCE = 0.25  # ROI bottom above assumed ground [m]
+
+# Curved ROI: bend the box along the centerline (the path the follower uses), same
+# ROI_START/ROI_LENGTH measured as distance along the centerline from the camera.
+# Falls back to the straight box while the centerline is lost or older than the max age.
+AUTO_STOP_ROI_FOLLOW_CENTERLINE = True
+AUTO_STOP_PATH_MAX_AGE_SECONDS = 1.0  # Older centerline paths are ignored (straight box)
+AUTO_STOP_ROI_STATION_STEP = 0.25     # Spacing of the corridor stations along the centerline [m]
+# Straight box only. The old filter rotated the points by +CAMERA_PITCH instead of -CAMERA_PITCH,
+# so the box it tested was tilted by 2 x CAMERA_PITCH around its centre (far end ~0.6 m lower,
+# near end ~0.6 m higher) while the RViz marker showed it level. True keeps that old behaviour;
+# False levels the points correctly (the curved ROI always does). Re-check MIN_OBSTACLE_POINTS
+# on a flat-road replay when switching.
+AUTO_STOP_ROI_LEGACY_ROTATION = False
+
+# Obstacle detection
+MIN_OBSTACLE_HEIGHT = 0.20  # Minimum height above ground [m]
+MIN_OBSTACLE_POINTS = 140    # Minimum number of candidate points
+
+# Point cloud resolution
+CLOUD_WIDTH = 640
+CLOUD_HEIGHT = 360
+
+# ============================================================================
 # Visualization - OPTIMIZED
 # ============================================================================
 MASK_OPACITY = 0.4
@@ -168,6 +224,8 @@ SHOW_BOXES = True
 # Shadow road follower in the preview: lookahead point (yellow), arc the steering
 # command would drive (magenta) and the command itself. Nothing is sent to the car.
 SHOW_FOLLOWER_OVERLAY = True
+# Auto-stop in the preview: ROI box (green, red on stop), obstacle points and the stop state.
+SHOW_AUTO_STOP_OVERLAY = True
 
 # Display at native camera resolution (no scaling needed)
 # If you want to display smaller, change this value (e.g., 0.8 for 80% size)

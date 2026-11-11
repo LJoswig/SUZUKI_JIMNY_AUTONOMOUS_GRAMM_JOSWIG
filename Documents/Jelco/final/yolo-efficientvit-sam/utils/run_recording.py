@@ -22,6 +22,8 @@ ROSBAG_TOPICS = [
     "/mode",
     "/heartbeat",
     "/signal_error",
+    # Autonomous stop (point clouds left out, too big)
+    "/stop_request",
     # Centerline perception and road follower
     "/centerline/path",
     "/centerline/status",
