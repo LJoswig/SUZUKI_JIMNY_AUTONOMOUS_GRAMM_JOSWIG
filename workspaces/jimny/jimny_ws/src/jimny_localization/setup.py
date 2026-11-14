@@ -25,7 +25,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'wheel_twist = jimny_localization.wheel_twist_node:main',
+            'speed_twist = jimny_localization.speed_twist_node:main',
         ],
     },
 )

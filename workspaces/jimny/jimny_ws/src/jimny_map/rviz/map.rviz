@@ -1,0 +1,91 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Reference Frame: map
+      Cell Size: 10
+      Plane Cell Count: 100
+      Color: 80; 80; 80
+    - Class: rviz_default_plugins/MarkerArray
+      Name: OSM roads
+      Enabled: true
+      Topic:
+        Value: /route_map/markers
+        Durability Policy: Transient Local
+        Reliability Policy: Reliable
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/Path
+      Name: GPS (raw, map)
+      Enabled: true
+      Topic:
+        Value: /route_map/gps_trail
+      Color: 239; 68; 68
+      Line Style: Lines
+      Line Width: 0.1
+    - Class: rviz_default_plugins/Path
+      Name: EKF global (map)
+      Enabled: true
+      Topic:
+        Value: /route_map/global_trail
+      Color: 34; 197; 94
+      Line Style: Billboards
+      Line Width: 0.25
+    - Class: rviz_default_plugins/Path
+      Name: EKF local (odom)
+      Enabled: false
+      Topic:
+        Value: /route_map/local_trail
+      Color: 59; 130; 246
+      Line Style: Billboards
+      Line Width: 0.15
+    - Class: rviz_default_plugins/Odometry
+      Name: Car (EKF global)
+      Enabled: true
+      Topic:
+        Value: /odometry/global
+      Keep: 1
+      Shape:
+        Value: Arrow
+        Color: 34; 197; 94
+        Shaft Length: 3
+        Shaft Radius: 0.3
+        Head Length: 1
+        Head Radius: 0.6
+      Covariance:
+        Value: true
+        Position:
+          Value: true
+          Color: 34; 197; 94
+          Alpha: 0.3
+          Scale: 1
+        Orientation:
+          Value: false
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Show Names: true
+      Marker Scale: 3
+  Global Options:
+    Fixed Frame: map
+    Background Color: 30; 30; 30
+    Frame Rate: 30
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Measure
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Name: Current View
+      Target Frame: base_link
+      Scale: 5
+      X: 0
+      Y: 0
+Window Geometry:
+  Width: 1400
+  Height: 900

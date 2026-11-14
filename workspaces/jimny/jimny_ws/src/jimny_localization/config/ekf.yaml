@@ -17,8 +17,8 @@ ekf_local:
     base_link_frame: base_link
     world_frame: odom
 
-    # Measured speed (vx) + nonholonomic vy = 0
-    twist0: /wheel/twist
+    # GPS Doppler speed (vx) + nonholonomic vy = 0, from speed_twist
+    twist0: /speed/twist
     twist0_config: [false, false, false,
                     false, false, false,
                     true,  true,  false,
@@ -49,7 +49,7 @@ ekf_global:
     base_link_frame: base_link
     world_frame: map
 
-    twist0: /wheel/twist
+    twist0: /speed/twist
     twist0_config: [false, false, false,
                     false, false, false,
                     true,  true,  false,
