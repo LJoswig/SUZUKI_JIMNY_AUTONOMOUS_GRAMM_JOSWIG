@@ -29,7 +29,7 @@ from ackermann_msgs.msg import AckermannDrive
 from diagnostic_msgs.msg import KeyValue
 from gps_msgs.msg import GPSFix
 from rclpy.node import Node
-from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import Bool, Float32MultiArray
 
 
 class AckermannToVehicleNode(Node):
@@ -40,6 +40,10 @@ class AckermannToVehicleNode(Node):
         self.GPS_speed = 0.0
         self.is_esp32 = is_esp32
         self.ack_signal_flag = 0
+        # When /signal_error was last received. None until mode_switch is up; until then
+        # H,0 is sent as before so the brake can home during startup.
+        self.last_flag_time = None
+        self.flag_timeout = 0.5   # s, mode_switch publishes at 10 Hz
         self._last_cmd_print_time = 0.0
         self.serial_lock = threading.Lock()
 
@@ -85,6 +89,10 @@ class AckermannToVehicleNode(Node):
         # [velocity_ctrl, velocity_fb, steering_rate_ctrl, steering_angle_fb]
         self.serial_data_publisher = self.create_publisher(Float32MultiArray, 'feedback_data', 10)
 
+        # sterfBoard's own latched emergency (e-button, missing CAN board, Jetson timeout).
+        # The steering board is not on CAN, so mode_switch needs this to make it hold.
+        self.sterf_emergency_publisher = self.create_publisher(Bool, 'sterfboard_emergency', 10)
+
         if self.send_to_serial:
             self.create_timer(0.02, self.read_from_serial_port)   # 50 Hz
             self.heartbeat_interval = 0.2
@@ -115,7 +123,8 @@ class AckermannToVehicleNode(Node):
             'brakeAlive',
             'serialCmdCount',
             'serialHbCount',
-            'canSteerTxCount'
+            'canSteerTxCount',
+            'emergencyLatched'
         ])
         self.sterf_dbg_file.flush()
 
@@ -150,10 +159,14 @@ class AckermannToVehicleNode(Node):
         self.GPS_speed = msg.speed
 
     def signal_flag_callback(self, msg):
-        if msg.key not in ("0", "1", "2"):
-            self.ack_signal_flag = 2
-            return
-        self.ack_signal_flag = int(msg.key)
+        self.last_flag_time = time.time()
+        flag = int(msg.key) if msg.key in ("0", "1", "2") else 2
+
+        if flag != self.ack_signal_flag:
+            self.ack_signal_flag = flag
+            # Don't wait for the next 200 ms tick, so an emergency reaches the car sooner.
+            if self.send_to_serial:
+                self.send_heartbeat()
 
     def send_to_can_bus(self, steering_angle, steering_angle_velocity, velocity, acceleration, jerk):
         steering_angle_data = int(steering_angle * 1000)
@@ -205,9 +218,13 @@ class AckermannToVehicleNode(Node):
 
                 if data.startswith("DBG,"):
                     parts = data.split(',')
-                    if len(parts) == 20:
+                    if len(parts) == 21:
                         self.sterf_dbg_writer.writerow([time.time()] + parts[1:])
                         self.sterf_dbg_file.flush()
+
+                        emergency = Bool()
+                        emergency.data = parts[20].strip() == '1'
+                        self.sterf_emergency_publisher.publish(emergency)
                     continue
 
                 if not data.startswith("<"):
@@ -244,6 +261,13 @@ class AckermannToVehicleNode(Node):
             return None
 
     def send_heartbeat(self):
+        # mode_switch went silent while armed: a stale H,1 would keep the sterfBoard in AUTO.
+        if (self.last_flag_time is not None and self.ack_signal_flag != 0 and
+                time.time() - self.last_flag_time > self.flag_timeout):
+            if self.ack_signal_flag != 2:
+                self.get_logger().error('No /signal_error from mode_switch -> sending EMERGENCY')
+            self.ack_signal_flag = 2
+
         heartbeat_message = f"H,{int(self.ack_signal_flag)}"
         self.send_to_serial_port(heartbeat_message)
 

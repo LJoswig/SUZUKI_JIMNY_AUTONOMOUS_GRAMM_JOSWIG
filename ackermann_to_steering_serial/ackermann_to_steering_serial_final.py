@@ -8,8 +8,22 @@ from datetime import datetime
 import rclpy
 from rclpy.node import Node
 from ackermann_msgs.msg import AckermannDrive
-from std_msgs.msg import Float32MultiArray
+from diagnostic_msgs.msg import KeyValue
+from std_msgs.msg import Bool, Float32MultiArray
 import serial
+
+# Steering board states, as reported in the last column of the DATA line.
+STATE_OFF = 0      # PID off, DAC idle
+STATE_TRACK = 1    # PID follows s<deg> targets
+STATE_HOLD = 2     # PID holds the angle it had when hold started, s<deg> ignored
+
+STATE_CMD = {STATE_OFF: "d", STATE_TRACK: "e", STATE_HOLD: "x"}
+
+KEEPALIVE_PERIOD = 0.1   # s, "h" to the board (board holds after 300 ms of silence)
+DATA_TIMEOUT = 0.3       # s, board prints DATA every 50 ms
+STATE_GRACE = 0.3        # s, time the board gets to confirm a state command
+REOPEN_PERIOD = 1.0      # s, retry interval after the port is lost
+BOOT_WAIT = 2.0          # s, opening the port resets the board; its bootloader must not get our bytes
 
 
 class AckermannToSteeringSerial(Node):
@@ -19,8 +33,29 @@ class AckermannToSteeringSerial(Node):
         self.serial_port = serial_port
         self.baud_rate = baud_rate
 
-        self.serial_connection = serial.Serial(serial_port, baud_rate, timeout=0.02)
-        time.sleep(2.0)
+        if not serial_port.startswith('/dev/serial/by-id/'):
+            self.get_logger().warn(
+                f'{serial_port} can swap with the sterfBoard port on boot; '
+                f'pass the /dev/serial/by-id/... path instead (ls -l /dev/serial/by-id/)'
+            )
+
+        # Safety state.
+        # flag: last /signal_error key from mode_switch (0 disarmed, 1 armed ok, 2 armed + error).
+        # fault: latched steering fault, reported on /steering_status. Starts set and is
+        # cleared once the link is healthy and the flag is no longer 1; mode_switch then keeps
+        # its own stop latched until disarm, so recovery is disarm -> arm.
+        self.flag = 0
+        self.fault = True
+        self.fault_reason = 'Startup'
+        self.last_data_time = 0.0
+        self.last_state_cmd_time = 0.0
+        self.last_reopen_try = 0.0
+        self.port_open_time = 0.0
+        self.ino_state = STATE_OFF
+
+        # Opening the port resets the board; it reports READY and DATA lines ~1-2 s later.
+        self.serial_connection = None
+        self.open_serial()
 
         self.last_target = None
         self.last_send_time = 0.0
@@ -73,7 +108,14 @@ class AckermannToSteeringSerial(Node):
             10
         )
 
-        # Debug-only steering feedback.
+        self.signal_error_subscriber = self.create_subscription(
+            KeyValue,
+            'signal_error',
+            self.signal_flag_callback,
+            10
+        )
+
+        # Steering feedback; mode_switch uses data[0] as the measured angle.
         # Important: this is NOT /feedback_data, so it cannot disturb old mode_switch.
         self.steering_feedback_publisher = self.create_publisher(
             Float32MultiArray,
@@ -81,8 +123,16 @@ class AckermannToSteeringSerial(Node):
             10
         )
 
+        # True while the board link is healthy and no steering fault is latched.
+        self.steering_status_publisher = self.create_publisher(
+            Bool,
+            'steering_status',
+            10
+        )
+
         self.create_timer(0.01, self.read_serial)
         self.create_timer(0.02, self.log_row)
+        self.create_timer(KEEPALIVE_PERIOD, self.supervise)
 
         ts = datetime.now().strftime('%Y%m%d_%H%M%S')
         self.csv_file = open(f'steering_test_log_{ts}.csv', 'w', newline='')
@@ -115,20 +165,104 @@ class AckermannToSteeringSerial(Node):
             'ino_d_term',
             'ino_isr',
             'ino_invalid',
+            'ino_state',
+            'flag',
+            'steering_ok',
         ])
         self.csv_file.flush()
 
-        self.get_logger().info(f'Connected to steering board on {serial_port}')
+    def open_serial(self):
+        self.last_reopen_try = time.time()
+        try:
+            self.serial_connection = serial.Serial(self.serial_port, self.baud_rate, timeout=0.02)
+        except (serial.SerialException, OSError) as e:
+            self.serial_connection = None
+            self.set_fault(f'Cannot open {self.serial_port}: {e}')
+            return
+        self.port_open_time = time.time()
+        self.ino_state = STATE_OFF
+        self.get_logger().info(f'Connected to steering board on {self.serial_port}')
 
-        # Same behaviour as the old working version:
-        # disable once, then enable once.
-        self.send_line("d")
-        time.sleep(0.1)
-        self.send_line("e")
+    def close_serial(self, reason):
+        self.set_fault(reason)
+        try:
+            self.serial_connection.close()
+        except Exception:
+            pass
+        self.serial_connection = None
+
+    def set_fault(self, reason):
+        # Keep the first reason; follow-up symptoms of the same fault are not logged.
+        if not self.fault:
+            self.get_logger().error(f'STEERING FAULT: {reason}')
+            self.fault = True
+            self.fault_reason = reason
+
+    def link_ok(self):
+        return (self.serial_connection is not None and
+                time.time() - self.last_data_time <= DATA_TIMEOUT)
+
+    def desired_state(self):
+        if self.flag == 0:
+            return STATE_OFF
+        if self.flag == 1 and not self.fault:
+            return STATE_TRACK
+        # Emergency, or a fault mode_switch has not reacted to yet: stop where it is.
+        return STATE_HOLD
+
+    def send_state_cmd(self, state):
+        self.send_line(STATE_CMD[state])
+        self.last_state_cmd_time = time.time()
 
     def send_line(self, line: str):
+        if self.serial_connection is None:
+            return
+        if time.time() - self.port_open_time < BOOT_WAIT:
+            return
         msg = line.strip() + "\n"
-        self.serial_connection.write(msg.encode('ascii', errors='ignore'))
+        try:
+            self.serial_connection.write(msg.encode('ascii', errors='ignore'))
+        except (serial.SerialException, OSError) as e:
+            self.close_serial(f'Serial write failed: {e}')
+
+    def signal_flag_callback(self, msg: KeyValue):
+        flag = int(msg.key) if msg.key in ("0", "1", "2") else 2
+        if flag == self.flag:
+            return
+        self.flag = flag
+        self.send_state_cmd(self.desired_state())
+
+    def supervise(self):
+        now = time.time()
+
+        if self.serial_connection is None:
+            if now - self.last_reopen_try >= REOPEN_PERIOD:
+                self.open_serial()
+        else:
+            self.send_line("h")
+
+        if self.serial_connection is not None and now - self.last_data_time > DATA_TIMEOUT:
+            self.set_fault('No DATA from steering board')
+
+        desired = self.desired_state()
+        if (self.link_ok() and self.ino_state != desired and
+                now - self.last_state_cmd_time > STATE_GRACE):
+            if desired == STATE_TRACK:
+                # Board left tracking on its own (e.g. its serial timeout put it in hold).
+                self.set_fault(f'Board state {self.ino_state}, expected tracking')
+            else:
+                self.send_state_cmd(desired)
+
+        # Clear once the link is back, but never while the flag still says "armed, ok": then
+        # mode_switch has to see the fault first. It latches its own stop until disarm, and keeps
+        # the flag at 2 while latched, so waiting for flag 0 here would block both forever.
+        if self.fault and self.flag != 1 and self.link_ok():
+            self.fault = False
+            self.get_logger().info(f'Steering fault cleared (was: {self.fault_reason})')
+
+        status = Bool()
+        status.data = self.link_ok() and not self.fault
+        self.steering_status_publisher.publish(status)
 
     def ackermann_callback(self, msg: AckermannDrive):
         target = float(msg.steering_angle)
@@ -139,6 +273,11 @@ class AckermannToSteeringSerial(Node):
         self.last_cmd_speed = float(msg.speed)
         self.last_cmd_acc = float(msg.acceleration)
         self.last_cmd_jerk = float(msg.jerk)
+
+        # Targets only go out while armed, fault free and the board is tracking.
+        if self.desired_state() != STATE_TRACK or self.ino_state != STATE_TRACK:
+            self.last_target = None
+            return
 
         now = time.time()
         should_send = False
@@ -171,6 +310,9 @@ class AckermannToSteeringSerial(Node):
             self.rc_manual_target = float(msg.data[3])
 
     def read_serial(self):
+        if self.serial_connection is None:
+            return
+
         try:
             while self.serial_connection.in_waiting > 0:
                 line = self.serial_connection.readline().decode(
@@ -181,12 +323,34 @@ class AckermannToSteeringSerial(Node):
                 if not line:
                     continue
 
+                if line == "READY":
+                    # Board rebooted (port open, watchdog, brown-out or reset button).
+                    # Its encoder zero is now wherever the wheel was at boot.
+                    self.ino_state = STATE_OFF
+                    self.set_fault('Steering board reset')
+                    self.get_logger().info("Steering board raw: READY")
+                    continue
+
                 if line.startswith("DATA,"):
                     parts = line.split(',')
 
-                    if len(parts) >= 18:
+                    if len(parts) < 19 or not parts[1].isdigit():
+                        # Old sketch (no state column), the header line or a broken line.
+                        now = time.time()
+                        if (now - self._last_raw_print_time) >= 2.0:
+                            self._last_raw_print_time = now
+                            self.get_logger().warn(
+                                f"DATA line not used ({len(parts)} fields, need 19): {line}"
+                            )
+                        continue
+
+                    if len(parts) >= 19:
                         try:
-                            self.ino_t_ms = int(parts[1])
+                            t_ms = int(parts[1])
+                            if t_ms < self.ino_t_ms:
+                                self.ino_state = STATE_OFF
+                                self.set_fault('Steering board reset (time went backwards)')
+                            self.ino_t_ms = t_ms
                             self.ino_target_deg = float(parts[2])
                             self.ino_target_slew_deg = float(parts[3])
                             self.ino_angle_deg = float(parts[4])
@@ -203,6 +367,8 @@ class AckermannToSteeringSerial(Node):
                             self.ino_d_term = float(parts[15])
                             self.ino_isr = int(parts[16])
                             self.ino_invalid = int(parts[17])
+                            self.ino_state = int(parts[18])
+                            self.last_data_time = time.time()
 
                             fb = Float32MultiArray()
                             fb.data = [
@@ -228,6 +394,8 @@ class AckermannToSteeringSerial(Node):
                         self._last_raw_print_time = now
                         self.get_logger().info(f"Steering board raw: {line}")
 
+        except (serial.SerialException, OSError) as e:
+            self.close_serial(f'Serial read failed: {e}')
         except Exception as e:
             self.get_logger().warn(f"Serial read warning: {e}")
 
@@ -260,14 +428,14 @@ class AckermannToSteeringSerial(Node):
             self.ino_d_term,
             self.ino_isr,
             self.ino_invalid,
+            self.ino_state,
+            self.flag,
+            int(self.link_ok() and not self.fault),
         ])
         self.csv_file.flush()
 
     def destroy_node(self):
-        try:
-            self.send_line("d")
-        except Exception:
-            pass
+        self.send_line("d")
 
         try:
             self.csv_file.flush()
@@ -275,10 +443,11 @@ class AckermannToSteeringSerial(Node):
         except Exception:
             pass
 
-        try:
-            self.serial_connection.close()
-        except Exception:
-            pass
+        if self.serial_connection is not None:
+            try:
+                self.serial_connection.close()
+            except Exception:
+                pass
 
         super().destroy_node()
 

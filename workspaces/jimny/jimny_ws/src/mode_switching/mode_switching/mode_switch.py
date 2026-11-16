@@ -106,6 +106,12 @@ class ModeSwitchNode(Node):
         self.mpc_error_subscriber = self.create_subscription(
             Bool, 'mpc_error_state', self._error_state_callback, 10)
 
+
+        # Autonomous safety stop
+        self.auto_stop_subscriber = self.create_subscription(
+            Bool, '/stop_request', self._auto_stop_callback, 10)
+        
+
         self.excitation_subscriber = self.create_subscription(
             AckermannDrive, 'excitation_cmd', self._excitation_callback, 10)
 
@@ -165,18 +171,22 @@ class ModeSwitchNode(Node):
 
         # --- Road follower mode (ACRO) ---
         # In ACRO the centerline follower steers (/centerline_follower/cmd) and the throttle stick
-        # sets the speed as a dead-man: centred or released means stop. The follower engages only
-        # when it is tracking, the vehicle is stopped and the stick is centred. Once engaged, any
-        # problem latches the same stop as the RC e-stop (full brake, steering held, disarm to clear).
+        # sets the speed as a dead-man. The follower engages only when it is tracking, the vehicle
+        # is stopped and the stick is centred. Once the stick has been pushed forward, releasing it
+        # for deadman_release_time latches a stop. That stop, and any other problem while engaged,
+        # is the same as the RC e-stop (full brake, steering held, disarm to clear).
         self.ACRO_SOURCE = self.declare_parameter('acro_source', 'follower').value  # 'follower' or 'mpc'
         self.FOLLOWER_TOPIC = self.declare_parameter('follower_topic', '/centerline_follower/cmd').value
         self.FOLLOWER_CMD_TIMEOUT = self.declare_parameter('follower_cmd_timeout', 0.3).value  # s
         self.RC_TIMEOUT = self.declare_parameter('rc_timeout', 0.3).value  # s
         self.FOLLOWER_MAX_SPEED = self.declare_parameter('follower_max_speed', 1.39).value  # m/s
-        self.FOLLOWER_MAX_STEER = self.declare_parameter('follower_max_steering_deg', 300.0).value
+        self.FOLLOWER_MAX_STEER = self.declare_parameter('follower_max_steering_deg', 620.0).value
         self.STEER_ERROR_LIMIT = self.declare_parameter('steering_error_limit_deg', 100.0).value
         self.STEER_ERROR_TIME = self.declare_parameter('steering_error_time', 1.0).value  # s
+        self.DEADMAN_RELEASE_TIME = self.declare_parameter('deadman_release_time', 0.2).value  # s
         self.follower_engaged = False
+        self._deadman_armed = False          # set once the stick was pushed after engaging
+        self._stick_released_since = None
         self._follower_cmd = None
         self._follower_cmd_time = None
         self._last_rc_msg_time = None
@@ -190,6 +200,22 @@ class ModeSwitchNode(Node):
         self.steering_feedback_subscriber = self.create_subscription(
             Float32MultiArray, 'steering_feedback', self._steering_feedback_callback, 10)
         self.follower_watchdog_timer = self.create_timer(0.05, self._follower_watchdog)
+
+        # --- Link checks: steering board (own USB, not on CAN) and sterfBoard ---
+        # While armed, a lost link latches the same stop as the RC e-stop. The stop only clears
+        # when disarmed with both links healthy again.
+        self.STEERING_STATUS_TIMEOUT = 0.5  # s, the steering bridge publishes at 10 Hz
+        self.FEEDBACK_TIMEOUT = 1.0         # s, the sterfBoard sends feedback at 5 Hz
+        self._steering_ok = False
+        self._steering_status_time = None
+        self._feedback_time = None
+        self._sterf_emergency = False
+        self.steering_status_subscriber = self.create_subscription(
+            Bool, 'steering_status', self._steering_status_callback, 10)
+        # sterfBoard's own latch (e-button, missing CAN board), from its DBG line via to_vehicle
+        self.sterf_emergency_subscriber = self.create_subscription(
+            Bool, 'sterfboard_emergency', self._sterf_emergency_callback, 10)
+
         self.get_logger().info(
             f'ACRO source: {self.ACRO_SOURCE}'
             + (f' (steering from {self.FOLLOWER_TOPIC}, limit {self.FOLLOWER_MAX_STEER} deg, '
@@ -230,10 +256,37 @@ class ModeSwitchNode(Node):
             self._last_rc_time = time.time()
 
     def _check_heartbeat(self):
-        if time.time() - self.last_heartbeat_time > self.heartbeat_timeout:
+        now = time.time()
+        if now - self.last_heartbeat_time > self.heartbeat_timeout:
             self.get_logger().warn("Lost cube connection! No heartbeat received")
             self.signal_error = True
             self.signal_error_msg = "Lost cube connection! No heartbeat received"
+            if self.armed:
+                self._latch_stop('Lost cube connection')
+
+        if self.armed:
+            fault = self._link_fault(now)
+            if fault:
+                self._latch_stop(fault)
+            elif self._sterf_emergency:
+                self._latch_stop('sterfBoard emergency (e-button or CAN board missing)')
+
+    def _link_fault(self, now):
+        """Why the steering or sterfBoard link is not usable, None if both are fine."""
+        if self._steering_status_time is None or now - self._steering_status_time > self.STEERING_STATUS_TIMEOUT:
+            return 'Steering bridge not running'
+        if not self._steering_ok:
+            return 'Steering board fault'
+        if self._feedback_time is None or now - self._feedback_time > self.FEEDBACK_TIMEOUT:
+            return 'Lost sterfBoard feedback'
+        return None
+
+    def _steering_status_callback(self, msg):
+        self._steering_status_time = time.time()
+        self._steering_ok = msg.data
+
+    def _sterf_emergency_callback(self, msg):
+        self._sterf_emergency = msg.data
 
     def _pub_disarmed(self):
         if not self.armed and self.mode is not None:
@@ -241,18 +294,18 @@ class ModeSwitchNode(Node):
             self.signal_error = False
 
     def _feedback_callback(self, msg):
+        self._feedback_time = time.time()
         velocity_fb = msg.data[1]
-        steering_angle_fb = msg.data[3]
         self._velocity_fb = velocity_fb
 
-        self._steering_angle_fb = steering_angle_fb
-
+        # The steering angle comes from /steering_feedback: feedback_data carries 0.0 for it
+        # since the steering board moved to its own USB.
         self.can_start_mpc = (
-            abs(steering_angle_fb) < self.MPC_STEER_TOLERANCE and
+            abs(self._steering_angle_fb) < self.MPC_STEER_TOLERANCE and
             abs(velocity_fb) < self.MPC_VEL_TOLERANCE
         )
 
-        if abs(velocity_fb) >= self.MAX_VEL or abs(steering_angle_fb) >= self.MAX_STEER:
+        if abs(velocity_fb) >= self.MAX_VEL or abs(self._steering_angle_fb) >= self.MAX_STEER:
             self.get_logger().warn("Feedback signal out of bounds")
             self.signal_error = True
             self.signal_error_msg = "Feedback signal out of bounds"
@@ -266,6 +319,14 @@ class ModeSwitchNode(Node):
             self.reset_mpc = False
             if not msg.data:
                 self.signal_error = False
+
+    
+    # Autonomous stop: ZED X detects obstacle -> stop_request = True -> emergency brake
+    # Stop remains active until disarmed; re-arm to resume driving !check that obstacle is gone   
+    def _auto_stop_callback(self, msg):
+        if msg.data:
+            self._latch_stop("Obstacle detected by ZED X")
+
 
     def _latch_stop(self, reason):
         """Latch a stop: signal_error 2 (full brake), speed 0, steering held, until disarmed."""
@@ -292,6 +353,10 @@ class ModeSwitchNode(Node):
                 self.get_logger().error(reason, throttle_duration_sec=2.0)
             self._latch_stop(reason)
         elif self.estop_latched and not self.armed:
+            fault = self._link_fault(time.time())
+            if fault:
+                self.get_logger().warn(f'Stop not cleared: {fault}', throttle_duration_sec=2.0)
+                return
             self.estop_latched = False
             self.get_logger().info('Stop released and vehicle disarmed, stop cleared')
 
@@ -307,6 +372,8 @@ class ModeSwitchNode(Node):
         if len(msg.data) > 1:
             self._steering_meas = (float(msg.data[0]), float(msg.data[1]))
             self._steering_meas_time = time.time()
+            # Real angle, so the manual target starts at the wheel and not at 0 on arm
+            self._steering_angle_fb = float(msg.data[0])
 
     def _stick_speed(self):
         """Throttle stick as dead-man: centred or backwards = 0, full forward = follower_max_speed."""
@@ -327,7 +394,10 @@ class ModeSwitchNode(Node):
             stopped = self._velocity_fb is not None and abs(self._velocity_fb) < self.MPC_VEL_TOLERANCE
             if tracking and stopped and speed == 0.0:
                 self.follower_engaged = True
-                self.get_logger().info('Follower engaged: throttle stick sets the speed, release to stop')
+                self._deadman_armed = False
+                self._stick_released_since = None
+                self.get_logger().info(
+                    'Follower engaged: throttle stick sets the speed, releasing it latches a stop')
             else:
                 self.publish_ackermann_msg(steering_angle=self._last_cmd_steering)
                 self.signal_error = True
@@ -339,6 +409,18 @@ class ModeSwitchNode(Node):
             self._latch_stop('Follower command missing' if not fresh else 'Follower is not tracking the road')
             self.publish_ackermann_msg()
             return
+
+        # Dead-man: armed by the first push after engaging (the follower engages with the stick
+        # centred), then a release longer than DEADMAN_RELEASE_TIME latches the stop.
+        if speed > 0.0:
+            self._deadman_armed = True
+            self._stick_released_since = None
+        elif self._deadman_armed:
+            self._stick_released_since = self._stick_released_since or now
+            if now - self._stick_released_since >= self.DEADMAN_RELEASE_TIME:
+                self._latch_stop('Dead-man stick released')
+                self.publish_ackermann_msg()
+                return
 
         steering = float(np.clip(command.steering_angle, -self.FOLLOWER_MAX_STEER, self.FOLLOWER_MAX_STEER))
         self.publish_ackermann_msg(
