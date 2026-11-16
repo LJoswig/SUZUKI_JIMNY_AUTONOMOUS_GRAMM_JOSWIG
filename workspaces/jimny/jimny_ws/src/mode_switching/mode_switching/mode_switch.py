@@ -322,10 +322,21 @@ class ModeSwitchNode(Node):
 
     
     # Autonomous stop: ZED X detects obstacle -> stop_request = True -> emergency brake
-    # Stop remains active until disarmed; re-arm to resume driving !check that obstacle is gone   
+    # Stop remains active until disarmed; re-arm to resume driving !check that obstacle is gone
+    # Only while software drives (ACRO: follower/mpc, LOITER: excitation). In MANUAL the driver
+    # keeps control, so perception can run during manual and recording drives without braking.
+    def _software_driving(self):
+        return self.armed and self.mode in ('ACRO', 'LOITER')
+
     def _auto_stop_callback(self, msg):
-        if msg.data:
+        if not msg.data:
+            return
+        if self._software_driving():
             self._latch_stop("Obstacle detected by ZED X")
+        else:
+            self.get_logger().warn(
+                f'Obstacle detected by ZED X (no stop: mode {self.mode}, armed {self.armed})',
+                throttle_duration_sec=2.0)
 
 
     def _latch_stop(self, reason):
