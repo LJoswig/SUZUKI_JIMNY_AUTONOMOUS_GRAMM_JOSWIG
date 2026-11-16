@@ -188,7 +188,7 @@ ROI_START = 6.5        # Distance to ROI start [m]
 ROI_LENGTH = 3.0       # ROI length [m]
 ROI_WIDTH = 2.2        # ROI width [m]
 ROI_HEIGHT = 1.5       # ROI height [m]
-GROUND_CLEARANCE = 0.25  # ROI bottom above assumed ground [m]
+GROUND_CLEARANCE = 0.15  # ROI bottom above assumed ground [m]
 
 # Curved ROI: bend the box along the centerline (the path the follower uses), same
 # ROI_START/ROI_LENGTH measured as distance along the centerline from the camera.
