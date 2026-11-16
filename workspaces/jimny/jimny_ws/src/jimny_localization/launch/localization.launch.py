@@ -43,7 +43,7 @@ def static_tf(child, prefix):
 
 def generate_launch_description():
     config_dir = os.path.join(get_package_share_directory('jimny_localization'), 'config')
-    ekf_config = os.path.join(config_dir, 'ekf.yaml')
+    default_ekf_config = os.path.join(config_dir, 'ekf.yaml')
     navsat_config = os.path.join(config_dir, 'navsat.yaml')
 
     mount_args = []
@@ -54,11 +54,16 @@ def generate_launch_description():
                 f'{prefix}_{axis}', default_value=default,
                 description=f'{prefix} mount {axis} relative to the rear axle (m / rad)'))
 
+    # alternative EKF parameter file, e.g. a variant for replaying a recorded drive
+    ekf_config = LaunchConfiguration('ekf_config')
+
     # true when replaying a bag with `ros2 bag play --clock`
     sim_time = {'use_sim_time': LaunchConfiguration('use_sim_time')}
 
     return LaunchDescription(mount_args + [
         DeclareLaunchArgument('use_sim_time', default_value='false'),
+        DeclareLaunchArgument('ekf_config', default_value=default_ekf_config,
+                              description='EKF parameter file (default: installed config/ekf.yaml)'),
         static_tf('gps_link', 'gps'),
         static_tf('imu_link', 'imu'),
 
