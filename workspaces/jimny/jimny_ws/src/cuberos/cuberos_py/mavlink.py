@@ -63,6 +63,13 @@ class CubeSerial:
         self.cube.wait_heartbeat()
         self.rc_freq = 50
         self.set_message_interval(65, self.rc_freq)  # RC_CHANNELS message ID is 65
+        # Without these requests the Cube sends at its default stream rates (SRx_* params, often
+        # ~4 Hz). The *_freq values below only set the ROS publish timers. Not persistent: the
+        # Cube falls back to its defaults after a reboot until cuberos requests them again.
+        self.set_message_interval(30, 20)    # ATTITUDE (orientation + yaw rate for the EKF)
+        self.set_message_interval(129, 20)   # SCALED_IMU3 (accelerations)
+        self.set_message_interval(24, 10)    # GPS_RAW_INT (the receiver itself may update slower)
+        self.set_message_interval(33, 10)    # GLOBAL_POSITION_INT
         println("Received first MAVlink heartbeat")
 
         # Initialize message storage variables

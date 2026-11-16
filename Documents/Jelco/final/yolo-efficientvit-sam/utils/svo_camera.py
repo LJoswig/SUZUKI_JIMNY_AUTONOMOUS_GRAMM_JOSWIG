@@ -55,10 +55,14 @@ class SVOReplayCamera:
         }
 
         init_params.depth_mode = depth_map.get(
-            config.ZED_DEPTH_MODE,
+            config.camera_depth_mode(),
             sl.DEPTH_MODE.NEURAL
         )
-        self.depth_enabled = init_params.depth_mode != sl.DEPTH_MODE.NONE
+        # Depth map + positional tracking only when asked for; the auto-stop only needs the point cloud
+        self.depth_enabled = depth_map.get(
+            config.ZED_DEPTH_MODE,
+            sl.DEPTH_MODE.NEURAL
+        ) != sl.DEPTH_MODE.NONE
 
         init_params.coordinate_units = sl.UNIT.METER
         init_params.coordinate_system = sl.COORDINATE_SYSTEM.RIGHT_HANDED_Z_UP_X_FWD
@@ -93,9 +97,35 @@ class SVOReplayCamera:
         print(f"  Resolution: {self.camera_width}x{self.camera_height}")
         print(f"  FPS: {camera_info.camera_configuration.fps}")
 
+        # Replay window (SVO_START_SECONDS / SVO_END_SECONDS), converted to frames
+        total_frames = self.zed.get_svo_number_of_frames()
+        fps = float(self.camera_fps) if self.camera_fps else 30.0
+        start_seconds = max(0.0, float(config.SVO_START_SECONDS or 0.0))
+        self.start_frame = min(int(round(start_seconds * fps)), max(total_frames - 1, 0))
+        self.end_frame = total_frames
+        if config.SVO_END_SECONDS is not None:
+            self.end_frame = min(total_frames, int(round(float(config.SVO_END_SECONDS) * fps)))
+        if self.end_frame <= self.start_frame:
+            raise ValueError(
+                f"SVO_END_SECONDS ({config.SVO_END_SECONDS}) must be after "
+                f"SVO_START_SECONDS ({config.SVO_START_SECONDS})"
+            )
+        if self.start_frame > 0:
+            self.zed.set_svo_position(self.start_frame)
+        self._next_frame = self.start_frame
+        print(f"  Length: {total_frames / fps:.1f} s ({total_frames} frames)")
+        print(
+            f"  Playing: {self.start_frame / fps:.1f} s to {self.end_frame / fps:.1f} s "
+            f"(frames {self.start_frame}-{self.end_frame - 1})"
+        )
+
     def grab_frame(self) -> Tuple[bool, Optional[np.ndarray], Optional[np.ndarray]]:
+        if self._next_frame >= self.end_frame:
+            return False, None, None
         if self.zed.grab(self.runtime_params) != sl.ERROR_CODE.SUCCESS:
             return False, None, None
+        # After a grab the position is the frame just grabbed (also after a set_svo_position skip)
+        self._next_frame = self.zed.get_svo_position() + 1
 
         self.zed.retrieve_image(self.image_zed, sl.VIEW.LEFT)
         image = self.image_zed.get_data()

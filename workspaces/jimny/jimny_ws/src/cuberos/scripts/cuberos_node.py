@@ -5,7 +5,7 @@ import numpy as np
 from tf_transformations import quaternion_from_euler
 from geometry_msgs.msg import Quaternion
 from rclpy.node import Node
-from sensor_msgs.msg import Imu
+from sensor_msgs.msg import Imu, NavSatFix, NavSatStatus
 from gps_msgs.msg import GPSFix
 from cuberos.msg import RCIn, Heartbeat
 from cuberos_py.mavlink import CubeSerial
@@ -30,6 +30,12 @@ class CubeROSNode(Node):
         self.publisher_rc = self.create_publisher(RCIn, 'rc_inputs', 10)
         self.publisher_imu = self.create_publisher(Imu, 'imu_attitude', 10)
         self.publisher_heartbeat = self.create_publisher(Heartbeat, 'heartbeat', 1)
+        # REP-103 versions for robot_localization (ENU world, FLU body). The topics above stay
+        # unchanged because centerline_follower and state_pub_node rely on their NED/FRD conventions.
+        self.publisher_navsat = self.create_publisher(NavSatFix, 'gps/fix', 10)
+        self.publisher_imu_enu = self.create_publisher(Imu, 'imu/data', 10)
+        self._last_navsat_time_usec = None
+        self._last_imu_enu_time_ms = None
 
         # Cube object to communicate with the CubePilot using Mavlink to receive data
         #self.cube = CubeSerial('/dev/serial/by-id/usb-CubePilot_CubeOrange+_42001E000A51323039383833-if00', 115200)  # Adjust the port based on the system
@@ -105,6 +111,47 @@ class CubeROSNode(Node):
 
         if publish:
             self.publisher_gps_raw.publish(gps_msg)
+        self.publish_navsat_fix()
+
+    # MAVLink GPS_RAW_INT fix_type -> sensor_msgs/NavSatStatus
+    NAVSAT_STATUS = {
+        0: NavSatStatus.STATUS_NO_FIX, 1: NavSatStatus.STATUS_NO_FIX,
+        2: NavSatStatus.STATUS_FIX, 3: NavSatStatus.STATUS_FIX,
+        4: NavSatStatus.STATUS_SBAS_FIX,                                   # DGPS
+        5: NavSatStatus.STATUS_GBAS_FIX, 6: NavSatStatus.STATUS_GBAS_FIX,  # RTK float / fixed
+    }
+    # Used when the receiver does not report h_acc/v_acc: sigma = DOP * UERE
+    UERE_M = 3.0
+
+    def publish_navsat_fix(self):
+        """Publish GPS_RAW_INT as sensor_msgs/NavSatFix for navsat_transform_node.
+
+        Only new fixes are published: the timer runs faster than the receiver updates, and
+        repeating a fix would make the EKF count the same measurement several times.
+        """
+        raw = self.cube.gps_raw_int
+        if raw is None or raw.time_usec == self._last_navsat_time_usec:
+            return
+        self._last_navsat_time_usec = raw.time_usec
+
+        msg = NavSatFix()
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.header.frame_id = 'gps_link'
+        msg.status.status = self.NAVSAT_STATUS.get(raw.fix_type, NavSatStatus.STATUS_NO_FIX)
+        msg.status.service = NavSatStatus.SERVICE_GPS
+        msg.latitude = raw.lat
+        msg.longitude = raw.lon
+        msg.altitude = raw.alt  # m above MSL (GPS_RAW_INT alt is mm, scaled in GPS_RAW_INT class)
+
+        sigma_h = raw.h_acc if raw.h_acc > 0.0 else max(raw.eph, 1.0) * self.UERE_M
+        sigma_v = raw.v_acc if raw.v_acc > 0.0 else max(raw.epv, 1.0) * self.UERE_M
+        msg.position_covariance = [
+            sigma_h ** 2, 0.0, 0.0,
+            0.0, sigma_h ** 2, 0.0,
+            0.0, 0.0, sigma_v ** 2,
+        ]
+        msg.position_covariance_type = NavSatFix.COVARIANCE_TYPE_DIAGONAL_KNOWN
+        self.publisher_navsat.publish(msg)
 
     def publish_rc_data(self):
         """Publish scaled RC channels"""
@@ -153,6 +200,62 @@ class CubeROSNode(Node):
 
         # Publish the message
         self.publisher_imu.publish(imu_msg)
+        self.publish_imu_enu()
+
+    # Variances for /imu/data. Yaw is the Cube EKF3 heading (compass and/or GPS-aided), so it is
+    # given a large variance; robot_localization should only fuse the yaw rate.
+    IMU_ORIENTATION_VAR = (math.radians(2.0) ** 2, math.radians(2.0) ** 2, math.radians(15.0) ** 2)
+    IMU_GYRO_VAR = 1e-4        # (rad/s)^2
+    IMU_ACCEL_VAR = 0.1        # (m/s^2)^2, vehicle vibration dominates
+
+    def publish_imu_enu(self):
+        """Publish ATTITUDE (+ SCALED_IMU3) in REP-103 frames on /imu/data.
+
+        ArduPilot reports the orientation of the FRD body in the NED world. For an ENU world and
+        FLU body (ZYX euler): roll stays, pitch and the body y/z axes flip sign, and
+        yaw_enu = pi/2 - yaw_ned (yaw 0 = east, counter-clockwise positive).
+        Only new ATTITUDE messages are published, so the EKF does not see repeated samples.
+        """
+        att = self.cube.attitude
+        if att is None or att.time_boot_ms == self._last_imu_enu_time_ms:
+            return
+        self._last_imu_enu_time_ms = att.time_boot_ms
+
+        msg = Imu()
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.header.frame_id = 'imu_link'
+
+        yaw_enu = math.atan2(math.sin(math.pi / 2 - att.yaw), math.cos(math.pi / 2 - att.yaw))
+        q = quaternion_from_euler(att.roll, -att.pitch, yaw_enu)
+        msg.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
+        msg.orientation_covariance = [
+            self.IMU_ORIENTATION_VAR[0], 0.0, 0.0,
+            0.0, self.IMU_ORIENTATION_VAR[1], 0.0,
+            0.0, 0.0, self.IMU_ORIENTATION_VAR[2],
+        ]
+
+        msg.angular_velocity.x = att.rollspeed
+        msg.angular_velocity.y = -att.pitchspeed
+        msg.angular_velocity.z = -att.yawspeed
+        msg.angular_velocity_covariance = [
+            self.IMU_GYRO_VAR, 0.0, 0.0,
+            0.0, self.IMU_GYRO_VAR, 0.0,
+            0.0, 0.0, self.IMU_GYRO_VAR,
+        ]
+
+        if self.cube.imu:
+            msg.linear_acceleration.x = self.cube.imu.xacc
+            msg.linear_acceleration.y = -self.cube.imu.yacc
+            msg.linear_acceleration.z = -self.cube.imu.zacc
+            msg.linear_acceleration_covariance = [
+                self.IMU_ACCEL_VAR, 0.0, 0.0,
+                0.0, self.IMU_ACCEL_VAR, 0.0,
+                0.0, 0.0, self.IMU_ACCEL_VAR,
+            ]
+        else:
+            msg.linear_acceleration_covariance[0] = -1.0  # REP-145: no acceleration data
+
+        self.publisher_imu_enu.publish(msg)
 
     def publish_heartbeat_data(self):
         """Publish flight mode of the Cube"""

@@ -51,8 +51,9 @@ class ZEDCamera:
             "PERFORMANCE": sl.DEPTH_MODE.PERFORMANCE,
             "NONE": sl.DEPTH_MODE.NONE
         }
-        init_params.depth_mode = depth_map.get(config.ZED_DEPTH_MODE, sl.DEPTH_MODE.NEURAL)
-        self.depth_enabled = init_params.depth_mode != sl.DEPTH_MODE.NONE
+        init_params.depth_mode = depth_map.get(config.camera_depth_mode(), sl.DEPTH_MODE.NEURAL)
+        # Depth map + positional tracking only when asked for; the auto-stop only needs the point cloud
+        self.depth_enabled = depth_map.get(config.ZED_DEPTH_MODE, sl.DEPTH_MODE.NEURAL) != sl.DEPTH_MODE.NONE
         
         init_params.coordinate_units = sl.UNIT.METER
         init_params.coordinate_system = sl.COORDINATE_SYSTEM.RIGHT_HANDED_Z_UP_X_FWD

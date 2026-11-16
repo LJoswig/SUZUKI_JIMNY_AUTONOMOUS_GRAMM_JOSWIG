@@ -1,0 +1,9429 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3754781,
+     -25.3757334
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 0,
+    "osm_id": "3152722419",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3527968,
+     -25.3549592
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 1,
+    "osm_id": "3152722187",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3759697,
+     -25.3829647
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 2,
+    "osm_id": "3152721874",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.375737,
+     -25.3803676
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 3,
+    "osm_id": "3172726195",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3755698,
+     -25.3779561
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 4,
+    "osm_id": "9381404465",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3754299,
+     -25.3759376
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 5,
+    "osm_id": "3152722226",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3682213,
+     -25.3913783
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 6,
+    "osm_id": "3152722164",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3680376,
+     -25.3896077
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 7,
+    "osm_id": "3152778104",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.371511,
+     -25.3839036
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 8,
+    "osm_id": "3174851846",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3755075,
+     -25.38532
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 9,
+    "osm_id": "3152722259",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3781922,
+     -25.3883816
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 10,
+    "osm_id": "3152778119",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3803069,
+     -25.3896187
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 11,
+    "osm_id": "3174884707",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3869767,
+     -25.3872487
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 12,
+    "osm_id": "3152722435",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3878435,
+     -25.3862473
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 13,
+    "osm_id": "3177861443",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3706846,
+     -25.3893466
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 14,
+    "osm_id": "3152778101",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.380382,
+     -25.3881001
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 15,
+    "osm_id": "3174884701",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3911261,
+     -25.3863705
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 16,
+    "osm_id": "3152777837",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3842288,
+     -25.3820886
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 17,
+    "osm_id": "3163028362",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3842784,
+     -25.3810927
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 18,
+    "osm_id": "3163041067",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3842798,
+     -25.38094
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 19,
+    "osm_id": "3163039759",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3844313,
+     -25.3772383
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 20,
+    "osm_id": "7036111216",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3844467,
+     -25.3770881
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 21,
+    "osm_id": "3163040933",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.384607,
+     -25.3734965
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 22,
+    "osm_id": "3163024756",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3920488,
+     -25.3573091
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 23,
+    "osm_id": "3163024755",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3770165,
+     -25.3802814
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 24,
+    "osm_id": "7203779066",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3800036,
+     -25.3802472
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 25,
+    "osm_id": "3174884756",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.381179,
+     -25.3803663
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 26,
+    "osm_id": "3163040937",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3810974,
+     -25.3780962
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 27,
+    "osm_id": "3163039756",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3856185,
+     -25.380635
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 28,
+    "osm_id": "3163040909",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3860031,
+     -25.3803959
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 29,
+    "osm_id": "3163041269",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3813007,
+     -25.3805275
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 30,
+    "osm_id": "3163040892",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3837474,
+     -25.3809921
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 31,
+    "osm_id": "3163041294",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3813073,
+     -25.3709473
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 32,
+    "osm_id": "3174884711",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3813148,
+     -25.3749446
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 33,
+    "osm_id": "3179205912",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.382004,
+     -25.3778175
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 34,
+    "osm_id": "3163040870",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3842248,
+     -25.3774564
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 35,
+    "osm_id": "3163041146",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3843911,
+     -25.3771329
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 36,
+    "osm_id": "3163040957",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3838788,
+     -25.3809848
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 37,
+    "osm_id": "3163040949",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.385574,
+     -25.3808612
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 38,
+    "osm_id": "3163040908",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3872047,
+     -25.3808049
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 39,
+    "osm_id": "3163041292",
+    "degree": 2
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3845252,
+     -25.3810381
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 40,
+    "osm_id": "3163041020",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3831868,
+     -25.381341
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 41,
+    "osm_id": "3163041141",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3832726,
+     -25.3811956
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 42,
+    "osm_id": "3163041013",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3836808,
+     -25.3810071
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 43,
+    "osm_id": "3163040880",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3841363,
+     -25.3811132
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 44,
+    "osm_id": "3163041071",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3831037,
+     -25.3810914
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 45,
+    "osm_id": "3163041262",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3842556,
+     -25.3851837
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 46,
+    "osm_id": "3163041057",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3798931,
+     -25.3783603
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 47,
+    "osm_id": "3163041019",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3854009,
+     -25.3738582
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 48,
+    "osm_id": "3163048818",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.388749,
+     -25.3757667
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 49,
+    "osm_id": "7036066711",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3797281,
+     -25.3755856
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 50,
+    "osm_id": "3163137880",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3804016,
+     -25.3864427
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 51,
+    "osm_id": "7203738931",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3801156,
+     -25.3930862
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 52,
+    "osm_id": "3174884677",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3678503,
+     -25.3925409
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 53,
+    "osm_id": "3152722445",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3770337,
+     -25.3838539
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 54,
+    "osm_id": "3152722224",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3714735,
+     -25.3791502
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 55,
+    "osm_id": "3152721905",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3645228,
+     -25.3684912
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 56,
+    "osm_id": "3170720775",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3749665,
+     -25.3648317
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 57,
+    "osm_id": "3163229588",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3759877,
+     -25.3757201
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 58,
+    "osm_id": "3172726481",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3738017,
+     -25.376029
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 59,
+    "osm_id": "3174851825",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3742644,
+     -25.3760375
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 60,
+    "osm_id": "3174851858",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3751656,
+     -25.3756988
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 61,
+    "osm_id": "3174852181",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3738366,
+     -25.3766421
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 62,
+    "osm_id": "3174852166",
+    "degree": 4
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3742081,
+     -25.375073
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 63,
+    "osm_id": "3174852190",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3740525,
+     -25.3749773
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 64,
+    "osm_id": "3174854242",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3724787,
+     -25.3746016
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 65,
+    "osm_id": "3174854957",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3716506,
+     -25.3741085
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 66,
+    "osm_id": "3174854234",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3728643,
+     -25.3742369
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 67,
+    "osm_id": "3174857364",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3705696,
+     -25.3745411
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 68,
+    "osm_id": "3174854959",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3720878,
+     -25.373774
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 69,
+    "osm_id": "3174854953",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.379655,
+     -25.3748252
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 70,
+    "osm_id": "3179205930",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3840189,
+     -25.3743802
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 71,
+    "osm_id": "3179205926",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3841108,
+     -25.37311
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 72,
+    "osm_id": "7063808051",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3793458,
+     -25.370283
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 73,
+    "osm_id": "3163138087",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3711463,
+     -25.373196
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 74,
+    "osm_id": "3152722161",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.385814,
+     -25.3772904
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 75,
+    "osm_id": "3179186195",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.386618,
+     -25.373436
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 76,
+    "osm_id": "3179185926",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3801155,
+     -25.386362
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 77,
+    "osm_id": "7203739187",
+    "degree": 3
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3718866,
+     -25.3755153
+    ]
+   },
+   "properties": {
+    "kind": "node",
+    "id": 78,
+    "osm_id": "9381404464",
+    "degree": 1
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3754781,
+      -25.3757334
+     ],
+     [
+      28.3754177,
+      -25.3752996
+     ],
+     [
+      28.3753668,
+      -25.3748876
+     ],
+     [
+      28.3753359,
+      -25.3745071
+     ],
+     [
+      28.3752581,
+      -25.373362
+     ],
+     [
+      28.3752233,
+      -25.3723721
+     ],
+     [
+      28.3751448,
+      -25.3710555
+     ],
+     [
+      28.3751328,
+      -25.3709128
+     ],
+     [
+      28.3750845,
+      -25.3704351
+     ],
+     [
+      28.37488,
+      -25.367033
+     ],
+     [
+      28.3748424,
+      -25.3665355
+     ],
+     [
+      28.3747613,
+      -25.3650917
+     ],
+     [
+      28.3747519,
+      -25.3649984
+     ],
+     [
+      28.3747311,
+      -25.3649087
+     ],
+     [
+      28.3746962,
+      -25.3648148
+     ],
+     [
+      28.3746144,
+      -25.3646984
+     ],
+     [
+      28.374544,
+      -25.3646191
+     ],
+     [
+      28.3744568,
+      -25.3645579
+     ],
+     [
+      28.3743703,
+      -25.3645251
+     ],
+     [
+      28.3731212,
+      -25.3642435
+     ],
+     [
+      28.3722433,
+      -25.363995
+     ],
+     [
+      28.3700265,
+      -25.3634278
+     ],
+     [
+      28.3679767,
+      -25.3629298
+     ],
+     [
+      28.3677303,
+      -25.3628256
+     ],
+     [
+      28.3674931,
+      -25.362719
+     ],
+     [
+      28.3672746,
+      -25.3626035
+     ],
+     [
+      28.3643726,
+      -25.3610696
+     ],
+     [
+      28.3625151,
+      -25.3600877
+     ],
+     [
+      28.357552,
+      -25.3574642
+     ],
+     [
+      28.3562655,
+      -25.3567909
+     ],
+     [
+      28.3550477,
+      -25.3561275
+     ],
+     [
+      28.3543302,
+      -25.3557482
+     ],
+     [
+      28.3527968,
+      -25.3549592
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 0,
+    "start_id": 0,
+    "end_id": 1,
+    "length_m": 3695.36,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939737"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3759697,
+      -25.3829647
+     ],
+     [
+      28.3759152,
+      -25.3828433
+     ],
+     [
+      28.3758938,
+      -25.3826301
+     ],
+     [
+      28.375737,
+      -25.3803676
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 1,
+    "start_id": 2,
+    "end_id": 3,
+    "length_m": 290.44,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939738"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.375737,
+      -25.3803676
+     ],
+     [
+      28.3755698,
+      -25.3779561
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 2,
+    "start_id": 3,
+    "end_id": 4,
+    "length_m": 268.67,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939738"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3755698,
+      -25.3779561
+     ],
+     [
+      28.3754299,
+      -25.3759376
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 3,
+    "start_id": 4,
+    "end_id": 5,
+    "length_m": 224.89,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939738"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3682213,
+      -25.3913783
+     ],
+     [
+      28.3681752,
+      -25.391143
+     ],
+     [
+      28.3678257,
+      -25.3902535
+     ],
+     [
+      28.3676433,
+      -25.3898221
+     ],
+     [
+      28.3676326,
+      -25.3897543
+     ],
+     [
+      28.3676916,
+      -25.3896719
+     ],
+     [
+      28.3678525,
+      -25.3896428
+     ],
+     [
+      28.3680135,
+      -25.3896186
+     ],
+     [
+      28.3680376,
+      -25.3896077
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 4,
+    "start_id": 6,
+    "end_id": 7,
+    "length_m": 236.99,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939740"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3680376,
+      -25.3896077
+     ],
+     [
+      28.3680671,
+      -25.3895944
+     ],
+     [
+      28.3680778,
+      -25.3894926
+     ],
+     [
+      28.3680671,
+      -25.3894005
+     ],
+     [
+      28.3679982,
+      -25.3891463
+     ],
+     [
+      28.3679223,
+      -25.3889207
+     ],
+     [
+      28.3677782,
+      -25.3886472
+     ],
+     [
+      28.3677407,
+      -25.3882934
+     ],
+     [
+      28.3677345,
+      -25.3879466
+     ],
+     [
+      28.3677746,
+      -25.3876205
+     ],
+     [
+      28.3677828,
+      -25.3875541
+     ],
+     [
+      28.3678418,
+      -25.3873311
+     ],
+     [
+      28.3679652,
+      -25.3871276
+     ],
+     [
+      28.3682709,
+      -25.3867883
+     ],
+     [
+      28.3688664,
+      -25.3862698
+     ],
+     [
+      28.369258,
+      -25.3860081
+     ],
+     [
+      28.3697193,
+      -25.3857464
+     ],
+     [
+      28.3699286,
+      -25.3855913
+     ],
+     [
+      28.3701056,
+      -25.3854313
+     ],
+     [
+      28.3704014,
+      -25.3850899
+     ],
+     [
+      28.3707708,
+      -25.3847286
+     ],
+     [
+      28.371098,
+      -25.3844378
+     ],
+     [
+      28.3712911,
+      -25.3842585
+     ],
+     [
+      28.3714099,
+      -25.3840818
+     ],
+     [
+      28.371511,
+      -25.3839036
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 5,
+    "start_id": 7,
+    "end_id": 8,
+    "length_m": 797.09,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939740"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.371511,
+      -25.3839036
+     ],
+     [
+      28.3716299,
+      -25.3836941
+     ],
+     [
+      28.3717471,
+      -25.3835267
+     ],
+     [
+      28.3718544,
+      -25.3834443
+     ],
+     [
+      28.371967,
+      -25.3834007
+     ],
+     [
+      28.3720636,
+      -25.3833861
+     ],
+     [
+      28.3721494,
+      -25.3834007
+     ],
+     [
+      28.3722513,
+      -25.3834297
+     ],
+     [
+      28.37282,
+      -25.3837302
+     ],
+     [
+      28.373292,
+      -25.3839968
+     ],
+     [
+      28.3738017,
+      -25.3842343
+     ],
+     [
+      28.3742684,
+      -25.384462
+     ],
+     [
+      28.3745642,
+      -25.3846004
+     ],
+     [
+      28.3746975,
+      -25.3846947
+     ],
+     [
+      28.375047,
+      -25.3849591
+     ],
+     [
+      28.3755075,
+      -25.38532
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 6,
+    "start_id": 8,
+    "end_id": 9,
+    "length_m": 494.51,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939740"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3755075,
+      -25.38532
+     ],
+     [
+      28.3756532,
+      -25.3854389
+     ],
+     [
+      28.3757229,
+      -25.3855164
+     ],
+     [
+      28.3757489,
+      -25.3856107
+     ],
+     [
+      28.3757329,
+      -25.3856834
+     ],
+     [
+      28.3756961,
+      -25.3857781
+     ],
+     [
+      28.3756264,
+      -25.385909
+     ],
+     [
+      28.3755566,
+      -25.3860495
+     ],
+     [
+      28.3754976,
+      -25.3862191
+     ],
+     [
+      28.3754708,
+      -25.3863597
+     ],
+     [
+      28.3754976,
+      -25.3865002
+     ],
+     [
+      28.3755942,
+      -25.3867038
+     ],
+     [
+      28.3756425,
+      -25.3867716
+     ],
+     [
+      28.3756961,
+      -25.3868395
+     ],
+     [
+      28.3757605,
+      -25.3868782
+     ],
+     [
+      28.3758463,
+      -25.3869073
+     ],
+     [
+      28.3760011,
+      -25.386895
+     ],
+     [
+      28.3762908,
+      -25.3868756
+     ],
+     [
+      28.3763766,
+      -25.3868853
+     ],
+     [
+      28.3764946,
+      -25.3869289
+     ],
+     [
+      28.3766027,
+      -25.3870042
+     ],
+     [
+      28.3769291,
+      -25.3873408
+     ],
+     [
+      28.3773797,
+      -25.3877237
+     ],
+     [
+      28.3777874,
+      -25.3880387
+     ],
+     [
+      28.3780288,
+      -25.3882326
+     ],
+     [
+      28.3781922,
+      -25.3883816
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 7,
+    "start_id": 9,
+    "end_id": 10,
+    "length_m": 507.21,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939740"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3781922,
+      -25.3883816
+     ],
+     [
+      28.3782442,
+      -25.3884291
+     ],
+     [
+      28.3783461,
+      -25.3885405
+     ],
+     [
+      28.3784365,
+      -25.3886154
+     ],
+     [
+      28.3786841,
+      -25.3887489
+     ],
+     [
+      28.3790159,
+      -25.3889207
+     ],
+     [
+      28.3792098,
+      -25.3890252
+     ],
+     [
+      28.3793377,
+      -25.3891243
+     ],
+     [
+      28.3794558,
+      -25.3892261
+     ],
+     [
+      28.3797141,
+      -25.389379
+     ],
+     [
+      28.3801531,
+      -25.3896089
+     ],
+     [
+      28.3802711,
+      -25.3896186
+     ],
+     [
+      28.3803069,
+      -25.3896187
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 8,
+    "start_id": 10,
+    "end_id": 11,
+    "length_m": 256.7,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939740"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3803069,
+      -25.3896187
+     ],
+     [
+      28.3837741,
+      -25.3896283
+     ],
+     [
+      28.3847826,
+      -25.3896525
+     ],
+     [
+      28.3849221,
+      -25.3896331
+     ],
+     [
+      28.385024,
+      -25.389575
+     ],
+     [
+      28.3851965,
+      -25.3894129
+     ],
+     [
+      28.3855712,
+      -25.3890564
+     ],
+     [
+      28.3857919,
+      -25.3888071
+     ],
+     [
+      28.3858394,
+      -25.3887075
+     ],
+     [
+      28.3859092,
+      -25.3884991
+     ],
+     [
+      28.3860057,
+      -25.3883053
+     ],
+     [
+      28.3861567,
+      -25.3881528
+     ],
+     [
+      28.386569,
+      -25.3878352
+     ],
+     [
+      28.3866655,
+      -25.3877479
+     ],
+     [
+      28.3867138,
+      -25.3876462
+     ],
+     [
+      28.3867621,
+      -25.3874959
+     ],
+     [
+      28.3868318,
+      -25.3873941
+     ],
+     [
+      28.3869767,
+      -25.3872487
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 9,
+    "start_id": 11,
+    "end_id": 12,
+    "length_m": 806.67,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939740"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3869767,
+      -25.3872487
+     ],
+     [
+      28.387269,
+      -25.3869387
+     ],
+     [
+      28.387387,
+      -25.3868151
+     ],
+     [
+      28.3874675,
+      -25.3866915
+     ],
+     [
+      28.3875599,
+      -25.386581
+     ],
+     [
+      28.3876821,
+      -25.3864468
+     ],
+     [
+      28.3877625,
+      -25.3863692
+     ],
+     [
+      28.3878001,
+      -25.3863256
+     ],
+     [
+      28.3878435,
+      -25.3862473
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 10,
+    "start_id": 12,
+    "end_id": 13,
+    "length_m": 141.8,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309939740"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3680376,
+      -25.3896077
+     ],
+     [
+      28.3680733,
+      -25.3896455
+     ],
+     [
+      28.368135,
+      -25.3896722
+     ],
+     [
+      28.3681717,
+      -25.389672
+     ],
+     [
+      28.3690542,
+      -25.389563
+     ],
+     [
+      28.3706846,
+      -25.3893466
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 11,
+    "start_id": 7,
+    "end_id": 14,
+    "length_m": 271.1,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309943837"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3706846,
+      -25.3893466
+     ],
+     [
+      28.3765668,
+      -25.3885905
+     ],
+     [
+      28.3781922,
+      -25.3883816
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 12,
+    "start_id": 14,
+    "end_id": 10,
+    "length_m": 761.78,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309943837"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3781922,
+      -25.3883816
+     ],
+     [
+      28.380382,
+      -25.3881001
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 13,
+    "start_id": 10,
+    "end_id": 15,
+    "length_m": 222.19,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309943837"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.380382,
+      -25.3881001
+     ],
+     [
+      28.3807835,
+      -25.3880485
+     ],
+     [
+      28.3857294,
+      -25.3874112
+     ],
+     [
+      28.3857965,
+      -25.387387
+     ],
+     [
+      28.3858912,
+      -25.3873362
+     ],
+     [
+      28.3859494,
+      -25.3873119
+     ],
+     [
+      28.3860084,
+      -25.3872998
+     ],
+     [
+      28.386087,
+      -25.3873096
+     ],
+     [
+      28.3861693,
+      -25.3873313
+     ],
+     [
+      28.386231,
+      -25.387341
+     ],
+     [
+      28.3863356,
+      -25.3873313
+     ],
+     [
+      28.3869767,
+      -25.3872487
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 14,
+    "start_id": 15,
+    "end_id": 12,
+    "length_m": 671.95,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309943837"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3869767,
+      -25.3872487
+     ],
+     [
+      28.3874066,
+      -25.3871908
+     ],
+     [
+      28.3876472,
+      -25.3871616
+     ],
+     [
+      28.3877231,
+      -25.3871399
+     ],
+     [
+      28.3877813,
+      -25.3870889
+     ],
+     [
+      28.3878894,
+      -25.3869655
+     ],
+     [
+      28.3879411,
+      -25.3869112
+     ],
+     [
+      28.3880048,
+      -25.3868443
+     ],
+     [
+      28.3880817,
+      -25.3867982
+     ],
+     [
+      28.3883105,
+      -25.3867328
+     ],
+     [
+      28.3884017,
+      -25.3866892
+     ],
+     [
+      28.388527,
+      -25.3866334
+     ],
+     [
+      28.388637,
+      -25.3865995
+     ],
+     [
+      28.3887282,
+      -25.3866019
+     ],
+     [
+      28.3888542,
+      -25.3866188
+     ],
+     [
+      28.3889642,
+      -25.3866455
+     ],
+     [
+      28.3890661,
+      -25.3866697
+     ],
+     [
+      28.389109,
+      -25.3866625
+     ],
+     [
+      28.3892592,
+      -25.3866091
+     ],
+     [
+      28.3894282,
+      -25.3865849
+     ],
+     [
+      28.390485,
+      -25.3864977
+     ],
+     [
+      28.3907049,
+      -25.3864783
+     ],
+     [
+      28.3908122,
+      -25.3864662
+     ],
+     [
+      28.3909203,
+      -25.3864396
+     ],
+     [
+      28.391033,
+      -25.3863912
+     ],
+     [
+      28.3911261,
+      -25.3863705
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 15,
+    "start_id": 12,
+    "end_id": 16,
+    "length_m": 443.78,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "309943837"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3842288,
+      -25.3820886
+     ],
+     [
+      28.3842784,
+      -25.3810927
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 16,
+    "start_id": 17,
+    "end_id": 18,
+    "length_m": 110.85,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310816223"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3842784,
+      -25.3810927
+     ],
+     [
+      28.3842798,
+      -25.38094
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 17,
+    "start_id": 18,
+    "end_id": 19,
+    "length_m": 16.98,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310816223"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3842798,
+      -25.38094
+     ],
+     [
+      28.3843562,
+      -25.3794036
+     ],
+     [
+      28.3844273,
+      -25.377411
+     ],
+     [
+      28.3844313,
+      -25.3772383
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 18,
+    "start_id": 19,
+    "end_id": 20,
+    "length_m": 411.9,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310816223"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3844313,
+      -25.3772383
+     ],
+     [
+      28.3844467,
+      -25.3770881
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 19,
+    "start_id": 20,
+    "end_id": 21,
+    "length_m": 16.77,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310816223"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3844467,
+      -25.3770881
+     ],
+     [
+      28.3844984,
+      -25.3759073
+     ],
+     [
+      28.384607,
+      -25.3734965
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 20,
+    "start_id": 21,
+    "end_id": 22,
+    "length_m": 399.69,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310816223"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.384607,
+      -25.3734965
+     ],
+     [
+      28.3846138,
+      -25.3732864
+     ],
+     [
+      28.3846566,
+      -25.3719698
+     ],
+     [
+      28.3847277,
+      -25.3702103
+     ],
+     [
+      28.3847974,
+      -25.3690676
+     ],
+     [
+      28.3848175,
+      -25.3685768
+     ],
+     [
+      28.384831,
+      -25.3682874
+     ],
+     [
+      28.3848665,
+      -25.3670518
+     ],
+     [
+      28.3848752,
+      -25.3669912
+     ],
+     [
+      28.3848993,
+      -25.3669191
+     ],
+     [
+      28.3849248,
+      -25.3668597
+     ],
+     [
+      28.3849597,
+      -25.3668076
+     ],
+     [
+      28.3850274,
+      -25.3667343
+     ],
+     [
+      28.3866508,
+      -25.365185
+     ],
+     [
+      28.3879048,
+      -25.3639748
+     ],
+     [
+      28.3882528,
+      -25.363639
+     ],
+     [
+      28.388983,
+      -25.3629398
+     ],
+     [
+      28.3890457,
+      -25.3628625
+     ],
+     [
+      28.3890977,
+      -25.3627874
+     ],
+     [
+      28.3891319,
+      -25.3627298
+     ],
+     [
+      28.3901129,
+      -25.360926
+     ],
+     [
+      28.3910376,
+      -25.3592457
+     ],
+     [
+      28.3920488,
+      -25.3573091
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 21,
+    "start_id": 22,
+    "end_id": 23,
+    "length_m": 2034.45,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310816223"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.375737,
+      -25.3803676
+     ],
+     [
+      28.3759581,
+      -25.3803523
+     ],
+     [
+      28.3762004,
+      -25.3803406
+     ],
+     [
+      28.3763738,
+      -25.3803232
+     ],
+     [
+      28.3765518,
+      -25.3803042
+     ],
+     [
+      28.3767476,
+      -25.3802945
+     ],
+     [
+      28.3770165,
+      -25.3802814
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 22,
+    "start_id": 3,
+    "end_id": 24,
+    "length_m": 128.94,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817284"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3770165,
+      -25.3802814
+     ],
+     [
+      28.3771446,
+      -25.3802751
+     ],
+     [
+      28.3775728,
+      -25.3802505
+     ],
+     [
+      28.3776971,
+      -25.3802388
+     ],
+     [
+      28.3777722,
+      -25.3802218
+     ],
+     [
+      28.3778492,
+      -25.3802068
+     ],
+     [
+      28.37867,
+      -25.3801948
+     ],
+     [
+      28.3788524,
+      -25.3801875
+     ],
+     [
+      28.3789033,
+      -25.3801669
+     ],
+     [
+      28.3790106,
+      -25.3800979
+     ],
+     [
+      28.3791286,
+      -25.3800494
+     ],
+     [
+      28.3792413,
+      -25.3800445
+     ],
+     [
+      28.3793405,
+      -25.3800542
+     ],
+     [
+      28.3793834,
+      -25.3800833
+     ],
+     [
+      28.3794371,
+      -25.3801197
+     ],
+     [
+      28.379472,
+      -25.3801294
+     ],
+     [
+      28.3795551,
+      -25.3801318
+     ],
+     [
+      28.3796839,
+      -25.3801318
+     ],
+     [
+      28.3797804,
+      -25.3801318
+     ],
+     [
+      28.3798314,
+      -25.3801463
+     ],
+     [
+      28.3798743,
+      -25.3801778
+     ],
+     [
+      28.3799011,
+      -25.3802287
+     ],
+     [
+      28.3799306,
+      -25.3802457
+     ],
+     [
+      28.3799708,
+      -25.3802505
+     ],
+     [
+      28.3800036,
+      -25.3802472
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 23,
+    "start_id": 24,
+    "end_id": 25,
+    "length_m": 313.16,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817284"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3800036,
+      -25.3802472
+     ],
+     [
+      28.3800433,
+      -25.3802433
+     ],
+     [
+      28.3800808,
+      -25.3802433
+     ],
+     [
+      28.3801291,
+      -25.3802578
+     ],
+     [
+      28.3801935,
+      -25.3802966
+     ],
+     [
+      28.3802766,
+      -25.3803717
+     ],
+     [
+      28.3803356,
+      -25.3804202
+     ],
+     [
+      28.3803598,
+      -25.3804347
+     ],
+     [
+      28.3804188,
+      -25.3804468
+     ],
+     [
+      28.380636,
+      -25.3804517
+     ],
+     [
+      28.3809043,
+      -25.3804541
+     ],
+     [
+      28.3810276,
+      -25.3804444
+     ],
+     [
+      28.3811081,
+      -25.3804202
+     ],
+     [
+      28.3811671,
+      -25.3803838
+     ],
+     [
+      28.381179,
+      -25.3803663
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 24,
+    "start_id": 25,
+    "end_id": 26,
+    "length_m": 128.69,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817284"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.381179,
+      -25.3803663
+     ],
+     [
+      28.3812154,
+      -25.3803123
+     ],
+     [
+      28.3812824,
+      -25.3802263
+     ],
+     [
+      28.38132,
+      -25.3801839
+     ],
+     [
+      28.3813495,
+      -25.3801063
+     ],
+     [
+      28.3813495,
+      -25.3800143
+     ],
+     [
+      28.3813495,
+      -25.3799512
+     ],
+     [
+      28.3813495,
+      -25.3798325
+     ],
+     [
+      28.3813656,
+      -25.379652
+     ],
+     [
+      28.3813736,
+      -25.379555
+     ],
+     [
+      28.3814192,
+      -25.3794327
+     ],
+     [
+      28.3814836,
+      -25.3793321
+     ],
+     [
+      28.3815373,
+      -25.3792836
+     ],
+     [
+      28.3815882,
+      -25.3792024
+     ],
+     [
+      28.3815882,
+      -25.3790946
+     ],
+     [
+      28.3815748,
+      -25.3789577
+     ],
+     [
+      28.3815748,
+      -25.3787783
+     ],
+     [
+      28.381548,
+      -25.3785917
+     ],
+     [
+      28.3814943,
+      -25.3784888
+     ],
+     [
+      28.3813817,
+      -25.3783749
+     ],
+     [
+      28.3812342,
+      -25.3782295
+     ],
+     [
+      28.3810974,
+      -25.3780962
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 25,
+    "start_id": 26,
+    "end_id": 27,
+    "length_m": 280.48,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817284"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3856185,
+      -25.380635
+     ],
+     [
+      28.3858556,
+      -25.3805534
+     ],
+     [
+      28.3859066,
+      -25.3805304
+     ],
+     [
+      28.3859522,
+      -25.3804989
+     ],
+     [
+      28.385987,
+      -25.3804614
+     ],
+     [
+      28.3860031,
+      -25.3803959
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 26,
+    "start_id": 28,
+    "end_id": 29,
+    "length_m": 49.88,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817285"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3842288,
+      -25.3820886
+     ],
+     [
+      28.3839727,
+      -25.3820995
+     ],
+     [
+      28.3838654,
+      -25.382085
+     ],
+     [
+      28.3837072,
+      -25.3820292
+     ],
+     [
+      28.3835409,
+      -25.3819905
+     ],
+     [
+      28.3833129,
+      -25.3819674
+     ],
+     [
+      28.3831278,
+      -25.3819687
+     ],
+     [
+      28.3830715,
+      -25.3819832
+     ],
+     [
+      28.3830286,
+      -25.3820183
+     ],
+     [
+      28.3829937,
+      -25.382068
+     ],
+     [
+      28.3829535,
+      -25.3820947
+     ],
+     [
+      28.3828757,
+      -25.3821092
+     ],
+     [
+      28.3825994,
+      -25.3821116
+     ],
+     [
+      28.3825404,
+      -25.3821044
+     ],
+     [
+      28.3825163,
+      -25.3820777
+     ],
+     [
+      28.3825592,
+      -25.3820099
+     ],
+     [
+      28.3826262,
+      -25.3818851
+     ],
+     [
+      28.3826477,
+      -25.3817796
+     ],
+     [
+      28.3826289,
+      -25.3817069
+     ],
+     [
+      28.382594,
+      -25.381667
+     ],
+     [
+      28.3825297,
+      -25.3816609
+     ],
+     [
+      28.3822668,
+      -25.3816052
+     ],
+     [
+      28.3820496,
+      -25.3815688
+     ],
+     [
+      28.3819745,
+      -25.3815252
+     ],
+     [
+      28.3818806,
+      -25.3814186
+     ],
+     [
+      28.3816231,
+      -25.381135
+     ],
+     [
+      28.3814756,
+      -25.3809945
+     ],
+     [
+      28.381328,
+      -25.3809
+     ],
+     [
+      28.3812556,
+      -25.3808442
+     ],
+     [
+      28.3812315,
+      -25.380803
+     ],
+     [
+      28.3812288,
+      -25.3807376
+     ],
+     [
+      28.3812556,
+      -25.3806528
+     ],
+     [
+      28.3812878,
+      -25.380568
+     ],
+     [
+      28.3813007,
+      -25.3805275
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 27,
+    "start_id": 17,
+    "end_id": 30,
+    "length_m": 438.32,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817286"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3813007,
+      -25.3805275
+     ],
+     [
+      28.381328,
+      -25.380442
+     ],
+     [
+      28.3813575,
+      -25.3803572
+     ],
+     [
+      28.3813871,
+      -25.3802748
+     ],
+     [
+      28.3814112,
+      -25.3802336
+     ],
+     [
+      28.3814434,
+      -25.3802202
+     ],
+     [
+      28.3814943,
+      -25.3802214
+     ],
+     [
+      28.3815534,
+      -25.3802227
+     ],
+     [
+      28.3815989,
+      -25.3802227
+     ],
+     [
+      28.381666,
+      -25.3801996
+     ],
+     [
+      28.3817304,
+      -25.3801366
+     ],
+     [
+      28.3818162,
+      -25.3800736
+     ],
+     [
+      28.3819369,
+      -25.3800215
+     ],
+     [
+      28.3820469,
+      -25.3799888
+     ],
+     [
+      28.3821354,
+      -25.37995
+     ],
+     [
+      28.38224,
+      -25.3798701
+     ],
+     [
+      28.3822936,
+      -25.3798337
+     ],
+     [
+      28.3823258,
+      -25.3798277
+     ],
+     [
+      28.3824304,
+      -25.3798264
+     ],
+     [
+      28.3824733,
+      -25.3798131
+     ],
+     [
+      28.3825297,
+      -25.3797877
+     ],
+     [
+      28.3825672,
+      -25.3797331
+     ],
+     [
+      28.3826236,
+      -25.3796435
+     ],
+     [
+      28.3826826,
+      -25.3795768
+     ],
+     [
+      28.3827764,
+      -25.379526
+     ],
+     [
+      28.3828837,
+      -25.3794981
+     ],
+     [
+      28.3829159,
+      -25.3794993
+     ],
+     [
+      28.3829642,
+      -25.3795223
+     ],
+     [
+      28.3830152,
+      -25.3795732
+     ],
+     [
+      28.3830715,
+      -25.379658
+     ],
+     [
+      28.383109,
+      -25.3797465
+     ],
+     [
+      28.3831224,
+      -25.3798858
+     ],
+     [
+      28.3831439,
+      -25.3800009
+     ],
+     [
+      28.3831788,
+      -25.3800676
+     ],
+     [
+      28.3833504,
+      -25.3803353
+     ],
+     [
+      28.3834416,
+      -25.380488
+     ],
+     [
+      28.3835436,
+      -25.3806928
+     ],
+     [
+      28.3836669,
+      -25.380877
+     ],
+     [
+      28.3837474,
+      -25.3809921
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 28,
+    "start_id": 30,
+    "end_id": 31,
+    "length_m": 404.46,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817286"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3813073,
+      -25.3709473
+     ],
+     [
+      28.3812395,
+      -25.3709833
+     ],
+     [
+      28.3811697,
+      -25.3710027
+     ],
+     [
+      28.3811134,
+      -25.3710027
+     ],
+     [
+      28.3810517,
+      -25.3709954
+     ],
+     [
+      28.3810016,
+      -25.3710006
+     ],
+     [
+      28.3809533,
+      -25.3710297
+     ],
+     [
+      28.3809283,
+      -25.3710657
+     ],
+     [
+      28.3809023,
+      -25.3711703
+     ],
+     [
+      28.3808821,
+      -25.3711977
+     ],
+     [
+      28.3808594,
+      -25.3712285
+     ],
+     [
+      28.3807996,
+      -25.3712741
+     ],
+     [
+      28.3807325,
+      -25.371359
+     ],
+     [
+      28.3806977,
+      -25.3714486
+     ],
+     [
+      28.3806789,
+      -25.3715625
+     ],
+     [
+      28.3806663,
+      -25.3716089
+     ],
+     [
+      28.3806207,
+      -25.3716647
+     ],
+     [
+      28.3806073,
+      -25.3717035
+     ],
+     [
+      28.380618,
+      -25.3717641
+     ],
+     [
+      28.3806609,
+      -25.3718343
+     ],
+     [
+      28.3807889,
+      -25.3719794
+     ],
+     [
+      28.38088,
+      -25.3720812
+     ],
+     [
+      28.380931,
+      -25.372166
+     ],
+     [
+      28.3809847,
+      -25.3722096
+     ],
+     [
+      28.3810525,
+      -25.3722536
+     ],
+     [
+      28.3810954,
+      -25.3722996
+     ],
+     [
+      28.3811088,
+      -25.3723578
+     ],
+     [
+      28.3811027,
+      -25.3724108
+     ],
+     [
+      28.3810579,
+      -25.3724644
+     ],
+     [
+      28.3810061,
+      -25.3725319
+     ],
+     [
+      28.3810034,
+      -25.3726071
+     ],
+     [
+      28.3810249,
+      -25.3727113
+     ],
+     [
+      28.3811625,
+      -25.3731188
+     ],
+     [
+      28.3812751,
+      -25.3733636
+     ],
+     [
+      28.3813395,
+      -25.3734775
+     ],
+     [
+      28.3813333,
+      -25.3735474
+     ],
+     [
+      28.3812716,
+      -25.3736467
+     ],
+     [
+      28.3811912,
+      -25.373843
+     ],
+     [
+      28.3811858,
+      -25.3739109
+     ],
+     [
+      28.3812108,
+      -25.3739403
+     ],
+     [
+      28.3812421,
+      -25.3739545
+     ],
+     [
+      28.3813368,
+      -25.3739621
+     ],
+     [
+      28.3814012,
+      -25.3739864
+     ],
+     [
+      28.3814334,
+      -25.3740421
+     ],
+     [
+      28.3814996,
+      -25.374209
+     ],
+     [
+      28.3815058,
+      -25.374316
+     ],
+     [
+      28.3814763,
+      -25.3744299
+     ],
+     [
+      28.3813583,
+      -25.3746601
+     ],
+     [
+      28.3812985,
+      -25.3747979
+     ],
+     [
+      28.3812993,
+      -25.3748758
+     ],
+     [
+      28.3813148,
+      -25.3749446
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 29,
+    "start_id": 32,
+    "end_id": 33,
+    "length_m": 535.46,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817287"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3813148,
+      -25.3749446
+     ],
+     [
+      28.3813682,
+      -25.3751808
+     ],
+     [
+      28.3814119,
+      -25.3753677
+     ],
+     [
+      28.3814039,
+      -25.3755253
+     ],
+     [
+      28.3814111,
+      -25.3756848
+     ],
+     [
+      28.381428,
+      -25.3758064
+     ],
+     [
+      28.3814809,
+      -25.3759975
+     ],
+     [
+      28.3815031,
+      -25.3761093
+     ],
+     [
+      28.3815139,
+      -25.3761869
+     ],
+     [
+      28.3815694,
+      -25.3762835
+     ],
+     [
+      28.3817009,
+      -25.3764786
+     ],
+     [
+      28.381776,
+      -25.3766058
+     ],
+     [
+      28.381835,
+      -25.376733
+     ],
+     [
+      28.3818672,
+      -25.3768433
+     ],
+     [
+      28.3818967,
+      -25.3769584
+     ],
+     [
+      28.3819235,
+      -25.3770323
+     ],
+     [
+      28.3819825,
+      -25.3771256
+     ],
+     [
+      28.3820093,
+      -25.3771898
+     ],
+     [
+      28.3820201,
+      -25.3772674
+     ],
+     [
+      28.3820201,
+      -25.3773679
+     ],
+     [
+      28.3820013,
+      -25.3776333
+     ],
+     [
+      28.3819906,
+      -25.3777593
+     ],
+     [
+      28.382004,
+      -25.3778175
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 30,
+    "start_id": 33,
+    "end_id": 34,
+    "length_m": 333.22,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817287"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.382004,
+      -25.3778175
+     ],
+     [
+      28.3820308,
+      -25.3778344
+     ],
+     [
+      28.3820844,
+      -25.3778417
+     ],
+     [
+      28.3822319,
+      -25.3778005
+     ],
+     [
+      28.3823044,
+      -25.3777884
+     ],
+     [
+      28.3823741,
+      -25.3777884
+     ],
+     [
+      28.3824331,
+      -25.3777763
+     ],
+     [
+      28.3824868,
+      -25.3777424
+     ],
+     [
+      28.3825404,
+      -25.3777157
+     ],
+     [
+      28.3826182,
+      -25.3777036
+     ],
+     [
+      28.3826906,
+      -25.3777084
+     ],
+     [
+      28.3828086,
+      -25.3777084
+     ],
+     [
+      28.3830125,
+      -25.377689
+     ],
+     [
+      28.383388,
+      -25.3776115
+     ],
+     [
+      28.3839056,
+      -25.3775037
+     ],
+     [
+      28.3840666,
+      -25.3774721
+     ],
+     [
+      28.3842248,
+      -25.3774564
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 31,
+    "start_id": 34,
+    "end_id": 35,
+    "length_m": 229.74,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817287"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3813007,
+      -25.3805275
+     ],
+     [
+      28.3812422,
+      -25.3804662
+     ],
+     [
+      28.3811966,
+      -25.3804056
+     ],
+     [
+      28.381179,
+      -25.3803663
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 32,
+    "start_id": 30,
+    "end_id": 26,
+    "length_m": 21.86,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817288"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3844467,
+      -25.3770881
+     ],
+     [
+      28.3843911,
+      -25.3771329
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 33,
+    "start_id": 21,
+    "end_id": 36,
+    "length_m": 7.48,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817289"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3843911,
+      -25.3771329
+     ],
+     [
+      28.3842919,
+      -25.3772371
+     ],
+     [
+      28.3842356,
+      -25.377334
+     ],
+     [
+      28.3842248,
+      -25.377391
+     ],
+     [
+      28.3842248,
+      -25.3774564
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 34,
+    "start_id": 36,
+    "end_id": 35,
+    "length_m": 41.15,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817289"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3842248,
+      -25.3774564
+     ],
+     [
+      28.3842436,
+      -25.3775424
+     ],
+     [
+      28.384249,
+      -25.3776103
+     ],
+     [
+      28.3842436,
+      -25.3777072
+     ],
+     [
+      28.3842034,
+      -25.377872
+     ],
+     [
+      28.3841524,
+      -25.3780622
+     ],
+     [
+      28.3840746,
+      -25.3782076
+     ],
+     [
+      28.3839968,
+      -25.3783579
+     ],
+     [
+      28.3839647,
+      -25.3784597
+     ],
+     [
+      28.3839566,
+      -25.3785578
+     ],
+     [
+      28.3839566,
+      -25.3786766
+     ],
+     [
+      28.3839754,
+      -25.3787529
+     ],
+     [
+      28.3840129,
+      -25.3788401
+     ],
+     [
+      28.3841202,
+      -25.3789528
+     ],
+     [
+      28.3841739,
+      -25.3790183
+     ],
+     [
+      28.3842087,
+      -25.3790691
+     ],
+     [
+      28.3842329,
+      -25.3791309
+     ],
+     [
+      28.3842275,
+      -25.3791903
+     ],
+     [
+      28.3842061,
+      -25.3792521
+     ],
+     [
+      28.3841524,
+      -25.3793442
+     ],
+     [
+      28.3841524,
+      -25.3794036
+     ],
+     [
+      28.3841551,
+      -25.379509
+     ],
+     [
+      28.3841551,
+      -25.3795768
+     ],
+     [
+      28.3841524,
+      -25.3796362
+     ],
+     [
+      28.3841283,
+      -25.3797138
+     ],
+     [
+      28.3841229,
+      -25.3797622
+     ],
+     [
+      28.3841202,
+      -25.3798168
+     ],
+     [
+      28.3841336,
+      -25.3798592
+     ],
+     [
+      28.3841685,
+      -25.3799319
+     ],
+     [
+      28.3841953,
+      -25.3800033
+     ],
+     [
+      28.3842087,
+      -25.3800688
+     ],
+     [
+      28.3842248,
+      -25.3801378
+     ],
+     [
+      28.3842061,
+      -25.3802954
+     ],
+     [
+      28.3841819,
+      -25.3805207
+     ],
+     [
+      28.3841578,
+      -25.3806237
+     ],
+     [
+      28.3841363,
+      -25.3807061
+     ],
+     [
+      28.3840827,
+      -25.3807934
+     ],
+     [
+      28.3840263,
+      -25.380843
+     ],
+     [
+      28.3839432,
+      -25.3809121
+     ],
+     [
+      28.3838788,
+      -25.3809848
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 35,
+    "start_id": 35,
+    "end_id": 37,
+    "length_m": 419.88,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817289"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.385574,
+      -25.3808612
+     ],
+     [
+      28.3856974,
+      -25.380883
+     ],
+     [
+      28.3857912,
+      -25.3809024
+     ],
+     [
+      28.385861,
+      -25.3809024
+     ],
+     [
+      28.385987,
+      -25.3808903
+     ],
+     [
+      28.3860782,
+      -25.3808612
+     ],
+     [
+      28.3861453,
+      -25.380843
+     ],
+     [
+      28.3861989,
+      -25.3808321
+     ],
+     [
+      28.3862606,
+      -25.3808273
+     ],
+     [
+      28.386317,
+      -25.380837
+     ],
+     [
+      28.3864162,
+      -25.3808588
+     ],
+     [
+      28.3864993,
+      -25.3808854
+     ],
+     [
+      28.386561,
+      -25.3808854
+     ],
+     [
+      28.38662,
+      -25.3808842
+     ],
+     [
+      28.3867676,
+      -25.3808491
+     ],
+     [
+      28.3869285,
+      -25.3808261
+     ],
+     [
+      28.3870331,
+      -25.3808176
+     ],
+     [
+      28.3871082,
+      -25.3808176
+     ],
+     [
+      28.3872047,
+      -25.3808049
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 36,
+    "start_id": 38,
+    "end_id": 39,
+    "length_m": 167.14,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817290"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.385574,
+      -25.3808612
+     ],
+     [
+      28.3855686,
+      -25.3809121
+     ],
+     [
+      28.3855767,
+      -25.3809606
+     ],
+     [
+      28.3856008,
+      -25.3809872
+     ],
+     [
+      28.3856464,
+      -25.3810284
+     ],
+     [
+      28.3856759,
+      -25.3810914
+     ],
+     [
+      28.3856947,
+      -25.3811447
+     ],
+     [
+      28.3856947,
+      -25.3812247
+     ],
+     [
+      28.3856947,
+      -25.3813434
+     ],
+     [
+      28.3856625,
+      -25.3814137
+     ],
+     [
+      28.3856249,
+      -25.3814695
+     ],
+     [
+      28.3855901,
+      -25.3814937
+     ],
+     [
+      28.3854774,
+      -25.3815179
+     ],
+     [
+      28.3853916,
+      -25.3815228
+     ],
+     [
+      28.3853084,
+      -25.381501
+     ],
+     [
+      28.3850805,
+      -25.3813919
+     ],
+     [
+      28.3849195,
+      -25.3813265
+     ],
+     [
+      28.3848122,
+      -25.3812683
+     ],
+     [
+      28.3847586,
+      -25.3812247
+     ],
+     [
+      28.3846808,
+      -25.3811593
+     ],
+     [
+      28.3846057,
+      -25.3811011
+     ],
+     [
+      28.3845252,
+      -25.3810381
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 37,
+    "start_id": 38,
+    "end_id": 40,
+    "length_m": 201.25,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817291"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3831868,
+      -25.381341
+     ],
+     [
+      28.3832244,
+      -25.3812611
+     ],
+     [
+      28.3832726,
+      -25.3811956
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 38,
+    "start_id": 41,
+    "end_id": 42,
+    "length_m": 18.4,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817292"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3832726,
+      -25.3811956
+     ],
+     [
+      28.3833451,
+      -25.3811314
+     ],
+     [
+      28.3834604,
+      -25.3810708
+     ],
+     [
+      28.3836508,
+      -25.3810139
+     ],
+     [
+      28.3836808,
+      -25.3810071
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 39,
+    "start_id": 42,
+    "end_id": 43,
+    "length_m": 46.85,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817292"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3836808,
+      -25.3810071
+     ],
+     [
+      28.3837474,
+      -25.3809921
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 40,
+    "start_id": 43,
+    "end_id": 31,
+    "length_m": 6.9,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817292"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3837474,
+      -25.3809921
+     ],
+     [
+      28.3838145,
+      -25.380986
+     ],
+     [
+      28.3838788,
+      -25.3809848
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 41,
+    "start_id": 31,
+    "end_id": 37,
+    "length_m": 13.24,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817292"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3838788,
+      -25.3809848
+     ],
+     [
+      28.3839593,
+      -25.3809945
+     ],
+     [
+      28.384021,
+      -25.3810139
+     ],
+     [
+      28.3840666,
+      -25.3810454
+     ],
+     [
+      28.3841363,
+      -25.3811132
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 42,
+    "start_id": 37,
+    "end_id": 44,
+    "length_m": 30.78,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817292"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3831037,
+      -25.3810914
+     ],
+     [
+      28.383168,
+      -25.3811302
+     ],
+     [
+      28.3832726,
+      -25.3811956
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 43,
+    "start_id": 45,
+    "end_id": 42,
+    "length_m": 20.55,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817293"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3842288,
+      -25.3820886
+     ],
+     [
+      28.3842342,
+      -25.3824073
+     ],
+     [
+      28.3842234,
+      -25.3826981
+     ],
+     [
+      28.3842288,
+      -25.3828738
+     ],
+     [
+      28.3842771,
+      -25.3831718
+     ],
+     [
+      28.3843173,
+      -25.3834796
+     ],
+     [
+      28.3843347,
+      -25.3837849
+     ],
+     [
+      28.384379,
+      -25.3842223
+     ],
+     [
+      28.3844105,
+      -25.3845792
+     ],
+     [
+      28.3844072,
+      -25.3846088
+     ],
+     [
+      28.3843971,
+      -25.3846361
+     ],
+     [
+      28.3843622,
+      -25.3846767
+     ],
+     [
+      28.384328,
+      -25.3847043
+     ],
+     [
+      28.3842834,
+      -25.3847373
+     ],
+     [
+      28.3842499,
+      -25.3847694
+     ],
+     [
+      28.3842298,
+      -25.3848033
+     ],
+     [
+      28.3842127,
+      -25.3848454
+     ],
+     [
+      28.3841912,
+      -25.3849226
+     ],
+     [
+      28.3841892,
+      -25.3850184
+     ],
+     [
+      28.3841966,
+      -25.3850614
+     ],
+     [
+      28.384212,
+      -25.3850959
+     ],
+     [
+      28.3842556,
+      -25.3851837
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 44,
+    "start_id": 17,
+    "end_id": 46,
+    "length_m": 353.91,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817294"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3836808,
+      -25.3810071
+     ],
+     [
+      28.3837125,
+      -25.3810793
+     ],
+     [
+      28.3837554,
+      -25.3811496
+     ],
+     [
+      28.3837849,
+      -25.3811908
+     ],
+     [
+      28.3838145,
+      -25.3812005
+     ],
+     [
+      28.3838654,
+      -25.381198
+     ],
+     [
+      28.3839512,
+      -25.3811738
+     ],
+     [
+      28.3840666,
+      -25.3811278
+     ],
+     [
+      28.3841363,
+      -25.3811132
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 45,
+    "start_id": 43,
+    "end_id": 44,
+    "length_m": 60.19,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817295"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3841363,
+      -25.3811132
+     ],
+     [
+      28.3841873,
+      -25.3810963
+     ],
+     [
+      28.3842382,
+      -25.3810842
+     ],
+     [
+      28.3842784,
+      -25.3810927
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 46,
+    "start_id": 44,
+    "end_id": 18,
+    "length_m": 14.89,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817295"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3798931,
+      -25.3783603
+     ],
+     [
+      28.3810974,
+      -25.3780962
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 47,
+    "start_id": 47,
+    "end_id": 27,
+    "length_m": 124.5,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817296"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3810974,
+      -25.3780962
+     ],
+     [
+      28.3812127,
+      -25.3780525
+     ],
+     [
+      28.3813871,
+      -25.3779883
+     ],
+     [
+      28.3817411,
+      -25.3778987
+     ],
+     [
+      28.382004,
+      -25.3778175
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 48,
+    "start_id": 27,
+    "end_id": 34,
+    "length_m": 96.33,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310817296"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.384607,
+      -25.3734965
+     ],
+     [
+      28.3846774,
+      -25.3735353
+     ],
+     [
+      28.3848558,
+      -25.3736407
+     ],
+     [
+      28.3849289,
+      -25.3736838
+     ],
+     [
+      28.3849832,
+      -25.3737062
+     ],
+     [
+      28.3850281,
+      -25.3737213
+     ],
+     [
+      28.385122,
+      -25.3737443
+     ],
+     [
+      28.3851944,
+      -25.3737625
+     ],
+     [
+      28.3852608,
+      -25.3737861
+     ],
+     [
+      28.3854009,
+      -25.3738582
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 49,
+    "start_id": 22,
+    "end_id": 48,
+    "length_m": 89.97,
+    "highway": "residential",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310818016"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3854009,
+      -25.3738582
+     ],
+     [
+      28.3857898,
+      -25.3740212
+     ],
+     [
+      28.3876453,
+      -25.3748222
+     ],
+     [
+      28.3883996,
+      -25.3751481
+     ],
+     [
+      28.3888013,
+      -25.3753335
+     ],
+     [
+      28.3888187,
+      -25.3753493
+     ],
+     [
+      28.3888321,
+      -25.3753735
+     ],
+     [
+      28.3888375,
+      -25.375402
+     ],
+     [
+      28.3888194,
+      -25.3754892
+     ],
+     [
+      28.3887879,
+      -25.3756189
+     ],
+     [
+      28.3887617,
+      -25.3757037
+     ],
+     [
+      28.388749,
+      -25.3757667
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 50,
+    "start_id": 48,
+    "end_id": 49,
+    "length_m": 429.24,
+    "highway": "residential",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310818016"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3797281,
+      -25.3755856
+     ],
+     [
+      28.3797166,
+      -25.375697
+     ],
+     [
+      28.3797401,
+      -25.3760435
+     ],
+     [
+      28.3798045,
+      -25.3772479
+     ],
+     [
+      28.3798931,
+      -25.3783603
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 51,
+    "start_id": 50,
+    "end_id": 47,
+    "length_m": 309.14,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310825772"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3798931,
+      -25.3783603
+     ],
+     [
+      28.3799332,
+      -25.3791333
+     ],
+     [
+      28.3800036,
+      -25.3802472
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 52,
+    "start_id": 47,
+    "end_id": 25,
+    "length_m": 210.11,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310825772"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3800036,
+      -25.3802472
+     ],
+     [
+      28.3804016,
+      -25.3864427
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 53,
+    "start_id": 25,
+    "end_id": 51,
+    "length_m": 690.07,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310825772"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3804016,
+      -25.3864427
+     ],
+     [
+      28.3804107,
+      -25.3865849
+     ],
+     [
+      28.3804133,
+      -25.3868612
+     ],
+     [
+      28.380382,
+      -25.3881001
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 54,
+    "start_id": 51,
+    "end_id": 15,
+    "length_m": 184.36,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310825772"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.380382,
+      -25.3881001
+     ],
+     [
+      28.3803785,
+      -25.3883393
+     ],
+     [
+      28.3803069,
+      -25.3896187
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 55,
+    "start_id": 15,
+    "end_id": 11,
+    "length_m": 169.04,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310825772"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3803069,
+      -25.3896187
+     ],
+     [
+      28.3801827,
+      -25.3918722
+     ],
+     [
+      28.3801156,
+      -25.3930862
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 56,
+    "start_id": 11,
+    "end_id": 52,
+    "length_m": 386.05,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "310825772"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3678503,
+      -25.3925409
+     ],
+     [
+      28.3678104,
+      -25.3924175
+     ],
+     [
+      28.3677541,
+      -25.3922673
+     ],
+     [
+      28.3676441,
+      -25.3921219
+     ],
+     [
+      28.367595,
+      -25.3920491
+     ],
+     [
+      28.3675824,
+      -25.3919717
+     ],
+     [
+      28.3676119,
+      -25.3919199
+     ],
+     [
+      28.367628,
+      -25.3918917
+     ],
+     [
+      28.3677479,
+      -25.3917826
+     ],
+     [
+      28.368102,
+      -25.3914773
+     ],
+     [
+      28.3682213,
+      -25.3913783
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 57,
+    "start_id": 53,
+    "end_id": 6,
+    "length_m": 162.23,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311574317"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3682213,
+      -25.3913783
+     ],
+     [
+      28.3697757,
+      -25.3900888
+     ],
+     [
+      28.3706846,
+      -25.3893466
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 58,
+    "start_id": 6,
+    "end_id": 14,
+    "length_m": 335.07,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311574317"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3706846,
+      -25.3893466
+     ],
+     [
+      28.3709746,
+      -25.3891099
+     ],
+     [
+      28.3722996,
+      -25.3880122
+     ],
+     [
+      28.3726698,
+      -25.3876778
+     ],
+     [
+      28.3727717,
+      -25.3875566
+     ],
+     [
+      28.3728798,
+      -25.3873653
+     ],
+     [
+      28.3730461,
+      -25.3870769
+     ],
+     [
+      28.3732017,
+      -25.3869412
+     ],
+     [
+      28.3734262,
+      -25.3867982
+     ],
+     [
+      28.3736657,
+      -25.3867062
+     ],
+     [
+      28.3738446,
+      -25.3866552
+     ],
+     [
+      28.3739714,
+      -25.3866117
+     ],
+     [
+      28.374068,
+      -25.3865438
+     ],
+     [
+      28.3742531,
+      -25.3863863
+     ],
+     [
+      28.3750838,
+      -25.3856762
+     ],
+     [
+      28.3755075,
+      -25.38532
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 59,
+    "start_id": 14,
+    "end_id": 9,
+    "length_m": 668.21,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311574317"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3755075,
+      -25.38532
+     ],
+     [
+      28.3760494,
+      -25.3847699
+     ],
+     [
+      28.3762049,
+      -25.38461
+     ],
+     [
+      28.3762969,
+      -25.3845568
+     ],
+     [
+      28.3764007,
+      -25.3845131
+     ],
+     [
+      28.376508,
+      -25.3844694
+     ],
+     [
+      28.3765831,
+      -25.384404
+     ],
+     [
+      28.3766778,
+      -25.3842951
+     ],
+     [
+      28.3767762,
+      -25.384169
+     ],
+     [
+      28.3768468,
+      -25.3841012
+     ],
+     [
+      28.3769425,
+      -25.3840454
+     ],
+     [
+      28.3770069,
+      -25.3839945
+     ],
+     [
+      28.377031,
+      -25.3839315
+     ],
+     [
+      28.3770337,
+      -25.3838539
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 60,
+    "start_id": 9,
+    "end_id": 54,
+    "length_m": 229.32,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311574317"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3770337,
+      -25.3838539
+     ],
+     [
+      28.3769702,
+      -25.3837474
+     ],
+     [
+      28.3767762,
+      -25.3835995
+     ],
+     [
+      28.3766716,
+      -25.3835147
+     ],
+     [
+      28.3765429,
+      -25.3834468
+     ],
+     [
+      28.3764659,
+      -25.3834009
+     ],
+     [
+      28.3764168,
+      -25.3833547
+     ],
+     [
+      28.3763801,
+      -25.3832919
+     ],
+     [
+      28.3763095,
+      -25.3832021
+     ],
+     [
+      28.376213,
+      -25.3831173
+     ],
+     [
+      28.3761172,
+      -25.3830616
+     ],
+     [
+      28.3759697,
+      -25.3829647
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 61,
+    "start_id": 54,
+    "end_id": 2,
+    "length_m": 147.87,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311574317"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3759697,
+      -25.3829647
+     ],
+     [
+      28.3754995,
+      -25.3825163
+     ],
+     [
+      28.373115,
+      -25.3804783
+     ],
+     [
+      28.3728843,
+      -25.3803376
+     ],
+     [
+      28.3726974,
+      -25.3802337
+     ],
+     [
+      28.3726,
+      -25.3801583
+     ],
+     [
+      28.3725035,
+      -25.3800517
+     ],
+     [
+      28.3723908,
+      -25.3799305
+     ],
+     [
+      28.3723104,
+      -25.3798626
+     ],
+     [
+      28.3721931,
+      -25.3797975
+     ],
+     [
+      28.3721441,
+      -25.3797463
+     ],
+     [
+      28.3720582,
+      -25.3796155
+     ],
+     [
+      28.3719992,
+      -25.3795185
+     ],
+     [
+      28.3718329,
+      -25.3793974
+     ],
+     [
+      28.3716084,
+      -25.3792643
+     ],
+     [
+      28.3714735,
+      -25.3791502
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 62,
+    "start_id": 2,
+    "end_id": 55,
+    "length_m": 622.88,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311574317"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3714735,
+      -25.3791502
+     ],
+     [
+      28.371334,
+      -25.3789805
+     ],
+     [
+      28.37076,
+      -25.3784716
+     ],
+     [
+      28.3702504,
+      -25.3780403
+     ],
+     [
+      28.3701171,
+      -25.3779557
+     ],
+     [
+      28.3699615,
+      -25.3778782
+     ],
+     [
+      28.3699017,
+      -25.3778173
+     ],
+     [
+      28.3698213,
+      -25.3776962
+     ],
+     [
+      28.3697569,
+      -25.3776331
+     ],
+     [
+      28.369655,
+      -25.3775653
+     ],
+     [
+      28.3695316,
+      -25.3775023
+     ],
+     [
+      28.369435,
+      -25.3774102
+     ],
+     [
+      28.3693385,
+      -25.3772842
+     ],
+     [
+      28.3691936,
+      -25.3771388
+     ],
+     [
+      28.3690067,
+      -25.3770397
+     ],
+     [
+      28.3689254,
+      -25.3769837
+     ],
+     [
+      28.3687913,
+      -25.3768383
+     ],
+     [
+      28.3685982,
+      -25.3766444
+     ],
+     [
+      28.3678042,
+      -25.3759562
+     ],
+     [
+      28.3673161,
+      -25.375549
+     ],
+     [
+      28.3670693,
+      -25.3753648
+     ],
+     [
+      28.3668923,
+      -25.3752582
+     ],
+     [
+      28.3668386,
+      -25.3751758
+     ],
+     [
+      28.3667536,
+      -25.3750573
+     ],
+     [
+      28.3660823,
+      -25.3744876
+     ],
+     [
+      28.3651027,
+      -25.37368
+     ],
+     [
+      28.3650416,
+      -25.3736297
+     ],
+     [
+      28.3649933,
+      -25.3735521
+     ],
+     [
+      28.3649879,
+      -25.3734455
+     ],
+     [
+      28.3650738,
+      -25.3731595
+     ],
+     [
+      28.3651649,
+      -25.3727911
+     ],
+     [
+      28.3651435,
+      -25.3725973
+     ],
+     [
+      28.3651604,
+      -25.3724981
+     ],
+     [
+      28.365214,
+      -25.3724109
+     ],
+     [
+      28.3652347,
+      -25.3723358
+     ],
+     [
+      28.3652355,
+      -25.3722364
+     ],
+     [
+      28.3653044,
+      -25.3721176
+     ],
+     [
+      28.3653205,
+      -25.3720643
+     ],
+     [
+      28.3653374,
+      -25.3719989
+     ],
+     [
+      28.365316,
+      -25.3719407
+     ],
+     [
+      28.3652838,
+      -25.3718632
+     ],
+     [
+      28.3652722,
+      -25.3717493
+     ],
+     [
+      28.3653321,
+      -25.371616
+     ],
+     [
+      28.3654769,
+      -25.3713445
+     ],
+     [
+      28.365552,
+      -25.3711943
+     ],
+     [
+      28.3655995,
+      -25.3710513
+     ],
+     [
+      28.3660187,
+      -25.3694009
+     ],
+     [
+      28.3660233,
+      -25.369287
+     ],
+     [
+      28.3659972,
+      -25.3691876
+     ],
+     [
+      28.3658945,
+      -25.3690931
+     ],
+     [
+      28.3656585,
+      -25.368938
+     ],
+     [
+      28.3655619,
+      -25.368841
+     ],
+     [
+      28.3654868,
+      -25.3687344
+     ],
+     [
+      28.3653849,
+      -25.3686375
+     ],
+     [
+      28.3651918,
+      -25.368526
+     ],
+     [
+      28.3650308,
+      -25.3684678
+     ],
+     [
+      28.3649182,
+      -25.3684581
+     ],
+     [
+      28.364607,
+      -25.3684775
+     ],
+     [
+      28.3645228,
+      -25.3684912
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 63,
+    "start_id": 55,
+    "end_id": 56,
+    "length_m": 1589.63,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311574317"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3749665,
+      -25.3648317
+     ],
+     [
+      28.3750327,
+      -25.3649438
+     ],
+     [
+      28.3750766,
+      -25.3650169
+     ],
+     [
+      28.3750971,
+      -25.3650795
+     ],
+     [
+      28.3751051,
+      -25.3651207
+     ],
+     [
+      28.3751185,
+      -25.3651377
+     ],
+     [
+      28.3751641,
+      -25.3651426
+     ],
+     [
+      28.3752232,
+      -25.3651474
+     ],
+     [
+      28.375267,
+      -25.3651672
+     ],
+     [
+      28.3752902,
+      -25.3651959
+     ],
+     [
+      28.3753197,
+      -25.3652686
+     ],
+     [
+      28.3753528,
+      -25.3653562
+     ],
+     [
+      28.3754163,
+      -25.3654213
+     ],
+     [
+      28.3755182,
+      -25.3655182
+     ],
+     [
+      28.3756121,
+      -25.3655764
+     ],
+     [
+      28.3757113,
+      -25.3655837
+     ],
+     [
+      28.3758347,
+      -25.3655982
+     ],
+     [
+      28.375951,
+      -25.3656373
+     ],
+     [
+      28.3761136,
+      -25.3656903
+     ],
+     [
+      28.3762317,
+      -25.3657582
+     ],
+     [
+      28.3765079,
+      -25.3660029
+     ],
+     [
+      28.3766018,
+      -25.3660902
+     ],
+     [
+      28.3766662,
+      -25.3661362
+     ],
+     [
+      28.3767359,
+      -25.3662089
+     ],
+     [
+      28.3768244,
+      -25.3663422
+     ],
+     [
+      28.3769238,
+      -25.3664125
+     ],
+     [
+      28.3769451,
+      -25.3665119
+     ],
+     [
+      28.3770256,
+      -25.3665773
+     ],
+     [
+      28.3771007,
+      -25.3666331
+     ],
+     [
+      28.3771436,
+      -25.3666864
+     ],
+     [
+      28.3771928,
+      -25.3667789
+     ],
+     [
+      28.3772053,
+      -25.3668318
+     ],
+     [
+      28.3771973,
+      -25.3668706
+     ],
+     [
+      28.3771463,
+      -25.3669118
+     ],
+     [
+      28.377056,
+      -25.3669485
+     ],
+     [
+      28.376929,
+      -25.3669918
+     ],
+     [
+      28.3768602,
+      -25.367043
+     ],
+     [
+      28.3768388,
+      -25.3671012
+     ],
+     [
+      28.3768459,
+      -25.3671493
+     ],
+     [
+      28.3768647,
+      -25.367205
+     ],
+     [
+      28.3769129,
+      -25.3672899
+     ],
+     [
+      28.3769317,
+      -25.3673577
+     ],
+     [
+      28.3769505,
+      -25.3674668
+     ],
+     [
+      28.3769612,
+      -25.3675637
+     ],
+     [
+      28.376988,
+      -25.3676364
+     ],
+     [
+      28.3770497,
+      -25.3677116
+     ],
+     [
+      28.3771597,
+      -25.3677988
+     ],
+     [
+      28.3772411,
+      -25.367838
+     ],
+     [
+      28.3772831,
+      -25.3678764
+     ],
+     [
+      28.3773189,
+      -25.3679519
+     ],
+     [
+      28.3773367,
+      -25.3680291
+     ],
+     [
+      28.3773501,
+      -25.3681381
+     ],
+     [
+      28.377377,
+      -25.368189
+     ],
+     [
+      28.3774333,
+      -25.3682593
+     ],
+     [
+      28.3774762,
+      -25.3683441
+     ],
+     [
+      28.3774789,
+      -25.3684023
+     ],
+     [
+      28.3774601,
+      -25.3684895
+     ],
+     [
+      28.377402,
+      -25.3685602
+     ],
+     [
+      28.3772948,
+      -25.3686256
+     ],
+     [
+      28.3771892,
+      -25.3687052
+     ],
+     [
+      28.377157,
+      -25.3687634
+     ],
+     [
+      28.3771517,
+      -25.3688555
+     ],
+     [
+      28.3771999,
+      -25.369013
+     ],
+     [
+      28.3772563,
+      -25.3691415
+     ],
+     [
+      28.3773072,
+      -25.3691924
+     ],
+     [
+      28.3774092,
+      -25.3692166
+     ],
+     [
+      28.377562,
+      -25.3692675
+     ],
+     [
+      28.3776881,
+      -25.3693354
+     ],
+     [
+      28.3778741,
+      -25.369423
+     ],
+     [
+      28.377909,
+      -25.3694521
+     ],
+     [
+      28.3779241,
+      -25.3695002
+     ],
+     [
+      28.377959,
+      -25.3696092
+     ],
+     [
+      28.3780422,
+      -25.3697304
+     ],
+     [
+      28.3781736,
+      -25.3698831
+     ],
+     [
+      28.3782514,
+      -25.3699703
+     ],
+     [
+      28.3783533,
+      -25.3700333
+     ],
+     [
+      28.3784177,
+      -25.3700867
+     ],
+     [
+      28.3784847,
+      -25.3701666
+     ],
+     [
+      28.3785491,
+      -25.3702757
+     ],
+     [
+      28.3785571,
+      -25.3703702
+     ],
+     [
+      28.3785384,
+      -25.3704575
+     ],
+     [
+      28.3785115,
+      -25.3705302
+     ],
+     [
+      28.3784981,
+      -25.3705956
+     ],
+     [
+      28.3785008,
+      -25.3706538
+     ],
+     [
+      28.378525,
+      -25.3706853
+     ],
+     [
+      28.3785983,
+      -25.3707341
+     ],
+     [
+      28.3786215,
+      -25.3707628
+     ],
+     [
+      28.3786322,
+      -25.3707919
+     ],
+     [
+      28.3786269,
+      -25.3708573
+     ],
+     [
+      28.3786054,
+      -25.3708985
+     ],
+     [
+      28.3785598,
+      -25.3709155
+     ],
+     [
+      28.3785152,
+      -25.370911
+     ],
+     [
+      28.3784633,
+      -25.3708937
+     ],
+     [
+      28.3784401,
+      -25.3708553
+     ],
+     [
+      28.3784159,
+      -25.3708165
+     ],
+     [
+      28.3783918,
+      -25.3707923
+     ],
+     [
+      28.3783587,
+      -25.3707871
+     ],
+     [
+      28.3783104,
+      -25.3707968
+     ],
+     [
+      28.3781843,
+      -25.3708501
+     ],
+     [
+      28.3780055,
+      -25.3709401
+     ],
+     [
+      28.3778008,
+      -25.3710464
+     ],
+     [
+      28.3775969,
+      -25.3711869
+     ],
+     [
+      28.3774342,
+      -25.3712649
+     ],
+     [
+      28.3773162,
+      -25.371323
+     ],
+     [
+      28.3772384,
+      -25.371357
+     ],
+     [
+      28.3771741,
+      -25.3713666
+     ],
+     [
+      28.3771141,
+      -25.3713663
+     ],
+     [
+      28.3770471,
+      -25.3713469
+     ],
+     [
+      28.3769478,
+      -25.3712887
+     ],
+     [
+      28.3768924,
+      -25.3712697
+     ],
+     [
+      28.3768495,
+      -25.3712697
+     ],
+     [
+      28.3768083,
+      -25.371279
+     ],
+     [
+      28.376685,
+      -25.3713372
+     ],
+     [
+      28.3764731,
+      -25.3714244
+     ],
+     [
+      28.3763524,
+      -25.3714826
+     ],
+     [
+      28.3762478,
+      -25.3715505
+     ],
+     [
+      28.3761753,
+      -25.3716062
+     ],
+     [
+      28.3761405,
+      -25.3716523
+     ],
+     [
+      28.3761029,
+      -25.3716983
+     ],
+     [
+      28.3760636,
+      -25.3717374
+     ],
+     [
+      28.376009,
+      -25.3717686
+     ],
+     [
+      28.3759724,
+      -25.3717932
+     ],
+     [
+      28.3759366,
+      -25.3718292
+     ],
+     [
+      28.3759286,
+      -25.3718679
+     ],
+     [
+      28.375942,
+      -25.3719164
+     ],
+     [
+      28.376001,
+      -25.3720739
+     ],
+     [
+      28.376069,
+      -25.3721785
+     ],
+     [
+      28.3761378,
+      -25.3722412
+     ],
+     [
+      28.3761888,
+      -25.3722945
+     ],
+     [
+      28.3762031,
+      -25.3723264
+     ],
+     [
+      28.3762022,
+      -25.3723575
+     ],
+     [
+      28.3761727,
+      -25.3724205
+     ],
+     [
+      28.3761646,
+      -25.3724666
+     ],
+     [
+      28.3761619,
+      -25.3724956
+     ],
+     [
+      28.3761941,
+      -25.3725441
+     ],
+     [
+      28.3762504,
+      -25.3725974
+     ],
+     [
+      28.3763023,
+      -25.3726656
+     ],
+     [
+      28.3763497,
+      -25.3728058
+     ],
+     [
+      28.3763604,
+      -25.3728931
+     ],
+     [
+      28.376355,
+      -25.3729585
+     ],
+     [
+      28.3763202,
+      -25.373007
+     ],
+     [
+      28.3762826,
+      -25.3730748
+     ],
+     [
+      28.3762639,
+      -25.3731403
+     ],
+     [
+      28.3762719,
+      -25.3731936
+     ],
+     [
+      28.3763148,
+      -25.3732881
+     ],
+     [
+      28.376356,
+      -25.3733612
+     ],
+     [
+      28.3763577,
+      -25.3733899
+     ],
+     [
+      28.3763443,
+      -25.373419
+     ],
+     [
+      28.3762997,
+      -25.3734315
+     ],
+     [
+      28.3762478,
+      -25.3734456
+     ],
+     [
+      28.3762156,
+      -25.3734747
+     ],
+     [
+      28.37617,
+      -25.3735111
+     ],
+     [
+      28.3761226,
+      -25.3735429
+     ],
+     [
+      28.3760609,
+      -25.3735623
+     ],
+     [
+      28.3759778,
+      -25.3735914
+     ],
+     [
+      28.3759349,
+      -25.3736278
+     ],
+     [
+      28.3759215,
+      -25.3736593
+     ],
+     [
+      28.3759259,
+      -25.3737074
+     ],
+     [
+      28.3759554,
+      -25.3737825
+     ],
+     [
+      28.3760234,
+      -25.3738968
+     ],
+     [
+      28.3760707,
+      -25.3739812
+     ],
+     [
+      28.3761002,
+      -25.3740248
+     ],
+     [
+      28.3761083,
+      -25.3740588
+     ],
+     [
+      28.3761012,
+      -25.3740906
+     ],
+     [
+      28.3760707,
+      -25.3741242
+     ],
+     [
+      28.3760037,
+      -25.3741872
+     ],
+     [
+      28.3759795,
+      -25.374226
+     ],
+     [
+      28.3759715,
+      -25.3742672
+     ],
+     [
+      28.3759956,
+      -25.3743884
+     ],
+     [
+      28.3760583,
+      -25.3746577
+     ],
+     [
+      28.3761056,
+      -25.3747301
+     ],
+     [
+      28.376111,
+      -25.3747495
+     ],
+     [
+      28.3761083,
+      -25.3747834
+     ],
+     [
+      28.3760895,
+      -25.3748149
+     ],
+     [
+      28.3760385,
+      -25.3748779
+     ],
+     [
+      28.3759912,
+      -25.374934
+     ],
+     [
+      28.3759688,
+      -25.3749845
+     ],
+     [
+      28.3759795,
+      -25.3750088
+     ],
+     [
+      28.3760198,
+      -25.3750281
+     ],
+     [
+      28.3760663,
+      -25.3750406
+     ],
+     [
+      28.3761163,
+      -25.3750742
+     ],
+     [
+      28.3761834,
+      -25.3751469
+     ],
+     [
+      28.3762263,
+      -25.3752051
+     ],
+     [
+      28.3762397,
+      -25.3752511
+     ],
+     [
+      28.3762343,
+      -25.3752971
+     ],
+     [
+      28.3762156,
+      -25.3753529
+     ],
+     [
+      28.3761521,
+      -25.3754114
+     ],
+     [
+      28.3760949,
+      -25.3754838
+     ],
+     [
+      28.3760385,
+      -25.3755565
+     ],
+     [
+      28.3759825,
+      -25.3755953
+     ],
+     [
+      28.3759699,
+      -25.375638
+     ],
+     [
+      28.3759877,
+      -25.3757201
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 64,
+    "start_id": 57,
+    "end_id": 58,
+    "length_m": 1744.99,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311581295"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3754781,
+      -25.3757334
+     ],
+     [
+      28.3756042,
+      -25.3757225
+     ],
+     [
+      28.3757235,
+      -25.3757237
+     ],
+     [
+      28.3758322,
+      -25.3757286
+     ],
+     [
+      28.3759877,
+      -25.3757201
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 65,
+    "start_id": 0,
+    "end_id": 58,
+    "length_m": 51.3,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311581296"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3759877,
+      -25.3757201
+     ],
+     [
+      28.3763451,
+      -25.3757007
+     ],
+     [
+      28.376498,
+      -25.3756801
+     ],
+     [
+      28.3765772,
+      -25.3756898
+     ],
+     [
+      28.376657,
+      -25.3757043
+     ],
+     [
+      28.3767669,
+      -25.3757292
+     ],
+     [
+      28.3768286,
+      -25.3757479
+     ],
+     [
+      28.3769252,
+      -25.3757546
+     ],
+     [
+      28.3770264,
+      -25.3757425
+     ],
+     [
+      28.3771123,
+      -25.3757122
+     ],
+     [
+      28.3772055,
+      -25.3756765
+     ],
+     [
+      28.3773436,
+      -25.3756207
+     ],
+     [
+      28.3773899,
+      -25.3756013
+     ],
+     [
+      28.3774355,
+      -25.3755892
+     ],
+     [
+      28.3774764,
+      -25.3755868
+     ],
+     [
+      28.3776118,
+      -25.3755832
+     ],
+     [
+      28.3784493,
+      -25.3755359
+     ],
+     [
+      28.3785151,
+      -25.3755286
+     ],
+     [
+      28.3785546,
+      -25.3755286
+     ],
+     [
+      28.3785875,
+      -25.3755353
+     ],
+     [
+      28.3786022,
+      -25.3755417
+     ],
+     [
+      28.37862,
+      -25.3755559
+     ],
+     [
+      28.3786767,
+      -25.3756025
+     ],
+     [
+      28.378741,
+      -25.3756328
+     ],
+     [
+      28.3788249,
+      -25.375671
+     ],
+     [
+      28.3789147,
+      -25.3757025
+     ],
+     [
+      28.3789784,
+      -25.3757213
+     ],
+     [
+      28.3790555,
+      -25.3757383
+     ],
+     [
+      28.3791963,
+      -25.3757425
+     ],
+     [
+      28.3792446,
+      -25.375737
+     ],
+     [
+      28.3792922,
+      -25.3757249
+     ],
+     [
+      28.3793472,
+      -25.3756971
+     ],
+     [
+      28.3793874,
+      -25.375645
+     ],
+     [
+      28.379421,
+      -25.375588
+     ],
+     [
+      28.3794498,
+      -25.3755607
+     ],
+     [
+      28.379484,
+      -25.3755456
+     ],
+     [
+      28.3795296,
+      -25.3755329
+     ],
+     [
+      28.3795806,
+      -25.3755317
+     ],
+     [
+      28.3796208,
+      -25.3755371
+     ],
+     [
+      28.3796771,
+      -25.3755589
+     ],
+     [
+      28.3797281,
+      -25.3755856
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 66,
+    "start_id": 58,
+    "end_id": 50,
+    "length_m": 397.72,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311581296"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3738017,
+      -25.376029
+     ],
+     [
+      28.3738607,
+      -25.3760714
+     ],
+     [
+      28.3738916,
+      -25.3760945
+     ],
+     [
+      28.3739157,
+      -25.3761078
+     ],
+     [
+      28.3739398,
+      -25.3761078
+     ],
+     [
+      28.3739573,
+      -25.3761042
+     ],
+     [
+      28.3739854,
+      -25.376092
+     ],
+     [
+      28.374027,
+      -25.3760733
+     ],
+     [
+      28.3740907,
+      -25.376043
+     ],
+     [
+      28.3741437,
+      -25.3760315
+     ],
+     [
+      28.3741799,
+      -25.3760254
+     ],
+     [
+      28.3742302,
+      -25.3760236
+     ],
+     [
+      28.3742644,
+      -25.3760375
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 67,
+    "start_id": 59,
+    "end_id": 60,
+    "length_m": 51.7,
+    "highway": "service",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765479"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3742644,
+      -25.3760375
+     ],
+     [
+      28.3743395,
+      -25.3760569
+     ],
+     [
+      28.3744005,
+      -25.3760618
+     ],
+     [
+      28.3744803,
+      -25.3760563
+     ],
+     [
+      28.3745822,
+      -25.3760327
+     ],
+     [
+      28.3747673,
+      -25.3759236
+     ],
+     [
+      28.375006,
+      -25.3757903
+     ],
+     [
+      28.3751656,
+      -25.3756988
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 68,
+    "start_id": 60,
+    "end_id": 61,
+    "length_m": 101.99,
+    "highway": "service",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765479"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3751656,
+      -25.3756988
+     ],
+     [
+      28.375245,
+      -25.3757282
+     ],
+     [
+      28.3753067,
+      -25.3757383
+     ],
+     [
+      28.3753738,
+      -25.3757383
+     ],
+     [
+      28.3754781,
+      -25.3757334
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 69,
+    "start_id": 61,
+    "end_id": 0,
+    "length_m": 32.15,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765481"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.371511,
+      -25.3839036
+     ],
+     [
+      28.3714636,
+      -25.3837501
+     ],
+     [
+      28.3713456,
+      -25.3835175
+     ],
+     [
+      28.3712482,
+      -25.3832917
+     ],
+     [
+      28.3711525,
+      -25.3831249
+     ],
+     [
+      28.371005,
+      -25.3828995
+     ],
+     [
+      28.3709264,
+      -25.3827513
+     ],
+     [
+      28.3709111,
+      -25.3826427
+     ],
+     [
+      28.3709218,
+      -25.3825021
+     ],
+     [
+      28.3709988,
+      -25.3822109
+     ],
+     [
+      28.3711061,
+      -25.3818668
+     ],
+     [
+      28.3712303,
+      -25.381574
+     ],
+     [
+      28.3712456,
+      -25.3814621
+     ],
+     [
+      28.3712375,
+      -25.3813264
+     ],
+     [
+      28.3711731,
+      -25.3810526
+     ],
+     [
+      28.3710927,
+      -25.3808006
+     ],
+     [
+      28.3710881,
+      -25.3807089
+     ],
+     [
+      28.3711034,
+      -25.3805171
+     ],
+     [
+      28.3711356,
+      -25.3803062
+     ],
+     [
+      28.3711302,
+      -25.3801899
+     ],
+     [
+      28.3710881,
+      -25.3799988
+     ],
+     [
+      28.371072,
+      -25.3798995
+     ],
+     [
+      28.371098,
+      -25.379807
+     ],
+     [
+      28.3711865,
+      -25.3795913
+     ],
+     [
+      28.3712678,
+      -25.37941
+     ],
+     [
+      28.3713233,
+      -25.3793054
+     ],
+     [
+      28.3714145,
+      -25.3792133
+     ],
+     [
+      28.3714735,
+      -25.3791502
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 70,
+    "start_id": 8,
+    "end_id": 55,
+    "length_m": 559.89,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765482"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3714735,
+      -25.3791502
+     ],
+     [
+      28.3715835,
+      -25.3790437
+     ],
+     [
+      28.3716541,
+      -25.3789519
+     ],
+     [
+      28.3717203,
+      -25.3788425
+     ],
+     [
+      28.3717908,
+      -25.3787217
+     ],
+     [
+      28.3718383,
+      -25.3786729
+     ],
+     [
+      28.3719081,
+      -25.3786293
+     ],
+     [
+      28.3719679,
+      -25.3786006
+     ],
+     [
+      28.3720188,
+      -25.3785569
+     ],
+     [
+      28.3721253,
+      -25.3784136
+     ],
+     [
+      28.372246,
+      -25.3782003
+     ],
+     [
+      28.372271,
+      -25.3781207
+     ],
+     [
+      28.372279,
+      -25.3780214
+     ],
+     [
+      28.3723023,
+      -25.377958
+     ],
+     [
+      28.372389,
+      -25.3778178
+     ],
+     [
+      28.3727859,
+      -25.3771586
+     ],
+     [
+      28.3728146,
+      -25.3771195
+     ],
+     [
+      28.3728584,
+      -25.3771053
+     ],
+     [
+      28.3729595,
+      -25.3770904
+     ],
+     [
+      28.3731346,
+      -25.377069
+     ],
+     [
+      28.3733323,
+      -25.3770032
+     ],
+     [
+      28.3735423,
+      -25.3769163
+     ],
+     [
+      28.3737113,
+      -25.3767903
+     ],
+     [
+      28.3738366,
+      -25.3766421
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 71,
+    "start_id": 55,
+    "end_id": 62,
+    "length_m": 387.17,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765482"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3738366,
+      -25.3766421
+     ],
+     [
+      28.3742644,
+      -25.3760375
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 72,
+    "start_id": 62,
+    "end_id": 60,
+    "length_m": 79.79,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765482"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3742644,
+      -25.3760375
+     ],
+     [
+      28.3743381,
+      -25.3759078
+     ],
+     [
+      28.3743684,
+      -25.375833
+     ],
+     [
+      28.3743703,
+      -25.3757648
+     ],
+     [
+      28.3743389,
+      -25.375724
+     ],
+     [
+      28.3742773,
+      -25.3756804
+     ],
+     [
+      28.3741423,
+      -25.3756243
+     ],
+     [
+      28.3740672,
+      -25.3755879
+     ],
+     [
+      28.3740243,
+      -25.3755516
+     ],
+     [
+      28.3739841,
+      -25.3754837
+     ],
+     [
+      28.3739822,
+      -25.375392
+     ],
+     [
+      28.3740251,
+      -25.375312
+     ],
+     [
+      28.3741102,
+      -25.3752147
+     ],
+     [
+      28.3742081,
+      -25.375073
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 73,
+    "start_id": 60,
+    "end_id": 63,
+    "length_m": 136.45,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765482"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3740525,
+      -25.3749773
+     ],
+     [
+      28.3739486,
+      -25.3751221
+     ],
+     [
+      28.3738185,
+      -25.3753032
+     ],
+     [
+      28.3737749,
+      -25.3753553
+     ],
+     [
+      28.3737461,
+      -25.3753802
+     ],
+     [
+      28.3737051,
+      -25.3753947
+     ],
+     [
+      28.3736656,
+      -25.3753905
+     ],
+     [
+      28.37363,
+      -25.3753698
+     ],
+     [
+      28.3735241,
+      -25.3752935
+     ],
+     [
+      28.3734376,
+      -25.3752384
+     ],
+     [
+      28.3733075,
+      -25.3751615
+     ],
+     [
+      28.3731607,
+      -25.3750663
+     ],
+     [
+      28.3729964,
+      -25.3749506
+     ],
+     [
+      28.372702,
+      -25.3747446
+     ],
+     [
+      28.3724787,
+      -25.3746016
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 74,
+    "start_id": 64,
+    "end_id": 65,
+    "length_m": 210.99,
+    "highway": "service",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765914"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3724787,
+      -25.3746016
+     ],
+     [
+      28.3723607,
+      -25.3745289
+     ],
+     [
+      28.3721354,
+      -25.3743999
+     ],
+     [
+      28.3719142,
+      -25.3742651
+     ],
+     [
+      28.3717801,
+      -25.3741948
+     ],
+     [
+      28.3716506,
+      -25.3741085
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 75,
+    "start_id": 65,
+    "end_id": 66,
+    "length_m": 99.7,
+    "highway": "service",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765914"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3724787,
+      -25.3746016
+     ],
+     [
+      28.3728643,
+      -25.3742369
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 76,
+    "start_id": 65,
+    "end_id": 67,
+    "length_m": 56.08,
+    "highway": "service",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765937"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3705696,
+      -25.3745411
+     ],
+     [
+      28.3708687,
+      -25.3746901
+     ],
+     [
+      28.3710001,
+      -25.3747204
+     ],
+     [
+      28.3710806,
+      -25.3747283
+     ],
+     [
+      28.371149,
+      -25.374724
+     ],
+     [
+      28.3712,
+      -25.3747083
+     ],
+     [
+      28.371267,
+      -25.3746513
+     ],
+     [
+      28.3713233,
+      -25.3745604
+     ],
+     [
+      28.3714494,
+      -25.3743229
+     ],
+     [
+      28.3714977,
+      -25.3742478
+     ],
+     [
+      28.3715674,
+      -25.3741691
+     ],
+     [
+      28.3716506,
+      -25.3741085
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 77,
+    "start_id": 68,
+    "end_id": 66,
+    "length_m": 150.1,
+    "highway": "service",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765938"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3716506,
+      -25.3741085
+     ],
+     [
+      28.3719094,
+      -25.3739073
+     ],
+     [
+      28.3720878,
+      -25.373774
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 78,
+    "start_id": 66,
+    "end_id": 69,
+    "length_m": 57.56,
+    "highway": "service",
+    "name": "",
+    "oneway": false,
+    "osm_way": "311765938"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.379655,
+      -25.3748252
+     ],
+     [
+      28.379731,
+      -25.3747868
+     ],
+     [
+      28.3798231,
+      -25.3747712
+     ],
+     [
+      28.379909,
+      -25.3747736
+     ],
+     [
+      28.3800189,
+      -25.3748221
+     ],
+     [
+      28.3802496,
+      -25.3749045
+     ],
+     [
+      28.3804776,
+      -25.3749529
+     ],
+     [
+      28.3806224,
+      -25.3749723
+     ],
+     [
+      28.3807324,
+      -25.3749965
+     ],
+     [
+      28.380837,
+      -25.3750256
+     ],
+     [
+      28.3809175,
+      -25.3750305
+     ],
+     [
+      28.3810435,
+      -25.3750184
+     ],
+     [
+      28.3813148,
+      -25.3749446
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 79,
+    "start_id": 70,
+    "end_id": 33,
+    "length_m": 173.92,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "312095924"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3813148,
+      -25.3749446
+     ],
+     [
+      28.3814834,
+      -25.3748972
+     ],
+     [
+      28.381749,
+      -25.374839
+     ],
+     [
+      28.3818724,
+      -25.3748318
+     ],
+     [
+      28.3819662,
+      -25.3748414
+     ],
+     [
+      28.3821057,
+      -25.3748851
+     ],
+     [
+      28.3822532,
+      -25.3749335
+     ],
+     [
+      28.3823471,
+      -25.3749335
+     ],
+     [
+      28.3825107,
+      -25.3749166
+     ],
+     [
+      28.3827012,
+      -25.374902
+     ],
+     [
+      28.3828299,
+      -25.374919
+     ],
+     [
+      28.3829747,
+      -25.3749602
+     ],
+     [
+      28.3830928,
+      -25.3750038
+     ],
+     [
+      28.3831357,
+      -25.3750087
+     ],
+     [
+      28.3832054,
+      -25.374982
+     ],
+     [
+      28.3834361,
+      -25.3748439
+     ],
+     [
+      28.3835666,
+      -25.3747941
+     ],
+     [
+      28.3837204,
+      -25.3747494
+     ],
+     [
+      28.3837946,
+      -25.374702
+     ],
+     [
+      28.3838679,
+      -25.374633
+     ],
+     [
+      28.3839957,
+      -25.3744402
+     ],
+     [
+      28.3840189,
+      -25.3743802
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 80,
+    "start_id": 33,
+    "end_id": 71,
+    "length_m": 306.07,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "312095924"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3840189,
+      -25.3743802
+     ],
+     [
+      28.384036,
+      -25.374336
+     ],
+     [
+      28.3840789,
+      -25.3741616
+     ],
+     [
+      28.3840842,
+      -25.3739943
+     ],
+     [
+      28.3841164,
+      -25.373878
+     ],
+     [
+      28.3841791,
+      -25.3737533
+     ],
+     [
+      28.3842112,
+      -25.3736927
+     ],
+     [
+      28.3842327,
+      -25.3736273
+     ],
+     [
+      28.3842246,
+      -25.3735231
+     ],
+     [
+      28.3841978,
+      -25.3733219
+     ],
+     [
+      28.3841549,
+      -25.3732129
+     ],
+     [
+      28.3841108,
+      -25.37311
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 81,
+    "start_id": 71,
+    "end_id": 72,
+    "length_m": 146.58,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "312095924"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3843911,
+      -25.3771329
+     ],
+     [
+      28.3843749,
+      -25.377008
+     ],
+     [
+      28.3843775,
+      -25.3767681
+     ],
+     [
+      28.3843846,
+      -25.3760276
+     ],
+     [
+      28.3843846,
+      -25.3757707
+     ],
+     [
+      28.3843507,
+      -25.3753383
+     ],
+     [
+      28.3842998,
+      -25.3750111
+     ],
+     [
+      28.3842774,
+      -25.3748644
+     ],
+     [
+      28.3842783,
+      -25.3748051
+     ],
+     [
+      28.3842676,
+      -25.3747421
+     ],
+     [
+      28.38423,
+      -25.3746767
+     ],
+     [
+      28.3841576,
+      -25.3745967
+     ],
+     [
+      28.3840986,
+      -25.3745216
+     ],
+     [
+      28.3840584,
+      -25.3744561
+     ],
+     [
+      28.3840189,
+      -25.3743802
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 82,
+    "start_id": 36,
+    "end_id": 71,
+    "length_m": 314.24,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "312095926"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3793458,
+      -25.370283
+     ],
+     [
+      28.3793686,
+      -25.3706405
+     ],
+     [
+      28.3794035,
+      -25.3712803
+     ],
+     [
+      28.3795034,
+      -25.3727968
+     ],
+     [
+      28.3795711,
+      -25.3738982
+     ],
+     [
+      28.3795939,
+      -25.3744156
+     ],
+     [
+      28.3796027,
+      -25.3745574
+     ],
+     [
+      28.3796073,
+      -25.3746283
+     ],
+     [
+      28.3796208,
+      -25.3747004
+     ],
+     [
+      28.379655,
+      -25.3748252
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 83,
+    "start_id": 73,
+    "end_id": 70,
+    "length_m": 506.33,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "735398478"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.379655,
+      -25.3748252
+     ],
+     [
+      28.379714,
+      -25.3750154
+     ],
+     [
+      28.3797287,
+      -25.3750718
+     ],
+     [
+      28.3797348,
+      -25.3751148
+     ],
+     [
+      28.3797247,
+      -25.3753287
+     ],
+     [
+      28.379727,
+      -25.3754726
+     ],
+     [
+      28.3797267,
+      -25.3754977
+     ],
+     [
+      28.379725,
+      -25.3755289
+     ],
+     [
+      28.3797281,
+      -25.3755856
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 84,
+    "start_id": 70,
+    "end_id": 50,
+    "length_m": 85.61,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "735398478"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3842798,
+      -25.38094
+     ],
+     [
+      28.3843965,
+      -25.3810187
+     ],
+     [
+      28.384477,
+      -25.3810381
+     ],
+     [
+      28.3845252,
+      -25.3810381
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 85,
+    "start_id": 19,
+    "end_id": 40,
+    "length_m": 27.84,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753010665"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3845252,
+      -25.3810381
+     ],
+     [
+      28.3845547,
+      -25.3810308
+     ],
+     [
+      28.384603,
+      -25.381003
+     ],
+     [
+      28.3847371,
+      -25.3809048
+     ],
+     [
+      28.3849758,
+      -25.3807594
+     ],
+     [
+      28.3851126,
+      -25.3806383
+     ],
+     [
+      28.3852709,
+      -25.3805013
+     ],
+     [
+      28.3853594,
+      -25.3804383
+     ],
+     [
+      28.3854077,
+      -25.3804153
+     ],
+     [
+      28.3854506,
+      -25.3804105
+     ],
+     [
+      28.3855123,
+      -25.3804177
+     ],
+     [
+      28.3855418,
+      -25.3804323
+     ],
+     [
+      28.3855928,
+      -25.3805219
+     ],
+     [
+      28.3856169,
+      -25.3806092
+     ],
+     [
+      28.3856185,
+      -25.380635
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 86,
+    "start_id": 40,
+    "end_id": 28,
+    "length_m": 151.21,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753010665"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3856185,
+      -25.380635
+     ],
+     [
+      28.3856223,
+      -25.380694
+     ],
+     [
+      28.3855981,
+      -25.3807934
+     ],
+     [
+      28.385574,
+      -25.3808612
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 87,
+    "start_id": 28,
+    "end_id": 38,
+    "length_m": 25.81,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753010665"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3751656,
+      -25.3756988
+     ],
+     [
+      28.3752106,
+      -25.3757965
+     ],
+     [
+      28.3752581,
+      -25.3758569
+     ],
+     [
+      28.3753091,
+      -25.3759054
+     ],
+     [
+      28.3753279,
+      -25.3759197
+     ],
+     [
+      28.3753503,
+      -25.3759273
+     ],
+     [
+      28.3753922,
+      -25.3759369
+     ],
+     [
+      28.3754299,
+      -25.3759376
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 88,
+    "start_id": 61,
+    "end_id": 5,
+    "length_m": 40.45,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753010666"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3754299,
+      -25.3759376
+     ],
+     [
+      28.3754596,
+      -25.3759148
+     ],
+     [
+      28.3754757,
+      -25.3759018
+     ],
+     [
+      28.3754881,
+      -25.3758709
+     ],
+     [
+      28.3754781,
+      -25.3757334
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 89,
+    "start_id": 5,
+    "end_id": 0,
+    "length_m": 25.06,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753010666"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3711463,
+      -25.373196
+     ],
+     [
+      28.3720878,
+      -25.373774
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 90,
+    "start_id": 74,
+    "end_id": 69,
+    "length_m": 114.36,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753010667"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3720878,
+      -25.373774
+     ],
+     [
+      28.3728643,
+      -25.3742369
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 91,
+    "start_id": 69,
+    "end_id": 67,
+    "length_m": 93.46,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753010667"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3728643,
+      -25.3742369
+     ],
+     [
+      28.3736649,
+      -25.3747386
+     ],
+     [
+      28.3740525,
+      -25.3749773
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 92,
+    "start_id": 67,
+    "end_id": 64,
+    "length_m": 145.01,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753010667"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3740525,
+      -25.3749773
+     ],
+     [
+      28.3742081,
+      -25.375073
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 93,
+    "start_id": 64,
+    "end_id": 63,
+    "length_m": 18.91,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753010667"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3742081,
+      -25.375073
+     ],
+     [
+      28.3745192,
+      -25.3752778
+     ],
+     [
+      28.3748947,
+      -25.3755068
+     ],
+     [
+      28.3750221,
+      -25.375571
+     ],
+     [
+      28.3750536,
+      -25.3755928
+     ],
+     [
+      28.3750838,
+      -25.3756189
+     ],
+     [
+      28.3751656,
+      -25.3756988
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 94,
+    "start_id": 63,
+    "end_id": 61,
+    "length_m": 119.13,
+    "highway": "unclassified",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753010667"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3844313,
+      -25.3772383
+     ],
+     [
+      28.3845668,
+      -25.3773025
+     ],
+     [
+      28.3846338,
+      -25.3773243
+     ],
+     [
+      28.3847585,
+      -25.3773377
+     ],
+     [
+      28.3850294,
+      -25.3773328
+     ],
+     [
+      28.3854519,
+      -25.3773207
+     ],
+     [
+      28.385814,
+      -25.3772904
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 95,
+    "start_id": 20,
+    "end_id": 75,
+    "length_m": 141.37,
+    "highway": "residential",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753013419"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3854009,
+      -25.3738582
+     ],
+     [
+      28.3854023,
+      -25.373954
+     ],
+     [
+      28.3854083,
+      -25.3740927
+     ],
+     [
+      28.3854103,
+      -25.3741539
+     ],
+     [
+      28.3854264,
+      -25.3742084
+     ],
+     [
+      28.3854593,
+      -25.3742563
+     ],
+     [
+      28.3855136,
+      -25.3743023
+     ],
+     [
+      28.3855719,
+      -25.3743369
+     ],
+     [
+      28.3856168,
+      -25.3743726
+     ],
+     [
+      28.3856543,
+      -25.3744295
+     ],
+     [
+      28.3856866,
+      -25.3744684
+     ],
+     [
+      28.3857349,
+      -25.3745071
+     ],
+     [
+      28.3857898,
+      -25.3745362
+     ],
+     [
+      28.3858435,
+      -25.3745744
+     ],
+     [
+      28.3858602,
+      -25.3746047
+     ],
+     [
+      28.3858683,
+      -25.3746416
+     ],
+     [
+      28.3858743,
+      -25.3746889
+     ],
+     [
+      28.3858918,
+      -25.374747
+     ],
+     [
+      28.3859193,
+      -25.3748004
+     ],
+     [
+      28.3859494,
+      -25.3748313
+     ],
+     [
+      28.385989,
+      -25.3748876
+     ],
+     [
+      28.3860137,
+      -25.3749554
+     ],
+     [
+      28.38604,
+      -25.3750639
+     ],
+     [
+      28.3860514,
+      -25.3751439
+     ],
+     [
+      28.3860514,
+      -25.3751814
+     ],
+     [
+      28.3860426,
+      -25.3752148
+     ],
+     [
+      28.3860265,
+      -25.3752445
+     ],
+     [
+      28.3859957,
+      -25.3752972
+     ],
+     [
+      28.3859783,
+      -25.375339
+     ],
+     [
+      28.3859682,
+      -25.3753911
+     ],
+     [
+      28.3859722,
+      -25.3754511
+     ],
+     [
+      28.3859869,
+      -25.3755152
+     ],
+     [
+      28.385993,
+      -25.375565
+     ],
+     [
+      28.3859923,
+      -25.3756249
+     ],
+     [
+      28.3859883,
+      -25.3756564
+     ],
+     [
+      28.3859749,
+      -25.3757098
+     ],
+     [
+      28.3859488,
+      -25.37576
+     ],
+     [
+      28.3859159,
+      -25.3758406
+     ],
+     [
+      28.3858958,
+      -25.3759297
+     ],
+     [
+      28.3858784,
+      -25.3760218
+     ],
+     [
+      28.3858079,
+      -25.3762659
+     ],
+     [
+      28.3857603,
+      -25.3763774
+     ],
+     [
+      28.3857295,
+      -25.3764816
+     ],
+     [
+      28.385706,
+      -25.3765307
+     ],
+     [
+      28.3856644,
+      -25.3765895
+     ],
+     [
+      28.3855806,
+      -25.3766634
+     ],
+     [
+      28.3855069,
+      -25.3767415
+     ],
+     [
+      28.3854807,
+      -25.3767979
+     ],
+     [
+      28.3854693,
+      -25.3768736
+     ],
+     [
+      28.3854673,
+      -25.3769851
+     ],
+     [
+      28.3854807,
+      -25.3770499
+     ],
+     [
+      28.3855008,
+      -25.3770887
+     ],
+     [
+      28.3855243,
+      -25.3771135
+     ],
+     [
+      28.3855538,
+      -25.3771341
+     ],
+     [
+      28.3856866,
+      -25.3772226
+     ],
+     [
+      28.385814,
+      -25.3772904
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 96,
+    "start_id": 48,
+    "end_id": 75,
+    "length_m": 436.17,
+    "highway": "residential",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753013420"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.385814,
+      -25.3772904
+     ],
+     [
+      28.3858958,
+      -25.377368
+     ],
+     [
+      28.3859681,
+      -25.3775048
+     ],
+     [
+      28.3860539,
+      -25.3776914
+     ],
+     [
+      28.3860876,
+      -25.3777642
+     ],
+     [
+      28.3860956,
+      -25.3777996
+     ],
+     [
+      28.386099,
+      -25.3778457
+     ],
+     [
+      28.386102,
+      -25.377912
+     ],
+     [
+      28.3861144,
+      -25.3779987
+     ],
+     [
+      28.3861372,
+      -25.3780795
+     ],
+     [
+      28.3861603,
+      -25.3781229
+     ],
+     [
+      28.3861938,
+      -25.3781607
+     ],
+     [
+      28.3862378,
+      -25.3781853
+     ],
+     [
+      28.3862582,
+      -25.3781995
+     ],
+     [
+      28.3862773,
+      -25.3782165
+     ],
+     [
+      28.3862914,
+      -25.3782434
+     ],
+     [
+      28.3862921,
+      -25.3783052
+     ],
+     [
+      28.3862928,
+      -25.3783537
+     ],
+     [
+      28.3863048,
+      -25.3784021
+     ],
+     [
+      28.3863417,
+      -25.3784567
+     ],
+     [
+      28.3864188,
+      -25.3785269
+     ],
+     [
+      28.3864584,
+      -25.3785603
+     ],
+     [
+      28.3864966,
+      -25.3785809
+     ],
+     [
+      28.3865321,
+      -25.3785918
+     ],
+     [
+      28.3865751,
+      -25.3785912
+     ],
+     [
+      28.3866381,
+      -25.3785821
+     ],
+     [
+      28.3867367,
+      -25.3785615
+     ],
+     [
+      28.3868466,
+      -25.37855
+     ],
+     [
+      28.3869177,
+      -25.3785566
+     ],
+     [
+      28.3869781,
+      -25.3785694
+     ],
+     [
+      28.3870237,
+      -25.3785918
+     ],
+     [
+      28.3870726,
+      -25.3786263
+     ],
+     [
+      28.3871142,
+      -25.3786657
+     ],
+     [
+      28.3871584,
+      -25.3787154
+     ],
+     [
+      28.3871859,
+      -25.3787475
+     ],
+     [
+      28.3871967,
+      -25.3787796
+     ],
+     [
+      28.387204,
+      -25.3788141
+     ],
+     [
+      28.387206,
+      -25.3788995
+     ],
+     [
+      28.3871685,
+      -25.3789789
+     ],
+     [
+      28.3871149,
+      -25.3790698
+     ],
+     [
+      28.38709,
+      -25.3791201
+     ],
+     [
+      28.3870585,
+      -25.3792231
+     ],
+     [
+      28.387027,
+      -25.37928
+     ],
+     [
+      28.3870082,
+      -25.3793176
+     ],
+     [
+      28.3870015,
+      -25.3793594
+     ],
+     [
+      28.3869935,
+      -25.3794721
+     ],
+     [
+      28.3869828,
+      -25.3796617
+     ],
+     [
+      28.3869881,
+      -25.3797598
+     ],
+     [
+      28.3869948,
+      -25.3798004
+     ],
+     [
+      28.3870089,
+      -25.3798259
+     ],
+     [
+      28.3870377,
+      -25.3798556
+     ],
+     [
+      28.3870773,
+      -25.3798967
+     ],
+     [
+      28.3870994,
+      -25.3799313
+     ],
+     [
+      28.3871094,
+      -25.3799524
+     ],
+     [
+      28.3871182,
+      -25.3799743
+     ],
+     [
+      28.3871206,
+      -25.3799961
+     ],
+     [
+      28.3871169,
+      -25.3800397
+     ],
+     [
+      28.3871152,
+      -25.380083
+     ],
+     [
+      28.3871206,
+      -25.3801312
+     ],
+     [
+      28.3871403,
+      -25.3801885
+     ],
+     [
+      28.3871604,
+      -25.3802578
+     ],
+     [
+      28.3871586,
+      -25.3802836
+     ],
+     [
+      28.3871586,
+      -25.3803157
+     ],
+     [
+      28.3871517,
+      -25.3803523
+     ],
+     [
+      28.3871316,
+      -25.3803875
+     ],
+     [
+      28.3871135,
+      -25.3804196
+     ],
+     [
+      28.3871095,
+      -25.3804529
+     ],
+     [
+      28.387121,
+      -25.3805019
+     ],
+     [
+      28.3871511,
+      -25.3805474
+     ],
+     [
+      28.3871839,
+      -25.3805838
+     ],
+     [
+      28.3872007,
+      -25.3806122
+     ],
+     [
+      28.3872087,
+      -25.3806503
+     ],
+     [
+      28.3872047,
+      -25.380688
+     ],
+     [
+      28.387198,
+      -25.3807316
+     ],
+     [
+      28.3871987,
+      -25.3807661
+     ],
+     [
+      28.3872047,
+      -25.3808049
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 97,
+    "start_id": 75,
+    "end_id": 39,
+    "length_m": 485.8,
+    "highway": "residential",
+    "name": "",
+    "oneway": false,
+    "osm_way": "753013420"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.386618,
+      -25.373436
+     ],
+     [
+      28.3865214,
+      -25.3734347
+     ],
+     [
+      28.3862498,
+      -25.3734257
+     ],
+     [
+      28.3861918,
+      -25.3734199
+     ],
+     [
+      28.3861593,
+      -25.3734108
+     ],
+     [
+      28.3860886,
+      -25.3733778
+     ],
+     [
+      28.3860487,
+      -25.3733584
+     ],
+     [
+      28.3860131,
+      -25.3733527
+     ],
+     [
+      28.3859752,
+      -25.3733554
+     ],
+     [
+      28.3858861,
+      -25.3733787
+     ],
+     [
+      28.3857208,
+      -25.3734063
+     ],
+     [
+      28.3855089,
+      -25.373449
+     ],
+     [
+      28.3854653,
+      -25.373462
+     ],
+     [
+      28.3854284,
+      -25.3734935
+     ],
+     [
+      28.3854096,
+      -25.3735347
+     ],
+     [
+      28.3853949,
+      -25.3736062
+     ],
+     [
+      28.3853915,
+      -25.3736874
+     ],
+     [
+      28.3854009,
+      -25.3738582
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 98,
+    "start_id": 76,
+    "end_id": 48,
+    "length_m": 165.12,
+    "highway": "residential",
+    "name": "",
+    "oneway": false,
+    "osm_way": "756303067"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3770337,
+      -25.3838539
+     ],
+     [
+      28.3771597,
+      -25.3838249
+     ],
+     [
+      28.377267,
+      -25.3838636
+     ],
+     [
+      28.3777283,
+      -25.3843119
+     ],
+     [
+      28.3790185,
+      -25.3854121
+     ],
+     [
+      28.3794423,
+      -25.3858022
+     ],
+     [
+      28.3798366,
+      -25.38611
+     ],
+     [
+      28.3801155,
+      -25.386362
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 99,
+    "start_id": 54,
+    "end_id": 77,
+    "length_m": 423.71,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "771660065"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3801155,
+      -25.386362
+     ],
+     [
+      28.3804016,
+      -25.3864427
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 100,
+    "start_id": 77,
+    "end_id": 51,
+    "length_m": 30.11,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "771660065"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3801155,
+      -25.386362
+     ],
+     [
+      28.3801075,
+      -25.3862893
+     ],
+     [
+      28.3801396,
+      -25.3861754
+     ],
+     [
+      28.3801691,
+      -25.3860373
+     ],
+     [
+      28.3801075,
+      -25.3859258
+     ],
+     [
+      28.3799599,
+      -25.3857562
+     ],
+     [
+      28.3797212,
+      -25.3857465
+     ],
+     [
+      28.379571,
+      -25.3857029
+     ],
+     [
+      28.3794798,
+      -25.3856035
+     ],
+     [
+      28.3794503,
+      -25.3854703
+     ],
+     [
+      28.3793538,
+      -25.3853273
+     ],
+     [
+      28.3791821,
+      -25.3852788
+     ],
+     [
+      28.3790319,
+      -25.385211
+     ],
+     [
+      28.3789836,
+      -25.385051
+     ],
+     [
+      28.3789595,
+      -25.3847966
+     ],
+     [
+      28.3789648,
+      -25.3846221
+     ],
+     [
+      28.3790265,
+      -25.3844501
+     ],
+     [
+      28.3790185,
+      -25.3843798
+     ],
+     [
+      28.3789997,
+      -25.384278
+     ],
+     [
+      28.3790212,
+      -25.3840817
+     ],
+     [
+      28.3789568,
+      -25.3838321
+     ],
+     [
+      28.3789246,
+      -25.3837352
+     ],
+     [
+      28.3789326,
+      -25.3835389
+     ],
+     [
+      28.3789005,
+      -25.3834129
+     ],
+     [
+      28.3788602,
+      -25.3831972
+     ],
+     [
+      28.3787449,
+      -25.3829743
+     ],
+     [
+      28.3786859,
+      -25.3828434
+     ],
+     [
+      28.3786564,
+      -25.3826714
+     ],
+     [
+      28.3785679,
+      -25.3825817
+     ],
+     [
+      28.3784847,
+      -25.3824921
+     ],
+     [
+      28.378415,
+      -25.3823685
+     ],
+     [
+      28.3783238,
+      -25.3822934
+     ],
+     [
+      28.3781245,
+      -25.3822264
+     ],
+     [
+      28.3779716,
+      -25.3822239
+     ],
+     [
+      28.3778276,
+      -25.3822255
+     ],
+     [
+      28.3777096,
+      -25.3821649
+     ],
+     [
+      28.3775808,
+      -25.3821165
+     ],
+     [
+      28.3774145,
+      -25.382114
+     ],
+     [
+      28.3773153,
+      -25.3820874
+     ],
+     [
+      28.3771838,
+      -25.3820583
+     ],
+     [
+      28.3770229,
+      -25.3820559
+     ],
+     [
+      28.3768673,
+      -25.381942
+     ],
+     [
+      28.3766608,
+      -25.3818305
+     ],
+     [
+      28.3765938,
+      -25.3817457
+     ],
+     [
+      28.3765635,
+      -25.3815309
+     ],
+     [
+      28.3765098,
+      -25.3812013
+     ],
+     [
+      28.3765098,
+      -25.3810123
+     ],
+     [
+      28.3766359,
+      -25.3807191
+     ],
+     [
+      28.3767083,
+      -25.3804719
+     ],
+     [
+      28.3768934,
+      -25.3803483
+     ],
+     [
+      28.3770165,
+      -25.3802814
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 101,
+    "start_id": 77,
+    "end_id": 24,
+    "length_m": 916.77,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "771663883"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3718866,
+      -25.3755153
+     ],
+     [
+      28.3738366,
+      -25.3766421
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 102,
+    "start_id": 78,
+    "end_id": 62,
+    "length_m": 232.55,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "1017101674"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      28.3738366,
+      -25.3766421
+     ],
+     [
+      28.3740082,
+      -25.3768021
+     ],
+     [
+      28.374086,
+      -25.3769112
+     ],
+     [
+      28.3741853,
+      -25.3770493
+     ],
+     [
+      28.3744723,
+      -25.3774322
+     ],
+     [
+      28.3746922,
+      -25.3777303
+     ],
+     [
+      28.3747485,
+      -25.3777884
+     ],
+     [
+      28.3748424,
+      -25.3778369
+     ],
+     [
+      28.3751696,
+      -25.3779241
+     ],
+     [
+      28.3752823,
+      -25.3779653
+     ],
+     [
+      28.3753493,
+      -25.3779871
+     ],
+     [
+      28.3753976,
+      -25.3779908
+     ],
+     [
+      28.375458,
+      -25.3779811
+     ],
+     [
+      28.3755698,
+      -25.3779561
+     ]
+    ]
+   },
+   "properties": {
+    "kind": "edge",
+    "id": 103,
+    "start_id": 62,
+    "end_id": 4,
+    "length_m": 244.47,
+    "highway": "track",
+    "name": "",
+    "oneway": false,
+    "osm_way": "1017101675"
+   }
+  }
+ ]
+}

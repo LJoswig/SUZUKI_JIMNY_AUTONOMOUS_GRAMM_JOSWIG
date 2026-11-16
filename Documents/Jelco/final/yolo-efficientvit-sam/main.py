@@ -53,6 +53,7 @@ from utils.path_memory import CenterlinePathMemory, GroundProjector
 from utils.follower import PurePursuitFollower
 from utils.ros_publishers import CenterlineRosPublisher
 from utils.run_recording import ROSBAG_TOPICS, start_rosbag, stop_rosbag
+from utils.camera_thread import ThreadedCamera
 
 
 class PerformanceMonitor:
@@ -348,6 +349,27 @@ class RealtimeRoadSegmentation:
                 except RuntimeError as exc:
                     print(f"Warning: {exc} Not publishing the centerline.")
 
+        # Autonomous stop: obstacle in the ROI ahead -> /stop_request (same camera, needs depth).
+        self.auto_stop = None
+        self.auto_stop_result = (None, False, None)
+        self.auto_stop_times = deque(maxlen=10)
+        self.auto_stop_rate_hz = 0.0
+        self._auto_stop_rate_window = (time.perf_counter(), 0)
+        self._auto_stop_count = 0
+        if AUTO_STOP_ENABLED:
+            try:
+                from utils.auto_stop import DepthSensingNode
+                self.auto_stop = DepthSensingNode()
+            except (ImportError, RuntimeError) as exc:
+                print(f"Warning: auto-stop needs ROS sourced ({exc}); auto-stop is OFF.")
+        if self.auto_stop is not None and AUTO_STOP_THREADED:
+            if INPUT_MODE == "svo" and not SVO_REAL_TIME_MODE:
+                print(
+                    "Warning: AUTO_STOP_THREADED with SVO_REAL_TIME_MODE = False grabs as fast as "
+                    "possible; perception will skip frames."
+                )
+            self.camera = ThreadedCamera(self.camera, self.auto_stop)
+
         # Record the live drive (SVO + matching rosbag) for offline replay.
         self.run_dir = None
         self.rosbag_process = None
@@ -388,6 +410,20 @@ class RealtimeRoadSegmentation:
             if self.centerline_publisher is not None
             else "  Publishing: off"
         )
+        if self.auto_stop is not None:
+            print(
+                f"  Auto-stop: on, depth {camera_depth_mode()}, "
+                f"{'own camera thread' if AUTO_STOP_THREADED else 'once per perception frame'}, "
+                f"stop after {AUTO_STOP_MIN_CONSECUTIVE_FRAMES} frame(s) >= {MIN_OBSTACLE_POINTS} points"
+            )
+            follows = AUTO_STOP_ROI_FOLLOW_CENTERLINE and CENTERLINE_TEMPORAL_FILTER_TYPE == "kalman"
+            straight = "legacy tilted box" if AUTO_STOP_ROI_LEGACY_ROTATION else "level box"
+            print(
+                f"  Auto-stop ROI: {'follows the centerline, ' if follows else ''}"
+                f"straight fallback = {straight}"
+            )
+        else:
+            print("  Auto-stop: OFF")
         if self.kalman_sensor_mode == "motion_aided" or self.path_memory_active:
             print(f"  Motion source: {CENTERLINE_MOTION_SOURCE}")
             if CENTERLINE_MOTION_SOURCE == "rosbag":
@@ -731,6 +767,68 @@ class RealtimeRoadSegmentation:
             2,
         )
 
+    def update_auto_stop(self):
+        """Run the auto-stop on the frame just grabbed (or fetch the camera thread's result)."""
+        if isinstance(self.camera, ThreadedCamera):
+            self.auto_stop_result, count = self.camera.get_auto_stop_result()
+            self.auto_stop_times.append(self.camera.auto_stop_time)
+        else:
+            start = time.perf_counter()
+            self.auto_stop_result = self.auto_stop.update(self.camera.zed)
+            self.auto_stop_times.append(time.perf_counter() - start)
+            self._auto_stop_count += 1
+            count = self._auto_stop_count
+        window_start, window_count = self._auto_stop_rate_window
+        now = time.perf_counter()
+        if now - window_start >= 1.0:
+            self.auto_stop_rate_hz = (count - window_count) / (now - window_start)
+            self._auto_stop_rate_window = (now, count)
+
+    def draw_auto_stop_overlay(self, image):
+        """Draw the auto-stop ROI (green, red on stop), the obstacle points and the stop state."""
+        roi_points, stop, roi_info = self.auto_stop_result
+        calibration = self.camera.get_calibration()
+        cam_w, _ = self.camera.get_resolution()
+        scale = self.display_width / cam_w
+
+        def project(points):
+            # Camera frame: X forward, Y left, Z up -> left image pixels
+            points = np.asarray(points, dtype=np.float32)
+            front = points[:, 0] > 0.1
+            u = (calibration['cx'] - calibration['fx'] * points[:, 1] / np.maximum(points[:, 0], 0.1)) * scale
+            v = (calibration['cy'] - calibration['fy'] * points[:, 2] / np.maximum(points[:, 0], 0.1)) * scale
+            return np.column_stack((u, v)), front
+
+        color = (255, 0, 0) if stop else (0, 255, 0)
+        lines = [] if roi_info is None else roi_info["lines"]
+        for line in lines:
+            pixels, front = project(line)
+            if np.count_nonzero(front) < 2:
+                continue
+            pixels = np.rint(pixels[front]).astype(np.int32).reshape(-1, 1, 2)
+            cv2.polylines(image, [pixels], isClosed=False, color=color, thickness=2,
+                          lineType=cv2.LINE_AA)
+
+        num_points = 0 if roi_points is None else len(roi_points)
+        if num_points > 0:
+            step = max(1, num_points // 2000)
+            pixels, front = project(roi_points[::step])
+            pixels = np.rint(pixels[front]).astype(np.int32)
+            inside = (
+                (pixels[:, 0] >= 0) & (pixels[:, 0] < image.shape[1]) &
+                (pixels[:, 1] >= 0) & (pixels[:, 1] < image.shape[0])
+            )
+            for px, py in pixels[inside]:
+                cv2.circle(image, (int(px), int(py)), 2, (255, 0, 0), -1)
+
+        mode = "" if roi_info is None else f" [{roi_info['mode']}]"
+        label = f"Auto-stop{mode}: {num_points} pts (min {MIN_OBSTACLE_POINTS})"
+        cv2.putText(image, label, (10, self.display_height - 75),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
+        if stop:
+            cv2.putText(image, "STOP", (self.display_width // 2 - 80, 80),
+                        cv2.FONT_HERSHEY_SIMPLEX, 2.0, (255, 0, 0), 5)
+
     def run(self):
         """Main processing loop - OPTIMIZED"""
         print("\n" + "="*70)
@@ -752,6 +850,8 @@ class RealtimeRoadSegmentation:
         
         self.running = True
         show_timing = True
+        if isinstance(self.camera, ThreadedCamera):
+            self.camera.start()
         
         try:
             while self.running:
@@ -766,6 +866,10 @@ class RealtimeRoadSegmentation:
                     else:
                         print("Failed to grab frame")
                     break
+
+                # Auto-stop first, so the stop request is not held back by YOLO/SAM
+                if self.auto_stop is not None:
+                    self.update_auto_stop()
 
                 frame_timestamp = self.camera.get_timestamp_seconds()
                 if frame_timestamp is None:
@@ -833,6 +937,11 @@ class RealtimeRoadSegmentation:
                                 motion_sample,
                                 frame_timestamp,
                             )
+                        if self.auto_stop is not None and AUTO_STOP_ROI_FOLLOW_CENTERLINE:
+                            if centerline_status == TemporalCenterlineKalmanFilter.LOST:
+                                self.auto_stop.clear_path()
+                            else:
+                                self.auto_stop.set_path(centerline_ground)
                         if SHOW_FOLLOWER_OVERLAY:
                             follower_command = self.update_follower(
                                 centerline_ground,
@@ -917,6 +1026,8 @@ class RealtimeRoadSegmentation:
                     )
                 if follower_command is not None:
                     self.draw_follower_overlay(display_image, follower_command)
+                if self.auto_stop is not None and SHOW_AUTO_STOP_OVERLAY:
+                    self.draw_auto_stop_overlay(display_image)
                 centerline_label = f"Centerline: {centerline_status.upper()}"
                 if (
                     centerline_status == CenterlinePathMemory.REMEMBERED
@@ -1024,6 +1135,16 @@ class RealtimeRoadSegmentation:
                     y += spacing + 5
                     cv2.putText(display_image, f"TOTAL: {avg_times['total']:.1f}ms", (10, y),
                                cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 255), 2)
+                    if self.auto_stop is not None:
+                        y += spacing
+                        auto_stop_ms = (
+                            sum(self.auto_stop_times) / len(self.auto_stop_times) * 1000
+                            if self.auto_stop_times else 0.0
+                        )
+                        cv2.putText(
+                            display_image,
+                            f"Auto-stop: {auto_stop_ms:.1f}ms, {self.auto_stop_rate_hz:.1f} Hz",
+                            (10, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 0), 1)
                 
                 # Convert RGB to BGR for display
                 display_image_bgr = cv2.cvtColor(display_image, cv2.COLOR_RGB2BGR)
@@ -1073,7 +1194,15 @@ class RealtimeRoadSegmentation:
         """Cleanup resources"""
         print("\nCleaning up...")
         self.running = False
-        # Close the publisher before the motion provider, which may own the ROS context.
+        # Stop the camera thread before the auto-stop node it uses is destroyed.
+        if isinstance(self.camera, ThreadedCamera):
+            self.camera.stop()
+        # Close the ROS users before the motion provider, which may own the ROS context.
+        if self.auto_stop is not None:
+            try:
+                self.auto_stop.close()
+            except Exception:
+                pass
         if self.centerline_publisher is not None:
             try:
                 self.centerline_publisher.close()
